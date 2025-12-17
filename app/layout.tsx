@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import ConfirmPopup from "@/components/ConfirmPopup";
+import VoteConfirmationPopup from "@/components/VoteConfirmationPopup";
 
 export default function RootLayout({
   children,
@@ -25,6 +26,7 @@ export default function RootLayout({
         {children}
         <Suspense fallback={null}>
           <ConfirmPopup />
+          <VoteConfirmationPopup />
         </Suspense>
       </body>
     </html>

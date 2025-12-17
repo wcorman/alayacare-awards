@@ -167,6 +167,55 @@ export async function checkIfNomineeExists(email: string): Promise<boolean> {
     return data.records && data.records.length > 0;
 }
 
+export async function sendVoteRequestWebhook(email: string, nomineeData: {
+    id: string;
+    name: string;
+    category?: string;
+    description?: string;
+    image?: string | null;
+    votes?: number;
+}) {
+    const webhookUrl = process.env.AIRTABLE_WEBHOOK_URL;
+
+    if (!webhookUrl) {
+        console.warn("AIRTABLE_WEBHOOK_URL not configured, skipping webhook");
+        return;
+    }
+
+    try {
+        const payload = {
+            voterEmail: email,
+            nominee: {
+                id: nomineeData.id,
+                name: nomineeData.name,
+                category: nomineeData.category || "Unknown",
+                description: nomineeData.description || "",
+                imageUrl: nomineeData.image || null,
+                currentVotes: nomineeData.votes || 0
+            },
+            timestamp: new Date().toISOString(),
+            eventType: "vote_request"
+        };
+
+        const res = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+            console.error(`Webhook failed with status ${res.status}`);
+        } else {
+            console.log("Webhook sent successfully for", nomineeData.name);
+        }
+    } catch (error) {
+        console.error("Error sending webhook:", error);
+        // Don't throw - webhook failures shouldn't break the vote flow
+    }
+}
+
 export async function submitNomination(data: {
     nominatorEmail: string;
     nomineeName: string;
