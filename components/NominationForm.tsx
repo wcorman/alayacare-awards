@@ -22,6 +22,22 @@ const CATEGORIES = [
     { id: 'lifetime', name: "Lifetime Achievement", color: '#08193e' },
 ];
 
+const JOB_TITLES = [
+    'Caregiver',
+    'Home Health Aide',
+    'Personal Care Aide',
+    'Certified Nursing Assistant (CNA)',
+    'Registered Nurse (RN)',
+    'Licensed Practical Nurse (LPN)',
+    'Case Manager',
+    'Care Coordinator',
+    'Supervisor',
+    'Manager',
+    'Director',
+    'Administrator',
+    'Other'
+];
+
 export default function NominationForm() {
     const router = useRouter();
     const [step, setStep] = useState<'type' | 'form' | 'success'>('type');
@@ -37,6 +53,9 @@ export default function NominationForm() {
         email: '', // Nominator email
         profileImage: null as string | null,
         isHomeCare: false,
+        name: '',
+        company: '',
+        jobTitle: '',
     });
 
     const handleTypeSelect = (type: 'self' | 'other') => {
@@ -90,14 +109,14 @@ export default function NominationForm() {
 
     if (step === 'type') {
         return (
-            <div className="py-20 px-6 lg:px-12 bg-gray-50 min-h-screen flex flex-col items-center">
+            <div className="py-8 px-6 lg:px-12 bg-gray-50 min-h-screen flex flex-col items-center">
                 <div className="max-w-4xl w-full text-center">
-                    <button onClick={() => router.push('/')} className="flex items-center gap-2 text-gray-500 hover:text-[#f37021] mb-8 font-medium mx-auto md:mx-0">
+                    <button onClick={() => router.push('/')} className="flex items-center gap-2 text-gray-500 hover:text-[#f37021] mb-6 font-medium mx-auto md:mx-0">
                         <ChevronRight className="rotate-180" size={20} /> Back to Home
                     </button>
 
-                    <h2 className="text-3xl font-bold mb-4" style={{ color: THEME.colors.deepBlue }}>Who are you nominating?</h2>
-                    <p className="text-gray-600 mb-12 max-w-xl mx-auto">
+                    <h2 className="text-3xl font-bold mb-3" style={{ color: THEME.colors.deepBlue }}>Who are you nominating?</h2>
+                    <p className="text-gray-600 mb-8 max-w-xl mx-auto">
                         You can nominate yourself for your own achievements, or recognize a colleague who has gone above and beyond.
                     </p>
 
@@ -168,14 +187,14 @@ export default function NominationForm() {
     }
 
     return (
-        <div className="py-12 px-6 lg:px-12 bg-gray-50 min-h-screen">
+        <div className="py-8 px-6 lg:px-12 bg-gray-50 min-h-screen">
             <div className="max-w-3xl mx-auto">
-                <button onClick={() => setStep('type')} className="flex items-center gap-2 text-gray-500 hover:text-[#f37021] mb-8 font-medium">
+                <button onClick={() => setStep('type')} className="flex items-center gap-2 text-gray-500 hover:text-[#f37021] mb-6 font-medium">
                     <ChevronRight className="rotate-180" size={20} /> Back to Selection
                 </button>
 
-                <div className="bg-white rounded-lg shadow-md p-8 md:p-12">
-                    <div className="mb-8">
+                <div className="bg-white rounded-lg shadow-md p-6 md:p-10">
+                    <div className="mb-6">
                         <h2 className="text-3xl font-bold mb-2" style={{ color: THEME.colors.deepBlue }}>
                             {isSelf ? "Tell Us Your Story" : "Nominate a Caregiver"}
                         </h2>
@@ -215,6 +234,40 @@ export default function NominationForm() {
                             />
                             <p className="text-xs text-gray-500 mt-1">We'll use this to notify {isSelf ? "you" : "them"} if {isSelf ? "you" : "they"} win.</p>
                         </div>
+
+                        {/* Company and Job Title Fields (For Self-Nominations) */}
+                        {isSelf && (
+                            <>
+                                <div>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">Company</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                        placeholder="e.g. ABC Home Care"
+                                        value={formData.company}
+                                        onChange={e => setFormData({ ...formData, company: e.target.value })}
+                                    />
+                                </div>
+                                
+                                <div>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">Job Title</label>
+                                    <select
+                                        required
+                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                        value={formData.jobTitle}
+                                        onChange={e => setFormData({ ...formData, jobTitle: e.target.value })}
+                                    >
+                                        <option value="">Select your job title</option>
+                                        {JOB_TITLES.map((title) => (
+                                            <option key={title} value={title}>
+                                                {title}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </>
+                        )}
 
                         {/* Photo */}
                         <div>
@@ -287,7 +340,7 @@ export default function NominationForm() {
                             </div>
                         )}
 
-                        {/* Industry Checkbox */}
+                        {/* Industry Checkbox (Only for Other Nominations) */}
                         {!isSelf && (
                             <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-md border border-blue-100">
                                 <input
@@ -295,7 +348,13 @@ export default function NominationForm() {
                                     id="industryCheckbox"
                                     className="w-5 h-5 rounded text-[#f37021] focus:ring-[#f37021]"
                                     checked={formData.isHomeCare}
-                                    onChange={e => setFormData({ ...formData, isHomeCare: e.target.checked })}
+                                    onChange={e => setFormData({ 
+                                        ...formData, 
+                                        isHomeCare: e.target.checked,
+                                        name: e.target.checked ? formData.name : '',
+                                        company: e.target.checked ? formData.company : '',
+                                        jobTitle: e.target.checked ? formData.jobTitle : ''
+                                    })}
                                 />
                                 <label htmlFor="industryCheckbox" className="text-sm font-medium text-gray-700 cursor-pointer flex items-center gap-2">
                                     <Briefcase size={16} className="text-[#1d5eed]" />
@@ -303,11 +362,60 @@ export default function NominationForm() {
                                 </label>
                             </div>
                         )}
+                        
+                        {/* Name Field (Only for Other Nominations when checkbox is checked) */}
+                        {!isSelf && formData.isHomeCare && (
+                            <div>
+                                <label className="block text-sm font-bold mb-2 text-gray-700">Name</label>
+                                <input
+                                    required
+                                    type="text"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                    placeholder="e.g. Jane Doe"
+                                    value={formData.name}
+                                    onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                />
+                            </div>
+                        )}
+                        
+                        {/* Company and Job Title Fields (Only for Other Nominations when checkbox is checked) */}
+                        {!isSelf && formData.isHomeCare && (
+                            <>
+                                <div>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">Company</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                        placeholder="e.g. ABC Home Care"
+                                        value={formData.company}
+                                        onChange={e => setFormData({ ...formData, company: e.target.value })}
+                                    />
+                                </div>
+                                
+                                <div>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">Job Title</label>
+                                    <select
+                                        required
+                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                        value={formData.jobTitle}
+                                        onChange={e => setFormData({ ...formData, jobTitle: e.target.value })}
+                                    >
+                                        <option value="">Select your job title</option>
+                                        {JOB_TITLES.map((title) => (
+                                            <option key={title} value={title}>
+                                                {title}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </>
+                        )}
 
                         <button
                             type="submit"
                             className="w-full px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg"
-                            disabled={isSubmitting}
+                            disabled={isSubmitting || ((isSelf || formData.isHomeCare) && (!formData.company || !formData.jobTitle || (!isSelf && formData.isHomeCare && !formData.name)))}
                         >
                             {isSubmitting ? (
                                 <>

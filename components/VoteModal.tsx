@@ -1,13 +1,29 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Mail, X, Loader2, AlertCircle } from 'lucide-react';
+import { Mail, X, Loader2, AlertCircle, Briefcase } from 'lucide-react';
+
+const JOB_TITLES = [
+    'Caregiver',
+    'Home Health Aide',
+    'Personal Care Aide',
+    'Certified Nursing Assistant (CNA)',
+    'Registered Nurse (RN)',
+    'Licensed Practical Nurse (LPN)',
+    'Case Manager',
+    'Care Coordinator',
+    'Supervisor',
+    'Manager',
+    'Director',
+    'Administrator',
+    'Other'
+];
 
 interface VoteModalProps {
     isOpen: boolean;
     onClose: () => void;
     nomineeName: string;
-    onSubmit: (email: string) => Promise<void>;
+    onSubmit: (email: string, isHomeCare?: boolean, name?: string, company?: string, jobTitle?: string) => Promise<void>;
     isChecking: boolean;
     errorMsg: string | null;
     voteCompleted: boolean;
@@ -23,6 +39,10 @@ export default function VoteModal({
     voteCompleted,
 }: VoteModalProps) {
     const [email, setEmail] = useState('');
+    const [isHomeCare, setIsHomeCare] = useState(false);
+    const [name, setName] = useState('');
+    const [company, setCompany] = useState('');
+    const [jobTitle, setJobTitle] = useState('');
 
     if (!isOpen) return null;
 
@@ -43,7 +63,14 @@ export default function VoteModal({
                         Thank you for voting for <strong>{nomineeName}</strong>. Please check your email inbox to finalize your submission. Your vote is pending confirmation.
                     </p>
                     <button
-                        onClick={onClose}
+                        onClick={() => {
+                            setEmail('');
+                            setIsHomeCare(false);
+                            setName('');
+                            setCompany('');
+                            setJobTitle('');
+                            onClose();
+                        }}
                         className="w-full px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15] transition-colors"
                     >
                         Close
@@ -57,13 +84,30 @@ export default function VoteModal({
         <div
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in"
             style={{ backgroundColor: 'rgba(0, 0, 12, 0.82)' }}
-            onClick={onClose}
+            onClick={() => {
+                setEmail('');
+                setIsHomeCare(false);
+                setName('');
+                setCompany('');
+                setJobTitle('');
+                onClose();
+            }}
         >
             <div
                 className="bg-white rounded-lg shadow-xl w-full max-w-md p-6 relative"
                 onClick={(e) => e.stopPropagation()}
             >
-                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <button 
+                    onClick={() => {
+                        setEmail('');
+                        setIsHomeCare(false);
+                        setName('');
+                        setCompany('');
+                        setJobTitle('');
+                        onClose();
+                    }} 
+                    className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+                >
                     <X size={24} />
                 </button>
 
@@ -80,7 +124,7 @@ export default function VoteModal({
                     </div>
                 )}
 
-                <form onSubmit={(e) => { e.preventDefault(); onSubmit(email); }}>
+                <form onSubmit={(e) => { e.preventDefault(); onSubmit(email, isHomeCare, name, company, jobTitle); }}>
                     <div className="mb-6">
                         <label className="block text-sm font-bold mb-2 text-gray-700">Your Email Address</label>
                         <input
@@ -93,11 +137,83 @@ export default function VoteModal({
                         />
                     </div>
 
+                    {/* Industry Checkbox */}
+                    <div className="mb-6">
+                        <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-md border border-blue-100">
+                            <input
+                                type="checkbox"
+                                id="industryCheckbox"
+                                className="w-5 h-5 rounded text-[#f37021] focus:ring-[#f37021]"
+                                checked={isHomeCare}
+                                onChange={(e) => {
+                                    setIsHomeCare(e.target.checked);
+                                    if (!e.target.checked) {
+                                        setName('');
+                                        setCompany('');
+                                        setJobTitle('');
+                                    }
+                                }}
+                            />
+                            <label htmlFor="industryCheckbox" className="text-sm font-medium text-gray-700 cursor-pointer flex items-center gap-2">
+                                <Briefcase size={16} className="text-[#1d5eed]" />
+                                I am currently working in the home care industry.
+                            </label>
+                        </div>
+                    </div>
+
+                    {/* Name and Company Fields */}
+                    {isHomeCare && (
+                        <>
+                            <div className="mb-6">
+                                <label className="block text-sm font-bold mb-2 text-gray-700">Name</label>
+                                <input
+                                    required
+                                    type="text"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                    placeholder="e.g. Jane Doe"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <label className="block text-sm font-bold mb-2 text-gray-700">Company</label>
+                                <input
+                                    required
+                                    type="text"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                    placeholder="e.g. ABC Home Care"
+                                    value={company}
+                                    onChange={(e) => setCompany(e.target.value)}
+                                />
+                            </div>
+                        </>
+                    )}
+
+                    {/* Job Title Dropdown */}
+                    {isHomeCare && (
+                        <div className="mb-6">
+                            <label className="block text-sm font-bold mb-2 text-gray-700">Job Title</label>
+                            <select
+                                required
+                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                value={jobTitle}
+                                onChange={(e) => setJobTitle(e.target.value)}
+                            >
+                                <option value="">Select your job title</option>
+                                {JOB_TITLES.map((title) => (
+                                    <option key={title} value={title}>
+                                        {title}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    )}
+
                     <div className="flex gap-3">
                         <button
                             type="submit"
                             className="flex-1 px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                            disabled={isChecking}
+                            disabled={isChecking || (isHomeCare && (!name || !company || !jobTitle))}
                         >
                             {isChecking ? (
                                 <>
@@ -109,7 +225,14 @@ export default function VoteModal({
                         </button>
                         <button
                             type="button"
-                            onClick={onClose}
+                            onClick={() => {
+                                setEmail('');
+                                setIsHomeCare(false);
+                                setName('');
+                                setCompany('');
+                                setJobTitle('');
+                                onClose();
+                            }}
                             className="px-6 py-3 rounded-md font-semibold bg-white text-[#08193e] border border-gray-300 hover:bg-gray-50 disabled:opacity-50"
                             disabled={isChecking}
                         >

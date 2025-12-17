@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import ConfirmPopup from "@/components/ConfirmPopup";
 import VoteConfirmationPopup from "@/components/VoteConfirmationPopup";
 
@@ -22,8 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <Navbar />
-        {children}
+        <div className="min-h-screen flex flex-col">
+          <Navbar />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+        </div>
         <Suspense fallback={null}>
           <ConfirmPopup />
           <VoteConfirmationPopup />

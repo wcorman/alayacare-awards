@@ -75,39 +75,90 @@ export default async function Home() {
       </section>
 
       {/* Celebrating Excellence Section */}
-      <section className="py-16 px-6 lg:px-12 bg-[#dadadf]">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
-          <div className="flex-1">
-            <h2 className="text-3xl font-bold mb-6 text-[#08193e]">Celebrating Excellence</h2>
-            <p className="text-gray-700 mb-6 leading-relaxed">
-              At AlayaCare, we believe that technology is only as good as the people who use it.
-              These awards celebrate the human touch, the late-night visits, the compassionate listening,
-              and the innovative problem-solving that defines exceptional home care.
-            </p>
-            <ul className="space-y-4">
-              {[
-                "Recognize outstanding dedication",
-                "Share inspiring stories of care",
-                "Build a stronger care community"
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 font-medium text-[#1d5eed]">
-                  <Check size={20} className="text-[#f37021]" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex-1 relative">
-            {/* Placeholder images using colors/patterns since we don't have the original assets */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg shadow-lg w-full h-48 bg-gradient-to-br from-blue-400 to-blue-600 transform translate-y-4 flex items-center justify-center text-white font-bold opacity-80">
-                Care & Compassion
+      <section className="py-24 px-6 lg:px-12 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            {/* Left Content */}
+            <div className="flex-1 max-w-xl">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#08193e] bg-opacity-5 mb-6">
+                <div className="w-2 h-2 rounded-full bg-[#f37021]"></div>
+                <span className="text-sm font-semibold uppercase tracking-wide text-[#ffffff]">
+                  Our Mission
+                </span>
               </div>
-              <div className="rounded-lg shadow-lg w-full h-48 bg-gradient-to-br from-orange-300 to-orange-500 transform -translate-y-4 flex items-center justify-center text-white font-bold opacity-80">
-                Innovation
+              
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#08193e] mb-6 leading-tight">
+                Celebrating Excellence
+              </h2>
+              
+              <p className="text-lg text-gray-700 mb-10 leading-relaxed">
+                At AlayaCare, we believe that technology is only as good as the people who use it.
+                These awards celebrate the human touch, the late-night visits, the compassionate listening,
+                and the innovative problem-solving that defines exceptional home care.
+              </p>
+              
+              <div className="space-y-4">
+                {[
+                  { text: "Recognize outstanding dedication", icon: Trophy },
+                  { text: "Share inspiring stories of care", icon: Heart },
+                  { text: "Build a stronger care community", icon: UserPlus }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 p-4 rounded-lg bg-gray-50 hover:bg-[#f37021] hover:bg-opacity-5 transition-all group">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#f37021] flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <item.icon size={20} className="text-white" strokeWidth={2.5} />
+                    </div>
+                    <span className="text-base font-semibold text-[#08193e] group-hover:text-white transition-colors">
+                      {item.text}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="absolute -z-10 top-0 right-0 w-full h-full opacity-20" style={{ backgroundImage: 'radial-gradient(#f37021 2px, transparent 2px)', backgroundSize: '20px 20px' }}></div>
+
+            {/* Right Visual */}
+            <div className="flex-1 w-full max-w-xl">
+              <div className="grid grid-cols-2 gap-5">
+                {/* Card 1 */}
+                <div className="bg-gradient-to-br from-[#08193e] to-[#113cca] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                  <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
+                    <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
+                      <Heart size={32} strokeWidth={2} />
+                    </div>
+                    <h3 className="font-bold text-lg">Care Givers</h3>
+                  </div>
+                </div>
+
+                {/* Card 2 */}
+                <div className="bg-gradient-to-br from-[#f37021] to-[#ff8c42] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                  <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
+                    <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
+                      <Sparkles size={32} strokeWidth={2} />
+                    </div>
+                    <h3 className="font-bold text-lg">Schedulers</h3>
+                  </div>
+                </div>
+
+                {/* Card 3 */}
+                <div className="bg-gradient-to-br from-[#ffaa05] to-[#ffc42e] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                  <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
+                    <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
+                      <Star size={32} strokeWidth={2} />
+                    </div>
+                    <h3 className="font-bold text-lg">IT People</h3>
+                  </div>
+                </div>
+
+                {/* Card 4 */}
+                <div className="bg-gradient-to-br from-[#113cca] to-[#2e5ce6] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                  <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
+                    <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
+                      <Trophy size={32} strokeWidth={2} />
+                    </div>
+                    <h3 className="font-bold text-lg">Managers</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
