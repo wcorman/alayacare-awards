@@ -32,7 +32,10 @@ export default function VoteConfirmationPopup() {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div
+            className="fixed inset-0 flex items-center justify-center z-50 p-4"
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.82)' }}
+        >
             <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative animate-fadeIn">
                 {/* Close button */}
                 <button
@@ -61,7 +64,7 @@ export default function VoteConfirmationPopup() {
                 <p className="text-gray-600 text-center mb-2">
                     Your vote has been confirmed for
                 </p>
-                <p className="text-xl font-semibold text-[#00A3E0] text-center mb-1">
+                <p className="text-xl font-semibold text-[#08193e] text-center mb-1">
                     {nomineeName}
                 </p>
                 {category && (
@@ -74,7 +77,7 @@ export default function VoteConfirmationPopup() {
                 <div className="space-y-3 mt-6">
                     <Link
                         href="/categories"
-                        className="block w-full bg-[#00A3E0] text-white py-3 px-6 rounded-lg font-semibold text-center hover:bg-[#0088c0] transition-colors"
+                        className="block w-full bg-[#f37021] text-white py-3 px-6 rounded-lg font-semibold text-center hover:bg-[#d85e15] transition-colors shadow-sm"
                         onClick={() => setIsOpen(false)}
                     >
                         Vote for Others

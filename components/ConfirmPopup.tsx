@@ -12,6 +12,13 @@ export default function ConfirmPopup() {
 
     useEffect(() => {
         const voteParam = searchParams.get('vote');
+        const nomineeParam = searchParams.get('nominee');
+
+        // Don't show this popup if nominee parameter exists (VoteConfirmationPopup handles that)
+        if (nomineeParam) {
+            return;
+        }
+
         if (voteParam === 'confirmed') {
             setStatus('confirmed');
             setIsOpen(true);
