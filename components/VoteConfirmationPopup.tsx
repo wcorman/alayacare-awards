@@ -76,7 +76,7 @@ export default function VoteConfirmationPopup() {
                 {/* CTA Buttons */}
                 <div className="space-y-3 mt-6">
                     <Link
-                        href="/categories"
+                        href="/vote"
                         className="block w-full bg-[#f37021] text-white py-3 px-6 rounded-lg font-semibold text-center hover:bg-[#d85e15] transition-colors shadow-sm"
                         onClick={() => setIsOpen(false)}
                     >
