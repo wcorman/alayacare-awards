@@ -39,18 +39,11 @@ export default function Navbar() {
                     >
                         Nominate
                     </Link>
-
                     <Link
                         href="/vote"
-                        className={`font-medium hover:text-[#f37021] transition-colors ${isActive('/vote') ? 'text-[#f37021]' : 'text-[#08193e]'}`}
-                    >
-                        Vote
-                    </Link>
-                    <Link
-                        href="/nominate"
                         className="py-2 px-4 text-sm font-semibold rounded-md bg-[#f37021] text-white hover:bg-[#d85e15] transition-colors"
                     >
-                        Get Started
+                        Vote
                     </Link>
                 </nav>
 
@@ -78,7 +71,7 @@ export default function Navbar() {
                     <Link
                         href="/vote"
                         onClick={() => setMobileMenuOpen(false)}
-                        className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e]"
+                        className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e] bg-[#f37021] text-white hover:bg-[#d85e15]"
                     >
                         Vote
                     </Link>
