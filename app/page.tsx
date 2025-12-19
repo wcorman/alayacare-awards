@@ -26,11 +26,11 @@ export default async function Home() {
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-[#f37021] mb-6 inline-block">
-            2025 Caregiver Awards
+            2026 AlayaCare Awards
           </span>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Better Technology. <br />
-            <span className="text-[#f37021]">Better Outcomes.</span> <br />
+            Better Technology.<br />
+            <span className="text-[#f37021]">Better Outcomes.</span><br />
             Best Caregivers.
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
