@@ -1,10 +1,18 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Search, Loader2, UserPlus } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { Search, X, Heart, Award, Briefcase, Sparkles, Grid3x3 } from 'lucide-react';
 import NomineeCard from './NomineeCard';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
+
+// Category definitions matching the ones used in NominationForm and Home page
+const CATEGORY_CONFIG: Record<string, { icon: React.ComponentType<{ size?: number; className?: string }>; color: string }> = {
+    "Frontline Care": { icon: Heart, color: '#f37021' },
+    "Operational Excellence": { icon: Award, color: '#113cca' },
+    "Executive Leadership": { icon: Briefcase, color: '#ffaa05' },
+    "Impact and Innovation": { icon: Sparkles, color: '#08193e' },
+};
 
 interface VotePageClientProps {
     nominees: Nominee[];
@@ -12,6 +20,7 @@ interface VotePageClientProps {
 
 export default function VotePageClient({ nominees }: VotePageClientProps) {
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [votedNomineeIds, setVotedNomineeIds] = useState<string[]>([]);
 
     // Vote Modal State
@@ -90,8 +99,20 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
 
     const selectedNominee = nominees.find(n => n.id === selectedNomineeId);
 
+    // Extract unique categories
+    const categories = useMemo(() => {
+        const uniqueCategories = Array.from(new Set(nominees.map(n => n.category).filter(Boolean)));
+        return uniqueCategories.sort();
+    }, [nominees]);
+
     // Filter Nominees
     const filteredNominees = nominees.filter(nominee => {
+        // Category filter
+        if (selectedCategory && nominee.category !== selectedCategory) {
+            return false;
+        }
+
+        // Search filter
         if (!searchTerm) return true;
         const lowerSearch = searchTerm.toLowerCase();
         return (
@@ -104,10 +125,10 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
     return (
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
             {/* Header & Search */}
-            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-6">
                 <div>
                     <h2 className="text-3xl font-bold text-[#08193e]">Vote for Excellence</h2>
-                    <p className="text-gray-600 mt-2">Support your colleagues by voting for their outstanding contributions.</p>
+                    <p className="text-gray-600 mt-2">Recognize outstanding individuals transforming home-based care by casting your vote.</p>
                 </div>
 
                 <div className="relative w-full md:w-72">
@@ -121,6 +142,56 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
                     <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
                 </div>
             </div>
+
+            {/* Category Filter */}
+            {categories.length > 0 && (
+                <div className="mb-8">
+                    <div className="flex flex-wrap items-center gap-3">
+                        <span className="text-sm font-semibold text-gray-700 mr-2">Filter by Category:</span>
+                        <button
+                            onClick={() => setSelectedCategory(null)}
+                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                                selectedCategory === null
+                                    ? 'bg-[#08193e] text-white shadow-md'
+                                    : 'bg-white text-gray-700 border border-gray-300 hover:border-[#f37021] hover:text-[#f37021]'
+                            }`}
+                        >
+                            <Grid3x3 size={16} />
+                            All Categories
+                        </button>
+                        {categories.map((category) => {
+                            const categoryInfo = CATEGORY_CONFIG[category] || { icon: Award, color: '#6b7280' };
+                            const IconComponent = categoryInfo.icon;
+                            return (
+                                <button
+                                    key={category}
+                                    onClick={() => setSelectedCategory(category === selectedCategory ? null : category)}
+                                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                                        selectedCategory === category
+                                            ? 'text-white shadow-md'
+                                            : 'bg-white text-gray-700 border border-gray-300 hover:border-[#f37021] hover:text-[#f37021]'
+                                    }`}
+                                    style={selectedCategory === category ? { backgroundColor: categoryInfo.color } : {}}
+                                >
+                                    <IconComponent size={16} />
+                                    {category}
+                                    {selectedCategory === category && (
+                                        <X size={14} className="ml-1" />
+                                    )}
+                                </button>
+                            );
+                        })}
+                    </div>
+                    {selectedCategory && (
+                        <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
+                            <span>Showing {filteredNominees.length} {filteredNominees.length === 1 ? 'nominee' : 'nominees'} in</span>
+                            <span className="px-3 py-1 rounded-full bg-[#f37021]/10 text-[#f37021] font-semibold">
+                                {selectedCategory}
+                            </span>
+                        </div>
+                    )}
+                </div>
+            )}
 
             {/* Grid */}
             {filteredNominees.length === 0 ? (
