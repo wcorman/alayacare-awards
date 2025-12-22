@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { FileUploaderRegular } from '@uploadcare/react-uploader/next';
 import '@uploadcare/react-uploader/core.css';
-import { User, Users, ChevronRight, Upload, Check, Briefcase, AlertCircle, Loader2, UserPlus } from 'lucide-react';
+import { User, Users, ChevronRight, Upload, Check, Briefcase, AlertCircle, Loader2, UserPlus, Heart, Award, Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 const THEME = {
@@ -16,10 +16,10 @@ const THEME = {
 };
 
 const CATEGORIES = [
-    { id: 'compassion', name: "Compassion in Care", color: '#f58220' },
-    { id: 'innovation', name: "Innovation Excellence", color: '#113cca' },
-    { id: 'rookie', name: "Rookie of the Year", color: '#ffaa05' },
-    { id: 'lifetime', name: "Lifetime Achievement", color: '#08193e' },
+    { id: 'frontline', name: "Frontline Care", color: '#f37021', icon: Heart },
+    { id: 'operational', name: "Operational Excellence", color: '#113cca', icon: Award },
+    { id: 'executive', name: "Executive Leadership", color: '#ffaa05', icon: Briefcase },
+    { id: 'impact', name: "Impact and Innovation", color: '#08193e', icon: Sparkles },
 ];
 
 const JOB_TITLES = [
@@ -48,7 +48,7 @@ export default function NominationForm() {
     const [formData, setFormData] = useState({
         nomineeName: '',
         nomineeEmail: '',
-        category: 'Compassion in Care',
+        category: 'Frontline Care',
         description: '',
         email: '', // Nominator email
         profileImage: null as string | null,
@@ -303,7 +303,7 @@ export default function NominationForm() {
                                         className={`cursor-pointer p-4 rounded-md border-2 transition-all flex items-center gap-3 ${formData.category === cat.name ? 'bg-orange-50 border-[#f37021]' : 'hover:bg-gray-50 border-gray-200'}`}
                                     >
                                         <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white`} style={{ backgroundColor: cat.color }}>
-                                            <span className="text-xs font-bold">{cat.name[0]}</span>
+                                            <cat.icon size={18} />
                                         </div>
                                         <span className="font-medium text-sm text-gray-800">{cat.name}</span>
                                         {formData.category === cat.name && <Check size={16} className="ml-auto text-[#f37021]" />}

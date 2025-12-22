@@ -1,16 +1,16 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { UserPlus, Heart, Sparkles, Star, Trophy, Check } from 'lucide-react';
+import { UserPlus, Heart, Sparkles, Star, Trophy, Check, Award, Briefcase } from 'lucide-react';
 
 // Force dynamic rendering so we always get the latest nominees
 export const dynamic = 'force-dynamic';
 
 const CATEGORIES = [
-  { id: 'compassion', name: "Compassion in Care", icon: Heart, color: '#f37021', description: "For caregivers who show extraordinary empathy." },
-  { id: 'innovation', name: "Innovation Excellence", icon: Sparkles, color: '#113cca', description: "For finding new, better ways to deliver care." },
-  { id: 'rookie', name: "Rookie of the Year", icon: Star, color: '#ffaa05', description: "Best newcomer (under 1 year) demonstrating potential." },
-  { id: 'lifetime', name: "Lifetime Achievement", icon: Trophy, color: '#08193e', description: "Honoring long-term dedication and impact." },
+  { id: 'frontline', name: "Frontline Care", icon: Heart, color: '#f37021', description: "Recognizing exceptional frontline caregivers." },
+  { id: 'operational', name: "Operational Excellence", icon: Award, color: '#113cca', description: "For outstanding operational performance and efficiency." },
+  { id: 'executive', name: "Executive Leadership", icon: Briefcase, color: '#ffaa05', description: "Celebrating visionary leadership and strategic impact." },
+  { id: 'impact', name: "Impact and Innovation", icon: Sparkles, color: '#08193e', description: "For groundbreaking innovation and measurable impact." },
 ];
 
 export default async function Home() {
