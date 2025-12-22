@@ -29,13 +29,10 @@ export default async function Home() {
             2026 AlayaCare Awards
           </span>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Better Technology.<br />
-            <span className="text-[#f37021]">Better Outcomes.</span><br />
-            Best Caregivers.
+            Celebrating the people at the heart of home-based care
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
-            Help us recognize the unsung heroes who deliver extraordinary home care every single day.
-            Vote for this year's stars below.
+            Nominate, vote, and help recognize the top individuals transforming home-based care across roles, regions, and organizations.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
