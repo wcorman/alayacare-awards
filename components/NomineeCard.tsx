@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { ThumbsUp, Check, Award } from 'lucide-react';
 import { Nominee } from '@/lib/airtable';
 
@@ -17,18 +17,48 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
         gold: '#ffaa05',
     };
 
+    const [imageUrl, setImageUrl] = useState(nominee.image);
+    const retryAttempted = useRef(false);
+
+    const handleImageError = async (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        const target = e.target as HTMLImageElement;
+        
+        // If it's an Airtable URL that failed, try to fetch fresh URL
+        if (imageUrl && imageUrl.includes('airtableusercontent') && !retryAttempted.current) {
+            retryAttempted.current = true;
+            
+            try {
+                // Fetch fresh nominee data from API
+                const res = await fetch('/api/nominees');
+                if (res.ok) {
+                    const nominees = await res.json();
+                    const freshNominee = nominees.find((n: Nominee) => n.id === nominee.id);
+                    
+                    if (freshNominee?.image && freshNominee.image !== imageUrl) {
+                        // Use fresh URL
+                        setImageUrl(freshNominee.image);
+                        target.src = freshNominee.image;
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.error('Failed to fetch fresh image URL:', err);
+            }
+        }
+        
+        // Fallback to placeholder
+        target.onerror = null;
+        target.src = "https://placehold.co/400x400/dadadf/08193e?text=Photo+Missing";
+    };
+
     return (
         <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full">
             <div className="relative aspect-square overflow-hidden bg-gray-200">
                 <img
-                    src={nominee.image || "https://placehold.co/400x400/dadadf/08193e?text=No+Photo"}
+                    src={imageUrl || "https://placehold.co/400x400/dadadf/08193e?text=No+Photo"}
                     alt={nominee.name}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                    onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.onerror = null;
-                        target.src = "https://placehold.co/400x400/dadadf/08193e?text=Photo+Missing";
-                    }}
+                    onError={handleImageError}
                 />
                 <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-blue-600">

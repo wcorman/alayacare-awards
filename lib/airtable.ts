@@ -26,7 +26,8 @@ export async function fetchNominations(): Promise<Nominee[]> {
 
     const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}?${sortQuery}&filterByFormula=${filterFormula}`;
 
-    const res = await fetch(url, { headers: HEADERS, next: { revalidate: 60 } }); // Cache for 60s
+    // Remove cache to always get fresh image URLs (Airtable URLs expire)
+    const res = await fetch(url, { headers: HEADERS, cache: 'no-store' });
 
     if (!res.ok) {
         throw new Error(`Failed to fetch nominees: ${res.statusText}`);
