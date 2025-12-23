@@ -67,7 +67,9 @@ export default function NominationForm() {
                     nomineeEmail: formData.nomineeEmail,
                     description: formData.description,
                     category: formData.category,
-                    imageUrl: formData.profileImage
+                    imageUrl: formData.profileImage,
+                    jobTitle: formData.jobTitle || '',
+                    organization: formData.organization || ''
                 }),
             });
 
@@ -79,7 +81,10 @@ export default function NominationForm() {
                 if (data.reason === 'duplicate_nominee') {
                     setErrorMsg("This person has already been nominated. Thank you for your enthusiasm.");
                 } else {
-                    setErrorMsg("An error occurred. Please try again.");
+                    // Show the actual error message if available
+                    const errorMsg = data.error || "An error occurred. Please try again.";
+                    console.error("Nomination API Error:", data);
+                    setErrorMsg(errorMsg);
                 }
             }
         } catch (err) {

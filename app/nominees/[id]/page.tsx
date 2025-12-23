@@ -55,9 +55,9 @@ export default async function NomineePage({ params }: NomineePageProps) {
                             <h1 className="text-4xl md:text-5xl font-bold leading-tight">
                                 {nominee.name}
                             </h1>
-                            {nominee.organization && (
+                            {(nominee.organization || nominee.jobTitle) && (
                                 <p className="text-xl md:text-2xl text-white/90 mt-2">
-                                    {nominee.organization}
+                                    {[nominee.organization, nominee.jobTitle].filter(Boolean).join(' - ')}
                                 </p>
                             )}
                         </div>

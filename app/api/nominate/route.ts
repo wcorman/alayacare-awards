@@ -10,7 +10,9 @@ export async function POST(request: NextRequest) {
             nomineeEmail,
             description,
             category,
-            imageUrl
+            imageUrl,
+            jobTitle,
+            organization
         } = body;
 
         if (!nomineeName || !nomineeEmail || !description || !category) {
@@ -30,13 +32,24 @@ export async function POST(request: NextRequest) {
             nomineeEmail,
             description,
             category,
-            imageUrl
+            imageUrl,
+            jobTitle: jobTitle || '',
+            organization: organization || ''
         });
 
         return NextResponse.json({ ok: true });
 
     } catch (error) {
         console.error("Nomination Error:", error);
-        return NextResponse.json({ ok: false, reason: "server_error" }, { status: 500 });
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error("Full error details:", {
+            message: errorMessage,
+            stack: error instanceof Error ? error.stack : undefined
+        });
+        return NextResponse.json({ 
+            ok: false, 
+            reason: "server_error",
+            error: errorMessage 
+        }, { status: 500 });
     }
 }

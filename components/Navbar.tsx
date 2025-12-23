@@ -43,7 +43,7 @@ export default function Navbar() {
                         href="/vote"
                         className="py-2 px-4 text-sm font-semibold rounded-md bg-[#f37021] text-white hover:bg-[#d85e15] transition-colors"
                     >
-                        Vote
+                        Vote Now
                     </Link>
                 </nav>
 
@@ -73,7 +73,7 @@ export default function Navbar() {
                         onClick={() => setMobileMenuOpen(false)}
                         className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e] bg-[#f37021] text-white hover:bg-[#d85e15]"
                     >
-                        Vote
+                        Vote Now
                     </Link>
                 </div>
             )}

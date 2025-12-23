@@ -18,6 +18,7 @@ export interface Nominee {
     image: string | null;
     description: string;
     organization: string | null;
+    jobTitle: string | null;
 }
 
 export async function fetchNominations(): Promise<Nominee[]> {
@@ -44,6 +45,7 @@ export async function fetchNominations(): Promise<Nominee[]> {
         image: record.fields["Profile Photo"]?.[0]?.url || null,
         description: record.fields["Nomination Reason"] || "No description provided.",
         organization: record.fields["Organization"] || null,
+        jobTitle: record.fields["Job Title"] || null,
     }));
 }
 
@@ -76,6 +78,7 @@ export async function fetchNomineeById(id: string): Promise<Nominee | null> {
         image: record.fields["Profile Photo"]?.[0]?.url || null,
         description: record.fields["Nomination Reason"] || "No description provided.",
         organization: record.fields["Organization"] || null,
+        jobTitle: record.fields["Job Title"] || null,
     };
 }
 
@@ -258,6 +261,8 @@ export async function submitNomination(data: {
     description: string;
     category: string;
     imageUrl: string | null;
+    jobTitle?: string;
+    organization?: string;
 }) {
     const TABLE_NAME = "Nominations";
     const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`;
@@ -268,9 +273,16 @@ export async function submitNomination(data: {
         "Nominee Email": data.nomineeEmail,
         "Nomination Reason": data.description,
         "Category": data.category,
-        "Votes": 0,
         "Status": "Draft"
     };
+
+    // Add optional fields if provided and not empty
+    if (data.jobTitle && data.jobTitle.trim()) {
+        fields["Job Title"] = data.jobTitle.trim();
+    }
+    if (data.organization && data.organization.trim()) {
+        fields["Organization"] = data.organization.trim();
+    }
 
     if (data.imageUrl) {
         fields["Profile Photo"] = [{
@@ -290,9 +302,18 @@ export async function submitNomination(data: {
     });
 
     if (!res.ok) {
-        const err = await res.json();
-        console.error("Airtable Submission Error:", err);
-        throw new Error("Failed to submit nomination");
+        let err;
+        try {
+            err = await res.json();
+        } catch (e) {
+            const text = await res.text();
+            console.error("Airtable Error Response (not JSON):", text);
+            throw new Error(`Failed to submit nomination: ${res.status} ${res.statusText}`);
+        }
+        console.error("Airtable Submission Error:", JSON.stringify(err, null, 2));
+        console.error("Fields being sent:", JSON.stringify(fields, null, 2));
+        const errorMessage = err.error?.message || err.message || JSON.stringify(err);
+        throw new Error(`Airtable Error: ${errorMessage}`);
     }
 
     return true;
