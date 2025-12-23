@@ -3,27 +3,12 @@
 import React, { useState } from 'react';
 import { Mail, X, Loader2, AlertCircle, Briefcase } from 'lucide-react';
 
-const JOB_TITLES = [
-    'Caregiver',
-    'Home Health Aide',
-    'Personal Care Aide',
-    'Certified Nursing Assistant (CNA)',
-    'Registered Nurse (RN)',
-    'Licensed Practical Nurse (LPN)',
-    'Case Manager',
-    'Care Coordinator',
-    'Supervisor',
-    'Manager',
-    'Director',
-    'Administrator',
-    'Other'
-];
 
 interface VoteModalProps {
     isOpen: boolean;
     onClose: () => void;
     nomineeName: string;
-    onSubmit: (email: string, isHomeCare?: boolean, name?: string, company?: string, jobTitle?: string) => Promise<void>;
+    onSubmit: (email: string, isHomeCare?: boolean, name?: string, organization?: string, jobTitle?: string) => Promise<void>;
     isChecking: boolean;
     errorMsg: string | null;
     voteCompleted: boolean;
@@ -41,7 +26,7 @@ export default function VoteModal({
     const [email, setEmail] = useState('');
     const [isHomeCare, setIsHomeCare] = useState(false);
     const [name, setName] = useState('');
-    const [company, setCompany] = useState('');
+    const [organization, setOrganization] = useState('');
     const [jobTitle, setJobTitle] = useState('');
 
     if (!isOpen) return null;
@@ -67,7 +52,7 @@ export default function VoteModal({
                             setEmail('');
                             setIsHomeCare(false);
                             setName('');
-                            setCompany('');
+                            setOrganization('');
                             setJobTitle('');
                             onClose();
                         }}
@@ -88,7 +73,7 @@ export default function VoteModal({
                 setEmail('');
                 setIsHomeCare(false);
                 setName('');
-                setCompany('');
+                setOrganization('');
                 setJobTitle('');
                 onClose();
             }}
@@ -102,7 +87,7 @@ export default function VoteModal({
                         setEmail('');
                         setIsHomeCare(false);
                         setName('');
-                        setCompany('');
+                        setOrganization('');
                         setJobTitle('');
                         onClose();
                     }} 
@@ -124,7 +109,7 @@ export default function VoteModal({
                     </div>
                 )}
 
-                <form onSubmit={(e) => { e.preventDefault(); onSubmit(email, isHomeCare, name, company, jobTitle); }}>
+                <form onSubmit={(e) => { e.preventDefault(); onSubmit(email, isHomeCare, name, organization, jobTitle); }}>
                     <div className="mb-6">
                         <label className="block text-sm font-bold mb-2 text-gray-700">Your Email Address</label>
                         <input
@@ -149,7 +134,7 @@ export default function VoteModal({
                                     setIsHomeCare(e.target.checked);
                                     if (!e.target.checked) {
                                         setName('');
-                                        setCompany('');
+                                        setOrganization('');
                                         setJobTitle('');
                                     }
                                 }}
@@ -161,7 +146,7 @@ export default function VoteModal({
                         </div>
                     </div>
 
-                    {/* Name and Company Fields */}
+                    {/* Name and Organization Fields */}
                     {isHomeCare && (
                         <>
                             <div className="mb-6">
@@ -176,36 +161,31 @@ export default function VoteModal({
                                 />
                             </div>
                             <div className="mb-6">
-                                <label className="block text-sm font-bold mb-2 text-gray-700">Company</label>
+                                <label className="block text-sm font-bold mb-2 text-gray-700">Organization</label>
                                 <input
                                     required
                                     type="text"
                                     className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
                                     placeholder="e.g. ABC Home Care"
-                                    value={company}
-                                    onChange={(e) => setCompany(e.target.value)}
+                                    value={organization}
+                                    onChange={(e) => setOrganization(e.target.value)}
                                 />
                             </div>
                         </>
                     )}
 
-                    {/* Job Title Dropdown */}
+                    {/* Job Title Field */}
                     {isHomeCare && (
                         <div className="mb-6">
                             <label className="block text-sm font-bold mb-2 text-gray-700">Job Title</label>
-                            <select
+                            <input
                                 required
+                                type="text"
                                 className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                placeholder="e.g. Caregiver, Registered Nurse, etc."
                                 value={jobTitle}
                                 onChange={(e) => setJobTitle(e.target.value)}
-                            >
-                                <option value="">Select your job title</option>
-                                {JOB_TITLES.map((title) => (
-                                    <option key={title} value={title}>
-                                        {title}
-                                    </option>
-                                ))}
-                            </select>
+                            />
                         </div>
                     )}
 
@@ -213,7 +193,7 @@ export default function VoteModal({
                         <button
                             type="submit"
                             className="flex-1 px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                            disabled={isChecking || (isHomeCare && (!name || !company || !jobTitle))}
+                            disabled={isChecking || (isHomeCare && (!name || !organization || !jobTitle))}
                         >
                             {isChecking ? (
                                 <>
@@ -229,7 +209,7 @@ export default function VoteModal({
                                 setEmail('');
                                 setIsHomeCare(false);
                                 setName('');
-                                setCompany('');
+                                setOrganization('');
                                 setJobTitle('');
                                 onClose();
                             }}

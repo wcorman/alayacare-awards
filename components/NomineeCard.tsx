@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from 'react';
+import Link from 'next/link';
 import { ThumbsUp, Check, Award } from 'lucide-react';
 import { Nominee } from '@/lib/airtable';
 
@@ -52,51 +53,60 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
     };
 
     return (
-        <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full">
-            <div className="relative aspect-square overflow-hidden bg-gray-200">
-                <img
-                    src={imageUrl || "https://placehold.co/400x400/dadadf/08193e?text=No+Photo"}
-                    alt={nominee.name}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                    onError={handleImageError}
-                />
-                <div className="absolute top-3 left-3">
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-white bg-blue-600">
-                        {nominee.category}
-                    </span>
-                </div>
-            </div>
-
-            <div className="p-4 flex-1 flex flex-col">
-                <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-lg font-bold" style={{ color: THEME_COLORS.deepBlue }}>{nominee.name}</h3>
+        <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full group">
+            <Link href={`/nominees/${nominee.id}`} className="flex-1 flex flex-col cursor-pointer">
+                <div className="relative aspect-square overflow-hidden bg-gray-200">
+                    <img
+                        src={imageUrl || "https://placehold.co/400x400/dadadf/08193e?text=No+Photo"}
+                        alt={nominee.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        onError={handleImageError}
+                    />
+                    <div className="absolute top-3 left-3">
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-white bg-blue-600">
+                            {nominee.category}
+                        </span>
+                    </div>
                 </div>
 
-                <p className="text-gray-600 text-xs mb-4 flex-1 line-clamp-3">
-                    "{nominee.description}"
-                </p>
-
-                <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-                    <div className="flex items-center gap-1.5 text-gray-500 font-medium">
-                        <Award size={16} className="text-[#ffaa05]" />
-                        <span className="text-xs">{nominee.votes} Votes</span>
+                <div className="p-4 flex-1 flex flex-col">
+                    <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-lg font-bold group-hover:text-[#f37021] transition-colors" style={{ color: THEME_COLORS.deepBlue }}>{nominee.name}</h3>
                     </div>
 
-                    <button
-                        onClick={() => onVote(nominee.id)}
-                        disabled={hasVoted}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${hasVoted
-                                ? 'bg-green-100 text-green-700 cursor-default'
-                                : 'bg-gray-100 text-gray-600 hover:bg-[#f37021] hover:text-white'
-                            }`}
-                    >
-                        {hasVoted ? (
-                            <>Voted <Check size={14} /></>
-                        ) : (
-                            <>Vote <ThumbsUp size={14} /></>
-                        )}
-                    </button>
+                    <p className="text-gray-600 text-xs mb-4 flex-1 line-clamp-3">
+                        "{nominee.description}"
+                    </p>
                 </div>
+            </Link>
+
+            <div className="px-4 pb-4 flex items-center justify-between border-t border-gray-100">
+                <Link 
+                    href={`/nominees/${nominee.id}`}
+                    className="flex items-center gap-1.5 text-gray-500 font-medium hover:text-[#08193e] transition-colors"
+                >
+                    <Award size={16} className="text-[#ffaa05]" />
+                    <span className="text-xs">{nominee.votes} Votes</span>
+                </Link>
+
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        onVote(nominee.id);
+                    }}
+                    disabled={hasVoted}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${hasVoted
+                            ? 'bg-green-100 text-green-700 cursor-default'
+                            : 'bg-gray-100 text-gray-600 hover:bg-[#f37021] hover:text-white'
+                        }`}
+                >
+                    {hasVoted ? (
+                        <>Voted <Check size={14} /></>
+                    ) : (
+                        <>Vote <ThumbsUp size={14} /></>
+                    )}
+                </button>
             </div>
         </div>
     );

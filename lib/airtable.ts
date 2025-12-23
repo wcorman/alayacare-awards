@@ -17,6 +17,7 @@ export interface Nominee {
     votes: number;
     image: string | null;
     description: string;
+    organization: string | null;
 }
 
 export async function fetchNominations(): Promise<Nominee[]> {
@@ -42,7 +43,40 @@ export async function fetchNominations(): Promise<Nominee[]> {
         votes: record.fields["Votes"] || 0,
         image: record.fields["Profile Photo"]?.[0]?.url || null,
         description: record.fields["Nomination Reason"] || "No description provided.",
+        organization: record.fields["Organization"] || null,
     }));
+}
+
+export async function fetchNomineeById(id: string): Promise<Nominee | null> {
+    const TABLE_NAME = "Nominations";
+    // Fetch record directly by ID
+    const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}/${encodeURIComponent(id)}`;
+
+    const res = await fetch(url, { headers: HEADERS, cache: 'no-store' });
+
+    if (!res.ok) {
+        if (res.status === 404) {
+            return null;
+        }
+        throw new Error(`Failed to fetch nominee: ${res.statusText}`);
+    }
+
+    const record = await res.json();
+
+    // Check if status is Live
+    if (record.fields["Status"] !== "Live") {
+        return null;
+    }
+
+    return {
+        id: record.id,
+        name: record.fields["Name"] || "Unknown Name",
+        category: record.fields["Category"] || "Uncategorized",
+        votes: record.fields["Votes"] || 0,
+        image: record.fields["Profile Photo"]?.[0]?.url || null,
+        description: record.fields["Nomination Reason"] || "No description provided.",
+        organization: record.fields["Organization"] || null,
+    };
 }
 
 export async function findVotingRecord(email: string) {

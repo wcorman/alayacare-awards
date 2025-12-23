@@ -56,7 +56,7 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
         setVoteCompleted(false);
     };
 
-    const handleConfirmVote = async (email: string, isHomeCare?: boolean, name?: string, company?: string, jobTitle?: string) => {
+    const handleConfirmVote = async (email: string, isHomeCare?: boolean, name?: string, organization?: string, jobTitle?: string) => {
         setIsCheckingVote(true);
         setVoteError(null);
 
@@ -71,7 +71,7 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
                     nomineeId: selectedNomineeId,
                     isHomeCare: isHomeCare || false,
                     name: name || '',
-                    company: company || '',
+                    organization: organization || '',
                     jobTitle: jobTitle || ''
                 }),
             });
