@@ -182,14 +182,30 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
                             );
                         })}
                     </div>
-                    {selectedCategory && (
-                        <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
-                            <span>Showing {filteredNominees.length} {filteredNominees.length === 1 ? 'nominee' : 'nominees'} in</span>
-                            <span className="px-3 py-1 rounded-full bg-[#f37021]/10 text-[#f37021] font-semibold">
-                                {selectedCategory}
-                            </span>
-                        </div>
-                    )}
+                    {selectedCategory && (() => {
+                        const categoryInfo = CATEGORY_CONFIG[selectedCategory] || { color: '#6b7280' };
+                        // Convert hex to rgba with 15% opacity
+                        const hexToRgba = (hex: string, alpha: number) => {
+                            const r = parseInt(hex.slice(1, 3), 16);
+                            const g = parseInt(hex.slice(3, 5), 16);
+                            const b = parseInt(hex.slice(5, 7), 16);
+                            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+                        };
+                        return (
+                            <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
+                                <span>Showing {filteredNominees.length} {filteredNominees.length === 1 ? 'nominee' : 'nominees'} in</span>
+                                <span 
+                                    className="px-3 py-1 rounded-full font-semibold"
+                                    style={{ 
+                                        backgroundColor: hexToRgba(categoryInfo.color, 0.15),
+                                        color: categoryInfo.color
+                                    }}
+                                >
+                                    {selectedCategory}
+                                </span>
+                            </div>
+                        );
+                    })()}
                 </div>
             )}
 
