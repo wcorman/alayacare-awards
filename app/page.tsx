@@ -29,7 +29,7 @@ export default async function Home() {
             2026 AlayaCare Awards
           </span>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Celebrating the people at the heart of home-based care
+            Celebrating the <span style={{ color: '#f37021' }}>people</span> at the heart of home-based care
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
             Nominate, vote, and help recognize the top individuals transforming home-based care across roles, regions, and organizations.
