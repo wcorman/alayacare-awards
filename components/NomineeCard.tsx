@@ -11,12 +11,23 @@ interface NomineeCardProps {
     onVote: (id: string) => void;
 }
 
+// Category color mapping matching other components
+const CATEGORY_COLORS: Record<string, string> = {
+    "Frontline Care": '#f37021',
+    "Operational Excellence": '#113cca',
+    "Executive Leadership": '#ffaa05',
+    "Impact and Innovation": '#08193e',
+};
+
 export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardProps) {
     const THEME_COLORS = {
         deepBlue: '#08193e',
         logoOrange: '#f37021',
         gold: '#ffaa05',
     };
+
+    // Get category color, default to blue if not found
+    const categoryColor = CATEGORY_COLORS[nominee.category || ''] || '#113cca';
 
     const [imageUrl, setImageUrl] = useState(nominee.image);
     const retryAttempted = useRef(false);
@@ -63,7 +74,10 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
                         onError={handleImageError}
                     />
                     <div className="absolute top-3 left-3">
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-white bg-blue-600">
+                        <span 
+                            className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-white"
+                            style={{ backgroundColor: categoryColor }}
+                        >
                             {nominee.category}
                         </span>
                     </div>
