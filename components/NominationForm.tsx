@@ -181,7 +181,7 @@ export default function NominationForm() {
                 <div className="bg-white rounded-lg shadow-md p-6 md:p-10">
                     <div className="mb-6">
                         <h2 className="text-3xl font-bold mb-2" style={{ color: THEME.colors.deepBlue }}>
-                            {isSelf ? "Tell Us Your Story" : "Nominate a Caregiver"}
+                            {isSelf ? "Tell Us Your Story" : "Nominate a Care Leader"}
                         </h2>
                         <p className="text-gray-600">
                             {isSelf ? "You do amazing work. Help us recognize it." : "Shine a light on someone who makes a difference."}

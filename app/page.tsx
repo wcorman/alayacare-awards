@@ -40,7 +40,7 @@ export default async function Home() {
               href="/nominate"
               className="px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15] transition-all duration-200 shadow-sm flex items-center justify-center gap-2"
             >
-              <UserPlus size={20} /> Nominate a Caregiver
+              <UserPlus size={20} /> Nominate a Care Leader
             </Link>
           </div>
         </div>
