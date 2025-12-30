@@ -119,7 +119,7 @@ export default async function Home() {
                 <div className="bg-gradient-to-br from-[#08193e] to-[#113cca] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                   <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
                     <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
-                      <Users size={32} strokeWidth={2} />
+                      <Users size={32} strokeWidth={2} style={{ color: '#08193e' }} />
                     </div>
                     <h3 className="font-bold text-lg">Care Givers</h3>
                   </div>
@@ -129,7 +129,7 @@ export default async function Home() {
                 <div className="bg-gradient-to-br from-[#f37021] to-[#ff8c42] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                   <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
                     <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
-                      <Calendar size={32} strokeWidth={2} />
+                      <Calendar size={32} strokeWidth={2} style={{ color: '#08193e' }} />
                     </div>
                     <h3 className="font-bold text-lg">Schedulers</h3>
                   </div>
@@ -139,7 +139,7 @@ export default async function Home() {
                 <div className="bg-gradient-to-br from-[#ffaa05] to-[#ffc42e] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                   <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
                     <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
-                      <Code size={32} strokeWidth={2} />
+                      <Code size={32} strokeWidth={2} style={{ color: '#08193e' }} />
                     </div>
                     <h3 className="font-bold text-lg">IT People</h3>
                   </div>
@@ -149,7 +149,7 @@ export default async function Home() {
                 <div className="bg-gradient-to-br from-[#113cca] to-[#2e5ce6] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                   <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
                     <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
-                      <Briefcase size={32} strokeWidth={2} />
+                      <Briefcase size={32} strokeWidth={2} style={{ color: '#08193e' }} />
                     </div>
                     <h3 className="font-bold text-lg">Managers</h3>
                   </div>

@@ -38,9 +38,11 @@ export default function NominationForm() {
         email: '', // Nominator email
         profileImage: null as string | null,
         isHomeCare: false,
-        name: '',
-        organization: '',
-        jobTitle: '',
+        name: '', // Nominator name
+        nominatorOrganization: '', // Nominator organization
+        nominatorJobTitle: '', // Nominator job title
+        organization: '', // Nominee organization
+        jobTitle: '', // Nominee job title
     });
 
     const handleTypeSelect = (type: 'self' | 'other') => {
@@ -69,7 +71,11 @@ export default function NominationForm() {
                     category: formData.category,
                     imageUrl: formData.profileImage,
                     jobTitle: formData.jobTitle || '',
-                    organization: formData.organization || ''
+                    organization: formData.organization || '',
+                    nominatorName: formData.name || '',
+                    nominatorOrganization: formData.nominatorOrganization || '',
+                    nominatorJobTitle: formData.nominatorJobTitle || '',
+                    isHomeCare: nominationType === 'other' ? formData.isHomeCare : false
                 }),
             });
 
@@ -225,34 +231,36 @@ export default function NominationForm() {
                             <p className="text-xs text-gray-500 mt-1">We'll use this to notify {isSelf ? "you" : "them"} if {isSelf ? "you" : "they"} win.</p>
                         </div>
 
-                        {/* Organization and Job Title Fields (For Self-Nominations) */}
-                        {isSelf && (
-                            <>
-                                <div>
-                                    <label className="block text-sm font-bold mb-2 text-gray-700">Organization</label>
-                                    <input
-                                        required
-                                        type="text"
-                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
-                                        placeholder="e.g. ABC Home Care"
-                                        value={formData.organization}
-                                        onChange={e => setFormData({ ...formData, organization: e.target.value })}
-                                    />
-                                </div>
-                                
-                                <div>
-                                    <label className="block text-sm font-bold mb-2 text-gray-700">Job Title</label>
-                                    <input
-                                        required
-                                        type="text"
-                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
-                                        placeholder="e.g. Caregiver, Registered Nurse, etc."
-                                        value={formData.jobTitle}
-                                        onChange={e => setFormData({ ...formData, jobTitle: e.target.value })}
-                                    />
-                                </div>
-                            </>
-                        )}
+                        {/* Organization and Job Title Fields (For All Nominations) */}
+                        <>
+                            <div>
+                                <label className="block text-sm font-bold mb-2 text-gray-700">
+                                    {isSelf ? "Organization" : "Nominee Organization"}
+                                </label>
+                                <input
+                                    required
+                                    type="text"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                    placeholder="e.g. ABC Home Care"
+                                    value={formData.organization}
+                                    onChange={e => setFormData({ ...formData, organization: e.target.value })}
+                                />
+                            </div>
+                            
+                            <div>
+                                <label className="block text-sm font-bold mb-2 text-gray-700">
+                                    {isSelf ? "Job Title" : "Nominee Job Title"}
+                                </label>
+                                <input
+                                    required
+                                    type="text"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                    placeholder="e.g. Caregiver, Registered Nurse, etc."
+                                    value={formData.jobTitle}
+                                    onChange={e => setFormData({ ...formData, jobTitle: e.target.value })}
+                                />
+                            </div>
+                        </>
 
                         {/* Photo */}
                         <div>
@@ -337,8 +345,8 @@ export default function NominationForm() {
                                         ...formData, 
                                         isHomeCare: e.target.checked,
                                         name: e.target.checked ? formData.name : '',
-                                        organization: e.target.checked ? formData.organization : '',
-                                        jobTitle: e.target.checked ? formData.jobTitle : ''
+                                        nominatorOrganization: e.target.checked ? formData.nominatorOrganization : '',
+                                        nominatorJobTitle: e.target.checked ? formData.nominatorJobTitle : ''
                                     })}
                                 />
                                 <label htmlFor="industryCheckbox" className="text-sm font-medium text-gray-700 cursor-pointer flex items-center gap-2">
@@ -348,54 +356,52 @@ export default function NominationForm() {
                             </div>
                         )}
                         
-                        {/* Name Field (Only for Other Nominations when checkbox is checked) */}
-                        {!isSelf && formData.isHomeCare && (
-                            <div>
-                                <label className="block text-sm font-bold mb-2 text-gray-700">Name</label>
-                                <input
-                                    required
-                                    type="text"
-                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
-                                    placeholder="e.g. Jane Doe"
-                                    value={formData.name}
-                                    onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                />
-                            </div>
-                        )}
-                        
-                        {/* Organization and Job Title Fields (Only for Other Nominations when checkbox is checked) */}
+                        {/* Nominator Info Fields (Only for Other Nominations when checkbox is checked) */}
                         {!isSelf && formData.isHomeCare && (
                             <>
                                 <div>
-                                    <label className="block text-sm font-bold mb-2 text-gray-700">Organization</label>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">Your Name</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                        placeholder="e.g. Jane Doe"
+                                        value={formData.name}
+                                        onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                    />
+                                </div>
+                                
+                                <div>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">Your Organization</label>
                                     <input
                                         required
                                         type="text"
                                         className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
                                         placeholder="e.g. ABC Home Care"
-                                        value={formData.organization}
-                                        onChange={e => setFormData({ ...formData, organization: e.target.value })}
+                                        value={formData.nominatorOrganization}
+                                        onChange={e => setFormData({ ...formData, nominatorOrganization: e.target.value })}
                                     />
                                 </div>
                                 
                                 <div>
-                                    <label className="block text-sm font-bold mb-2 text-gray-700">Job Title</label>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">Your Job Title</label>
                                     <input
                                         required
                                         type="text"
                                         className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
                                         placeholder="e.g. Caregiver, Registered Nurse, etc."
-                                        value={formData.jobTitle}
-                                        onChange={e => setFormData({ ...formData, jobTitle: e.target.value })}
+                                        value={formData.nominatorJobTitle}
+                                        onChange={e => setFormData({ ...formData, nominatorJobTitle: e.target.value })}
                                     />
                                 </div>
                             </>
                         )}
+                        
 
                         <button
                             type="submit"
                             className="w-full px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg"
-                            disabled={isSubmitting || ((isSelf || formData.isHomeCare) && (!formData.organization || !formData.jobTitle || (!isSelf && formData.isHomeCare && !formData.name)))}
+                            disabled={isSubmitting || (!formData.organization || !formData.jobTitle || (!isSelf && formData.isHomeCare && (!formData.name || !formData.nominatorOrganization || !formData.nominatorJobTitle)))}
                         >
                             {isSubmitting ? (
                                 <>

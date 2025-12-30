@@ -263,6 +263,9 @@ export async function submitNomination(data: {
     imageUrl: string | null;
     jobTitle?: string;
     organization?: string;
+    nominatorName?: string;
+    nominatorOrganization?: string;
+    nominatorJobTitle?: string;
 }) {
     const TABLE_NAME = "Nominations";
     const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`;
@@ -283,6 +286,7 @@ export async function submitNomination(data: {
     if (data.organization && data.organization.trim()) {
         fields["Organization"] = data.organization.trim();
     }
+    // Note: Nominator Name, Organization, and Job Title are stored in the Contacts table, not here
 
     if (data.imageUrl) {
         fields["Profile Photo"] = [{
@@ -314,6 +318,185 @@ export async function submitNomination(data: {
         console.error("Fields being sent:", JSON.stringify(fields, null, 2));
         const errorMessage = err.error?.message || err.message || JSON.stringify(err);
         throw new Error(`Airtable Error: ${errorMessage}`);
+    }
+
+    const result = await res.json();
+    // Return the record ID so we can link it to the contact
+    return result.records?.[0]?.id || null;
+}
+
+export async function addContactToAirtable(data: {
+    email: string;
+    name?: string;
+    organization?: string;
+    jobTitle?: string;
+    nominationId?: string;
+}) {
+    const TABLE_NAME = "Contacts";
+    const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`;
+
+    // Check if contact already exists by email
+    let existingRecord = null;
+    
+    const filterFormula = encodeURIComponent(`LOWER({Email})=LOWER('${data.email}')`);
+    const checkUrl = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}?filterByFormula=${filterFormula}`;
+    const checkRes = await fetch(checkUrl, { headers: HEADERS, cache: 'no-store' });
+    
+    if (checkRes.ok) {
+        const checkData = await checkRes.json();
+        if (checkData.records && checkData.records.length > 0) {
+            existingRecord = checkData.records[0];
+        }
+    }
+    
+    if (existingRecord) {
+        // If contact exists, update it instead of creating a new one
+        const fields: any = {};
+        
+        if (data.name && data.name.trim()) {
+            fields["Name"] = data.name.trim();
+        }
+        if (data.organization && data.organization.trim()) {
+            fields["Organization"] = data.organization.trim();
+        }
+        if (data.jobTitle && data.jobTitle.trim()) {
+            fields["Job Title"] = data.jobTitle.trim();
+        }
+        
+        // Link nomination if provided
+        if (data.nominationId) {
+            const existingNominations = existingRecord.fields["Nominations"] || [];
+            // Only add if not already linked
+            if (!existingNominations.includes(data.nominationId)) {
+                fields["Nominations"] = [...existingNominations, data.nominationId];
+            }
+        }
+        
+        // Only update if there are fields to update
+        if (Object.keys(fields).length > 0) {
+            const updateUrl = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`;
+            const updateRes = await fetch(updateUrl, {
+                method: 'PATCH',
+                headers: HEADERS,
+                body: JSON.stringify({
+                    records: [{
+                        id: existingRecord.id,
+                        fields
+                    }]
+                })
+            });
+            
+            if (!updateRes.ok) {
+                const err = await updateRes.json();
+                console.error("Airtable Update Contact Error:", JSON.stringify(err, null, 2));
+                // Log but don't throw - we'll try to create instead
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    // Create new contact if it doesn't exist
+    // Try creating with just Email first to isolate any field issues
+    const fields: any = {
+        "Email": data.email.trim().toLowerCase()
+    };
+
+    // Try creating with just Email first
+    let body = {
+        records: [{ fields: { "Email": data.email.trim().toLowerCase() } }]
+    };
+
+    let res = await fetch(url, {
+        method: 'POST',
+        headers: HEADERS,
+        body: JSON.stringify(body)
+    });
+
+    if (res.ok) {
+        // If Email-only creation worked, try updating with other fields
+        const createdData = await res.json();
+        const createdRecordId = createdData.records[0].id;
+        
+        const updateFields: any = {};
+        if (data.name && data.name.trim()) {
+            updateFields["Name"] = data.name.trim();
+        }
+        if (data.organization && data.organization.trim()) {
+            updateFields["Organization"] = data.organization.trim();
+        }
+        if (data.jobTitle && data.jobTitle.trim()) {
+            updateFields["Job Title"] = data.jobTitle.trim();
+        }
+        // Link nomination if provided
+        if (data.nominationId) {
+            updateFields["Nominations"] = [data.nominationId];
+        }
+        
+        if (Object.keys(updateFields).length > 0) {
+            const updateUrl = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`;
+            const updateRes = await fetch(updateUrl, {
+                method: 'PATCH',
+                headers: HEADERS,
+                body: JSON.stringify({
+                    records: [{
+                        id: createdRecordId,
+                        fields: updateFields
+                    }]
+                })
+            });
+            
+            if (!updateRes.ok) {
+                const updateErr = await updateRes.json();
+                console.error("Airtable Update Contact Fields Error:", JSON.stringify(updateErr, null, 2));
+                console.error("Fields being updated:", JSON.stringify(updateFields, null, 2));
+                // Don't throw - at least the contact was created with Email
+            }
+        }
+        
+        return true;
+    } else {
+        // If Email-only creation failed, try with all fields
+        if (data.name && data.name.trim()) {
+            fields["Name"] = data.name.trim();
+        }
+        if (data.organization && data.organization.trim()) {
+            fields["Organization"] = data.organization.trim();
+        }
+        if (data.jobTitle && data.jobTitle.trim()) {
+            fields["Job Title"] = data.jobTitle.trim();
+        }
+        // Link nomination if provided
+        if (data.nominationId) {
+            fields["Nominations"] = [data.nominationId];
+        }
+
+        body = {
+            records: [{ fields }]
+        };
+
+        res = await fetch(url, {
+            method: 'POST',
+            headers: HEADERS,
+            body: JSON.stringify(body)
+        });
+
+        if (!res.ok) {
+            let err;
+            try {
+                err = await res.json();
+            } catch (e) {
+                const text = await res.text();
+                console.error("Airtable Error Response (not JSON):", text);
+                throw new Error(`Failed to add contact: ${res.status} ${res.statusText}`);
+            }
+            console.error("Airtable Contact Error:", JSON.stringify(err, null, 2));
+            console.error("Fields being sent:", JSON.stringify(fields, null, 2));
+            const errorMessage = err.error?.message || err.message || JSON.stringify(err);
+            throw new Error(`Airtable Error: ${errorMessage}`);
+        }
     }
 
     return true;

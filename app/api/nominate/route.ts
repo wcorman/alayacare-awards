@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { checkIfNomineeExists, submitNomination } from '@/lib/airtable';
+import { checkIfNomineeExists, submitNomination, addContactToAirtable } from '@/lib/airtable';
 
 export async function POST(request: NextRequest) {
     try {
@@ -12,7 +12,11 @@ export async function POST(request: NextRequest) {
             category,
             imageUrl,
             jobTitle,
-            organization
+            organization,
+            nominatorName,
+            nominatorOrganization,
+            nominatorJobTitle,
+            isHomeCare
         } = body;
 
         if (!nomineeName || !nomineeEmail || !description || !category) {
@@ -26,7 +30,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Submit to Airtable
-        await submitNomination({
+        const nominationId = await submitNomination({
             nominatorEmail: nominatorEmail || nomineeEmail, // If self-nomination, use nominee email
             nomineeName,
             nomineeEmail,
@@ -34,8 +38,31 @@ export async function POST(request: NextRequest) {
             category,
             imageUrl,
             jobTitle: jobTitle || '',
-            organization: organization || ''
+            organization: organization || '',
+            nominatorName: nominatorName || '',
+            nominatorOrganization: nominatorOrganization || '',
+            nominatorJobTitle: nominatorJobTitle || ''
         });
+
+        // Add nominator to Contacts table if they checked the home care industry option
+        if (isHomeCare && nominatorEmail && (nominatorName || nominatorOrganization || nominatorJobTitle)) {
+            try {
+                await addContactToAirtable({
+                    email: nominatorEmail,
+                    name: nominatorName || '',
+                    organization: nominatorOrganization || '',
+                    jobTitle: nominatorJobTitle || '',
+                    nominationId: nominationId || undefined
+                });
+            } catch (error) {
+                // Log error but don't fail the nomination if contact addition fails
+                console.error("Failed to add nominator to Contacts:", error);
+                if (error instanceof Error) {
+                    console.error("Error message:", error.message);
+                    console.error("Error stack:", error.stack);
+                }
+            }
+        }
 
         return NextResponse.json({ ok: true });
 

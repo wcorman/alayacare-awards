@@ -160,7 +160,7 @@ export default async function NomineePage({ params }: NomineePageProps) {
                         </Link>
                         <Link
                             href="/nominate"
-                            className="px-6 py-3 rounded-lg font-medium text-white bg-[#08193e] hover:bg-[#0a1f4a] transition-all duration-200 text-center"
+                            className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#f37021] hover:text-[#f37021] transition-all duration-200 text-center"
                         >
                             Nominate Someone
                         </Link>
