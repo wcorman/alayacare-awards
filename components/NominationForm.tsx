@@ -126,7 +126,7 @@ export default function NominationForm() {
                                 <User size={48} className="text-[#1d5eed]" />
                             </div>
                             <h3 className="text-2xl font-bold mb-3" style={{ color: THEME.colors.deepBlue }}>Myself</h3>
-                            <p className="text-gray-600">I am a caregiver and I want to share my own story of excellence.</p>
+                            <p className="text-gray-600">I am a care leader and I want to share my own story of excellence.</p>
                             <div className="mt-8">
                                 <span className="text-[#f37021] font-bold group-hover:underline flex items-center gap-2">
                                     Continue <ChevronRight size={16} />
