@@ -1,0 +1,45 @@
+{
+  "Home": {
+    "hero": {
+      "badge": "2026 AlayaCare Awards",
+      "title": "Celebrating the <people>people</people> at the heart of home-based care",
+      "subtitle": "Nominate, vote, and help recognize the top individuals transforming home-based care across roles, regions, and organizations.",
+      "cta": "Nominate a Care Leader"
+    },
+    "categories": {
+      "title": "Award Categories",
+      "frontline": {
+        "name": "Frontline Care",
+        "description": "Recognizing exceptional frontline caregivers."
+      },
+      "operational": {
+        "name": "Operational Excellence",
+        "description": "For outstanding operational performance and efficiency."
+      },
+      "executive": {
+        "name": "Executive Leadership",
+        "description": "Celebrating visionary leadership and strategic impact."
+      },
+      "impact": {
+        "name": "Impact and Innovation",
+        "description": "For groundbreaking innovation and measurable impact."
+      }
+    },
+    "mission": {
+      "eyebrow": "Our Mission",
+      "title": "Celebrating Excellence",
+      "description": "At AlayaCare, we believe that technology is only as good as the people who use it. These awards celebrate the human touch, the late-night visits, the compassionate listening, and the innovative problem-solving that defines exceptional home care.",
+      "items": [
+        "Recognize outstanding dedication",
+        "Share inspiring stories of care",
+        "Build a stronger care community"
+      ]
+    },
+    "audiences": {
+      "caregivers": "Care Givers",
+      "schedulers": "Schedulers",
+      "it": "IT People",
+      "managers": "Managers"
+    }
+  }
+}

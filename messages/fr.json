@@ -1,0 +1,45 @@
+{
+  "Home": {
+    "hero": {
+      "badge": "Prix AlayaCare 2026",
+      "title": "Célébrons les <people>personnes</people> au cœur des soins à domicile",
+      "subtitle": "Proposez des candidatures, votez et contribuez à reconnaître les personnes qui transforment les soins à domicile à travers les rôles, les régions et les organisations.",
+      "cta": "Nommer un leader du soin"
+    },
+    "categories": {
+      "title": "Catégories de prix",
+      "frontline": {
+        "name": "Soins de première ligne",
+        "description": "Reconnaître des soignants exceptionnels en première ligne."
+      },
+      "operational": {
+        "name": "Excellence opérationnelle",
+        "description": "Pour une performance opérationnelle et une efficacité exceptionnelles."
+      },
+      "executive": {
+        "name": "Leadership de la direction",
+        "description": "Célébrer un leadership visionnaire et un impact stratégique."
+      },
+      "impact": {
+        "name": "Impact et innovation",
+        "description": "Pour une innovation marquante et un impact mesurable."
+      }
+    },
+    "mission": {
+      "eyebrow": "Notre mission",
+      "title": "Célébrer l’excellence",
+      "description": "Chez AlayaCare, nous croyons que la technologie n’est aussi bonne que les personnes qui l’utilisent. Ces prix célèbrent la dimension humaine, les visites tardives, l’écoute bienveillante et la résolution de problèmes innovante qui définissent des soins à domicile exceptionnels.",
+      "items": [
+        "Mettre en valeur un dévouement remarquable",
+        "Partager des histoires de soins inspirantes",
+        "Bâtir une communauté de soins plus forte"
+      ]
+    },
+    "audiences": {
+      "caregivers": "Soignants",
+      "schedulers": "Planificateurs",
+      "it": "Équipe TI",
+      "managers": "Gestionnaires"
+    }
+  }
+}

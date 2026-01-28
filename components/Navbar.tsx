@@ -2,12 +2,16 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const pathname = usePathname();
+    const router = useRouter();
+    const locale = useLocale();
+    const nextLocale = locale === 'fr' ? 'en' : 'fr';
 
     const isActive = (path: string) => pathname === path;
 
@@ -51,6 +55,17 @@ export default function Navbar() {
                     >
                         Vote Now
                     </Link>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000; samesite=lax`;
+                            router.refresh();
+                        }}
+                        className="py-2 px-3 text-sm font-semibold rounded-md border border-[#08193e] text-[#08193e] hover:text-[#f37021] hover:border-[#f37021] transition-colors"
+                        aria-label={`Switch language to ${nextLocale === 'fr' ? 'French' : 'English'}`}
+                    >
+                        {nextLocale.toUpperCase()}
+                    </button>
                 </nav>
 
                 <button className="md:hidden text-gray-600" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -88,6 +103,18 @@ export default function Navbar() {
                     >
                         Vote Now
                     </Link>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000; samesite=lax`;
+                            router.refresh();
+                            setMobileMenuOpen(false);
+                        }}
+                        className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e]"
+                        aria-label={`Switch language to ${nextLocale === 'fr' ? 'French' : 'English'}`}
+                    >
+                        {nextLocale === 'fr' ? 'Français' : 'English'}
+                    </button>
                 </div>
             )}
         </header>
