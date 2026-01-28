@@ -100,11 +100,11 @@ export default async function Home() {
                   { text: "Share inspiring stories of care", icon: Heart },
                   { text: "Build a stronger care community", icon: UserPlus }
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 p-4 rounded-lg bg-gray-50 hover:bg-[#f37021] hover:bg-opacity-5 transition-all group">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#f37021] flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div key={i} className="flex items-center gap-4 p-4 rounded-lg bg-gray-50">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#f37021] flex items-center justify-center">
                       <item.icon size={20} className="text-white" strokeWidth={2.5} />
                     </div>
-                    <span className="text-base font-semibold text-[#08193e] group-hover:text-white transition-colors">
+                    <span className="text-base font-semibold text-[#08193e]">
                       {item.text}
                     </span>
                   </div>

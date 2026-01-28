@@ -34,6 +34,12 @@ export default function Navbar() {
                         Home
                     </Link>
                     <Link
+                        href="/eligibility"
+                        className={`font-medium hover:text-[#f37021] transition-colors ${isActive('/eligibility') ? 'text-[#f37021]' : 'text-[#08193e]'}`}
+                    >
+                        Eligibility
+                    </Link>
+                    <Link
                         href="/nominate"
                         className={`font-medium hover:text-[#f37021] transition-colors ${isActive('/nominate') ? 'text-[#f37021]' : 'text-[#08193e]'}`}
                     >
@@ -60,6 +66,13 @@ export default function Navbar() {
                         className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e]"
                     >
                         Home
+                    </Link>
+                    <Link
+                        href="/eligibility"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e]"
+                    >
+                        Eligibility
                     </Link>
                     <Link
                         href="/nominate"
