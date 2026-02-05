@@ -41,5 +41,8 @@
       "it": "IT People",
       "managers": "Managers"
     }
+  },
+  "NomineeCard": {
+    "viewNominee": "View Nominee"
   }
 }

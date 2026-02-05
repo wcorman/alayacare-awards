@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { ThumbsUp, Check, Award } from 'lucide-react';
 import { Nominee } from '@/lib/airtable';
+import { useTranslations } from 'next-intl';
 
 interface NomineeCardProps {
     nominee: Nominee;
@@ -20,6 +21,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardProps) {
+    const t = useTranslations('NomineeCard');
     const THEME_COLORS = {
         deepBlue: '#08193e',
         logoOrange: '#f37021',
@@ -80,6 +82,13 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
                         >
                             {nominee.category}
                         </span>
+                    </div>
+                    <div className="absolute inset-x-0 bottom-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <div className="flex justify-end">
+                            <div className="px-3 py-2 text-[10px] font-semibold tracking-wide text-white bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+                                {t('viewNominee')}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
