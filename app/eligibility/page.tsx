@@ -174,7 +174,7 @@ export default function EligibilityPage() {
         <div className="max-w-4xl mx-auto">
           <div className="mb-8">
             <h2 className="text-3xl font-bold mb-4 text-[#08193e]">Organization-Level Eligibility</h2>
-            <div className="h-1 w-20 rounded bg-[#f37021] mb-6"></div>
+            <div className="h-1 w-20 rounded bg-[#1D5EED] mb-6"></div>
             <p className="text-gray-700 mb-6">
               All categories share the same organization-level eligibility. To be eligible, nominees must:
             </p>
@@ -236,7 +236,7 @@ export default function EligibilityPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-[#08193e]">Category Eligibility</h2>
-            <div className="h-1 w-20 mx-auto rounded bg-[#f37021]"></div>
+            <div className="h-1 w-20 mx-auto rounded bg-[#1D5EED]"></div>
             <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
               Each category has specific eligibility requirements. Review the details below to determine the best category for your nomination.
             </p>
