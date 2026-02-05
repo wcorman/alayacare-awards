@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AlayaCare Awards",
+  title: "The Home-Based Care Momentum Awards",
   description: "Recognize the unsung heroes of home care.",
 };
 

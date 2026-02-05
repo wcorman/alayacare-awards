@@ -164,7 +164,7 @@ export default function EligibilityPage() {
             Eligibility Details
           </h1>
           <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
-            The Changemakers in Home-Based Care Awards recognize outstanding individuals who are elevating home-based care every day — from the front lines to the back office, and the C-suite to visionary innovators.
+            The Home-Based Care Momentum Awards recognize outstanding individuals who are elevating home-based care every day — from the front lines to the back office, and the C-suite to visionary innovators.
           </p>
         </div>
       </section>

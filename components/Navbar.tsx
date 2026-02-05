@@ -25,8 +25,8 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                 <Link href="/" className="flex items-center cursor-pointer">
                     <div className="flex flex-col">
-                        <span className="text-2xl font-bold leading-none tracking-tight" style={{ color: THEME_COLORS.deepBlue }}>AlayaCare</span>
-                        <span className="text-[10px] font-semibold tracking-widest uppercase text-gray-500">Awards</span>
+                        <span className="text-2xl font-bold leading-none tracking-tight" style={{ color: THEME_COLORS.deepBlue }}>The Home-Based Care</span>
+                        <span className="text-[10px] font-semibold tracking-widest uppercase text-gray-500">Momentum Awards</span>
                     </div>
                 </Link>
 
