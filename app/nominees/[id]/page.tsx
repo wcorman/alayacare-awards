@@ -103,7 +103,7 @@ export default async function NomineePage({ params }: NomineePageProps) {
                                             </div>
                                             <p className="text-3xl font-bold">{nominee.votes}</p>
                                         </div>
-                                        <div className="p-6 rounded-xl bg-gradient-to-br from-[#f37021] to-[#ff8c42] text-white">
+                                        <div className="p-6 rounded-xl bg-gradient-to-br from-[#1D5EED] to-[#113CCA] text-white">
                                             <div className="flex items-center gap-3 mb-2">
                                                 <IconComponent size={24} />
                                                 <span className="text-sm font-semibold uppercase tracking-wide opacity-80">Category</span>
@@ -134,7 +134,7 @@ export default async function NomineePage({ params }: NomineePageProps) {
                                             </div>
                                             <p className="text-3xl font-bold">{nominee.votes}</p>
                                         </div>
-                                        <div className="p-6 rounded-xl bg-gradient-to-br from-[#f37021] to-[#ff8c42] text-white">
+                                        <div className="p-6 rounded-xl bg-gradient-to-br from-[#1D5EED] to-[#113CCA] text-white">
                                             <div className="flex items-center gap-3 mb-2">
                                                 <IconComponent size={24} />
                                                 <span className="text-sm font-semibold uppercase tracking-wide opacity-80">Category</span>
@@ -154,13 +154,13 @@ export default async function NomineePage({ params }: NomineePageProps) {
                     <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
                             href="/vote"
-                            className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#f37021] hover:text-[#f37021] transition-all duration-200 text-center"
+                            className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED] transition-all duration-200 text-center"
                         >
                             View All Nominees
                         </Link>
                         <Link
                             href="/nominate"
-                            className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#f37021] hover:text-[#f37021] transition-all duration-200 text-center"
+                            className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED] transition-all duration-200 text-center"
                         >
                             Nominate Someone
                         </Link>

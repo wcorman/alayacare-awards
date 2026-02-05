@@ -77,7 +77,7 @@ export default function VoteConfirmationPopup() {
                 <div className="space-y-3 mt-6">
                     <Link
                         href="/vote"
-                        className="block w-full bg-[#f37021] text-white py-3 px-6 rounded-lg font-semibold text-center hover:bg-[#d85e15] transition-colors shadow-sm"
+                        className="block w-full bg-[#1D5EED] text-white py-3 px-6 rounded-lg font-semibold text-center hover:bg-[#113CCA] transition-colors shadow-sm"
                         onClick={() => setIsOpen(false)}
                     >
                         Vote for Others

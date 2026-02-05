@@ -22,20 +22,27 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-[#fcfcfc] text-slate-800">
       {/* Hero Section */}
-      <section
-        className="relative text-white py-20 px-6 lg:px-12 flex flex-col items-center text-center overflow-hidden"
-        style={{ background: `linear-gradient(135deg, #08193e 0%, #113cca 100%)` }}
-      >
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-bl-full transform translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#f37021] opacity-10 rounded-tr-full transform -translate-x-1/2 translate-y-1/2"></div>
-
-        <div className="relative z-10 max-w-4xl mx-auto">
-          <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-[#f37021] mb-6 inline-block">
+      <section className="relative text-white py-20 px-6 lg:px-12 flex flex-col items-center text-center overflow-hidden">
+        <video
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/video/hero-poster.webp"
+          aria-hidden="true"
+        >
+          <source src="/video/hero.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#08193e] to-[#113cca] opacity-60 z-10"></div>
+        <div className="relative z-20 max-w-4xl mx-auto">
+          <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-[#1D5EED] mb-6 inline-block">
             {t('hero.badge')}
           </span>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             {t.rich('hero.title', {
-              people: (chunks) => <span style={{ color: '#f37021' }}>{chunks}</span>,
+              people: (chunks) => <span style={{ color: '#1D5EED' }}>{chunks}</span>,
             })}
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
@@ -45,7 +52,7 @@ export default async function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/nominate"
-              className="px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15] transition-all duration-200 shadow-sm flex items-center justify-center gap-2"
+              className="px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-all duration-200 shadow-sm flex items-center justify-center gap-2"
             >
               <UserPlus size={20} /> {t('hero.cta')}
             </Link>
@@ -84,12 +91,9 @@ export default async function Home() {
           <div className="flex flex-col lg:flex-row items-center gap-16">
             {/* Left Content */}
             <div className="flex-1 max-w-xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#08193e] bg-opacity-5 mb-6">
-                <div className="w-2 h-2 rounded-full bg-[#f37021]"></div>
-                <span className="text-sm font-semibold uppercase tracking-wide text-[#ffffff]">
-                  {t('mission.eyebrow')}
-                </span>
-              </div>
+              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-[#1D5EED] mb-6 inline-block">
+                {t('mission.eyebrow')}
+              </span>
               
               <h2 className="text-4xl lg:text-5xl font-bold text-[#08193e] mb-6 leading-tight">
                 {t('mission.title')}
@@ -105,7 +109,7 @@ export default async function Home() {
 
                   return (
                   <div key={i} className="flex items-center gap-4 p-4 rounded-lg bg-gray-50">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#f37021] flex items-center justify-center">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#1D5EED] flex items-center justify-center">
                       {Icon ? <Icon size={20} className="text-white" strokeWidth={2.5} /> : null}
                     </div>
                     <span className="text-base font-semibold text-[#08193e]">
@@ -130,7 +134,7 @@ export default async function Home() {
                 </div>
 
                 {/* Card 2 */}
-                <div className="bg-gradient-to-br from-[#f37021] to-[#ff8c42] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                <div className="bg-gradient-to-br from-[#1D5EED] to-[#113CCA] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                   <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
                     <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
                       <Calendar size={32} strokeWidth={2} style={{ color: '#08193e' }} />
@@ -140,7 +144,7 @@ export default async function Home() {
                 </div>
 
                 {/* Card 3 */}
-                <div className="bg-gradient-to-br from-[#ffaa05] to-[#ffc42e] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                <div className="bg-gradient-to-br from-[#113CCA] to-[#08193E] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                   <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
                     <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
                       <Code size={32} strokeWidth={2} style={{ color: '#08193e' }} />
@@ -150,7 +154,7 @@ export default async function Home() {
                 </div>
 
                 {/* Card 4 */}
-                <div className="bg-gradient-to-br from-[#113cca] to-[#2e5ce6] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                <div className="bg-gradient-to-br from-[#1D5EED] to-[#08193E] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                   <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
                     <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
                       <Briefcase size={32} strokeWidth={2} style={{ color: '#08193e' }} />

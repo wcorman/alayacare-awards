@@ -63,7 +63,7 @@ export default function ConfirmPopup() {
 
                 <button
                     onClick={handleClose}
-                    className="w-full px-6 py-3 rounded-md font-semibold transition-all duration-200 shadow-sm bg-[#f37021] text-white hover:bg-[#d85e15]"
+                    className="w-full px-6 py-3 rounded-md font-semibold transition-all duration-200 shadow-sm bg-[#1D5EED] text-white hover:bg-[#113CCA]"
                 >
                     {isSuccess ? 'View All Nominees' : 'Close'}
                 </button>

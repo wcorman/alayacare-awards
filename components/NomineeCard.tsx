@@ -94,12 +94,12 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
                 </div>
             </Link>
 
-            <div className="px-4 pb-4 flex items-center justify-between border-t border-gray-100">
+            <div className="p-3 flex items-center justify-between border-t border-gray-100">
                 <Link 
                     href={`/nominees/${nominee.id}`}
-                    className="flex items-center gap-1.5 text-gray-500 font-medium hover:text-[#08193e] transition-colors"
+                    className="flex items-center gap-1.5 text-gray-500 font-medium hover:text-[#08193E] transition-colors"
                 >
-                    <Award size={16} className="text-[#ffaa05]" />
+                    <Award size={16} className="text-[#08193E]" />
                     <span className="text-xs">{nominee.votes} Votes</span>
                 </Link>
 
@@ -112,7 +112,7 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
                     disabled={hasVoted}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${hasVoted
                             ? 'bg-green-100 text-green-700 cursor-default'
-                            : 'bg-gray-100 text-gray-600 hover:bg-[#f37021] hover:text-white'
+                            : 'bg-gray-100 text-gray-600 hover:bg-[#1D5EED] hover:text-white'
                         }`}
                 >
                     {hasVoted ? (

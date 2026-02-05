@@ -33,25 +33,25 @@ export default function Navbar() {
                 <nav className="hidden md:flex items-center gap-8">
                     <Link
                         href="/"
-                        className={`font-medium hover:text-[#f37021] transition-colors ${isActive('/') ? 'text-[#f37021]' : 'text-[#08193e]'}`}
+                        className={`font-medium hover:text-[#1D5EED] transition-colors ${isActive('/') ? 'text-[#1D5EED]' : 'text-[#08193e]'}`}
                     >
                         Home
                     </Link>
                     <Link
                         href="/eligibility"
-                        className={`font-medium hover:text-[#f37021] transition-colors ${isActive('/eligibility') ? 'text-[#f37021]' : 'text-[#08193e]'}`}
+                        className={`font-medium hover:text-[#1D5EED] transition-colors ${isActive('/eligibility') ? 'text-[#1D5EED]' : 'text-[#08193e]'}`}
                     >
                         Eligibility
                     </Link>
                     <Link
                         href="/nominate"
-                        className={`font-medium hover:text-[#f37021] transition-colors ${isActive('/nominate') ? 'text-[#f37021]' : 'text-[#08193e]'}`}
+                        className={`font-medium hover:text-[#1D5EED] transition-colors ${isActive('/nominate') ? 'text-[#1D5EED]' : 'text-[#08193e]'}`}
                     >
                         Nominate
                     </Link>
                     <Link
                         href="/vote"
-                        className="py-2 px-4 text-sm font-semibold rounded-md bg-[#f37021] text-white hover:bg-[#d85e15] transition-colors"
+                        className="py-2 px-4 text-sm font-semibold rounded-md bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-colors"
                     >
                         Vote Now
                     </Link>
@@ -61,7 +61,7 @@ export default function Navbar() {
                             document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000; samesite=lax`;
                             router.refresh();
                         }}
-                        className="py-2 px-3 text-sm font-semibold rounded-md border border-[#08193e] text-[#08193e] hover:text-[#f37021] hover:border-[#f37021] transition-colors"
+                        className="py-2 px-3 text-sm font-semibold rounded-md border border-[#08193e] text-[#08193e] hover:text-[#1D5EED] hover:border-[#1D5EED] transition-colors"
                         aria-label={`Switch language to ${nextLocale === 'fr' ? 'French' : 'English'}`}
                     >
                         {nextLocale.toUpperCase()}
@@ -99,7 +99,7 @@ export default function Navbar() {
                     <Link
                         href="/vote"
                         onClick={() => setMobileMenuOpen(false)}
-                        className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e] bg-[#f37021] text-white hover:bg-[#d85e15]"
+                        className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e] bg-[#1D5EED] text-white hover:bg-[#113CCA]"
                     >
                         Vote Now
                     </Link>

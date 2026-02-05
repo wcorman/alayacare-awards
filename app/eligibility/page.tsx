@@ -296,7 +296,7 @@ export default function EligibilityPage() {
             </p>
             <Link
               href="/nominate"
-              className="inline-block px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15] transition-all duration-200 shadow-sm"
+              className="inline-block px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-all duration-200 shadow-sm"
             >
               Ready to Nominate?
             </Link>

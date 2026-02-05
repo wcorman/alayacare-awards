@@ -13,7 +13,7 @@ export default function Footer() {
                         href="https://alayacare.com" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-[#08193e] hover:text-[#f37021] transition-colors font-semibold"
+                        className="text-[#08193e] hover:text-[#1D5EED] transition-colors font-semibold"
                     >
                         AlayaCare
                     </Link>

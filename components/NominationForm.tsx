@@ -107,7 +107,7 @@ export default function NominationForm() {
         return (
             <div className="py-8 px-6 lg:px-12 bg-gray-50 min-h-screen flex flex-col items-center">
                 <div className="max-w-4xl w-full text-center">
-                    <button onClick={() => router.push('/')} className="flex items-center gap-2 text-gray-500 hover:text-[#f37021] mb-6 font-medium mx-auto md:mx-0">
+                    <button onClick={() => router.push('/')} className="flex items-center gap-2 text-gray-500 hover:text-[#1D5EED] mb-6 font-medium mx-auto md:mx-0">
                         <ChevronRight className="rotate-180" size={20} /> Back to Home
                     </button>
 
@@ -120,15 +120,15 @@ export default function NominationForm() {
                         {/* Self */}
                         <div
                             onClick={() => handleTypeSelect('self')}
-                            className="bg-white rounded-lg shadow-md p-8 cursor-pointer hover:border-2 border-transparent hover:border-[#f37021] transition-all group h-full flex flex-col items-center text-center"
+                            className="bg-white rounded-lg shadow-md p-8 cursor-pointer hover:border-2 border-transparent hover:border-[#1D5EED] transition-all group h-full flex flex-col items-center text-center"
                         >
                             <div className="w-24 h-24 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
-                                <User size={48} className="text-[#1d5eed]" />
+                                <User size={48} className="text-[#1D5EED]" />
                             </div>
                             <h3 className="text-2xl font-bold mb-3" style={{ color: THEME.colors.deepBlue }}>Myself</h3>
                             <p className="text-gray-600">I am a care leader and I want to share my own story of excellence.</p>
                             <div className="mt-8">
-                                <span className="text-[#f37021] font-bold group-hover:underline flex items-center gap-2">
+                                <span className="text-[#1D5EED] font-bold group-hover:underline flex items-center gap-2">
                                     Continue <ChevronRight size={16} />
                                 </span>
                             </div>
@@ -137,15 +137,15 @@ export default function NominationForm() {
                         {/* Other */}
                         <div
                             onClick={() => handleTypeSelect('other')}
-                            className="bg-white rounded-lg shadow-md p-8 cursor-pointer hover:border-2 border-transparent hover:border-[#f37021] transition-all group h-full flex flex-col items-center text-center"
+                            className="bg-white rounded-lg shadow-md p-8 cursor-pointer hover:border-2 border-transparent hover:border-[#1D5EED] transition-all group h-full flex flex-col items-center text-center"
                         >
-                            <div className="w-24 h-24 rounded-full bg-orange-50 flex items-center justify-center mb-6 group-hover:bg-orange-100 transition-colors">
-                                <Users size={48} className="text-[#f37021]" />
+                            <div className="w-24 h-24 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
+                                <Users size={48} className="text-[#1D5EED]" />
                             </div>
                             <h3 className="text-2xl font-bold mb-3" style={{ color: THEME.colors.deepBlue }}>Someone Else</h3>
                             <p className="text-gray-600">I want to nominate a colleague, employee, or friend for their amazing work.</p>
                             <div className="mt-8">
-                                <span className="text-[#f37021] font-bold group-hover:underline flex items-center gap-2">
+                                <span className="text-[#1D5EED] font-bold group-hover:underline flex items-center gap-2">
                                     Continue <ChevronRight size={16} />
                                 </span>
                             </div>
@@ -170,7 +170,7 @@ export default function NominationForm() {
                         We'll review your submission shortly.
                     </p>
                     <div className="space-y-3">
-                        <button onClick={() => router.push('/')} className="w-full px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15]">
+                        <button onClick={() => router.push('/')} className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA]">
                             Vote for Others
                         </button>
                         <button onClick={() => router.push('/')} className="w-full px-6 py-3 rounded-md font-semibold bg-white text-[#08193e] border border-gray-300 hover:bg-gray-50">
@@ -185,7 +185,7 @@ export default function NominationForm() {
     return (
         <div className="py-8 px-6 lg:px-12 bg-gray-50 min-h-screen">
             <div className="max-w-3xl mx-auto">
-                <button onClick={() => setStep('type')} className="flex items-center gap-2 text-gray-500 hover:text-[#f37021] mb-6 font-medium">
+                <button onClick={() => setStep('type')} className="flex items-center gap-2 text-gray-500 hover:text-[#1D5EED] mb-6 font-medium">
                     <ChevronRight className="rotate-180" size={20} /> Back to Selection
                 </button>
 
@@ -208,7 +208,7 @@ export default function NominationForm() {
                             <input
                                 required
                                 type="text"
-                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                 placeholder={isSelf ? "e.g. Jane Doe" : "e.g. Jane Doe"}
                                 value={formData.nomineeName}
                                 onChange={e => setFormData({ ...formData, nomineeName: e.target.value })}
@@ -223,7 +223,7 @@ export default function NominationForm() {
                             <input
                                 required
                                 type="email"
-                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                 placeholder="e.g. jane.doe@careprovider.com"
                                 value={formData.nomineeEmail}
                                 onChange={e => setFormData({ ...formData, nomineeEmail: e.target.value })}
@@ -240,7 +240,7 @@ export default function NominationForm() {
                                 <input
                                     required
                                     type="text"
-                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                     placeholder="e.g. ABC Home Care"
                                     value={formData.organization}
                                     onChange={e => setFormData({ ...formData, organization: e.target.value })}
@@ -254,7 +254,7 @@ export default function NominationForm() {
                                 <input
                                     required
                                     type="text"
-                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                     placeholder="e.g. Caregiver, Registered Nurse, etc."
                                     value={formData.jobTitle}
                                     onChange={e => setFormData({ ...formData, jobTitle: e.target.value })}
@@ -293,13 +293,13 @@ export default function NominationForm() {
                                     <div
                                         key={cat.id}
                                         onClick={() => setFormData({ ...formData, category: cat.name })}
-                                        className={`cursor-pointer p-4 rounded-md border-2 transition-all flex items-center gap-3 ${formData.category === cat.name ? 'bg-orange-50 border-[#f37021]' : 'hover:bg-gray-50 border-gray-200'}`}
+                                        className={`cursor-pointer p-4 rounded-md border-2 transition-all flex items-center gap-3 ${formData.category === cat.name ? 'bg-blue-50 border-[#1D5EED]' : 'hover:bg-gray-50 border-gray-200'}`}
                                     >
                                         <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white`} style={{ backgroundColor: cat.color }}>
                                             <cat.icon size={18} />
                                         </div>
                                         <span className="font-medium text-sm text-gray-800">{cat.name}</span>
-                                        {formData.category === cat.name && <Check size={16} className="ml-auto text-[#f37021]" />}
+                                        {formData.category === cat.name && <Check size={16} className="ml-auto text-[#1D5EED]" />}
                                     </div>
                                 ))}
                             </div>
@@ -311,7 +311,7 @@ export default function NominationForm() {
                             <textarea
                                 required
                                 rows={4}
-                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                 placeholder={isSelf ? "Tell us why you deserve to win..." : "Tell us why this person deserves to win..."}
                                 value={formData.description}
                                 onChange={e => setFormData({ ...formData, description: e.target.value })}
@@ -325,7 +325,7 @@ export default function NominationForm() {
                                 <input
                                     required
                                     type="email"
-                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                     placeholder="So we can contact you if they win"
                                     value={formData.email}
                                     onChange={e => setFormData({ ...formData, email: e.target.value })}
@@ -364,7 +364,7 @@ export default function NominationForm() {
                                     <input
                                         required
                                         type="text"
-                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                         placeholder="e.g. Jane Doe"
                                         value={formData.name}
                                         onChange={e => setFormData({ ...formData, name: e.target.value })}
@@ -376,7 +376,7 @@ export default function NominationForm() {
                                     <input
                                         required
                                         type="text"
-                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                         placeholder="e.g. ABC Home Care"
                                         value={formData.nominatorOrganization}
                                         onChange={e => setFormData({ ...formData, nominatorOrganization: e.target.value })}
@@ -388,7 +388,7 @@ export default function NominationForm() {
                                     <input
                                         required
                                         type="text"
-                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                         placeholder="e.g. Caregiver, Registered Nurse, etc."
                                         value={formData.nominatorJobTitle}
                                         onChange={e => setFormData({ ...formData, nominatorJobTitle: e.target.value })}
@@ -400,7 +400,7 @@ export default function NominationForm() {
 
                         <button
                             type="submit"
-                            className="w-full px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg"
+                            className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg"
                             disabled={isSubmitting || (!formData.organization || !formData.jobTitle || (!isSelf && formData.isHomeCare && (!formData.name || !formData.nominatorOrganization || !formData.nominatorJobTitle)))}
                         >
                             {isSubmitting ? (

@@ -56,7 +56,7 @@ export default function VoteModal({
                             setJobTitle('');
                             onClose();
                         }}
-                        className="w-full px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15] transition-colors"
+                        className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-colors"
                     >
                         Close
                     </button>
@@ -115,7 +115,7 @@ export default function VoteModal({
                         <input
                             required
                             type="email"
-                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all"
+                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all"
                             placeholder="e.g. name@company.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -128,7 +128,7 @@ export default function VoteModal({
                             <input
                                 type="checkbox"
                                 id="industryCheckbox"
-                                className="w-5 h-5 rounded text-[#f37021] focus:ring-[#f37021]"
+                                className="w-5 h-5 rounded text-[#1D5EED] focus:ring-[#1D5EED]"
                                 checked={isHomeCare}
                                 onChange={(e) => {
                                     setIsHomeCare(e.target.checked);
@@ -154,7 +154,7 @@ export default function VoteModal({
                                 <input
                                     required
                                     type="text"
-                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                     placeholder="e.g. Jane Doe"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
@@ -165,7 +165,7 @@ export default function VoteModal({
                                 <input
                                     required
                                     type="text"
-                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                     placeholder="e.g. ABC Home Care"
                                     value={organization}
                                     onChange={(e) => setOrganization(e.target.value)}
@@ -181,7 +181,7 @@ export default function VoteModal({
                             <input
                                 required
                                 type="text"
-                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#f37021] focus:border-transparent transition-all text-gray-900"
+                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
                                 placeholder="e.g. Caregiver, Registered Nurse, etc."
                                 value={jobTitle}
                                 onChange={(e) => setJobTitle(e.target.value)}
@@ -192,7 +192,7 @@ export default function VoteModal({
                     <div className="flex gap-3">
                         <button
                             type="submit"
-                            className="flex-1 px-6 py-3 rounded-md font-semibold bg-[#f37021] text-white hover:bg-[#d85e15] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="flex-1 px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             disabled={isChecking || (isHomeCare && (!name || !organization || !jobTitle))}
                         >
                             {isChecking ? (

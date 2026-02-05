@@ -153,7 +153,7 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
                                 selectedCategory === null
                                     ? 'bg-[#08193e] text-white shadow-md'
-                                    : 'bg-white text-gray-700 border border-gray-300 hover:border-[#f37021] hover:text-[#f37021]'
+                                    : 'bg-white text-gray-700 border border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED]'
                             }`}
                         >
                             <Grid3x3 size={16} />
@@ -169,7 +169,7 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
                                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
                                         selectedCategory === category
                                             ? 'text-white shadow-md'
-                                            : 'bg-white text-gray-700 border border-gray-300 hover:border-[#f37021] hover:text-[#f37021]'
+                                            : 'bg-white text-gray-700 border border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED]'
                                     }`}
                                     style={selectedCategory === category ? { backgroundColor: categoryInfo.color } : {}}
                                 >
