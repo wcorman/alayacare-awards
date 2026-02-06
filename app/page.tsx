@@ -1,17 +1,18 @@
 
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
-import { UserPlus, Heart, Sparkles, Star, Trophy, Check, Award, Briefcase, Users, Calendar, Code } from 'lucide-react';
+import { UserPlus, Heart, Trophy } from 'lucide-react';
 
 // Force dynamic rendering so we always get the latest nominees
 export const dynamic = 'force-dynamic';
 
 const CATEGORIES = [
-  { id: 'frontline', nameKey: 'categories.frontline.name', descriptionKey: 'categories.frontline.description', icon: Heart, color: '#f37021' },
-  { id: 'operational', nameKey: 'categories.operational.name', descriptionKey: 'categories.operational.description', icon: Award, color: '#113cca' },
-  { id: 'executive', nameKey: 'categories.executive.name', descriptionKey: 'categories.executive.description', icon: Briefcase, color: '#ffaa05' },
-  { id: 'impact', nameKey: 'categories.impact.name', descriptionKey: 'categories.impact.description', icon: Sparkles, color: '#08193e' },
+  { id: 'frontline', nameKey: 'categories.frontline.name', descriptionKey: 'categories.frontline.description', iconPath: '/frontline-care.png', color: '#f37021' },
+  { id: 'operational', nameKey: 'categories.operational.name', descriptionKey: 'categories.operational.description', iconPath: '/operational-excellence.png', color: '#113cca' },
+  { id: 'executive', nameKey: 'categories.executive.name', descriptionKey: 'categories.executive.description', iconPath: '/executive-leadership.png', color: '#ffaa05' },
+  { id: 'impact', nameKey: 'categories.impact.name', descriptionKey: 'categories.impact.description', iconPath: '/Impact-and-innovation.png', color: '#08193e' },
 ];
 
 export default async function Home() {
@@ -75,7 +76,13 @@ export default async function Home() {
                   className="w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
                   style={{ backgroundColor: `${cat.color}15`, color: cat.color }}
                 >
-                  <cat.icon size={32} />
+                  <Image
+                    src={cat.iconPath}
+                    alt={t(cat.nameKey)}
+                    width={54}
+                    height={54}
+                    className="object-contain"
+                  />
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-[#08193e]">{t(cat.nameKey)}</h3>
                 <p className="text-gray-600 text-sm">{t(cat.descriptionKey)}</p>
@@ -126,8 +133,14 @@ export default async function Home() {
                 {/* Card 1 */}
                 <div className="bg-gradient-to-br from-[#08193e] to-[#113cca] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                   <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
-                      <Users size={32} strokeWidth={2} style={{ color: '#08193e' }} />
+                    <div className="flex items-center justify-center">
+                      <Image
+                        src="/caregiver.png"
+                        alt={t('audiences.caregivers')}
+                        width={64}
+                        height={64}
+                        className="object-contain"
+                      />
                     </div>
                     <h3 className="font-bold text-lg">{t('audiences.caregivers')}</h3>
                   </div>
@@ -136,8 +149,14 @@ export default async function Home() {
                 {/* Card 2 */}
                 <div className="bg-gradient-to-br from-[#1D5EED] to-[#113CCA] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                   <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
-                      <Calendar size={32} strokeWidth={2} style={{ color: '#08193e' }} />
+                    <div className="flex items-center justify-center">
+                      <Image
+                        src="/scheduler.png"
+                        alt={t('audiences.schedulers')}
+                        width={64}
+                        height={64}
+                        className="object-contain"
+                      />
                     </div>
                     <h3 className="font-bold text-lg">{t('audiences.schedulers')}</h3>
                   </div>
@@ -146,8 +165,14 @@ export default async function Home() {
                 {/* Card 3 */}
                 <div className="bg-gradient-to-br from-[#113CCA] to-[#08193E] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                   <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
-                      <Code size={32} strokeWidth={2} style={{ color: '#08193e' }} />
+                    <div className="flex items-center justify-center">
+                      <Image
+                        src="/it-person.png"
+                        alt={t('audiences.it')}
+                        width={64}
+                        height={64}
+                        className="object-contain"
+                      />
                     </div>
                     <h3 className="font-bold text-lg">{t('audiences.it')}</h3>
                   </div>
@@ -156,8 +181,14 @@ export default async function Home() {
                 {/* Card 4 */}
                 <div className="bg-gradient-to-br from-[#1D5EED] to-[#08193E] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
                   <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center backdrop-blur-sm">
-                      <Briefcase size={32} strokeWidth={2} style={{ color: '#08193e' }} />
+                    <div className="flex items-center justify-center">
+                      <Image
+                        src="/manager.png"
+                        alt={t('audiences.managers')}
+                        width={64}
+                        height={64}
+                        className="object-contain"
+                      />
                     </div>
                     <h3 className="font-bold text-lg">{t('audiences.managers')}</h3>
                   </div>
