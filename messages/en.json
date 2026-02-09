@@ -1,10 +1,10 @@
 {
   "Home": {
     "hero": {
-      "badge": "The Home-Based Care Momentum Awards",
-      "title": "Celebrating the <people>people</people> at the heart of home-based care",
-      "subtitle": "Nominate, vote, and help recognize the top individuals transforming home-based care across roles, regions, and organizations.",
-      "cta": "Nominate a Care Leader"
+      "badge": "2026 Home-Based Care Momentum Awards",
+      "title": "Celebrating the <people>people</people> powering exceptional home-based care across North America",
+      "subtitle": "The Home-Based Care Momentum Awards recognize outstanding individuals who are elevating home-based care every day — from the front lines to the back office, and the C-suite to visionary innovators.",
+      "cta": "Nominate a changemaker"
     },
     "categories": {
       "title": "Award Categories",
@@ -26,20 +26,47 @@
       }
     },
     "mission": {
-      "eyebrow": "Our Mission",
+      "eyebrow": "WHY PARTICIPATE?",
       "title": "Celebrating Excellence",
-      "description": "At AlayaCare, we believe that technology is only as good as the people who use it. These awards celebrate the human touch, the late-night visits, the compassionate listening, and the innovative problem-solving that defines exceptional home care.",
+      "description": "At AlayaCare, we believe technology is only as powerful as the changemakers who use it. The Home-Based Care Momentum Awards celebrate the human side of innovation — the late-night visits, the quiet acts of advocacy, and the everyday problem-solving that moves home-based care forward. By participating, you help:",
       "items": [
-        "Recognize outstanding dedication",
-        "Share inspiring stories of care",
-        "Build a stronger care community"
+        "Shine a spotlight on unsung heroes: Give frontline caregivers, operational champions, and leaders the recognition they deserve — not just inside your organization, but across the industry.",
+        "Share stories that inspire real change: Turn powerful moments of care into stories others can learn from, helping to raise the bar for what great home-based care looks like.",
+        "Build momentum for your organization and your teams: Boost morale, pride, and engagement by celebrating contributions that improve outcomes, streamline operations, and transform client and staff experience.",
+        "Elevate your brand as a leader in care: Show clients, families, staff, and partners that you’re serious about driving the future of home-based care."
       ]
     },
     "audiences": {
       "caregivers": "Care Givers",
       "schedulers": "Schedulers",
-      "it": "IT People",
+      "it": "IT staff",
       "managers": "Managers"
+    },
+    "timeline": {
+      "eyebrow": "KEY DATES AND MILESTONES",
+      "title": "Stay on top of the major moments for The Home-Based Care Momentum Awards",
+      "items": [
+        {
+          "title": "Nominations Open",
+          "date": "February 17 – April 13, 2026",
+          "description": "This is your window to put changemakers forward."
+        },
+        {
+          "title": "Public Voting",
+          "date": "May 1 – June 1, 2026",
+          "description": "The broader home-based care community and beyond adds its voice."
+        },
+        {
+          "title": "Panel Judging",
+          "date": "June 8 – June 22, 2026",
+          "description": "A panel of industry experts review nominations, voting results, and help spotlight where momentum is strongest."
+        },
+        {
+          "title": "Winners announced",
+          "date": "July 20, 2026",
+          "description": "The year’s standout changemakers are revealed."
+        }
+      ]
     }
   },
   "NomineeCard": {

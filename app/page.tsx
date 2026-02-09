@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
-import { UserPlus, Heart, Trophy } from 'lucide-react';
+import { UserPlus, Heart, Trophy, Megaphone, Calendar, Users, Gavel, Award } from 'lucide-react';
 
 // Force dynamic rendering so we always get the latest nominees
 export const dynamic = 'force-dynamic';
@@ -18,7 +18,9 @@ const CATEGORIES = [
 export default async function Home() {
   const t = await getTranslations('Home');
   const missionItems = t.raw('mission.items') as string[];
-  const missionIcons = [Trophy, Heart, UserPlus];
+  const missionIcons = [Trophy, Heart, UserPlus, Megaphone];
+  const timelineItems = t.raw('timeline.items') as Array<{ title: string; date: string; description: string }>;
+  const timelineIcons = [Calendar, Users, Gavel, Award];
 
   return (
     <main className="min-h-screen bg-[#fcfcfc] text-slate-800">
@@ -113,14 +115,19 @@ export default async function Home() {
               <div className="space-y-4">
                 {missionItems.map((item, i) => {
                   const Icon = missionIcons[i];
+                  const [lead, ...restParts] = item.split(':');
+                  const rest = restParts.join(':').trim();
 
                   return (
-                  <div key={i} className="flex items-center gap-4 p-4 rounded-lg bg-gray-50">
+                  <div key={i} className="flex items-start gap-4 p-4 rounded-lg bg-gray-50">
                     <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#1D5EED] flex items-center justify-center">
                       {Icon ? <Icon size={20} className="text-white" strokeWidth={2.5} /> : null}
                     </div>
-                    <span className="text-base font-semibold text-[#08193e]">
-                      {item}
+                    <span className="text-base text-[#08193e]">
+                      <strong className="block font-semibold">
+                        {lead}
+                      </strong>
+                      {rest ? <span className="block mt-1">{rest}</span> : null}
                     </span>
                   </div>
                 )})}
@@ -196,6 +203,50 @@ export default async function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Key Dates and Milestones Section */}
+      <section className="py-24 px-6 lg:px-12 bg-[#f6f8ff]">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-14">
+            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-[#1D5EED] mb-6 inline-block">
+              {t('timeline.eyebrow')}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#08193e] mb-4 max-w-3xl mx-auto">
+              {t('timeline.title')}
+            </h2>
+          </div>
+
+          <div className="relative">
+            <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-[#1D5EED] via-[#113CCA] to-transparent sm:left-1/2"></div>
+            <div className="space-y-10">
+              {timelineItems.map((item, index) => (
+                <div key={`${item.title}-${index}`} className="relative">
+                  <span className="absolute left-4 top-6 h-4 w-4 -translate-x-1/2 rounded-full bg-[#1D5EED] ring-4 ring-white shadow-md sm:left-1/2"></span>
+                  <div
+                    className={`pl-12 sm:pl-0 sm:w-1/2 ${
+                      index % 2 === 0 ? 'sm:pr-12' : 'sm:pl-12 sm:ml-auto'
+                    }`}
+                  >
+                    <div className="bg-white border border-blue-100 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow">
+                      <div className="flex items-center gap-3">
+                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#1D5EED]/10 text-[#1D5EED]">
+                          {React.createElement(timelineIcons[index] ?? Calendar, { size: 20, strokeWidth: 2.2 })}
+                        </span>
+                        <div className="text-xs font-semibold uppercase tracking-wide text-[#1D5EED]">
+                          {item.date}
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-bold text-[#08193e] mt-2">{item.title}</h3>
+                      <p className="text-gray-600 mt-3 leading-relaxed">{item.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
     </main>

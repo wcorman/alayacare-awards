@@ -5,7 +5,7 @@ export default function Footer() {
         <footer className="bg-white border-t border-gray-200 py-6 mt-auto">
             <div className="max-w-7xl mx-auto px-6 text-center">
                 <p className="text-gray-600 mb-2">
-                    Celebrating care leaders everywhere.
+                    Celebrating the momentum behind exceptional home-based care.
                 </p>
                 <p className="text-gray-600 text-sm">
                     Powered by{' '}
