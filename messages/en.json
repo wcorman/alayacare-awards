@@ -347,5 +347,11 @@
       "switchToFrench": "Switch language to French",
       "switchToEnglish": "Switch language to English"
     }
+  },
+  "VoteConfirmationPopup": {
+    "close": "Close",
+    "thankYou": "Thank You!",
+    "voteConfirmed": "Your vote has been confirmed for",
+    "voteForOthers": "Nominate Someone Else"
   }
 }

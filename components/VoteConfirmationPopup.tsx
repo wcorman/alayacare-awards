@@ -3,8 +3,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function VoteConfirmationPopup() {
+    const t = useTranslations('VoteConfirmationPopup');
+    const tHome = useTranslations('Home');
     const [isOpen, setIsOpen] = useState(false);
     const [nomineeName, setNomineeName] = useState('');
     const [category, setCategory] = useState('');
@@ -41,7 +44,7 @@ export default function VoteConfirmationPopup() {
                 <button
                     onClick={handleClose}
                     className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
-                    aria-label="Close"
+                    aria-label={t('close')}
                 >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -59,34 +62,38 @@ export default function VoteConfirmationPopup() {
 
                 {/* Message */}
                 <h2 className="text-2xl font-bold text-gray-900 text-center mb-3">
-                    Thank You!
+                    {t('thankYou')}
                 </h2>
                 <p className="text-gray-600 text-center mb-2">
-                    Your vote has been confirmed for
+                    {t('voteConfirmed')}
                 </p>
                 <p className="text-xl font-semibold text-[#08193e] text-center mb-1">
                     {nomineeName}
                 </p>
                 {category && (
                     <p className="text-sm text-gray-500 text-center mb-6">
-                        {category}
+                        {category === "Frontline Care" ? tHome('categories.frontline.name') :
+                         category === "Operational Excellence" ? tHome('categories.operational.name') :
+                         category === "Executive Leadership" ? tHome('categories.executive.name') :
+                         category === "Impact and Innovation" ? tHome('categories.impact.name') :
+                         category}
                     </p>
                 )}
 
                 {/* CTA Buttons */}
                 <div className="space-y-3 mt-6">
                     <Link
-                        href="/vote"
+                        href="/nominate"
                         className="block w-full bg-[#1D5EED] text-white py-3 px-6 rounded-lg font-semibold text-center hover:bg-[#113CCA] transition-colors shadow-sm"
                         onClick={() => setIsOpen(false)}
                     >
-                        Vote for Others
+                        {t('voteForOthers')}
                     </Link>
                     <button
                         onClick={handleClose}
                         className="block w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
                     >
-                        Close
+                        {t('close')}
                     </button>
                 </div>
             </div>

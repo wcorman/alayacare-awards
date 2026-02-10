@@ -347,5 +347,11 @@
       "switchToFrench": "Changer la langue en français",
       "switchToEnglish": "Switch language to English"
     }
+  },
+  "VoteConfirmationPopup": {
+    "close": "Fermer",
+    "thankYou": "Merci!",
+    "voteConfirmed": "Votre vote a été confirmé pour",
+    "voteForOthers": "Proposer quelqu'un d'autre"
   }
 }
