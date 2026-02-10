@@ -111,7 +111,10 @@ export default async function Home() {
               <p className="text-lg text-gray-700 mb-10 leading-relaxed">
                 {t('mission.description')}
               </p>
-              
+            </div>
+
+            {/* Right Content: Mission Items */}
+            <div className="flex-1 w-full max-w-xl">
               <div className="space-y-4">
                 {missionItems.map((item, i) => {
                   const Icon = missionIcons[i];
@@ -119,87 +122,19 @@ export default async function Home() {
                   const rest = restParts.join(':').trim();
 
                   return (
-                  <div key={i} className="flex items-start gap-4 p-4 rounded-lg bg-gray-50">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#1D5EED] flex items-center justify-center">
-                      {Icon ? <Icon size={20} className="text-white" strokeWidth={2.5} /> : null}
+                    <div key={i} className="flex items-start gap-4 p-4 rounded-lg bg-gray-50">
+                      <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#1D5EED] flex items-center justify-center">
+                        {Icon ? <Icon size={20} className="text-white" strokeWidth={2.5} /> : null}
+                      </div>
+                      <span className="text-base text-[#08193e]">
+                        <strong className="block font-semibold">
+                          {lead}
+                        </strong>
+                        {rest ? <span className="block mt-1">{rest}</span> : null}
+                      </span>
                     </div>
-                    <span className="text-base text-[#08193e]">
-                      <strong className="block font-semibold">
-                        {lead}
-                      </strong>
-                      {rest ? <span className="block mt-1">{rest}</span> : null}
-                    </span>
-                  </div>
-                )})}
-              </div>
-            </div>
-
-            {/* Right Visual */}
-            <div className="flex-1 w-full max-w-xl">
-              <div className="grid grid-cols-2 gap-5">
-                {/* Card 1 */}
-                <div className="bg-gradient-to-br from-[#08193e] to-[#113cca] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-                  <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
-                    <div className="flex items-center justify-center">
-                      <Image
-                        src="/caregiver.png"
-                        alt={t('audiences.caregivers')}
-                        width={64}
-                        height={64}
-                        className="object-contain"
-                      />
-                    </div>
-                    <h3 className="font-bold text-lg">{t('audiences.caregivers')}</h3>
-                  </div>
-                </div>
-
-                {/* Card 2 */}
-                <div className="bg-gradient-to-br from-[#1D5EED] to-[#113CCA] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-                  <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
-                    <div className="flex items-center justify-center">
-                      <Image
-                        src="/scheduler.png"
-                        alt={t('audiences.schedulers')}
-                        width={64}
-                        height={64}
-                        className="object-contain"
-                      />
-                    </div>
-                    <h3 className="font-bold text-lg">{t('audiences.schedulers')}</h3>
-                  </div>
-                </div>
-
-                {/* Card 3 */}
-                <div className="bg-gradient-to-br from-[#113CCA] to-[#08193E] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-                  <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
-                    <div className="flex items-center justify-center">
-                      <Image
-                        src="/it-person.png"
-                        alt={t('audiences.it')}
-                        width={64}
-                        height={64}
-                        className="object-contain"
-                      />
-                    </div>
-                    <h3 className="font-bold text-lg">{t('audiences.it')}</h3>
-                  </div>
-                </div>
-
-                {/* Card 4 */}
-                <div className="bg-gradient-to-br from-[#1D5EED] to-[#08193E] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
-                  <div className="flex flex-col items-center text-center text-white h-full justify-center space-y-4">
-                    <div className="flex items-center justify-center">
-                      <Image
-                        src="/manager.png"
-                        alt={t('audiences.managers')}
-                        width={64}
-                        height={64}
-                        className="object-contain"
-                      />
-                    </div>
-                    <h3 className="font-bold text-lg">{t('audiences.managers')}</h3>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
           </div>
