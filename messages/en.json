@@ -200,7 +200,8 @@
   },
   "Footer": {
     "tagline": "Celebrating the momentum behind exceptional home-based care.",
-    "poweredBy": "Powered by"
+    "poweredBy": "Powered by",
+    "terms": "Terms & Conditions"
   },
   "NominationForm": {
     "backToHome": "Back to Home",
@@ -353,5 +354,57 @@
     "thankYou": "Thank You!",
     "voteConfirmed": "Your vote has been confirmed for",
     "voteForOthers": "Nominate Someone Else"
+  },
+  "Terms": {
+    "hero": {
+      "title": "Terms and conditions",
+      "subtitle": "Terms and conditions"
+    },
+    "eligibility": {
+      "title": "Eligibility",
+      "p1": "The Home-Based Care Momentum Awards are open to individuals and organizations operating in the home-based care sector in Canada and the United States. This includes home health, home care, home infusion, hospice, community care, and related services.",
+      "p2": "Nominees must be actively working in the sector at the time of nomination.",
+      "p3": "Employees of AlayaCare may be ineligible for certain award categories, as determined by AlayaCare, to avoid conflicts of interest."
+    },
+    "nominations": {
+      "title": "Nominations",
+      "p1": "Nominations may be submitted by peers, colleagues, organizations, or by self-nomination, unless otherwise stated. All information submitted must be accurate and complete to the best of the nominator's knowledge.",
+      "p2": "AlayaCare reserves the right to verify nomination details and request additional information where required."
+    },
+    "selection": {
+      "title": "Selection process",
+      "p1": "Award recipients are selected through a combination of voting and evaluation by a judging panel, as determined by AlayaCare.",
+      "p2": "Voting is one input into the overall selection process and does not solely determine award recipients. AlayaCare reserves the right to validate votes and take reasonable steps to ensure the integrity of the process. This may include limiting votes, removing duplicate or automated submissions, and excluding votes that appear to be manipulated or inconsistent with the intent of the awards.",
+      "p3": "The judging panel reviews nominations using established criteria, which may include leadership, impact, influence, innovation, and contribution to advancing home-based care.",
+      "p4": "Final selections are made at the discretion of AlayaCare, informed by both voting outcomes and judge evaluations. All decisions are final, and no correspondence will be entered into regarding selection outcomes."
+    },
+    "useOfContent": {
+      "title": "Use of submitted content",
+      "p1": "By submitting a nomination or participating in the awards process, nominators and nominees grant AlayaCare a non-exclusive, royalty-free right to use submitted names, quotes, biographies, images, and supporting materials for award-related purposes. This includes promotional, editorial, marketing, and event-related use, in any medium, without additional compensation."
+    },
+    "publicity": {
+      "title": "Publicity",
+      "p1": "Award recipients agree to participate in reasonable promotional activities related to the awards. This may include interviews, written profiles, social media mentions, or event participation.",
+      "p2": "If a nominee does not wish to be publicly recognized, this must be communicated to AlayaCare prior to final selection."
+    },
+    "privacy": {
+      "title": "Privacy and marketing communications",
+      "p1": "By submitting a nomination, voting, or otherwise participating in the awards, nominators, nominees, and voters consent to the collection and use of their personal information for the administration of the awards.",
+      "p2": "In accordance with Canada's Anti-Spam Legislation (CASL) and U.S. CAN-SPAM regulations, participants also consent to receiving electronic communications from AlayaCare related to award updates, events, industry insights, content, products, and services relevant to home-based care.",
+      "p3": "Participants may withdraw consent and opt out of marketing communications at any time by using the unsubscribe mechanism included in such communications or by contacting AlayaCare directly.",
+      "p4": "Personal information will be handled in accordance with applicable Canadian and U.S. privacy laws."
+    },
+    "disqualification": {
+      "title": "Disqualification",
+      "p1": "AlayaCare reserves the right to disqualify any nomination or participant if information provided is false, misleading, incomplete, or submitted in violation of these terms and conditions."
+    },
+    "changes": {
+      "title": "Changes and cancellation",
+      "p1": "AlayaCare reserves the right to modify award categories, criteria, timelines, or these terms and conditions at any time. AlayaCare may suspend or cancel the awards if circumstances require, without liability."
+    },
+    "governingLaw": {
+      "title": "Governing law",
+      "p1": "These terms and conditions are governed by the laws of the jurisdiction in which AlayaCare operates, without regard to conflict of law principles."
+    }
   }
 }

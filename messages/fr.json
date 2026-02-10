@@ -200,7 +200,8 @@
   },
   "Footer": {
     "tagline": "Célébrer l'élan derrière des soins à domicile exceptionnels.",
-    "poweredBy": "Propulsé par"
+    "poweredBy": "Propulsé par",
+    "terms": "Conditions générales"
   },
   "NominationForm": {
     "backToHome": "Retour à l'accueil",
@@ -353,5 +354,57 @@
     "thankYou": "Merci!",
     "voteConfirmed": "Votre vote a été confirmé pour",
     "voteForOthers": "Proposer quelqu'un d'autre"
+  },
+  "Terms": {
+    "hero": {
+      "title": "Conditions générales",
+      "subtitle": "Conditions générales"
+    },
+    "eligibility": {
+      "title": "Admissibilité",
+      "p1": "Les Prix Momentum des soins à domicile sont ouverts aux personnes et aux organisations qui exercent leurs activités dans le secteur des soins à domicile au Canada et aux États-Unis. Cela comprend notamment les services de santé à domicile, de soins à domicile, de perfusion à domicile, de soins palliatifs, de soins communautaires et les services connexes.",
+      "p2": "Les candidats doivent travailler activement dans ce secteur au moment de leur mise en candidature.",
+      "p3": "Les employés d’AlayaCare peuvent ne pas être admissibles à certaines catégories de prix, tel que déterminé par AlayaCare, afin d’éviter tout conflit d’intérêts."
+    },
+    "nominations": {
+      "title": "Mises en candidature",
+      "p1": "Les mises en candidature peuvent être soumises par des pairs, des collègues, des organisations ou par auto-candidature, sauf indication contraire. Toutes les informations soumises doivent être exactes et complètes au mieux des connaissances de la personne qui propose la candidature.",
+      "p2": "AlayaCare se réserve le droit de vérifier les renseignements fournis dans le cadre des mises en candidature et de demander des informations supplémentaires au besoin."
+    },
+    "selection": {
+      "title": "Processus de sélection",
+      "p1": "Les lauréats sont choisis au moyen d’une combinaison de vote et d’évaluation par un panel de juges, tel que déterminé par AlayaCare.",
+      "p2": "Le vote constitue un des éléments pris en compte dans le processus global de sélection, mais ne détermine pas à lui seul les lauréats. AlayaCare se réserve le droit de valider les votes et de prendre des mesures raisonnables pour assurer l’intégrité du processus. Cela peut inclure la limitation du nombre de votes, la suppression des soumissions en double ou automatisées et l’exclusion des votes qui semblent manipulés ou incompatibles avec l’esprit des prix.",
+      "p3": "Le panel de juges examine les mises en candidature en fonction de critères établis, qui peuvent inclure le leadership, l’impact, l’influence, l’innovation et la contribution à l’avancement des soins à domicile.",
+      "p4": "Les décisions finales sont prises à la discrétion d’AlayaCare, en se fondant à la fois sur les résultats du vote et sur les évaluations du jury. Toutes les décisions sont définitives et aucune correspondance ne sera échangée au sujet des résultats de la sélection."
+    },
+    "useOfContent": {
+      "title": "Utilisation du contenu soumis",
+      "p1": "En soumettant une candidature ou en participant au processus des prix, les personnes qui proposent une candidature et les candidats accordent à AlayaCare un droit non exclusif et libre de redevances d’utiliser les noms, citations, biographies, images et documents de soutien soumis à des fins liées aux prix. Cela comprend l’utilisation à des fins promotionnelles, éditoriales, marketing et liées aux événements, dans tout média, sans rémunération supplémentaire."
+    },
+    "publicity": {
+      "title": "Publicité",
+      "p1": "Les lauréats acceptent de participer à des activités promotionnelles raisonnables liées aux prix. Cela peut inclure des entrevues, des portraits écrits, des mentions sur les réseaux sociaux ou une participation à des événements.",
+      "p2": "Si un candidat ne souhaite pas être reconnu publiquement, il doit en informer AlayaCare avant la sélection finale."
+    },
+    "privacy": {
+      "title": "Protection des renseignements personnels et communications marketing",
+      "p1": "En soumettant une candidature, en votant ou en participant autrement aux prix, les personnes qui proposent une candidature, les candidats et les votants consentent à la collecte et à l’utilisation de leurs renseignements personnels aux fins de l’administration des prix.",
+      "p2": "Conformément à la Loi canadienne anti-pourriel (LCAP) et à la loi américaine CAN-SPAM, les participants consentent également à recevoir des communications électroniques d’AlayaCare portant sur les mises à jour des prix, des événements, des informations sectorielles, du contenu, des produits et des services pertinents pour les soins à domicile.",
+      "p3": "Les participants peuvent retirer leur consentement et se désabonner des communications marketing en tout temps en utilisant le mécanisme de désabonnement inclus dans ces communications ou en communiquant directement avec AlayaCare.",
+      "p4": "Les renseignements personnels seront traités conformément aux lois applicables en matière de protection de la vie privée au Canada et aux États-Unis."
+    },
+    "disqualification": {
+      "title": "Disqualification",
+      "p1": "AlayaCare se réserve le droit de disqualifier toute candidature ou tout participant si les renseignements fournis sont faux, trompeurs, incomplets ou soumis en contravention des présentes conditions générales."
+    },
+    "changes": {
+      "title": "Modifications et annulation",
+      "p1": "AlayaCare se réserve le droit de modifier en tout temps les catégories de prix, les critères, les échéanciers ou les présentes conditions générales. AlayaCare peut suspendre ou annuler les prix si les circonstances l’exigent, sans engager sa responsabilité."
+    },
+    "governingLaw": {
+      "title": "Droit applicable",
+      "p1": "Les présentes conditions générales sont régies par les lois de la juridiction dans laquelle AlayaCare exerce ses activités, sans égard aux principes en matière de conflits de lois."
+    }
   }
 }
