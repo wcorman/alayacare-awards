@@ -107,7 +107,7 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
                     className="flex items-center gap-1.5 text-gray-500 font-medium hover:text-[#08193E] transition-colors"
                 >
                     <Award size={16} className="text-[#08193E]" />
-                    <span className="text-xs">{nominee.votes} Votes</span>
+                    <span className="text-xs">{nominee.votes} {t('votes')}</span>
                 </Link>
 
                 <button
@@ -123,9 +123,9 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
                         }`}
                 >
                     {hasVoted ? (
-                        <>Voted <Check size={14} /></>
+                        <>{t('voted')} <Check size={14} /></>
                     ) : (
-                        <>Vote <ThumbsUp size={14} /></>
+                        <>{t('vote')} <ThumbsUp size={14} /></>
                     )}
                 </button>
             </div>

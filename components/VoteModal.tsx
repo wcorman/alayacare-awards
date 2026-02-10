@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Mail, X, Loader2, AlertCircle, Briefcase } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 
 interface VoteModalProps {
@@ -23,6 +24,7 @@ export default function VoteModal({
     errorMsg,
     voteCompleted,
 }: VoteModalProps) {
+    const t = useTranslations('VoteModal');
     const [email, setEmail] = useState('');
     const [isHomeCare, setIsHomeCare] = useState(false);
     const [name, setName] = useState('');
@@ -43,9 +45,9 @@ export default function VoteModal({
                     onClick={(e) => e.stopPropagation()}
                 >
                     <Mail size={40} className="text-gray-500 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold mb-2 text-[#08193e]">Verification Required</h3>
+                    <h3 className="text-2xl font-bold mb-2 text-[#08193e]">{t('verificationRequired')}</h3>
                     <p className="text-gray-600 mb-6">
-                        Thank you for voting for <strong>{nomineeName}</strong>. Please check your email inbox to finalize your submission. Your vote is pending confirmation.
+                        {t('thankYou', { name: nomineeName })}
                     </p>
                     <button
                         onClick={() => {
@@ -58,7 +60,7 @@ export default function VoteModal({
                         }}
                         className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-colors"
                     >
-                        Close
+                        {t('close')}
                     </button>
                 </div>
             </div>
@@ -96,10 +98,10 @@ export default function VoteModal({
                     <X size={24} />
                 </button>
 
-                <h3 className="text-2xl font-bold mb-2 text-[#08193e]">Confirm Your Vote</h3>
+                <h3 className="text-2xl font-bold mb-2 text-[#08193e]">{t('confirmVote')}</h3>
                 <p className="text-gray-600 mb-6">
-                    You are voting for <span className="font-bold text-[#1D5EED]">{nomineeName}</span>.
-                    Please enter your email to verify your vote.
+                    {t('votingFor', { name: nomineeName })}{' '}
+                    {t('enterEmail')}
                 </p>
 
                 {errorMsg && (
@@ -111,12 +113,12 @@ export default function VoteModal({
 
                 <form onSubmit={(e) => { e.preventDefault(); onSubmit(email, isHomeCare, name, organization, jobTitle); }}>
                     <div className="mb-6">
-                        <label className="block text-sm font-bold mb-2 text-gray-700">Your Email Address</label>
+                        <label className="block text-sm font-bold mb-2 text-gray-700">{t('fields.email')}</label>
                         <input
                             required
                             type="email"
                             className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all"
-                            placeholder="e.g. name@company.com"
+                            placeholder={t('fields.emailPlaceholder')}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -141,7 +143,7 @@ export default function VoteModal({
                             />
                             <label htmlFor="industryCheckbox" className="text-sm font-medium text-gray-700 cursor-pointer flex items-center gap-2">
                                 <Briefcase size={16} className="text-[#1d5eed]" />
-                                I am currently working in the home care industry.
+                                {t('fields.industryCheckbox')}
                             </label>
                         </div>
                     </div>
@@ -150,23 +152,23 @@ export default function VoteModal({
                     {isHomeCare && (
                         <>
                             <div className="mb-6">
-                                <label className="block text-sm font-bold mb-2 text-gray-700">Name</label>
+                                <label className="block text-sm font-bold mb-2 text-gray-700">{t('fields.name')}</label>
                                 <input
                                     required
                                     type="text"
                                     className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                    placeholder="e.g. Jane Doe"
+                                    placeholder={t('fields.namePlaceholder')}
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
                             <div className="mb-6">
-                                <label className="block text-sm font-bold mb-2 text-gray-700">Organization</label>
+                                <label className="block text-sm font-bold mb-2 text-gray-700">{t('fields.organization')}</label>
                                 <input
                                     required
                                     type="text"
                                     className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                    placeholder="e.g. ABC Home Care"
+                                    placeholder={t('fields.organizationPlaceholder')}
                                     value={organization}
                                     onChange={(e) => setOrganization(e.target.value)}
                                 />
@@ -177,12 +179,12 @@ export default function VoteModal({
                     {/* Job Title Field */}
                     {isHomeCare && (
                         <div className="mb-6">
-                            <label className="block text-sm font-bold mb-2 text-gray-700">Job Title</label>
+                            <label className="block text-sm font-bold mb-2 text-gray-700">{t('fields.jobTitle')}</label>
                             <input
                                 required
                                 type="text"
                                 className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                placeholder="e.g. Caregiver, Registered Nurse, etc."
+                                placeholder={t('fields.jobTitlePlaceholder')}
                                 value={jobTitle}
                                 onChange={(e) => setJobTitle(e.target.value)}
                             />
@@ -197,10 +199,10 @@ export default function VoteModal({
                         >
                             {isChecking ? (
                                 <>
-                                    <Loader2 className="animate-spin" size={20} /> Verifying...
+                                    <Loader2 className="animate-spin" size={20} /> {t('verifying')}
                                 </>
                             ) : (
-                                "Submit Vote"
+                                t('submitVote')
                             )}
                         </button>
                         <button
@@ -216,7 +218,7 @@ export default function VoteModal({
                             className="px-6 py-3 rounded-md font-semibold bg-white text-[#08193e] border border-gray-300 hover:bg-gray-50 disabled:opacity-50"
                             disabled={isChecking}
                         >
-                            Cancel
+                            {t('cancel')}
                         </button>
                     </div>
                 </form>

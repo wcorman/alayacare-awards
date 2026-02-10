@@ -71,5 +71,281 @@
   },
   "NomineeCard": {
     "viewNominee": "View Nominee"
+  },
+  "Eligibility": {
+    "hero": {
+      "title": "Eligibility Details",
+      "subtitle": "The Home-Based Care Momentum Awards recognize outstanding individuals who are elevating home-based care every day — from the front lines to the back office, and the C-suite to visionary innovators.",
+      "note": "All categories share the same organization-level eligibility and then have individual eligibility by category."
+    },
+    "organizationLevel": {
+      "title": "Organization-Level Eligibility (All Categories)",
+      "intro": "To be eligible, nominees must:",
+      "employment": "Be currently employed (full-time, part-time, or contract) by a home-based care organization that provides one or more of the following services:",
+      "services": {
+        "homeCare": "Home care",
+        "homeHealth": "Home health",
+        "homeInfusion": "Home infusion",
+        "hospice": "Hospice",
+        "communityCare": "Community care",
+        "adjacentServices": "Adjacent or supporting services within home-based care"
+      },
+      "setting": "Provide services in a home or community-based setting (not exclusively facility-based).",
+      "additionalNotes": {
+        "title": "Additional Notes",
+        "nominations": "Nominations may come from colleagues, supervisors, direct reports, or self-nominations, subject to the award program's submission process.",
+        "oneCategory": "Each individual can be nominated in one primary category that best reflects their role and impact.",
+        "multipleNominations": "Organizations may submit multiple nominations across categories.",
+        "discretion": "Final eligibility and category placement are at the discretion of the awards committee, based on the information provided in the nomination."
+      }
+    },
+    "categoryLevel": {
+      "title": "Category Eligibility",
+      "intro": "Each category has specific eligibility requirements. Review the details below to determine the best category for your nomination.",
+      "nomineesShould": "Nominees should:",
+      "meetOrganizationLevel": "Meet the organization-level eligibility outlined above.",
+      "categories": {
+        "frontline": {
+          "name": "Changemakers in Frontline Care",
+          "description": "This category celebrates caregivers who deliver direct care and support in the home or community.",
+          "requirements": {
+            "impact": "Positively impact client outcomes, safety, experience, or quality of life through their day-to-day work — creating momentum one visit, one interaction, and one family at a time.",
+            "role": "Work in a direct care / client-facing role, such as:",
+            "roles": [
+              "Personal Support Worker (PSW), Home Health Aide (HHA), Home Support Worker (HSW), Care Aide, Companion, or similar",
+              "Registered Nurse (RN), Licensed/Registered Practical Nurse (LPN/RPN), Nurse Practitioner (NP)",
+              "Allied health professionals providing care at home (e.g., physiotherapist, occupational therapist, speech-language pathologist, social worker, respiratory therapist)"
+            ],
+            "provide": "Provide hands-on care, support, or clinical services in clients' homes or community settings.",
+            "demonstrate": "Demonstrate exceptional compassion, reliability, and client-centred care, going above and beyond typical expectations."
+          }
+        },
+        "operational": {
+          "name": "Changemakers in Operational Excellence",
+          "description": "This category recognizes behind-the-scenes champions whose work keeps home-based care running smoothly, efficiently, and safely.",
+          "requirements": {
+            "champion": "Champion collaboration across teams to solve operational challenges and sustain momentum.",
+            "role": "Work in a non-frontline, operations-focused role, such as:",
+            "roles": [
+              "Scheduler, Service Coordinator, Intake Coordinator, Client Services Representative",
+              "Operations, Quality, or Performance Improvement Specialist",
+              "HR, Finance, Billing, or Payroll professional focused on home-based care",
+              "IT Specialist, Systems Administrator, Data/Reporting Analyst, or similar"
+            ],
+            "playRole": "Play a key role in supporting caregivers, clients, and field operations (e.g., scheduling, capacity optimization, workflow design, billing integrity, compliance).",
+            "demonstrate": "Demonstrate measurable contributions to:",
+            "contributions": [
+              "Process improvement or efficiency gains",
+              "Data-driven decision-making",
+              "Quality, safety, or compliance",
+              "Employee or client experience"
+            ]
+          }
+        },
+        "executive": {
+          "name": "Changemakers in Executive Leadership",
+          "description": "This category honours senior leaders who are shaping the future of home-based care through strategic vision, culture-building, and bold decision-making.",
+          "requirements": {
+            "trackRecord": "A track record of setting a strategic direction that builds sustained momentum for their organization and the broader sector.",
+            "role": "Hold a senior leadership role at a home-based care organization, typically VP level or above, such as:",
+            "roles": [
+              "Vice President",
+              "Senior Vice President",
+              "Executive Vice President",
+              "Chief Executive Officer (CEO), Chief Operating Officer (COO), Chief Clinical Officer (CCO), Chief Nursing Officer (CNO), Chief Technology Officer (CTO), Chief Strategy Officer (CSO), or equivalent",
+              "President, Founder, or Co-Founder"
+            ],
+            "responsibility": "Have direct or shared responsibility for organizational strategy, growth, quality, or innovation in home-based care services.",
+            "demonstrate": "Demonstrate:",
+            "demonstrations": [
+              "Visionary leadership in expanding or improving home-based care",
+              "A clear commitment to care quality, safety, and equity",
+              "Investment in people and culture (e.g., supporting staff, enabling teams with tools and training, driving engagement)",
+              "Tangible impact on organizational performance, client outcomes, or community reach"
+            ]
+          }
+        },
+        "impact": {
+          "name": "Changemakers in Impact and Innovation",
+          "description": "This category recognizes trailblazers at any level or function who are driving meaningful change, testing new ideas, or redefining what's possible in home-based care.",
+          "requirements": {
+            "embody": "Embody the spirit of a changemaker by turning ideas into action, and action into lasting momentum.",
+            "role": "Work in any role or level (frontline, operational, clinical, technical, or leadership) within an eligible home-based care organization.",
+            "leading": "Be leading or significantly contributing to unique, high-impact initiatives, for example:",
+            "initiatives": [
+              "Implementing new models of care (e.g., hybrid virtual/in-person care, specialized programs for complex populations)",
+              "Piloting or scaling innovative technologies or data-driven approaches that improve client or staff experience",
+              "Designing novel workflows, partnerships, or community programs that increase access to care",
+              "Advancing equity, inclusion, or culturally competent care in home and community settings",
+              "Championing sustainability or scalable best practices that others in the industry can learn from"
+            ],
+            "show": "Show clear, demonstrable impact on:",
+            "impacts": [
+              "Client outcomes or experience",
+              "Staff experience, satisfaction, or retention",
+              "Operational performance or quality",
+              "The broader home-based care industry (e.g., thought leadership, advocacy, knowledge-sharing)"
+            ]
+          }
+        }
+      }
+    },
+    "contact": {
+      "title": "Have questions about the eligibility criteria or which category is the best fit?",
+      "text": "Please email",
+      "email": "awards@alayacare.com",
+      "textAfter": "and a member of the awards committee will be happy to help.",
+      "cta": "Ready to Nominate?"
+    }
+  },
+  "Footer": {
+    "tagline": "Celebrating the momentum behind exceptional home-based care.",
+    "poweredBy": "Powered by"
+  },
+  "NominationForm": {
+    "backToHome": "Back to Home",
+    "backToSelection": "Back to Selection",
+    "typeSelection": {
+      "title": "Who are you nominating?",
+      "description": "You can nominate yourself for your own achievements, or recognize a colleague who has gone above and beyond.",
+      "myself": {
+        "title": "Myself",
+        "description": "I am a care leader and I want to share my own story of excellence.",
+        "continue": "Continue"
+      },
+      "someoneElse": {
+        "title": "Someone Else",
+        "description": "I want to nominate a colleague, employee, or friend for their amazing work.",
+        "continue": "Continue"
+      }
+    },
+    "form": {
+      "selfTitle": "Tell Us Your Story",
+      "otherTitle": "Nominate a Care Leader",
+      "selfSubtitle": "You do amazing work. Help us recognize it.",
+      "otherSubtitle": "Shine a light on someone who makes a difference.",
+      "fields": {
+        "nomineeName": "Nominee Name",
+        "yourName": "Your Name",
+        "nomineeEmail": "Nominee Email",
+        "yourEmail": "Your Email",
+        "emailNotification": "We'll use this to notify {who} if {who2} win.",
+        "emailNotificationSelf": "We'll use this to notify you if you win.",
+        "emailNotificationOther": "We'll use this to notify them if they win.",
+        "you": "you",
+        "them": "them",
+        "they": "they",
+        "nomineeOrganization": "Nominee Organization",
+        "organization": "Organization",
+        "nomineeJobTitle": "Nominee Job Title",
+        "jobTitle": "Job Title",
+        "nomineePhoto": "Nominee Profile Photo (Optional)",
+        "yourPhoto": "Your Profile Photo (Optional)",
+        "awardCategory": "Award Category",
+        "reasonForNomination": "Reason for Nomination",
+        "reasonPlaceholderSelf": "Tell us why you deserve to win...",
+        "reasonPlaceholderOther": "Tell us why this person deserves to win...",
+        "nominatorEmail": "Your Email (Required for submission)",
+        "nominatorEmailPlaceholder": "So we can contact you if they win",
+        "industryCheckbox": "I am currently working in the home care industry.",
+        "nominatorName": "Your Name",
+        "nominatorOrganization": "Your Organization",
+        "nominatorJobTitle": "Your Job Title"
+      },
+      "placeholders": {
+        "name": "e.g. Jane Doe",
+        "email": "e.g. jane.doe@careprovider.com",
+        "organization": "e.g. ABC Home Care",
+        "jobTitle": "e.g. Caregiver, Registered Nurse, etc."
+      },
+      "submit": "Submit Nomination",
+      "submitting": "Submitting..."
+    },
+    "success": {
+      "homeCareTitle": "Nomination Submitted!",
+      "otherTitle": "Thank You for Your Nomination!",
+      "message": "We'll review your submission shortly.",
+      "voteForOthers": "Vote for Others",
+      "returnHome": "Return Home"
+    },
+    "errors": {
+      "duplicate": "This person has already been nominated. Thank you for your enthusiasm.",
+      "generic": "An error occurred. Please try again.",
+      "network": "Network error. Please try again."
+    }
+  },
+  "VotePage": {
+    "title": "Vote for Excellence",
+    "subtitle": "Recognize outstanding individuals transforming home-based care by casting your vote.",
+    "searchPlaceholder": "Search nominees...",
+    "filterByCategory": "Filter by Category:",
+    "allCategories": "All Categories",
+    "showingResults": "Showing {count} {nominee} in",
+    "nominee": "nominee",
+    "nominees": "nominees",
+    "noResults": {
+      "title": "No matching nominees found.",
+      "subtitle": "Try a different name or search term."
+    },
+    "errors": {
+      "alreadyVoted": "You've already voted for this nominee.",
+      "generic": "An error occurred. Please try again.",
+      "network": "Network error. Please try again."
+    }
+  },
+  "VoteModal": {
+    "confirmVote": "Confirm Your Vote",
+    "votingFor": "You are voting for {name}.",
+    "enterEmail": "Please enter your email to verify your vote.",
+    "verificationRequired": "Verification Required",
+    "thankYou": "Thank you for voting for {name}. Please check your email inbox to finalize your submission. Your vote is pending confirmation.",
+    "close": "Close",
+    "cancel": "Cancel",
+    "submitVote": "Submit Vote",
+    "verifying": "Verifying...",
+    "fields": {
+      "email": "Your Email Address",
+      "emailPlaceholder": "e.g. name@company.com",
+      "industryCheckbox": "I am currently working in the home care industry.",
+      "name": "Name",
+      "namePlaceholder": "e.g. Jane Doe",
+      "organization": "Organization",
+      "organizationPlaceholder": "e.g. ABC Home Care",
+      "jobTitle": "Job Title",
+      "jobTitlePlaceholder": "e.g. Caregiver, Registered Nurse, etc."
+    }
+  },
+  "NomineeCard": {
+    "viewNominee": "View Nominee",
+    "vote": "Vote",
+    "voted": "Voted",
+    "votes": "Votes"
+  },
+  "NomineePage": {
+    "voteFor": "Vote for {name}"
+  },
+  "NomineeProfile": {
+    "backToAllNominees": "Back to All Nominees",
+    "votes": "Votes",
+    "category": "Category",
+    "nominationStory": "Nomination Story",
+    "viewAllNominees": "View All Nominees",
+    "nominateSomeone": "Nominate Someone"
+  },
+  "Navbar": {
+    "logo": {
+      "title": "The Home-Based Care",
+      "subtitle": "Momentum Awards"
+    },
+    "home": "Home",
+    "eligibility": "Eligibility",
+    "nominate": "Nominate",
+    "voteNow": "Vote Now",
+    "languageSwitcher": {
+      "french": "Français",
+      "english": "English",
+      "switchToFrench": "Switch language to French",
+      "switchToEnglish": "Switch language to English"
+    }
   }
 }

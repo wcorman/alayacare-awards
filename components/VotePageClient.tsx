@@ -5,6 +5,7 @@ import { Search, X, Heart, Award, Briefcase, Sparkles, Grid3x3 } from 'lucide-re
 import NomineeCard from './NomineeCard';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
+import { useTranslations } from 'next-intl';
 
 // Category definitions matching the ones used in NominationForm and Home page
 const CATEGORY_CONFIG: Record<string, { icon: React.ComponentType<{ size?: number; className?: string }>; color: string }> = {
@@ -19,6 +20,8 @@ interface VotePageClientProps {
 }
 
 export default function VotePageClient({ nominees }: VotePageClientProps) {
+    const t = useTranslations('VotePage');
+    const tHome = useTranslations('Home');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [votedNomineeIds, setVotedNomineeIds] = useState<string[]>([]);
@@ -83,15 +86,15 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
                 checkStatus(email);
             } else {
                 if (data.reason === 'already_voted') {
-                    setVoteError("You've already voted for this nominee.");
+                    setVoteError(t('errors.alreadyVoted'));
                     checkStatus(email);
                 } else {
-                    setVoteError("An error occurred. Please try again.");
+                    setVoteError(t('errors.generic'));
                 }
             }
         } catch (err) {
             console.error(err);
-            setVoteError("Network error. Please try again.");
+            setVoteError(t('errors.network'));
         } finally {
             setIsCheckingVote(false);
         }
@@ -127,14 +130,14 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
             {/* Header & Search */}
             <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-6">
                 <div>
-                    <h2 className="text-3xl font-bold text-[#08193e]">Vote for Excellence</h2>
-                    <p className="text-gray-600 mt-2">Recognize outstanding individuals transforming home-based care by casting your vote.</p>
+                    <h2 className="text-3xl font-bold text-[#08193e]">{t('title')}</h2>
+                    <p className="text-gray-600 mt-2">{t('subtitle')}</p>
                 </div>
 
                 <div className="relative w-full md:w-72">
                     <input
                         type="text"
-                        placeholder="Search nominees..."
+                        placeholder={t('searchPlaceholder')}
                         className="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-[#1D5EED] w-full"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
@@ -147,7 +150,7 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
             {categories.length > 0 && (
                 <div className="mb-8">
                     <div className="flex flex-wrap items-center gap-3">
-                        <span className="text-sm font-semibold text-gray-700 mr-2">Filter by Category:</span>
+                        <span className="text-sm font-semibold text-gray-700 mr-2">{t('filterByCategory')}</span>
                         <button
                             onClick={() => setSelectedCategory(null)}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
@@ -157,11 +160,17 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
                             }`}
                         >
                             <Grid3x3 size={16} />
-                            All Categories
+                            {t('allCategories')}
                         </button>
                         {categories.map((category) => {
                             const categoryInfo = CATEGORY_CONFIG[category] || { icon: Award, color: '#6b7280' };
                             const IconComponent = categoryInfo.icon;
+                            // Try to get translated category name, fallback to original
+                            const translatedCategory = category === "Frontline Care" ? tHome('categories.frontline.name') :
+                                                      category === "Operational Excellence" ? tHome('categories.operational.name') :
+                                                      category === "Executive Leadership" ? tHome('categories.executive.name') :
+                                                      category === "Impact and Innovation" ? tHome('categories.impact.name') :
+                                                      category;
                             return (
                                 <button
                                     key={category}
@@ -174,7 +183,7 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
                                     style={selectedCategory === category ? { backgroundColor: categoryInfo.color } : {}}
                                 >
                                     <IconComponent size={16} />
-                                    {category}
+                                    {translatedCategory}
                                     {selectedCategory === category && (
                                         <X size={14} className="ml-1" />
                                     )}
@@ -191,9 +200,17 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
                             const b = parseInt(hex.slice(5, 7), 16);
                             return `rgba(${r}, ${g}, ${b}, ${alpha})`;
                         };
+                        const translatedCategory = selectedCategory === "Frontline Care" ? tHome('categories.frontline.name') :
+                                                   selectedCategory === "Operational Excellence" ? tHome('categories.operational.name') :
+                                                   selectedCategory === "Executive Leadership" ? tHome('categories.executive.name') :
+                                                   selectedCategory === "Impact and Innovation" ? tHome('categories.impact.name') :
+                                                   selectedCategory;
                         return (
                             <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
-                                <span>Showing {filteredNominees.length} {filteredNominees.length === 1 ? 'nominee' : 'nominees'} in</span>
+                                <span>{t('showingResults', { 
+                                    count: filteredNominees.length, 
+                                    nominee: filteredNominees.length === 1 ? t('nominee') : t('nominees')
+                                })}</span>
                                 <span 
                                     className="px-3 py-1 rounded-full font-semibold"
                                     style={{ 
@@ -201,7 +218,7 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
                                         color: categoryInfo.color
                                     }}
                                 >
-                                    {selectedCategory}
+                                    {translatedCategory}
                                 </span>
                             </div>
                         );
@@ -213,8 +230,8 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
             {filteredNominees.length === 0 ? (
                 <div className="text-center py-20 bg-white rounded-lg shadow-sm border border-gray-100">
                     <Search className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-                    <h3 className="text-xl font-bold text-gray-700">No matching nominees found.</h3>
-                    <p className="text-gray-500 mt-2">Try a different name or search term.</p>
+                    <h3 className="text-xl font-bold text-gray-700">{t('noResults.title')}</h3>
+                    <p className="text-gray-500 mt-2">{t('noResults.subtitle')}</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

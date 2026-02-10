@@ -5,12 +5,15 @@ import Link from 'next/link';
 import { ThumbsUp } from 'lucide-react';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
+import { useTranslations } from 'next-intl';
 
 interface NomineePageClientProps {
     nominee: Nominee;
 }
 
 export default function NomineePageClient({ nominee }: NomineePageClientProps) {
+    const t = useTranslations('NomineePage');
+    const tVotePage = useTranslations('VotePage');
     const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
     const [isCheckingVote, setIsCheckingVote] = useState(false);
     const [voteError, setVoteError] = useState<string | null>(null);
@@ -52,14 +55,14 @@ export default function NomineePageClient({ nominee }: NomineePageClientProps) {
                 setVoteCompleted(true);
             } else {
                 if (data.reason === 'already_voted') {
-                    setVoteError("You've already voted for this nominee.");
+                    setVoteError(tVotePage('errors.alreadyVoted'));
                 } else {
-                    setVoteError("An error occurred. Please try again.");
+                    setVoteError(tVotePage('errors.generic'));
                 }
             }
         } catch (err) {
             console.error(err);
-            setVoteError("Network error. Please try again.");
+            setVoteError(tVotePage('errors.network'));
         } finally {
             setIsCheckingVote(false);
         }
@@ -74,7 +77,7 @@ export default function NomineePageClient({ nominee }: NomineePageClientProps) {
                     className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                 >
                     <ThumbsUp size={20} />
-                    Vote for {nominee.name.split(' ')[0]}
+                    {t('voteFor', { name: nominee.name.split(' ')[0] })}
                 </button>
             </div>
 

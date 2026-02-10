@@ -5,6 +5,7 @@ import { ArrowLeft, Award, Heart, Briefcase, Sparkles } from 'lucide-react';
 import { fetchNomineeById } from '@/lib/airtable';
 import NomineeImage from '@/components/NomineeImage';
 import NomineePageClient from '@/components/NomineePageClient';
+import { getTranslations } from 'next-intl/server';
 
 // Force dynamic rendering so we always get the latest nominee data
 export const dynamic = 'force-dynamic';
@@ -28,8 +29,17 @@ export default async function NomineePage({ params }: NomineePageProps) {
         notFound();
     }
 
+    const t = await getTranslations('NomineeProfile');
+    const tHome = await getTranslations('Home');
     const categoryInfo = CATEGORY_CONFIG[nominee.category] || { icon: Award, color: '#6b7280' };
     const IconComponent = categoryInfo.icon;
+
+    // Get translated category name
+    const translatedCategory = nominee.category === "Frontline Care" ? tHome('categories.frontline.name') :
+                               nominee.category === "Operational Excellence" ? tHome('categories.operational.name') :
+                               nominee.category === "Executive Leadership" ? tHome('categories.executive.name') :
+                               nominee.category === "Impact and Innovation" ? tHome('categories.impact.name') :
+                               nominee.category;
 
     return (
         <main className="min-h-screen bg-[#fcfcfc] text-slate-800">
@@ -47,7 +57,7 @@ export default async function NomineePage({ params }: NomineePageProps) {
                         className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-8 transition-colors group"
                     >
                         <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-                        <span className="font-medium">Back to All Nominees</span>
+                        <span className="font-medium">{t('backToAllNominees')}</span>
                     </Link>
 
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
@@ -99,16 +109,16 @@ export default async function NomineePage({ params }: NomineePageProps) {
                                         <div className="p-6 rounded-xl bg-gradient-to-br from-[#08193e] to-[#113cca] text-white">
                                             <div className="flex items-center gap-3 mb-2">
                                                 <Award size={24} />
-                                                <span className="text-sm font-semibold uppercase tracking-wide opacity-80">Votes</span>
+                                                <span className="text-sm font-semibold uppercase tracking-wide opacity-80">{t('votes')}</span>
                                             </div>
                                             <p className="text-3xl font-bold">{nominee.votes}</p>
                                         </div>
                                         <div className="p-6 rounded-xl bg-gradient-to-br from-[#1D5EED] to-[#113CCA] text-white">
                                             <div className="flex items-center gap-3 mb-2">
                                                 <IconComponent size={24} />
-                                                <span className="text-sm font-semibold uppercase tracking-wide opacity-80">Category</span>
+                                                <span className="text-sm font-semibold uppercase tracking-wide opacity-80">{t('category')}</span>
                                             </div>
-                                            <p className="text-lg font-bold">{nominee.category}</p>
+                                            <p className="text-lg font-bold">{translatedCategory}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +128,7 @@ export default async function NomineePage({ params }: NomineePageProps) {
                                     <div className="mb-8">
                                         <h2 className="text-2xl font-bold text-[#08193e] mb-4 flex items-center gap-3">
                                             <div className="w-1 h-8 rounded-full" style={{ backgroundColor: categoryInfo.color }}></div>
-                                            Nomination Story
+                                            {t('nominationStory')}
                                         </h2>
                                         <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-wrap">
                                             "{nominee.description}"
@@ -130,16 +140,16 @@ export default async function NomineePage({ params }: NomineePageProps) {
                                         <div className="p-6 rounded-xl bg-gradient-to-br from-[#08193e] to-[#113cca] text-white">
                                             <div className="flex items-center gap-3 mb-2">
                                                 <Award size={24} />
-                                                <span className="text-sm font-semibold uppercase tracking-wide opacity-80">Votes</span>
+                                                <span className="text-sm font-semibold uppercase tracking-wide opacity-80">{t('votes')}</span>
                                             </div>
                                             <p className="text-3xl font-bold">{nominee.votes}</p>
                                         </div>
                                         <div className="p-6 rounded-xl bg-gradient-to-br from-[#1D5EED] to-[#113CCA] text-white">
                                             <div className="flex items-center gap-3 mb-2">
                                                 <IconComponent size={24} />
-                                                <span className="text-sm font-semibold uppercase tracking-wide opacity-80">Category</span>
+                                                <span className="text-sm font-semibold uppercase tracking-wide opacity-80">{t('category')}</span>
                                             </div>
-                                            <p className="text-lg font-bold">{nominee.category}</p>
+                                            <p className="text-lg font-bold">{translatedCategory}</p>
                                         </div>
                                     </div>
 
@@ -156,13 +166,13 @@ export default async function NomineePage({ params }: NomineePageProps) {
                             href="/vote"
                             className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED] transition-all duration-200 text-center"
                         >
-                            View All Nominees
+                            {t('viewAllNominees')}
                         </Link>
                         <Link
                             href="/nominate"
                             className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED] transition-all duration-200 text-center"
                         >
-                            Nominate Someone
+                            {t('nominateSomeone')}
                         </Link>
                     </div>
                 </div>

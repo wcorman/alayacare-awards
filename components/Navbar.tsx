@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
+    const t = useTranslations('Navbar');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const pathname = usePathname();
     const router = useRouter();
@@ -25,8 +26,8 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                 <Link href="/" className="flex items-center cursor-pointer">
                     <div className="flex flex-col">
-                        <span className="text-2xl font-bold leading-none tracking-tight" style={{ color: THEME_COLORS.deepBlue }}>The Home-Based Care</span>
-                        <span className="text-[10px] font-semibold tracking-widest uppercase text-gray-500">Momentum Awards</span>
+                        <span className="text-2xl font-bold leading-none tracking-tight" style={{ color: THEME_COLORS.deepBlue }}>{t('logo.title')}</span>
+                        <span className="text-[10px] font-semibold tracking-widest uppercase text-gray-500">{t('logo.subtitle')}</span>
                     </div>
                 </Link>
 
@@ -35,25 +36,25 @@ export default function Navbar() {
                         href="/"
                         className={`font-medium hover:text-[#1D5EED] transition-colors ${isActive('/') ? 'text-[#1D5EED]' : 'text-[#08193e]'}`}
                     >
-                        Home
+                        {t('home')}
                     </Link>
                     <Link
                         href="/eligibility"
                         className={`font-medium hover:text-[#1D5EED] transition-colors ${isActive('/eligibility') ? 'text-[#1D5EED]' : 'text-[#08193e]'}`}
                     >
-                        Eligibility
+                        {t('eligibility')}
                     </Link>
                     <Link
                         href="/nominate"
                         className={`font-medium hover:text-[#1D5EED] transition-colors ${isActive('/nominate') ? 'text-[#1D5EED]' : 'text-[#08193e]'}`}
                     >
-                        Nominate
+                        {t('nominate')}
                     </Link>
                     <Link
                         href="/vote"
                         className="py-2 px-4 text-sm font-semibold rounded-md bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-colors"
                     >
-                        Vote Now
+                        {t('voteNow')}
                     </Link>
                     <button
                         type="button"
@@ -62,9 +63,9 @@ export default function Navbar() {
                             router.refresh();
                         }}
                         className="py-2 px-3 text-sm font-semibold rounded-md border border-[#08193e] text-[#08193e] hover:text-[#1D5EED] hover:border-[#1D5EED] transition-colors"
-                        aria-label={`Switch language to ${nextLocale === 'fr' ? 'French' : 'English'}`}
+                        aria-label={nextLocale === 'fr' ? t('languageSwitcher.switchToFrench') : t('languageSwitcher.switchToEnglish')}
                     >
-                        {nextLocale.toUpperCase()}
+                        {nextLocale === 'fr' ? t('languageSwitcher.french') : t('languageSwitcher.english')}
                     </button>
                 </nav>
 
@@ -80,28 +81,28 @@ export default function Navbar() {
                         onClick={() => setMobileMenuOpen(false)}
                         className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e]"
                     >
-                        Home
+                        {t('home')}
                     </Link>
                     <Link
                         href="/eligibility"
                         onClick={() => setMobileMenuOpen(false)}
                         className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e]"
                     >
-                        Eligibility
+                        {t('eligibility')}
                     </Link>
                     <Link
                         href="/nominate"
                         onClick={() => setMobileMenuOpen(false)}
                         className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e]"
                     >
-                        Nominate
+                        {t('nominate')}
                     </Link>
                     <Link
                         href="/vote"
                         onClick={() => setMobileMenuOpen(false)}
                         className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e] bg-[#1D5EED] text-white hover:bg-[#113CCA]"
                     >
-                        Vote Now
+                        {t('voteNow')}
                     </Link>
                     <button
                         type="button"
@@ -111,9 +112,9 @@ export default function Navbar() {
                             setMobileMenuOpen(false);
                         }}
                         className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e]"
-                        aria-label={`Switch language to ${nextLocale === 'fr' ? 'French' : 'English'}`}
+                        aria-label={nextLocale === 'fr' ? t('languageSwitcher.switchToFrench') : t('languageSwitcher.switchToEnglish')}
                     >
-                        {nextLocale === 'fr' ? 'Français' : 'English'}
+                        {nextLocale === 'fr' ? t('languageSwitcher.french') : t('languageSwitcher.english')}
                     </button>
                 </div>
             )}

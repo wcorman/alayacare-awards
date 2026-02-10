@@ -5,6 +5,7 @@ import { FileUploaderRegular } from '@uploadcare/react-uploader/next';
 import '@uploadcare/react-uploader/core.css';
 import { User, Users, ChevronRight, Upload, Check, Briefcase, AlertCircle, Loader2, UserPlus, Heart, Award, Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 const THEME = {
     colors: {
@@ -16,15 +17,17 @@ const THEME = {
 };
 
 const CATEGORIES = [
-    { id: 'frontline', name: "Frontline Care", color: '#f37021', icon: Heart },
-    { id: 'operational', name: "Operational Excellence", color: '#113cca', icon: Award },
-    { id: 'executive', name: "Executive Leadership", color: '#ffaa05', icon: Briefcase },
-    { id: 'impact', name: "Impact and Innovation", color: '#08193e', icon: Sparkles },
+    { id: 'frontline', nameKey: 'categories.frontline.name', color: '#f37021', icon: Heart },
+    { id: 'operational', nameKey: 'categories.operational.name', color: '#113cca', icon: Award },
+    { id: 'executive', nameKey: 'categories.executive.name', color: '#ffaa05', icon: Briefcase },
+    { id: 'impact', nameKey: 'categories.impact.name', color: '#08193e', icon: Sparkles },
 ];
 
 
 export default function NominationForm() {
     const router = useRouter();
+    const t = useTranslations('NominationForm');
+    const tHome = useTranslations('Home');
     const [step, setStep] = useState<'type' | 'form' | 'success'>('type');
     const [nominationType, setNominationType] = useState<'self' | 'other'>('other');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,17 +88,17 @@ export default function NominationForm() {
                 setStep('success');
             } else {
                 if (data.reason === 'duplicate_nominee') {
-                    setErrorMsg("This person has already been nominated. Thank you for your enthusiasm.");
+                    setErrorMsg(t('errors.duplicate'));
                 } else {
                     // Show the actual error message if available
-                    const errorMsg = data.error || "An error occurred. Please try again.";
+                    const errorMsg = data.error || t('errors.generic');
                     console.error("Nomination API Error:", data);
                     setErrorMsg(errorMsg);
                 }
             }
         } catch (err) {
             console.error(err);
-            setErrorMsg("Network error. Please try again.");
+            setErrorMsg(t('errors.network'));
         } finally {
             setIsSubmitting(false);
         }
@@ -108,12 +111,12 @@ export default function NominationForm() {
             <div className="py-8 px-6 lg:px-12 bg-gray-50 min-h-screen flex flex-col items-center">
                 <div className="max-w-4xl w-full text-center">
                     <button onClick={() => router.push('/')} className="flex items-center gap-2 text-gray-500 hover:text-[#1D5EED] mb-6 font-medium mx-auto md:mx-0">
-                        <ChevronRight className="rotate-180" size={20} /> Back to Home
+                        <ChevronRight className="rotate-180" size={20} /> {t('backToHome')}
                     </button>
 
-                    <h2 className="text-3xl font-bold mb-3" style={{ color: THEME.colors.deepBlue }}>Who are you nominating?</h2>
+                    <h2 className="text-3xl font-bold mb-3" style={{ color: THEME.colors.deepBlue }}>{t('typeSelection.title')}</h2>
                     <p className="text-gray-600 mb-8 max-w-xl mx-auto">
-                        You can nominate yourself for your own achievements, or recognize a colleague who has gone above and beyond.
+                        {t('typeSelection.description')}
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
@@ -125,11 +128,11 @@ export default function NominationForm() {
                             <div className="w-24 h-24 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
                                 <User size={48} className="text-[#1D5EED]" />
                             </div>
-                            <h3 className="text-2xl font-bold mb-3" style={{ color: THEME.colors.deepBlue }}>Myself</h3>
-                            <p className="text-gray-600">I am a care leader and I want to share my own story of excellence.</p>
+                            <h3 className="text-2xl font-bold mb-3" style={{ color: THEME.colors.deepBlue }}>{t('typeSelection.myself.title')}</h3>
+                            <p className="text-gray-600">{t('typeSelection.myself.description')}</p>
                             <div className="mt-8">
                                 <span className="text-[#1D5EED] font-bold group-hover:underline flex items-center gap-2">
-                                    Continue <ChevronRight size={16} />
+                                    {t('typeSelection.myself.continue')} <ChevronRight size={16} />
                                 </span>
                             </div>
                         </div>
@@ -142,11 +145,11 @@ export default function NominationForm() {
                             <div className="w-24 h-24 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
                                 <Users size={48} className="text-[#1D5EED]" />
                             </div>
-                            <h3 className="text-2xl font-bold mb-3" style={{ color: THEME.colors.deepBlue }}>Someone Else</h3>
-                            <p className="text-gray-600">I want to nominate a colleague, employee, or friend for their amazing work.</p>
+                            <h3 className="text-2xl font-bold mb-3" style={{ color: THEME.colors.deepBlue }}>{t('typeSelection.someoneElse.title')}</h3>
+                            <p className="text-gray-600">{t('typeSelection.someoneElse.description')}</p>
                             <div className="mt-8">
                                 <span className="text-[#1D5EED] font-bold group-hover:underline flex items-center gap-2">
-                                    Continue <ChevronRight size={16} />
+                                    {t('typeSelection.someoneElse.continue')} <ChevronRight size={16} />
                                 </span>
                             </div>
                         </div>
@@ -164,17 +167,17 @@ export default function NominationForm() {
                         <Check size={40} />
                     </div>
                     <h2 className="text-2xl font-bold mb-4" style={{ color: THEME.colors.deepBlue }}>
-                        {formData.isHomeCare ? "Nomination Submitted!" : "Thank You for Your Nomination!"}
+                        {formData.isHomeCare ? t('success.homeCareTitle') : t('success.otherTitle')}
                     </h2>
                     <p className="text-gray-600 mb-4">
-                        We'll review your submission shortly.
+                        {t('success.message')}
                     </p>
                     <div className="space-y-3">
                         <button onClick={() => router.push('/')} className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA]">
-                            Vote for Others
+                            {t('success.voteForOthers')}
                         </button>
                         <button onClick={() => router.push('/')} className="w-full px-6 py-3 rounded-md font-semibold bg-white text-[#08193e] border border-gray-300 hover:bg-gray-50">
-                            Return Home
+                            {t('success.returnHome')}
                         </button>
                     </div>
                 </div>
@@ -186,16 +189,16 @@ export default function NominationForm() {
         <div className="py-8 px-6 lg:px-12 bg-gray-50 min-h-screen">
             <div className="max-w-3xl mx-auto">
                 <button onClick={() => setStep('type')} className="flex items-center gap-2 text-gray-500 hover:text-[#1D5EED] mb-6 font-medium">
-                    <ChevronRight className="rotate-180" size={20} /> Back to Selection
+                    <ChevronRight className="rotate-180" size={20} /> {t('backToSelection')}
                 </button>
 
                 <div className="bg-white rounded-lg shadow-md p-6 md:p-10">
                     <div className="mb-6">
                         <h2 className="text-3xl font-bold mb-2" style={{ color: THEME.colors.deepBlue }}>
-                            {isSelf ? "Tell Us Your Story" : "Nominate a Care Leader"}
+                            {isSelf ? t('form.selfTitle') : t('form.otherTitle')}
                         </h2>
                         <p className="text-gray-600">
-                            {isSelf ? "You do amazing work. Help us recognize it." : "Shine a light on someone who makes a difference."}
+                            {isSelf ? t('form.selfSubtitle') : t('form.otherSubtitle')}
                         </p>
                     </div>
 
@@ -203,13 +206,13 @@ export default function NominationForm() {
                         {/* Name */}
                         <div>
                             <label className="block text-sm font-bold mb-2 text-gray-700">
-                                {isSelf ? "Your Name" : "Nominee Name"}
+                                {isSelf ? t('form.fields.yourName') : t('form.fields.nomineeName')}
                             </label>
                             <input
                                 required
                                 type="text"
                                 className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                placeholder={isSelf ? "e.g. Jane Doe" : "e.g. Jane Doe"}
+                                placeholder={t('form.placeholders.name')}
                                 value={formData.nomineeName}
                                 onChange={e => setFormData({ ...formData, nomineeName: e.target.value })}
                             />
@@ -218,30 +221,32 @@ export default function NominationForm() {
                         {/* Nominee Email */}
                         <div>
                             <label className="block text-sm font-bold mb-2 text-gray-700">
-                                {isSelf ? "Your Email" : "Nominee Email"}
+                                {isSelf ? t('form.fields.yourEmail') : t('form.fields.nomineeEmail')}
                             </label>
                             <input
                                 required
                                 type="email"
                                 className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                placeholder="e.g. jane.doe@careprovider.com"
+                                placeholder={t('form.placeholders.email')}
                                 value={formData.nomineeEmail}
                                 onChange={e => setFormData({ ...formData, nomineeEmail: e.target.value })}
                             />
-                            <p className="text-xs text-gray-500 mt-1">We'll use this to notify {isSelf ? "you" : "them"} if {isSelf ? "you" : "they"} win.</p>
+                            <p className="text-xs text-gray-500 mt-1">
+                                {isSelf ? t('form.fields.emailNotificationSelf') : t('form.fields.emailNotificationOther')}
+                            </p>
                         </div>
 
                         {/* Organization and Job Title Fields (For All Nominations) */}
                         <>
                             <div>
                                 <label className="block text-sm font-bold mb-2 text-gray-700">
-                                    {isSelf ? "Organization" : "Nominee Organization"}
+                                    {isSelf ? t('form.fields.organization') : t('form.fields.nomineeOrganization')}
                                 </label>
                                 <input
                                     required
                                     type="text"
                                     className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                    placeholder="e.g. ABC Home Care"
+                                    placeholder={t('form.placeholders.organization')}
                                     value={formData.organization}
                                     onChange={e => setFormData({ ...formData, organization: e.target.value })}
                                 />
@@ -249,13 +254,13 @@ export default function NominationForm() {
                             
                             <div>
                                 <label className="block text-sm font-bold mb-2 text-gray-700">
-                                    {isSelf ? "Job Title" : "Nominee Job Title"}
+                                    {isSelf ? t('form.fields.jobTitle') : t('form.fields.nomineeJobTitle')}
                                 </label>
                                 <input
                                     required
                                     type="text"
                                     className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                    placeholder="e.g. Caregiver, Registered Nurse, etc."
+                                    placeholder={t('form.placeholders.jobTitle')}
                                     value={formData.jobTitle}
                                     onChange={e => setFormData({ ...formData, jobTitle: e.target.value })}
                                 />
@@ -265,7 +270,7 @@ export default function NominationForm() {
                         {/* Photo */}
                         <div>
                             <label className="block text-sm font-bold mb-2 text-gray-700">
-                                {isSelf ? "Your Profile Photo (Optional)" : "Nominee Profile Photo (Optional)"}
+                                {isSelf ? t('form.fields.yourPhoto') : t('form.fields.nomineePhoto')}
                             </label>
                             <div className="mb-4">
                                 <FileUploaderRegular
@@ -287,32 +292,35 @@ export default function NominationForm() {
 
                         {/* Category */}
                         <div>
-                            <label className="block text-sm font-bold mb-2 text-gray-700">Award Category</label>
+                            <label className="block text-sm font-bold mb-2 text-gray-700">{t('form.fields.awardCategory')}</label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {CATEGORIES.map(cat => (
-                                    <div
-                                        key={cat.id}
-                                        onClick={() => setFormData({ ...formData, category: cat.name })}
-                                        className={`cursor-pointer p-4 rounded-md border-2 transition-all flex items-center gap-3 ${formData.category === cat.name ? 'bg-blue-50 border-[#1D5EED]' : 'hover:bg-gray-50 border-gray-200'}`}
-                                    >
-                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white`} style={{ backgroundColor: cat.color }}>
-                                            <cat.icon size={18} />
+                                {CATEGORIES.map(cat => {
+                                    const categoryName = tHome(cat.nameKey);
+                                    return (
+                                        <div
+                                            key={cat.id}
+                                            onClick={() => setFormData({ ...formData, category: categoryName })}
+                                            className={`cursor-pointer p-4 rounded-md border-2 transition-all flex items-center gap-3 ${formData.category === categoryName ? 'bg-blue-50 border-[#1D5EED]' : 'hover:bg-gray-50 border-gray-200'}`}
+                                        >
+                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white`} style={{ backgroundColor: cat.color }}>
+                                                <cat.icon size={18} />
+                                            </div>
+                                            <span className="font-medium text-sm text-gray-800">{categoryName}</span>
+                                            {formData.category === categoryName && <Check size={16} className="ml-auto text-[#1D5EED]" />}
                                         </div>
-                                        <span className="font-medium text-sm text-gray-800">{cat.name}</span>
-                                        {formData.category === cat.name && <Check size={16} className="ml-auto text-[#1D5EED]" />}
-                                    </div>
-                                ))}
+                                    );
+                                })}
                             </div>
                         </div>
 
                         {/* Reason */}
                         <div>
-                            <label className="block text-sm font-bold mb-2 text-gray-700">Reason for Nomination</label>
+                            <label className="block text-sm font-bold mb-2 text-gray-700">{t('form.fields.reasonForNomination')}</label>
                             <textarea
                                 required
                                 rows={4}
                                 className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                placeholder={isSelf ? "Tell us why you deserve to win..." : "Tell us why this person deserves to win..."}
+                                placeholder={isSelf ? t('form.fields.reasonPlaceholderSelf') : t('form.fields.reasonPlaceholderOther')}
                                 value={formData.description}
                                 onChange={e => setFormData({ ...formData, description: e.target.value })}
                             ></textarea>
@@ -321,12 +329,12 @@ export default function NominationForm() {
                         {/* Nominator Email (Hidden if Self) */}
                         {!isSelf && (
                             <div>
-                                <label className="block text-sm font-bold mb-2 text-gray-700">Your Email (Required for submission)</label>
+                                <label className="block text-sm font-bold mb-2 text-gray-700">{t('form.fields.nominatorEmail')}</label>
                                 <input
                                     required
                                     type="email"
                                     className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                    placeholder="So we can contact you if they win"
+                                    placeholder={t('form.fields.nominatorEmailPlaceholder')}
                                     value={formData.email}
                                     onChange={e => setFormData({ ...formData, email: e.target.value })}
                                 />
@@ -351,7 +359,7 @@ export default function NominationForm() {
                                 />
                                 <label htmlFor="industryCheckbox" className="text-sm font-medium text-gray-700 cursor-pointer flex items-center gap-2">
                                     <Briefcase size={16} className="text-[#1d5eed]" />
-                                    I am currently working in the home care industry.
+                                    {t('form.fields.industryCheckbox')}
                                 </label>
                             </div>
                         )}
@@ -360,36 +368,36 @@ export default function NominationForm() {
                         {!isSelf && formData.isHomeCare && (
                             <>
                                 <div>
-                                    <label className="block text-sm font-bold mb-2 text-gray-700">Your Name</label>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">{t('form.fields.nominatorName')}</label>
                                     <input
                                         required
                                         type="text"
                                         className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                        placeholder="e.g. Jane Doe"
+                                        placeholder={t('form.placeholders.name')}
                                         value={formData.name}
                                         onChange={e => setFormData({ ...formData, name: e.target.value })}
                                     />
                                 </div>
                                 
                                 <div>
-                                    <label className="block text-sm font-bold mb-2 text-gray-700">Your Organization</label>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">{t('form.fields.nominatorOrganization')}</label>
                                     <input
                                         required
                                         type="text"
                                         className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                        placeholder="e.g. ABC Home Care"
+                                        placeholder={t('form.placeholders.organization')}
                                         value={formData.nominatorOrganization}
                                         onChange={e => setFormData({ ...formData, nominatorOrganization: e.target.value })}
                                     />
                                 </div>
                                 
                                 <div>
-                                    <label className="block text-sm font-bold mb-2 text-gray-700">Your Job Title</label>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">{t('form.fields.nominatorJobTitle')}</label>
                                     <input
                                         required
                                         type="text"
                                         className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                        placeholder="e.g. Caregiver, Registered Nurse, etc."
+                                        placeholder={t('form.placeholders.jobTitle')}
                                         value={formData.nominatorJobTitle}
                                         onChange={e => setFormData({ ...formData, nominatorJobTitle: e.target.value })}
                                     />
@@ -405,10 +413,10 @@ export default function NominationForm() {
                         >
                             {isSubmitting ? (
                                 <>
-                                    <Loader2 className="animate-spin" size={20} /> Submitting...
+                                    <Loader2 className="animate-spin" size={20} /> {t('form.submitting')}
                                 </>
                             ) : (
-                                "Submit Nomination"
+                                t('form.submit')
                             )}
                         </button>
 

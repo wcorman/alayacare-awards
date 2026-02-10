@@ -39,7 +39,7 @@ export default async function Home() {
           <source src="/video/hero.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-br from-[#15265d] to-[#113cca] opacity-60 z-10"></div>
-        <div className="relative z-20 max-w-4xl mx-auto">
+        <div className="relative z-20 max-w-[970px] mx-auto">
           <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-[#1D5EED] mb-6 inline-block">
             {t('hero.badge')}
           </span>

@@ -1,10 +1,10 @@
 {
   "Home": {
     "hero": {
-      "badge": "Prix Momentum des soins à domicile",
-      "title": "Célébrons les <people>personnes</people> au cœur des soins à domicile",
-      "subtitle": "Proposez des candidatures, votez et contribuez à reconnaître les personnes qui transforment les soins à domicile à travers les rôles, les régions et les organisations.",
-      "cta": "Nommer un leader du soin"
+      "badge": "Prix Momentum des soins à domicile 2026",
+      "title": "Célébrons les <people>personnes</people> qui propulsent des soins à domicile exceptionnels partout en Amérique du Nord",
+      "subtitle": "Les Prix Momentum des soins à domicile reconnaissent des personnes exceptionnelles qui font progresser les soins à domicile chaque jour — de la première ligne aux opérations, et du siège social aux innovateurs visionnaires.",
+      "cta": "Proposer un agent de changement"
     },
     "categories": {
       "title": "Catégories de prix",
@@ -26,13 +26,14 @@
       }
     },
     "mission": {
-      "eyebrow": "Notre mission",
+      "eyebrow": "POURQUOI PARTICIPER?",
       "title": "Célébrer l’excellence",
-      "description": "Chez AlayaCare, nous croyons que la technologie n’est aussi bonne que les personnes qui l’utilisent. Ces prix célèbrent la dimension humaine, les visites tardives, l’écoute bienveillante et la résolution de problèmes innovante qui définissent des soins à domicile exceptionnels.",
+      "description": "Chez AlayaCare, nous croyons que la technologie n’est aussi puissante que les agents de changement qui l’utilisent. Les Prix Momentum des soins à domicile célèbrent la dimension humaine de l’innovation — les visites tard le soir, les gestes silencieux de défense des intérêts et la résolution de problèmes au quotidien qui font avancer les soins à domicile. En participant, vous contribuez à :",
       "items": [
-        "Mettre en valeur un dévouement remarquable",
-        "Partager des histoires de soins inspirantes",
-        "Bâtir une communauté de soins plus forte"
+        "Mettre en lumière des héros souvent méconnus : Offrir aux soignants de première ligne, champions opérationnels et dirigeants la reconnaissance qu’ils méritent — non seulement au sein de votre organisation, mais dans tout le secteur.",
+        "Partager des histoires qui inspirent un véritable changement : Transformer des moments forts de soins en récits dont d’autres peuvent s’inspirer, afin d’élever la barre de ce à quoi ressemblent des soins à domicile exemplaires.",
+        "Donner de l’élan à votre organisation et à vos équipes : Renforcer la fierté, l’engagement et le moral en célébrant des contributions qui améliorent les résultats, optimisent les opérations et transforment l’expérience des clients comme du personnel.",
+        "Positionner votre organisation comme un leader des soins : Montrer aux clients, familles, employés et partenaires que vous prenez au sérieux l’avenir des soins à domicile."
       ]
     },
     "audiences": {
@@ -40,9 +41,311 @@
       "schedulers": "Planificateurs",
       "it": "Équipe TI",
       "managers": "Gestionnaires"
+    },
+    "timeline": {
+      "eyebrow": "DATES CLÉS ET ÉTAPES",
+      "title": "Restez informé des grands moments des Prix Momentum des soins à domicile",
+      "items": [
+        {
+          "title": "Ouverture des mises en candidature",
+          "date": "17 février – 13 avril 2026",
+          "description": "C’est votre période pour proposer des agents de changement."
+        },
+        {
+          "title": "Vote du public",
+          "date": "1 mai – 1 juin 2026",
+          "description": "La communauté élargie des soins à domicile et au‑delà fait entendre sa voix."
+        },
+        {
+          "title": "Évaluation par le jury",
+          "date": "8 juin – 22 juin 2026",
+          "description": "Un panel d’experts du secteur examine les candidatures, les résultats du vote et met en lumière les endroits où l’élan est le plus fort."
+        },
+        {
+          "title": "Annonce des lauréats",
+          "date": "20 juillet 2026",
+          "description": "Les agents de changement les plus remarquables de l’année sont révélés."
+        }
+      ]
     }
   },
   "NomineeCard": {
     "viewNominee": "Voir la candidature"
+  },
+  "Eligibility": {
+    "hero": {
+      "title": "Détails d'admissibilité",
+      "subtitle": "Les Prix Momentum des soins à domicile reconnaissent des personnes exceptionnelles qui font progresser les soins à domicile chaque jour — de la première ligne aux opérations, et du siège social aux innovateurs visionnaires.",
+      "note": "Toutes les catégories partagent la même admissibilité au niveau organisationnel, puis ont une admissibilité individuelle par catégorie."
+    },
+    "organizationLevel": {
+      "title": "Admissibilité au niveau organisationnel (toutes les catégories)",
+      "intro": "Pour être admissible, les candidats doivent :",
+      "employment": "Être actuellement employé (à temps plein, à temps partiel ou en contrat) par une organisation de soins à domicile qui offre un ou plusieurs des services suivants :",
+      "services": {
+        "homeCare": "Soins à domicile",
+        "homeHealth": "Santé à domicile",
+        "homeInfusion": "Perfusion à domicile",
+        "hospice": "Soins palliatifs",
+        "communityCare": "Soins communautaires",
+        "adjacentServices": "Services adjacents ou de soutien dans le cadre des soins à domicile"
+      },
+      "setting": "Offrir des services dans un contexte de soins à domicile ou communautaires (et non exclusivement en établissement).",
+      "additionalNotes": {
+        "title": "Notes supplémentaires",
+        "nominations": "Les candidatures peuvent provenir de collègues, superviseurs, subordonnés directs ou être des auto-candidatures, conformément au processus de soumission du programme de prix.",
+        "oneCategory": "Chaque personne peut être proposée dans une catégorie principale qui reflète le mieux son rôle et son impact.",
+        "multipleNominations": "Les organisations peuvent soumettre plusieurs candidatures dans différentes catégories.",
+        "discretion": "L'admissibilité finale et le placement dans une catégorie sont à la discrétion du comité des prix, en fonction des informations fournies dans la candidature."
+      }
+    },
+    "categoryLevel": {
+      "title": "Admissibilité par catégorie",
+      "intro": "Chaque catégorie a des exigences d'admissibilité spécifiques. Consultez les détails ci-dessous pour déterminer la meilleure catégorie pour votre candidature.",
+      "nomineesShould": "Les candidats doivent :",
+      "meetOrganizationLevel": "Répondre aux critères d'admissibilité au niveau organisationnel décrits ci-dessus.",
+      "categories": {
+        "frontline": {
+          "name": "Agents de changement en soins de première ligne",
+          "description": "Cette catégorie célèbre les soignants qui offrent des soins et un soutien directs à domicile ou dans la communauté.",
+          "requirements": {
+            "role": "Travailler dans un rôle de soins directs / orienté client, tel que :",
+            "roles": [
+              "Travailleur de soutien personnel (TSP), Aide à domicile en santé (ADS), Travailleur de soutien à domicile (TSD), Aide-soignant, Compagnon ou similaire",
+              "Infirmière autorisée (IA), Infirmière auxiliaire autorisée/infirmière auxiliaire inscrite (IAA/IAI), Infirmière praticienne (IP)",
+              "Professionnels de la santé connexes offrant des soins à domicile (p. ex., physiothérapeute, ergothérapeute, orthophoniste, travailleur social, inhalothérapeute)"
+            ],
+            "provide": "Offrir des soins pratiques, un soutien ou des services cliniques dans les foyers des clients ou les milieux communautaires.",
+            "demonstrate": "Faire preuve d'une compassion exceptionnelle, de fiabilité et de soins centrés sur le client, en dépassant les attentes typiques.",
+            "impact": "Avoir un impact positif sur les résultats, la sécurité, l'expérience ou la qualité de vie des clients grâce à leur travail quotidien."
+          }
+        },
+        "operational": {
+          "name": "Agents de changement en excellence opérationnelle",
+          "description": "Cette catégorie reconnaît les champions dans l'ombre dont le travail maintient les soins à domicile fonctionnant de manière fluide, efficace et sécuritaire.",
+          "requirements": {
+            "champion": "Défendre la collaboration entre les équipes pour résoudre les défis opérationnels et maintenir l'élan.",
+            "role": "Travailler dans un rôle axé sur les opérations, non en première ligne, tel que :",
+            "roles": [
+              "Planificateur, Coordonnateur de services, Coordonnateur d'admission, Représentant des services à la clientèle",
+              "Spécialiste des opérations, de la qualité ou de l'amélioration du rendement",
+              "Professionnel des RH, des finances, de la facturation ou de la paie axé sur les soins à domicile",
+              "Spécialiste TI, Administrateur de systèmes, Analyste de données/rapports ou similaire"
+            ],
+            "playRole": "Jouer un rôle clé dans le soutien aux soignants, aux clients et aux opérations sur le terrain (p. ex., planification, optimisation de la capacité, conception des flux de travail, intégrité de la facturation, conformité).",
+            "demonstrate": "Démontrer des contributions mesurables à :",
+            "contributions": [
+              "L'amélioration des processus ou les gains d'efficacité",
+              "La prise de décisions fondée sur les données",
+              "La qualité, la sécurité ou la conformité",
+              "L'expérience des employés ou des clients"
+            ]
+          }
+        },
+        "executive": {
+          "name": "Agents de changement en leadership de la direction",
+          "description": "Cette catégorie honore les dirigeants seniors qui façonnent l'avenir des soins à domicile grâce à une vision stratégique, la construction d'une culture et une prise de décision audacieuse.",
+          "requirements": {
+            "trackRecord": "Un historique d'établissement d'une orientation stratégique qui génère un élan soutenu pour leur organisation et le secteur au sens large.",
+            "role": "Occuper un rôle de leadership senior dans une organisation de soins à domicile, généralement au niveau VP ou supérieur, tel que :",
+            "roles": [
+              "Vice-président",
+              "Vice-président senior",
+              "Vice-président exécutif",
+              "Directeur général (DG), Directeur des opérations (DO), Directeur clinique (DC), Directeur des soins infirmiers (DSI), Directeur de la technologie (DT), Directeur de la stratégie (DS) ou équivalent",
+              "Président, Fondateur ou Co-fondateur"
+            ],
+            "responsibility": "Avoir une responsabilité directe ou partagée pour la stratégie organisationnelle, la croissance, la qualité ou l'innovation dans les services de soins à domicile.",
+            "demonstrate": "Démontrer :",
+            "demonstrations": [
+              "Un leadership visionnaire dans l'expansion ou l'amélioration des soins à domicile",
+              "Un engagement clair envers la qualité des soins, la sécurité et l'équité",
+              "Un investissement dans les personnes et la culture (p. ex., soutien du personnel, habilitation des équipes avec des outils et de la formation, promotion de l'engagement)",
+              "Un impact tangible sur la performance organisationnelle, les résultats des clients ou la portée communautaire"
+            ]
+          }
+        },
+        "impact": {
+          "name": "Agents de changement en impact et innovation",
+          "description": "Cette catégorie reconnaît les pionniers à tout niveau ou fonction qui stimulent un changement significatif, testent de nouvelles idées ou redéfinissent ce qui est possible dans les soins à domicile.",
+          "requirements": {
+            "embody": "Incarner l'esprit d'un agent de changement en transformant les idées en action, et l'action en élan durable.",
+            "role": "Travailler dans tout rôle ou niveau (première ligne, opérationnel, clinique, technique ou leadership) au sein d'une organisation de soins à domicile admissible.",
+            "leading": "Diriger ou contribuer de manière significative à des initiatives uniques à fort impact, par exemple :",
+            "initiatives": [
+              "Mettre en œuvre de nouveaux modèles de soins (p. ex., soins hybrides virtuels/en personne, programmes spécialisés pour les populations complexes)",
+              "Tester ou mettre à l'échelle des technologies innovantes ou des approches fondées sur les données qui améliorent l'expérience des clients ou du personnel",
+              "Concevoir de nouveaux flux de travail, partenariats ou programmes communautaires qui augmentent l'accès aux soins",
+              "Faire progresser l'équité, l'inclusion ou les soins culturellement compétents dans les milieux à domicile et communautaires",
+              "Défendre la durabilité ou les meilleures pratiques évolutives dont d'autres dans l'industrie peuvent s'inspirer"
+            ],
+            "show": "Montrer un impact clair et démontrable sur :",
+            "impacts": [
+              "Les résultats ou l'expérience des clients",
+              "L'expérience, la satisfaction ou la rétention du personnel",
+              "La performance ou la qualité opérationnelle",
+              "L'industrie élargie des soins à domicile (p. ex., leadership d'opinion, défense des intérêts, partage de connaissances)"
+            ]
+          }
+        }
+      }
+    },
+    "contact": {
+      "title": "Vous avez des questions sur les critères d'admissibilité ou sur la catégorie qui convient le mieux?",
+      "text": "Veuillez envoyer un courriel à",
+      "email": "awards@alayacare.com",
+      "textAfter": "et un membre du comité des prix sera heureux de vous aider.",
+      "cta": "Prêt à proposer une candidature?"
+    }
+  },
+  "Footer": {
+    "tagline": "Célébrer l'élan derrière des soins à domicile exceptionnels.",
+    "poweredBy": "Propulsé par"
+  },
+  "NominationForm": {
+    "backToHome": "Retour à l'accueil",
+    "backToSelection": "Retour à la sélection",
+    "typeSelection": {
+      "title": "Qui proposez-vous?",
+      "description": "Vous pouvez vous proposer pour vos propres réalisations, ou reconnaître un collègue qui a fait preuve d'excellence.",
+      "myself": {
+        "title": "Moi-même",
+        "description": "Je suis un leader des soins et je veux partager ma propre histoire d'excellence.",
+        "continue": "Continuer"
+      },
+      "someoneElse": {
+        "title": "Quelqu'un d'autre",
+        "description": "Je veux proposer un collègue, un employé ou un ami pour son travail remarquable.",
+        "continue": "Continuer"
+      }
+    },
+    "form": {
+      "selfTitle": "Racontez-nous votre histoire",
+      "otherTitle": "Proposer un leader des soins",
+      "selfSubtitle": "Vous faites un travail remarquable. Aidez-nous à le reconnaître.",
+      "otherSubtitle": "Mettez en lumière quelqu'un qui fait une différence.",
+      "fields": {
+        "nomineeName": "Nom du candidat",
+        "yourName": "Votre nom",
+        "nomineeEmail": "Courriel du candidat",
+        "yourEmail": "Votre courriel",
+        "emailNotification": "Nous l'utiliserons pour aviser {who} si {who2} gagne.",
+        "emailNotificationSelf": "Nous l'utiliserons pour vous aviser si vous gagnez.",
+        "emailNotificationOther": "Nous l'utiliserons pour les aviser s'ils gagnent.",
+        "you": "vous",
+        "them": "eux",
+        "they": "ils",
+        "nomineeOrganization": "Organisation du candidat",
+        "organization": "Organisation",
+        "nomineeJobTitle": "Titre d'emploi du candidat",
+        "jobTitle": "Titre d'emploi",
+        "nomineePhoto": "Photo de profil du candidat (facultatif)",
+        "yourPhoto": "Votre photo de profil (facultatif)",
+        "awardCategory": "Catégorie de prix",
+        "reasonForNomination": "Raison de la candidature",
+        "reasonPlaceholderSelf": "Dites-nous pourquoi vous méritez de gagner...",
+        "reasonPlaceholderOther": "Dites-nous pourquoi cette personne mérite de gagner...",
+        "nominatorEmail": "Votre courriel (requis pour la soumission)",
+        "nominatorEmailPlaceholder": "Pour que nous puissions vous contacter s'ils gagnent",
+        "industryCheckbox": "Je travaille actuellement dans l'industrie des soins à domicile.",
+        "nominatorName": "Votre nom",
+        "nominatorOrganization": "Votre organisation",
+        "nominatorJobTitle": "Votre titre d'emploi"
+      },
+      "placeholders": {
+        "name": "p. ex. Jean Dupont",
+        "email": "p. ex. jean.dupont@fournisseurdesoins.com",
+        "organization": "p. ex. Soins à domicile ABC",
+        "jobTitle": "p. ex. Soignant, Infirmière autorisée, etc."
+      },
+      "submit": "Soumettre la candidature",
+      "submitting": "Soumission en cours..."
+    },
+    "success": {
+      "homeCareTitle": "Candidature soumise!",
+      "otherTitle": "Merci pour votre candidature!",
+      "message": "Nous examinerons votre soumission sous peu.",
+      "voteForOthers": "Voter pour d'autres",
+      "returnHome": "Retour à l'accueil"
+    },
+    "errors": {
+      "duplicate": "Cette personne a déjà été proposée. Merci pour votre enthousiasme.",
+      "generic": "Une erreur s'est produite. Veuillez réessayer.",
+      "network": "Erreur réseau. Veuillez réessayer."
+    }
+  },
+  "VotePage": {
+    "title": "Voter pour l'excellence",
+    "subtitle": "Reconnaissez des personnes exceptionnelles qui transforment les soins à domicile en votant.",
+    "searchPlaceholder": "Rechercher des candidats...",
+    "filterByCategory": "Filtrer par catégorie :",
+    "allCategories": "Toutes les catégories",
+    "showingResults": "Affichage de {count} {nominee} dans",
+    "nominee": "candidat",
+    "nominees": "candidats",
+    "noResults": {
+      "title": "Aucun candidat correspondant trouvé.",
+      "subtitle": "Essayez un nom ou un terme de recherche différent."
+    },
+    "errors": {
+      "alreadyVoted": "Vous avez déjà voté pour ce candidat.",
+      "generic": "Une erreur s'est produite. Veuillez réessayer.",
+      "network": "Erreur réseau. Veuillez réessayer."
+    }
+  },
+  "VoteModal": {
+    "confirmVote": "Confirmer votre vote",
+    "votingFor": "Vous votez pour {name}.",
+    "enterEmail": "Veuillez entrer votre courriel pour vérifier votre vote.",
+    "verificationRequired": "Vérification requise",
+    "thankYou": "Merci d'avoir voté pour {name}. Veuillez vérifier votre boîte de réception pour finaliser votre soumission. Votre vote est en attente de confirmation.",
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "submitVote": "Soumettre le vote",
+    "verifying": "Vérification en cours...",
+    "fields": {
+      "email": "Votre adresse courriel",
+      "emailPlaceholder": "p. ex. nom@entreprise.com",
+      "industryCheckbox": "Je travaille actuellement dans l'industrie des soins à domicile.",
+      "name": "Nom",
+      "namePlaceholder": "p. ex. Jean Dupont",
+      "organization": "Organisation",
+      "organizationPlaceholder": "p. ex. Soins à domicile ABC",
+      "jobTitle": "Titre d'emploi",
+      "jobTitlePlaceholder": "p. ex. Soignant, Infirmière autorisée, etc."
+    }
+  },
+  "NomineeCard": {
+    "viewNominee": "Voir la candidature",
+    "vote": "Voter",
+    "voted": "Voté",
+    "votes": "Votes"
+  },
+  "NomineePage": {
+    "voteFor": "Voter pour {name}"
+  },
+  "NomineeProfile": {
+    "backToAllNominees": "Retour à tous les candidats",
+    "votes": "Votes",
+    "category": "Catégorie",
+    "nominationStory": "Histoire de la candidature",
+    "viewAllNominees": "Voir tous les candidats",
+    "nominateSomeone": "Proposer quelqu'un"
+  },
+  "Navbar": {
+    "logo": {
+      "title": "Les soins à domicile",
+      "subtitle": "Prix Momentum"
+    },
+    "home": "Accueil",
+    "eligibility": "Admissibilité",
+    "nominate": "Proposer",
+    "voteNow": "Voter maintenant",
+    "languageSwitcher": {
+      "french": "Français",
+      "english": "English",
+      "switchToFrench": "Changer la langue en français",
+      "switchToEnglish": "Switch language to English"
+    }
   }
 }

@@ -1,14 +1,19 @@
+"use client";
+
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
+    const t = useTranslations('Footer');
+    
     return (
         <footer className="bg-white border-t border-gray-200 py-6 mt-auto">
             <div className="max-w-7xl mx-auto px-6 text-center">
                 <p className="text-gray-600 mb-2">
-                    Celebrating the momentum behind exceptional home-based care.
+                    {t('tagline')}
                 </p>
                 <p className="text-gray-600 text-sm">
-                    Powered by{' '}
+                    {t('poweredBy')}{' '}
                     <Link 
                         href="https://alayacare.com" 
                         target="_blank" 
