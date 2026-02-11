@@ -340,6 +340,7 @@
     },
     "home": "Home",
     "eligibility": "Eligibility",
+    "results": "Results",
     "nominate": "Nominate",
     "voteNow": "Nominate Now",
     "languageSwitcher": {
@@ -348,6 +349,16 @@
       "switchToFrench": "Switch language to French",
       "switchToEnglish": "Switch language to English"
     }
+  },
+  "Results": {
+    "title": "Award Results",
+    "subtitle": "Top 3 nominees by category based on community votes. Final winners are determined by the judging panel.",
+    "noWinners": "No nominees yet",
+    "noWinnersSubtitle": "Nominations and voting will determine the top changemakers in this category.",
+    "noResults": "No results yet",
+    "noResultsSubtitle": "Once nominations and voting are complete, winners will appear here.",
+    "vote": "vote",
+    "votes": "votes"
   },
   "VoteConfirmationPopup": {
     "close": "Close",

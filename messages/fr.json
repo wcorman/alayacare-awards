@@ -340,6 +340,7 @@
     },
     "home": "Accueil",
     "eligibility": "Admissibilité",
+    "results": "Résultats",
     "nominate": "Proposer",
     "voteNow": "Proposer maintenant",
     "languageSwitcher": {
@@ -348,6 +349,16 @@
       "switchToFrench": "Changer la langue en français",
       "switchToEnglish": "Switch language to English"
     }
+  },
+  "Results": {
+    "title": "Résultats des prix",
+    "subtitle": "Top 3 des candidats par catégorie selon les votes de la communauté. Les lauréats finaux sont déterminés par le jury.",
+    "noWinners": "Aucun candidat pour le moment",
+    "noWinnersSubtitle": "Les candidatures et le vote détermineront les meilleurs agents de changement dans cette catégorie.",
+    "noResults": "Aucun résultat pour le moment",
+    "noResultsSubtitle": "Une fois les candidatures et le vote terminés, les lauréats apparaîtront ici.",
+    "vote": "vote",
+    "votes": "votes"
   },
   "VoteConfirmationPopup": {
     "close": "Fermer",
