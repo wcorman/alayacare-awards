@@ -101,7 +101,7 @@ export default async function Home() {
       </section>
 
       {/* Celebrating Excellence Section */}
-      <section className="py-24 px-6 lg:px-12 bg-white">
+      <section id="why-participate" className="py-24 px-6 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             {/* Left Content */}
@@ -148,7 +148,7 @@ export default async function Home() {
       </section>
 
       {/* Key Dates and Milestones Section */}
-      <section className="py-24 px-6 lg:px-12 bg-[#f6f8ff]">
+      <section id="key-dates" className="py-24 px-6 lg:px-12 bg-[#f6f8ff]">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-[#1D5EED] mb-6 inline-block">
