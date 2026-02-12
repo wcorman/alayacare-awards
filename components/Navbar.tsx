@@ -56,7 +56,7 @@ export default function Navbar() {
                             document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000; samesite=lax`;
                             router.refresh();
                         }}
-                        className="py-2 px-3 text-sm font-semibold rounded-md border border-[#08193e] text-[#08193e] hover:text-[#1D5EED] hover:border-[#1D5EED] transition-colors"
+                        className="py-2 px-3 text-sm font-normal rounded-md border border-[#08193e] text-[#08193e] hover:text-[#1D5EED] hover:border-[#1D5EED] transition-colors"
                         aria-label={nextLocale === 'fr' ? t('languageSwitcher.switchToFrench') : t('languageSwitcher.switchToEnglish')}
                     >
                         {nextLocale === 'fr' ? t('languageSwitcher.french') : t('languageSwitcher.english')}
@@ -98,7 +98,7 @@ export default function Navbar() {
                             router.refresh();
                             setMobileMenuOpen(false);
                         }}
-                        className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e]"
+                        className="p-4 text-left font-normal border-b hover:bg-gray-50 text-[#08193e]"
                         aria-label={nextLocale === 'fr' ? t('languageSwitcher.switchToFrench') : t('languageSwitcher.switchToEnglish')}
                     >
                         {nextLocale === 'fr' ? t('languageSwitcher.french') : t('languageSwitcher.english')}
