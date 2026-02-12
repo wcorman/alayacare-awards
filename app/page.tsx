@@ -45,7 +45,7 @@ export default async function Home() {
           </span>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             {t.rich('hero.title', {
-              people: (chunks) => <span style={{ color: '#1D5EED' }}>{chunks}</span>,
+              people: (chunks) => <span style={{ color: '#5FEAE6' }}>{chunks}</span>,
             })}
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
