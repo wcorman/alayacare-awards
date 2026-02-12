@@ -38,7 +38,7 @@ function getTopThreeByCategory(nominees: Nominee[]): Record<string, Nominee[]> {
   return result;
 }
 
-function PrizeBadge({ rank }: { rank: number }) {
+function PrizeBadge({ rank }: { rank: 1 | 2 | 3 }) {
   const config = {
     1: { bg: "bg-amber-400", icon: Trophy, label: "1st" },
     2: { bg: "bg-slate-300", icon: Medal, label: "2nd" },
@@ -62,7 +62,7 @@ function PodiumCard({
   index,
 }: {
   nominee: Nominee;
-  rank: number;
+  rank: 1 | 2 | 3;
   categoryColor: string;
   index: number;
 }) {
