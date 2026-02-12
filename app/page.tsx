@@ -191,8 +191,51 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* About the awards */}
+      <section className="py-24 px-6 lg:px-12 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold mb-8 text-[#08193e]">{t('aboutAwards.title')}</h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            {t('aboutAwards.intro1')}
+          </p>
+          <p className="text-gray-700 text-lg leading-relaxed mb-12">
+            {t('aboutAwards.intro2')}
+          </p>
+          <h3 className="text-xl font-bold mb-4 text-[#08193e] flex flex-wrap items-center gap-2">
+            {t('aboutAwards.poweredByPrefix')}
+            <Image
+              src="/AlayaCare-logo.svg"
+              alt="AlayaCare"
+              width={96}
+              height={30}
+              className="inline-block object-contain mb-[6px]"
+            />
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            {t.rich('aboutAwards.poweredBy1', {
+              link: (chunks) => (
+                <a
+                  href="https://alayacare.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#1D5EED] hover:underline"
+                >
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            {t('aboutAwards.poweredBy2')}
+          </p>
+          <p className="text-gray-700 leading-relaxed">
+            {t('aboutAwards.poweredBy3')}
+          </p>
+        </div>
+      </section>
+
       {/* Footer Logo Section */}
-      <section className="pt-3 pb-[70px] px-6 lg:px-12 bg-[#f6f8ff]">
+      <section className="pt-3 pb-[70px] px-6 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto flex justify-center">
           <Image
             src="/logo-blue.png"

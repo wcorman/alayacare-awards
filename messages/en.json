@@ -67,6 +67,15 @@
           "description": "The year’s standout changemakers are revealed."
         }
       ]
+    },
+    "aboutAwards": {
+      "title": "About the awards",
+      "intro1": "The Home-Based Care Momentum Awards, presented by AlayaCare, recognize the individuals driving meaningful impact across home-based care in North America.",
+      "intro2": "From frontline caregivers to operational leaders, executives, and innovators, this program celebrates the people behind better outcomes, stronger teams, and smarter systems.",
+      "poweredByPrefix": "Powered by ",
+      "poweredBy1": "<link>AlayaCare</link> is a global technology platform purpose-built for home and community-based care. We partner with care organizations to improve outcomes and strengthen the caregiver experience.",
+      "poweredBy2": "The Momentum Awards are open to individuals employed by eligible home-based care organizations delivering services in home or community settings, including home care, home health, hospice, home infusion, and related services.",
+      "poweredBy3": "This is more than recognition. It's a platform to spotlight the people shaping the future of home-based care, and to build momentum that lifts the entire industry."
     }
   },
   "NomineeCard": {
@@ -252,7 +261,7 @@
         "reasonPlaceholderOther": "Tell us why this person deserves to win...",
         "nominatorEmail": "Your email (required for submission)",
         "nominatorEmailPlaceholder": "So we can contact you if they win",
-        "industryCheckbox": "I am currently working in the home care industry.",
+        "industryCheckbox": "I am currently working in the home-based care sector.",
         "nominatorName": "Your name",
         "nominatorOrganization": "Your organization",
         "nominatorJobTitle": "Your job title",
@@ -269,7 +278,7 @@
         "name": "e.g. Jane Doe",
         "email": "e.g. jane.doe@careprovider.com",
         "organization": "e.g. ABC Home Care",
-        "jobTitle": "e.g. Caregiver, Registered Nurse, etc."
+        "jobTitle": "e.g. Caregiver, Scheduler, etc."
       },
       "submit": "Submit Nomination",
       "submitting": "Submitting..."
@@ -319,13 +328,13 @@
     "fields": {
       "email": "Your email address",
       "emailPlaceholder": "e.g. name@company.com",
-      "industryCheckbox": "I am currently working in the home care industry.",
+      "industryCheckbox": "I am currently working in the home-based care sector.",
       "name": "Name",
       "namePlaceholder": "e.g. Jane Doe",
       "organization": "Organization",
       "organizationPlaceholder": "e.g. ABC Home Care",
       "jobTitle": "Job title",
-      "jobTitlePlaceholder": "e.g. Caregiver, Registered Nurse, etc."
+      "jobTitlePlaceholder": "e.g. Caregiver, Scheduler, etc."
     }
   },
   "NomineeCard": {
