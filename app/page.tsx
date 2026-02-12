@@ -25,7 +25,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-[#fcfcfc] text-slate-800">
       {/* Hero Section */}
-      <section className="relative text-white py-20 px-6 lg:px-12 flex flex-col items-center text-center overflow-hidden">
+      <section className="relative text-white py-[100px] px-6 lg:px-12 flex flex-col items-center text-center overflow-hidden">
         <video
           className="absolute inset-0 w-full h-full object-cover z-0"
           autoPlay
@@ -40,15 +40,21 @@ export default async function Home() {
         </video>
         <div className="absolute inset-0 bg-gradient-to-br from-[#15265d] to-[#113cca] opacity-60 z-10"></div>
         <div className="relative z-20 max-w-[970px] mx-auto">
-          <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-[#1D5EED] mb-6 inline-block">
-            {t('hero.badge')}
-          </span>
+          <div className="mb-6 flex justify-center">
+            <Image
+              src="/logo-white.png"
+              alt="AlayaCare"
+              width={320}
+              height={60}
+              className="object-contain"
+            />
+          </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             {t.rich('hero.title', {
               people: (chunks) => <span style={{ color: '#5FEAE6' }}>{chunks}</span>,
             })}
           </h1>
-          <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
+          <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-[730px] mx-auto font-light">
             {t('hero.subtitle')}
           </p>
 
