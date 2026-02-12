@@ -34,7 +34,8 @@ export default function NominationForm() {
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     const [formData, setFormData] = useState({
-        nomineeName: '',
+        nomineeFirstName: '',
+        nomineeLastName: '',
         nomineeEmail: '',
         category: 'Frontline Care',
         description: '',
@@ -68,7 +69,8 @@ export default function NominationForm() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     nominatorEmail,
-                    nomineeName: formData.nomineeName,
+                    nomineeFirstName: formData.nomineeFirstName,
+                    nomineeLastName: formData.nomineeLastName,
                     nomineeEmail: formData.nomineeEmail,
                     description: formData.description,
                     category: formData.category,
@@ -173,7 +175,7 @@ export default function NominationForm() {
                         {t('success.message')}
                     </p>
                     <div className="space-y-3">
-                        <button onClick={() => router.push('/')} className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA]">
+                        <button onClick={() => window.location.href = '/nominate'} className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA]">
                             {t('success.voteForOthers')}
                         </button>
                         <button onClick={() => router.push('/')} className="w-full px-6 py-3 rounded-md font-semibold bg-white text-[#08193e] border border-gray-300 hover:bg-gray-50">
@@ -203,19 +205,34 @@ export default function NominationForm() {
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        {/* Name */}
-                        <div>
-                            <label className="block text-sm font-bold mb-2 text-gray-700">
-                                {isSelf ? t('form.fields.yourName') : t('form.fields.nomineeName')}
-                            </label>
-                            <input
-                                required
-                                type="text"
-                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                placeholder={t('form.placeholders.name')}
-                                value={formData.nomineeName}
-                                onChange={e => setFormData({ ...formData, nomineeName: e.target.value })}
-                            />
+                        {/* First Name and Last Name */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-bold mb-2 text-gray-700">
+                                    {isSelf ? t('form.fields.yourFirstName') : t('form.fields.nomineeFirstName')}
+                                </label>
+                                <input
+                                    required
+                                    type="text"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
+                                    placeholder={t('form.placeholders.firstName')}
+                                    value={formData.nomineeFirstName}
+                                    onChange={e => setFormData({ ...formData, nomineeFirstName: e.target.value })}
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-bold mb-2 text-gray-700">
+                                    {isSelf ? t('form.fields.yourLastName') : t('form.fields.nomineeLastName')}
+                                </label>
+                                <input
+                                    required
+                                    type="text"
+                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
+                                    placeholder={t('form.placeholders.lastName')}
+                                    value={formData.nomineeLastName}
+                                    onChange={e => setFormData({ ...formData, nomineeLastName: e.target.value })}
+                                />
+                            </div>
                         </div>
 
                         {/* Nominee Email */}
@@ -409,7 +426,7 @@ export default function NominationForm() {
                         <button
                             type="submit"
                             className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg"
-                            disabled={isSubmitting || (!formData.organization || !formData.jobTitle || (!isSelf && formData.isHomeCare && (!formData.name || !formData.nominatorOrganization || !formData.nominatorJobTitle)))}
+                            disabled={isSubmitting || (!formData.nomineeFirstName || !formData.nomineeLastName || !formData.organization || !formData.jobTitle || (!isSelf && formData.isHomeCare && (!formData.name || !formData.nominatorOrganization || !formData.nominatorJobTitle)))}
                         >
                             {isSubmitting ? (
                                 <>

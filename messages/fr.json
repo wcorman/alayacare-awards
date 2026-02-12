@@ -226,10 +226,14 @@
       "selfSubtitle": "Vous faites un travail remarquable. Aidez-nous à le reconnaître.",
       "otherSubtitle": "Mettez en lumière quelqu'un qui fait une différence.",
       "fields": {
+        "nomineeFirstName": "Prénom du candidat",
+        "nomineeLastName": "Nom de famille du candidat",
+        "yourFirstName": "Prénom",
+        "yourLastName": "Nom de famille",
         "nomineeName": "Nom du candidat",
         "yourName": "Votre nom",
         "nomineeEmail": "Courriel du candidat",
-        "yourEmail": "Votre courriel",
+        "yourEmail": "Courriel",
         "emailNotification": "Nous l'utiliserons pour aviser {who} si {who2} gagne.",
         "emailNotificationSelf": "Nous l'utiliserons pour vous aviser si vous gagnez.",
         "emailNotificationOther": "Nous l'utiliserons pour les aviser s'ils gagnent.",
@@ -254,6 +258,8 @@
         "nominatorJobTitle": "Votre titre d'emploi"
       },
       "placeholders": {
+        "firstName": "p. ex. Jean",
+        "lastName": "p. ex. Dupont",
         "name": "p. ex. Jean Dupont",
         "email": "p. ex. jean.dupont@fournisseurdesoins.com",
         "organization": "p. ex. Soins à domicile ABC",
@@ -266,7 +272,7 @@
       "homeCareTitle": "Candidature soumise!",
       "otherTitle": "Merci pour votre candidature!",
       "message": "Nous examinerons votre soumission sous peu.",
-      "voteForOthers": "Voter pour d'autres",
+      "voteForOthers": "Proposer quelqu'un d'autre",
       "returnHome": "Retour à l'accueil"
     },
     "errors": {

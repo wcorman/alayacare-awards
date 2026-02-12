@@ -13,6 +13,8 @@ const HEADERS = {
 export interface Nominee {
     id: string;
     name: string;
+    firstName?: string;
+    lastName?: string;
     category: string;
     votes: number;
     image: string | null;
@@ -37,16 +39,25 @@ export async function fetchNominations(): Promise<Nominee[]> {
 
     const data = await res.json();
 
-    return data.records.map((record: any) => ({
-        id: record.id,
-        name: record.fields["Name"] || "Unknown Name",
-        category: record.fields["Category"] || "Uncategorized",
-        votes: record.fields["Votes"] || 0,
-        image: record.fields["Profile Photo"]?.[0]?.url || null,
-        description: record.fields["Nomination Reason"] || "No description provided.",
-        organization: record.fields["Organization"] || null,
-        jobTitle: record.fields["Job Title"] || null,
-    }));
+    return data.records.map((record: any) => {
+        const firstName = record.fields["First Name"] || null;
+        const lastName = record.fields["Last Name"] || null;
+        const name = firstName && lastName
+            ? `${firstName} ${lastName}`.trim()
+            : record.fields["Name"] || "Unknown Name";
+        return {
+            id: record.id,
+            name,
+            firstName: firstName || undefined,
+            lastName: lastName || undefined,
+            category: record.fields["Category"] || "Uncategorized",
+            votes: record.fields["Votes"] || 0,
+            image: record.fields["Profile Photo"]?.[0]?.url || null,
+            description: record.fields["Nomination Reason"] || "No description provided.",
+            organization: record.fields["Company Name"] || null,
+            jobTitle: record.fields["Job Title"] || null,
+        };
+    });
 }
 
 export async function fetchNomineeById(id: string): Promise<Nominee | null> {
@@ -70,14 +81,22 @@ export async function fetchNomineeById(id: string): Promise<Nominee | null> {
         return null;
     }
 
+    const firstName = record.fields["First Name"] || null;
+    const lastName = record.fields["Last Name"] || null;
+    const name = firstName && lastName
+        ? `${firstName} ${lastName}`.trim()
+        : record.fields["Name"] || "Unknown Name";
+
     return {
         id: record.id,
-        name: record.fields["Name"] || "Unknown Name",
+        name,
+        firstName: firstName || undefined,
+        lastName: lastName || undefined,
         category: record.fields["Category"] || "Uncategorized",
         votes: record.fields["Votes"] || 0,
         image: record.fields["Profile Photo"]?.[0]?.url || null,
         description: record.fields["Nomination Reason"] || "No description provided.",
-        organization: record.fields["Organization"] || null,
+        organization: record.fields["Company Name"] || null,
         jobTitle: record.fields["Job Title"] || null,
     };
 }
@@ -256,7 +275,8 @@ export async function sendVoteRequestWebhook(email: string, nomineeData: {
 
 export async function submitNomination(data: {
     nominatorEmail: string;
-    nomineeName: string;
+    nomineeFirstName: string;
+    nomineeLastName: string;
     nomineeEmail: string;
     description: string;
     category: string;
@@ -270,9 +290,12 @@ export async function submitNomination(data: {
     const TABLE_NAME = "Nominations";
     const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`;
 
+    const fullName = `${data.nomineeFirstName} ${data.nomineeLastName}`.trim();
     const fields: any = {
         "Nominator Email": data.nominatorEmail,
-        "Name": data.nomineeName,
+        "First Name": data.nomineeFirstName.trim(),
+        "Last Name": data.nomineeLastName.trim(),
+        "Name": fullName,
         "Nominee Email": data.nomineeEmail,
         "Nomination Reason": data.description,
         "Category": data.category,
@@ -284,14 +307,14 @@ export async function submitNomination(data: {
         fields["Job Title"] = data.jobTitle.trim();
     }
     if (data.organization && data.organization.trim()) {
-        fields["Organization"] = data.organization.trim();
+        fields["Company Name"] = data.organization.trim();
     }
     // Note: Nominator Name, Organization, and Job Title are stored in the Contacts table, not here
 
     if (data.imageUrl) {
         fields["Profile Photo"] = [{
             url: data.imageUrl,
-            filename: `${data.nomineeName.replace(/\s+/g, '_')}_photo.png`
+            filename: `${fullName.replace(/\s+/g, '_')}_photo.png`
         }];
     }
 
@@ -357,7 +380,7 @@ export async function addContactToAirtable(data: {
             fields["Name"] = data.name.trim();
         }
         if (data.organization && data.organization.trim()) {
-            fields["Organization"] = data.organization.trim();
+            fields["Company Name"] = data.organization.trim();
         }
         if (data.jobTitle && data.jobTitle.trim()) {
             fields["Job Title"] = data.jobTitle.trim();
@@ -425,7 +448,7 @@ export async function addContactToAirtable(data: {
             updateFields["Name"] = data.name.trim();
         }
         if (data.organization && data.organization.trim()) {
-            updateFields["Organization"] = data.organization.trim();
+            updateFields["Company Name"] = data.organization.trim();
         }
         if (data.jobTitle && data.jobTitle.trim()) {
             updateFields["Job Title"] = data.jobTitle.trim();
@@ -463,7 +486,7 @@ export async function addContactToAirtable(data: {
             fields["Name"] = data.name.trim();
         }
         if (data.organization && data.organization.trim()) {
-            fields["Organization"] = data.organization.trim();
+            fields["Company Name"] = data.organization.trim();
         }
         if (data.jobTitle && data.jobTitle.trim()) {
             fields["Job Title"] = data.jobTitle.trim();

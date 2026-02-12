@@ -7,6 +7,17 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "The Home-Based Care Momentum Awards",
   description: "Recognize the unsung heroes of home care.",
+  openGraph: {
+    title: "The Home-Based Care Momentum Awards",
+    description: "Recognize the unsung heroes of home care.",
+    images: ["/awards-og-image.webp"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Home-Based Care Momentum Awards",
+    description: "Recognize the unsung heroes of home care.",
+    images: ["/awards-og-image.webp"],
+  },
 };
 
 import { Suspense } from "react";

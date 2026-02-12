@@ -6,7 +6,8 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         const {
             nominatorEmail,
-            nomineeName,
+            nomineeFirstName,
+            nomineeLastName,
             nomineeEmail,
             description,
             category,
@@ -19,7 +20,7 @@ export async function POST(request: NextRequest) {
             isHomeCare
         } = body;
 
-        if (!nomineeName || !nomineeEmail || !description || !category) {
+        if (!nomineeFirstName || !nomineeLastName || !nomineeEmail || !description || !category) {
             return NextResponse.json({ ok: false, reason: "missing_fields" }, { status: 400 });
         }
 
@@ -32,7 +33,8 @@ export async function POST(request: NextRequest) {
         // Submit to Airtable
         const nominationId = await submitNomination({
             nominatorEmail: nominatorEmail || nomineeEmail, // If self-nomination, use nominee email
-            nomineeName,
+            nomineeFirstName,
+            nomineeLastName,
             nomineeEmail,
             description,
             category,

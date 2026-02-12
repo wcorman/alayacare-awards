@@ -226,10 +226,14 @@
       "selfSubtitle": "You do amazing work. Help us recognize it.",
       "otherSubtitle": "Shine a light on someone who makes a difference.",
       "fields": {
+        "nomineeFirstName": "Nominee First Name",
+        "nomineeLastName": "Nominee Last Name",
+        "yourFirstName": "First Name",
+        "yourLastName": "Last Name",
         "nomineeName": "Nominee Name",
         "yourName": "Your Name",
         "nomineeEmail": "Nominee Email",
-        "yourEmail": "Your Email",
+        "yourEmail": "Email",
         "emailNotification": "We'll use this to notify {who} if {who2} win.",
         "emailNotificationSelf": "We'll use this to notify you if you win.",
         "emailNotificationOther": "We'll use this to notify them if they win.",
@@ -254,6 +258,8 @@
         "nominatorJobTitle": "Your Job Title"
       },
       "placeholders": {
+        "firstName": "e.g. Jane",
+        "lastName": "e.g. Doe",
         "name": "e.g. Jane Doe",
         "email": "e.g. jane.doe@careprovider.com",
         "organization": "e.g. ABC Home Care",
@@ -266,7 +272,7 @@
       "homeCareTitle": "Nomination Submitted!",
       "otherTitle": "Thank You for Your Nomination!",
       "message": "We'll review your submission shortly.",
-      "voteForOthers": "Vote for Others",
+      "voteForOthers": "Nominate Others",
       "returnHome": "Return Home"
     },
     "errors": {
