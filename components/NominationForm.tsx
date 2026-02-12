@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUploaderRegular } from '@uploadcare/react-uploader/next';
 import '@uploadcare/react-uploader/core.css';
-import { User, Users, ChevronRight, Upload, Check, Briefcase, AlertCircle, Loader2, UserPlus, Heart, Award, Sparkles } from 'lucide-react';
+import { User, Users, ChevronRight, Upload, Check, Briefcase, AlertCircle, Loader2, UserPlus, Heart, Award, Sparkles, FileText, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 const THEME = {
     colors: {
@@ -32,6 +33,7 @@ export default function NominationForm() {
     const [nominationType, setNominationType] = useState<'self' | 'other'>('other');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    const [showTermsConfirm, setShowTermsConfirm] = useState(false);
 
     const [formData, setFormData] = useState({
         nomineeFirstName: '',
@@ -47,6 +49,7 @@ export default function NominationForm() {
         nominatorJobTitle: '', // Nominator job title
         organization: '', // Nominee organization
         jobTitle: '', // Nominee job title
+        agreedToTerms: false,
     });
 
     const handleTypeSelect = (type: 'self' | 'other') => {
@@ -54,10 +57,20 @@ export default function NominationForm() {
         setStep('form');
     };
 
+    useEffect(() => {
+        if (!showTermsConfirm) return;
+        const onEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setShowTermsConfirm(false);
+        };
+        window.addEventListener('keydown', onEscape);
+        return () => window.removeEventListener('keydown', onEscape);
+    }, [showTermsConfirm]);
+
 
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!formData.agreedToTerms) return;
         setErrorMsg(null);
         setIsSubmitting(true);
 
@@ -421,12 +434,36 @@ export default function NominationForm() {
                                 </div>
                             </>
                         )}
-                        
+
+                        {/* Terms and conditions (required) */}
+                        <div className="flex items-start gap-3">
+                            <input
+                                type="checkbox"
+                                id="termsCheckbox"
+                                required
+                                className="w-5 h-5 mt-0.5 rounded text-[#1D5EED] focus:ring-[#1D5EED]"
+                                checked={formData.agreedToTerms}
+                                onChange={e => setFormData({ ...formData, agreedToTerms: e.target.checked })}
+                            />
+                            <label htmlFor="termsCheckbox" className="text-sm font-medium text-gray-700 cursor-pointer">
+                                {t('form.fields.termsAgreePrefix')}{' '}
+                                <Link
+                                    href="/terms"
+                                    className="text-[#1D5EED] underline hover:text-[#113CCA]"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setShowTermsConfirm(true);
+                                    }}
+                                >
+                                    {t('form.fields.termsAgreeLink')}
+                                </Link>
+                            </label>
+                        </div>
 
                         <button
                             type="submit"
                             className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg"
-                            disabled={isSubmitting || (!formData.nomineeFirstName || !formData.nomineeLastName || !formData.organization || !formData.jobTitle || (!isSelf && formData.isHomeCare && (!formData.name || !formData.nominatorOrganization || !formData.nominatorJobTitle)))}
+                            disabled={isSubmitting || !formData.agreedToTerms || (!formData.nomineeFirstName || !formData.nomineeLastName || !formData.organization || !formData.jobTitle || (!isSelf && formData.isHomeCare && (!formData.name || !formData.nominatorOrganization || !formData.nominatorJobTitle)))}
                         >
                             {isSubmitting ? (
                                 <>
@@ -450,6 +487,79 @@ export default function NominationForm() {
                     </form>
                 </div>
             </div>
+
+            {/* Terms leave confirmation modal */}
+            {showTermsConfirm && (
+                <>
+                    <style>{`
+                        @keyframes termsModalIn {
+                            from { opacity: 0; transform: scale(0.97); }
+                            to { opacity: 1; transform: scale(1); }
+                        }
+                        .terms-modal-panel {
+                            animation: termsModalIn 0.2s ease-out;
+                        }
+                    `}</style>
+                    <div
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+                        style={{ backgroundColor: 'rgba(8, 25, 62, 0.6)' }}
+                        onClick={() => setShowTermsConfirm(false)}
+                    >
+                        <div
+                            className="terms-modal-panel bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+                        onClick={(e) => e.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="terms-modal-title"
+                    >
+                        <div className="p-6 md:p-8">
+                            <div className="flex items-start gap-4">
+                                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center">
+                                    <FileText className="text-amber-600" size={24} />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex items-center justify-between gap-2">
+                                        <h3 id="terms-modal-title" className="text-xl font-bold text-[#08193e]">
+                                            {t('form.fields.termsModalTitle')}
+                                        </h3>
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowTermsConfirm(false)}
+                                            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+                                            aria-label="Close"
+                                        >
+                                            <X size={20} />
+                                        </button>
+                                    </div>
+                                    <p className="mt-2 text-gray-600 text-[15px] leading-relaxed">
+                                        {t('form.fields.termsLeaveConfirm')}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="mt-6 flex flex-col-reverse sm:flex-row gap-3 sm:justify-end">
+                                <button
+                                    type="button"
+                                    onClick={() => setShowTermsConfirm(false)}
+                                    className="px-5 py-2.5 rounded-xl font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors"
+                                >
+                                    {t('form.fields.termsModalStay')}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setShowTermsConfirm(false);
+                                        router.push('/terms');
+                                    }}
+                                    className="px-5 py-2.5 rounded-xl font-semibold text-white bg-[#1D5EED] hover:bg-[#113CCA] transition-colors"
+                                >
+                                    {t('form.fields.termsModalContinue')}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </>
+            )}
         </div>
     );
 }

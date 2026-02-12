@@ -26,7 +26,7 @@
       }
     },
     "mission": {
-      "eyebrow": "POURQUOI PARTICIPER?",
+      "eyebrow": "Pourquoi participer?",
       "title": "Célébrer l’excellence",
       "description": "Chez AlayaCare, nous croyons que la technologie n’est aussi puissante que les agents de changement qui l’utilisent. Les Prix Momentum des soins à domicile célèbrent la dimension humaine de l’innovation — les visites tard le soir, les gestes silencieux de défense des intérêts et la résolution de problèmes au quotidien qui font avancer les soins à domicile. En participant, vous contribuez à :",
       "items": [
@@ -43,7 +43,7 @@
       "managers": "Gestionnaires"
     },
     "timeline": {
-      "eyebrow": "DATES CLÉS ET ÉTAPES",
+      "eyebrow": "Dates clés et étapes",
       "title": "Restez informé des grands moments des Prix Momentum des soins à domicile",
       "items": [
         {
@@ -255,7 +255,13 @@
         "industryCheckbox": "Je travaille actuellement dans l'industrie des soins à domicile.",
         "nominatorName": "Votre nom",
         "nominatorOrganization": "Votre organisation",
-        "nominatorJobTitle": "Votre titre d'emploi"
+        "nominatorJobTitle": "Votre titre d'emploi",
+        "termsAgreePrefix": "J'accepte les",
+        "termsAgreeLink": "conditions générales",
+        "termsLeaveConfirm": "Quitter cette page effacera les informations que vous avez saisies. Voulez-vous continuer ?",
+        "termsModalTitle": "Quitter cette page ?",
+        "termsModalStay": "Rester",
+        "termsModalContinue": "Voir Les Conditions Générales"
       },
       "placeholders": {
         "firstName": "p. ex. Jean",
@@ -380,8 +386,7 @@
     "eligibility": {
       "title": "Admissibilité",
       "p1": "Les Prix Momentum des soins à domicile sont ouverts aux personnes et aux organisations qui exercent leurs activités dans le secteur des soins à domicile au Canada et aux États-Unis. Cela comprend notamment les services de santé à domicile, de soins à domicile, de perfusion à domicile, de soins palliatifs, de soins communautaires et les services connexes.",
-      "p2": "Les candidats doivent travailler activement dans ce secteur au moment de leur mise en candidature.",
-      "p3": "Les employés d’AlayaCare peuvent ne pas être admissibles à certaines catégories de prix, tel que déterminé par AlayaCare, afin d’éviter tout conflit d’intérêts."
+      "p2": "Les candidats doivent travailler activement dans ce secteur au moment de leur mise en candidature."
     },
     "nominations": {
       "title": "Mises en candidature",

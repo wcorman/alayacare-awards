@@ -48,7 +48,7 @@ export default async function TermsPage() {
       {/* Content */}
       <section className="py-16 px-6 lg:px-12 bg-white">
         <div className="max-w-4xl mx-auto">
-          <Section sectionKey="eligibility" paragraphs={['p1', 'p2', 'p3']} />
+          <Section sectionKey="eligibility" paragraphs={['p1', 'p2']} />
           <Section sectionKey="nominations" paragraphs={['p1', 'p2']} />
           <Section sectionKey="selection" paragraphs={['p1', 'p2', 'p3', 'p4']} />
           <Section sectionKey="useOfContent" paragraphs={['p1']} />

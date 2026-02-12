@@ -7,7 +7,7 @@
       "cta": "Nominate a Changemaker"
     },
     "categories": {
-      "title": "Award Categories",
+      "title": "Award categories",
       "frontline": {
         "name": "Frontline Care",
         "description": "Recognizing exceptional frontline caregivers."
@@ -26,8 +26,8 @@
       }
     },
     "mission": {
-      "eyebrow": "WHY PARTICIPATE?",
-      "title": "Celebrating Excellence",
+      "eyebrow": "Why participate?",
+      "title": "Celebrating excellence",
       "description": "At AlayaCare, we believe technology is only as powerful as the changemakers who use it. The Home-Based Care Momentum Awards celebrate the human side of innovation — the late-night visits, the quiet acts of advocacy, and the everyday problem-solving that moves home-based care forward. By participating, you help:",
       "items": [
         "Shine a spotlight on unsung heroes: Give frontline caregivers, operational champions, and leaders the recognition they deserve — not just inside your organization, but across the industry.",
@@ -43,21 +43,21 @@
       "managers": "Managers"
     },
     "timeline": {
-      "eyebrow": "KEY DATES AND MILESTONES",
+      "eyebrow": "Key dates and milestones",
       "title": "Stay on top of the major moments for The Home-Based Care Momentum Awards",
       "items": [
         {
-          "title": "Nominations Open",
+          "title": "Nominations open",
           "date": "February 17 – April 13, 2026",
           "description": "This is your window to put changemakers forward."
         },
         {
-          "title": "Public Voting",
+          "title": "Public voting",
           "date": "May 1 – June 1, 2026",
           "description": "The broader home-based care community and beyond adds its voice."
         },
         {
-          "title": "Panel Judging",
+          "title": "Panel judging",
           "date": "June 8 – June 22, 2026",
           "description": "A panel of industry experts review nominations, voting results, and help spotlight where momentum is strongest."
         },
@@ -74,12 +74,12 @@
   },
   "Eligibility": {
     "hero": {
-      "title": "Eligibility Details",
+      "title": "Eligibility details",
       "subtitle": "The Home-Based Care Momentum Awards recognize outstanding individuals who are elevating home-based care every day — from the front lines to the back office, and the C-suite to visionary innovators.",
       "note": "All categories share the same organization-level eligibility and then have individual eligibility by category."
     },
     "organizationLevel": {
-      "title": "Organization-Level Eligibility (All Categories)",
+      "title": "Organization-level eligibility (all categories)",
       "intro": "To be eligible, nominees must:",
       "employment": "Be currently employed (full-time, part-time, or contract) by a home-based care organization that provides one or more of the following services:",
       "services": {
@@ -92,7 +92,7 @@
       },
       "setting": "Provide services in a home or community-based setting (not exclusively facility-based).",
       "additionalNotes": {
-        "title": "Additional Notes",
+        "title": "Additional notes",
         "nominations": "Nominations may come from colleagues, supervisors, direct reports, or self-nominations, subject to the award program's submission process.",
         "oneCategory": "Each individual can be nominated in one primary category that best reflects their role and impact.",
         "multipleNominations": "Organizations may submit multiple nominations across categories.",
@@ -100,7 +100,7 @@
       }
     },
     "categoryLevel": {
-      "title": "Category Eligibility",
+      "title": "Category eligibility",
       "intro": "Each category has specific eligibility requirements. Review the details below to determine the best category for your nomination.",
       "nomineesShould": "Nominees should:",
       "meetOrganizationLevel": "Meet the organization-level eligibility outlined above.",
@@ -215,24 +215,24 @@
         "continue": "Continue"
       },
       "someoneElse": {
-        "title": "Someone Else",
+        "title": "Someone else",
         "description": "I want to nominate a colleague, employee, or friend for their amazing work.",
         "continue": "Continue"
       }
     },
     "form": {
-      "selfTitle": "Tell Us Your Story",
-      "otherTitle": "Nominate a Care Leader",
+      "selfTitle": "Tell us your story",
+      "otherTitle": "Nominate a care leader",
       "selfSubtitle": "You do amazing work. Help us recognize it.",
       "otherSubtitle": "Shine a light on someone who makes a difference.",
       "fields": {
-        "nomineeFirstName": "Nominee First Name",
-        "nomineeLastName": "Nominee Last Name",
-        "yourFirstName": "First Name",
-        "yourLastName": "Last Name",
-        "nomineeName": "Nominee Name",
-        "yourName": "Your Name",
-        "nomineeEmail": "Nominee Email",
+        "nomineeFirstName": "Nominee first name",
+        "nomineeLastName": "Nominee last name",
+        "yourFirstName": "First name",
+        "yourLastName": "Last name",
+        "nomineeName": "Nominee name",
+        "yourName": "Your name",
+        "nomineeEmail": "Nominee email",
         "yourEmail": "Email",
         "emailNotification": "We'll use this to notify {who} if {who2} win.",
         "emailNotificationSelf": "We'll use this to notify you if you win.",
@@ -240,22 +240,28 @@
         "you": "you",
         "them": "them",
         "they": "they",
-        "nomineeOrganization": "Nominee Organization",
+        "nomineeOrganization": "Nominee organization",
         "organization": "Organization",
-        "nomineeJobTitle": "Nominee Job Title",
-        "jobTitle": "Job Title",
-        "nomineePhoto": "Nominee Profile Photo (Optional)",
-        "yourPhoto": "Your Profile Photo (Optional)",
-        "awardCategory": "Award Category",
-        "reasonForNomination": "Reason for Nomination",
+        "nomineeJobTitle": "Nominee job title",
+        "jobTitle": "Job title",
+        "nomineePhoto": "Nominee profile photo (optional)",
+        "yourPhoto": "Your profile photo (optional)",
+        "awardCategory": "Award category",
+        "reasonForNomination": "Reason for nomination",
         "reasonPlaceholderSelf": "Tell us why you deserve to win...",
         "reasonPlaceholderOther": "Tell us why this person deserves to win...",
-        "nominatorEmail": "Your Email (Required for submission)",
+        "nominatorEmail": "Your email (required for submission)",
         "nominatorEmailPlaceholder": "So we can contact you if they win",
         "industryCheckbox": "I am currently working in the home care industry.",
-        "nominatorName": "Your Name",
-        "nominatorOrganization": "Your Organization",
-        "nominatorJobTitle": "Your Job Title"
+        "nominatorName": "Your name",
+        "nominatorOrganization": "Your organization",
+        "nominatorJobTitle": "Your job title",
+        "termsAgreePrefix": "I agree to the",
+        "termsAgreeLink": "terms and conditions",
+        "termsLeaveConfirm": "Leaving this page will cause you to lose any information you've entered. Do you want to continue?",
+        "termsModalTitle": "Leave this page?",
+        "termsModalStay": "Stay",
+        "termsModalContinue": "Continue To Terms"
       },
       "placeholders": {
         "firstName": "e.g. Jane",
@@ -269,8 +275,8 @@
       "submitting": "Submitting..."
     },
     "success": {
-      "homeCareTitle": "Nomination Submitted!",
-      "otherTitle": "Thank You for Your Nomination!",
+      "homeCareTitle": "Nomination submitted!",
+      "otherTitle": "Thank you for your nomination!",
       "message": "We'll review your submission shortly.",
       "voteForOthers": "Nominate Others",
       "returnHome": "Return Home"
@@ -282,11 +288,11 @@
     }
   },
   "VotePage": {
-    "title": "Vote for Excellence",
+    "title": "Vote for excellence",
     "subtitle": "Recognize outstanding individuals transforming home-based care by casting your vote.",
     "searchPlaceholder": "Search nominees...",
-    "filterByCategory": "Filter by Category:",
-    "allCategories": "All Categories",
+    "filterByCategory": "Filter by category:",
+    "allCategories": "All categories",
     "showingResults": "Showing {count} {nominee} in",
     "nominee": "nominee",
     "nominees": "nominees",
@@ -301,24 +307,24 @@
     }
   },
   "VoteModal": {
-    "confirmVote": "Confirm Your Vote",
+    "confirmVote": "Confirm your vote",
     "votingFor": "You are voting for {name}.",
     "enterEmail": "Please enter your email to verify your vote.",
-    "verificationRequired": "Verification Required",
+    "verificationRequired": "Verification required",
     "thankYou": "Thank you for voting for {name}. Please check your email inbox to finalize your submission. Your vote is pending confirmation.",
     "close": "Close",
     "cancel": "Cancel",
     "submitVote": "Submit Vote",
     "verifying": "Verifying...",
     "fields": {
-      "email": "Your Email Address",
+      "email": "Your email address",
       "emailPlaceholder": "e.g. name@company.com",
       "industryCheckbox": "I am currently working in the home care industry.",
       "name": "Name",
       "namePlaceholder": "e.g. Jane Doe",
       "organization": "Organization",
       "organizationPlaceholder": "e.g. ABC Home Care",
-      "jobTitle": "Job Title",
+      "jobTitle": "Job title",
       "jobTitlePlaceholder": "e.g. Caregiver, Registered Nurse, etc."
     }
   },
@@ -357,7 +363,7 @@
     }
   },
   "Results": {
-    "title": "Award Results",
+    "title": "Award results",
     "subtitle": "Top 3 nominees by category based on community votes. Final winners are determined by the judging panel.",
     "noWinners": "No nominees yet",
     "noWinnersSubtitle": "Nominations and voting will determine the top changemakers in this category.",
@@ -368,7 +374,7 @@
   },
   "VoteConfirmationPopup": {
     "close": "Close",
-    "thankYou": "Thank You!",
+    "thankYou": "Thank you!",
     "voteConfirmed": "Your vote has been confirmed for",
     "voteForOthers": "Nominate Someone Else"
   },
@@ -380,8 +386,7 @@
     "eligibility": {
       "title": "Eligibility",
       "p1": "The Home-Based Care Momentum Awards are open to individuals and organizations operating in the home-based care sector in Canada and the United States. This includes home health, home care, home infusion, hospice, community care, and related services.",
-      "p2": "Nominees must be actively working in the sector at the time of nomination.",
-      "p3": "Employees of AlayaCare may be ineligible for certain award categories, as determined by AlayaCare, to avoid conflicts of interest."
+      "p2": "Nominees must be actively working in the sector at the time of nomination."
     },
     "nominations": {
       "title": "Nominations",
