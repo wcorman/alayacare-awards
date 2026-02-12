@@ -190,6 +190,19 @@ export default async function Home() {
 
         </div>
       </section>
+
+      {/* Footer Logo Section */}
+      <section className="pt-3 pb-[70px] px-6 lg:px-12 bg-[#f6f8ff]">
+        <div className="max-w-7xl mx-auto flex justify-center">
+          <Image
+            src="/logo-blue.png"
+            alt="AlayaCare"
+            width={320}
+            height={60}
+            className="object-contain"
+          />
+        </div>
+      </section>
     </main>
   );
 }
