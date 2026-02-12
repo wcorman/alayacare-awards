@@ -6,16 +6,16 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "The Home-Based Care Momentum Awards",
-  description: "Recognize the unsung heroes of home care.",
+  description: "Recognize the outstanding individuals who are elevating home-based care every day.",
   openGraph: {
     title: "The Home-Based Care Momentum Awards",
-    description: "Recognize the unsung heroes of home care.",
+    description: "Recognize the outstanding individuals who are elevating home-based care every day.",
     images: ["/awards-og-image.webp"],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Home-Based Care Momentum Awards",
-    description: "Recognize the unsung heroes of home care.",
+    description: "Recognize the outstanding individuals who are elevating home-based care every day.",
     images: ["/awards-og-image.webp"],
   },
 };
