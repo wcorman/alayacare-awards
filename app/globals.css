@@ -24,3 +24,18 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    background-color: #1D5EED;
+    transform: scale(1);
+  }
+  50% {
+    background-color: #F4701F;
+    transform: scale(1.1);
+  }
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 2s ease-in-out infinite;
+}

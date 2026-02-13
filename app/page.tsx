@@ -164,7 +164,7 @@ export default async function Home() {
             <div className="space-y-10">
               {timelineItems.map((item, index) => (
                 <div key={`${item.title}-${index}`} className="relative">
-                  <span className="absolute left-4 top-6 h-4 w-4 -translate-x-1/2 rounded-full bg-[#1D5EED] ring-4 ring-white shadow-md sm:left-1/2"></span>
+                  <span className={`absolute left-4 top-6 h-4 w-4 -translate-x-1/2 rounded-full bg-[#1D5EED] ring-4 ring-white shadow-md sm:left-1/2 ${index === 0 ? 'animate-gentle-pulse' : ''}`}></span>
                   <div
                     className={`pl-12 sm:pl-0 sm:w-1/2 ${
                       index % 2 === 0 ? 'sm:pr-12' : 'sm:pl-12 sm:ml-auto'
