@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 
 export default function Navbar() {
     const t = useTranslations('Navbar');
@@ -56,9 +56,10 @@ export default function Navbar() {
                             document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000; samesite=lax`;
                             router.refresh();
                         }}
-                        className="py-2 px-3 text-sm font-normal rounded-md border border-[#08193e] text-[#08193e] hover:text-[#1D5EED] hover:border-[#1D5EED] transition-colors"
+                        className="py-2 px-3 text-sm font-normal rounded-md border border-[#08193e] text-[#08193e] hover:text-[#1D5EED] hover:border-[#1D5EED] transition-colors inline-flex items-center gap-2"
                         aria-label={nextLocale === 'fr' ? t('languageSwitcher.switchToFrench') : t('languageSwitcher.switchToEnglish')}
                     >
+                        <Globe size={18} strokeWidth={2} />
                         {nextLocale === 'fr' ? t('languageSwitcher.french') : t('languageSwitcher.english')}
                     </button>
                 </nav>
@@ -98,9 +99,10 @@ export default function Navbar() {
                             router.refresh();
                             setMobileMenuOpen(false);
                         }}
-                        className="p-4 text-left font-normal border-b hover:bg-gray-50 text-[#08193e]"
+                        className="p-4 text-left font-normal border-b hover:bg-gray-50 text-[#08193e] flex items-center gap-2"
                         aria-label={nextLocale === 'fr' ? t('languageSwitcher.switchToFrench') : t('languageSwitcher.switchToEnglish')}
                     >
+                        <Globe size={18} strokeWidth={2} />
                         {nextLocale === 'fr' ? t('languageSwitcher.french') : t('languageSwitcher.english')}
                     </button>
                 </div>

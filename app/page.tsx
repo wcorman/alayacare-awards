@@ -184,6 +184,14 @@ export default async function Home() {
                       </div>
                       <h3 className="text-xl font-bold text-[#08193e] mt-2">{item.title}</h3>
                       <p className="text-gray-600 mt-3 leading-relaxed">{item.description}</p>
+                      {index === 0 && (
+                        <Link
+                          href="/nominate"
+                          className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-all duration-200 shadow-sm text-sm"
+                        >
+                          <UserPlus size={16} /> {t('timeline.nominateCta')}
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -17,11 +17,12 @@ const THEME = {
     },
 };
 
+// Canonical English values must match Airtable's Category single-select options exactly.
 const CATEGORIES = [
-    { id: 'frontline', nameKey: 'categories.frontline.name', color: '#f37021', icon: Heart },
-    { id: 'operational', nameKey: 'categories.operational.name', color: '#113cca', icon: Award },
-    { id: 'executive', nameKey: 'categories.executive.name', color: '#ffaa05', icon: Briefcase },
-    { id: 'impact', nameKey: 'categories.impact.name', color: '#08193e', icon: Sparkles },
+    { id: 'frontline', nameKey: 'categories.frontline.name', value: 'Frontline Care', color: '#f37021', icon: Heart },
+    { id: 'operational', nameKey: 'categories.operational.name', value: 'Operational Excellence', color: '#113cca', icon: Award },
+    { id: 'executive', nameKey: 'categories.executive.name', value: 'Executive Leadership', color: '#ffaa05', icon: Briefcase },
+    { id: 'impact', nameKey: 'categories.impact.name', value: 'Impact and Innovation', color: '#08193e', icon: Sparkles },
 ];
 
 
@@ -331,18 +332,19 @@ export default function NominationForm() {
                             <label className="block text-sm font-bold mb-2 text-gray-700">{t('form.fields.awardCategory')}</label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {CATEGORIES.map(cat => {
-                                    const categoryName = tHome(cat.nameKey);
+                                    const categoryLabel = tHome(cat.nameKey);
+                                    const isSelected = formData.category === cat.value;
                                     return (
                                         <div
                                             key={cat.id}
-                                            onClick={() => setFormData({ ...formData, category: categoryName })}
-                                            className={`cursor-pointer p-4 rounded-md border-2 transition-all flex items-center gap-3 ${formData.category === categoryName ? 'bg-blue-50 border-[#1D5EED]' : 'hover:bg-gray-50 border-gray-200'}`}
+                                            onClick={() => setFormData({ ...formData, category: cat.value })}
+                                            className={`cursor-pointer p-4 rounded-md border-2 transition-all flex items-center gap-3 ${isSelected ? 'bg-blue-50 border-[#1D5EED]' : 'hover:bg-gray-50 border-gray-200'}`}
                                         >
                                             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white`} style={{ backgroundColor: cat.color }}>
                                                 <cat.icon size={18} />
                                             </div>
-                                            <span className="font-medium text-sm text-gray-800">{categoryName}</span>
-                                            {formData.category === categoryName && <Check size={16} className="ml-auto text-[#1D5EED]" />}
+                                            <span className="font-medium text-sm text-gray-800">{categoryLabel}</span>
+                                            {isSelected && <Check size={16} className="ml-auto text-[#1D5EED]" />}
                                         </div>
                                     );
                                 })}
