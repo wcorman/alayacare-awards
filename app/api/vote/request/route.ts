@@ -29,11 +29,16 @@ export async function POST(request: NextRequest) {
         // Add voter to Contacts table if they checked the home care industry option
         if (isHomeCare && email && (name || organization || jobTitle)) {
             try {
+                const fullName = (name || '').trim();
+                const spaceIdx = fullName.indexOf(' ');
+                const firstName = spaceIdx >= 0 ? fullName.slice(0, spaceIdx) : fullName;
+                const lastName = spaceIdx >= 0 ? fullName.slice(spaceIdx + 1) : '';
                 await addContactToAirtable({
                     email: email,
-                    name: name || '',
-                    organization: organization || '',
-                    jobTitle: jobTitle || ''
+                    firstName: firstName || undefined,
+                    lastName: lastName || undefined,
+                    organization: organization || undefined,
+                    jobTitle: jobTitle || undefined
                     // Note: Not linking nominations field
                 });
             } catch (error) {
