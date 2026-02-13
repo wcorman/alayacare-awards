@@ -286,6 +286,7 @@ export async function submitNomination(data: {
     nominatorName?: string;
     nominatorOrganization?: string;
     nominatorJobTitle?: string;
+    language?: string;
 }) {
     const TABLE_NAME = "Nominations";
     const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`;
@@ -301,6 +302,11 @@ export async function submitNomination(data: {
         "Category": data.category,
         "Status": "Draft"
     };
+
+    // Add language preference from i18n (English or French)
+    if (data.language && (data.language === "English" || data.language === "French")) {
+        fields["English or French"] = data.language;
+    }
 
     // Add optional fields if provided and not empty
     if (data.jobTitle && data.jobTitle.trim()) {
@@ -350,10 +356,12 @@ export async function submitNomination(data: {
 
 export async function addContactToAirtable(data: {
     email: string;
-    name?: string;
+    firstName?: string;
+    lastName?: string;
     organization?: string;
     jobTitle?: string;
     nominationId?: string;
+    language?: string;
 }) {
     const TABLE_NAME = "Contacts";
     const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`;
@@ -376,14 +384,24 @@ export async function addContactToAirtable(data: {
         // If contact exists, update it instead of creating a new one
         const fields: any = {};
         
-        if (data.name && data.name.trim()) {
-            fields["Name"] = data.name.trim();
+        if (data.firstName && data.firstName.trim()) {
+            fields["First Name"] = data.firstName.trim();
+        }
+        if (data.lastName && data.lastName.trim()) {
+            fields["Last Name"] = data.lastName.trim();
+        }
+        const fullName = [data.firstName, data.lastName].filter(Boolean).map(s => s?.trim()).join(' ').trim();
+        if (fullName) {
+            fields["Name"] = fullName;
         }
         if (data.organization && data.organization.trim()) {
             fields["Company Name"] = data.organization.trim();
         }
         if (data.jobTitle && data.jobTitle.trim()) {
             fields["Job Title"] = data.jobTitle.trim();
+        }
+        if (data.language && (data.language === "English" || data.language === "French")) {
+            fields["English or French"] = data.language;
         }
         
         // Link nomination if provided
@@ -422,14 +440,36 @@ export async function addContactToAirtable(data: {
     }
 
     // Create new contact if it doesn't exist
-    // Try creating with just Email first to isolate any field issues
-    const fields: any = {
+    // Build full contact record with all fields to avoid PATCH failures
+    const fullName = [data.firstName, data.lastName].filter(Boolean).map(s => s?.trim()).join(' ').trim();
+    const initialFields: any = {
         "Email": data.email.trim().toLowerCase()
     };
+    if (data.firstName && data.firstName.trim()) {
+        initialFields["First Name"] = data.firstName.trim();
+    }
+    if (data.lastName && data.lastName.trim()) {
+        initialFields["Last Name"] = data.lastName.trim();
+    }
+    if (fullName) {
+        initialFields["Name"] = fullName;
+    }
+    if (data.organization && data.organization.trim()) {
+        initialFields["Company Name"] = data.organization.trim();
+    }
+    if (data.jobTitle && data.jobTitle.trim()) {
+        initialFields["Job Title"] = data.jobTitle.trim();
+    }
+    if (data.language && (data.language === "English" || data.language === "French")) {
+        initialFields["English or French"] = data.language;
+    }
+    if (data.nominationId) {
+        initialFields["Nominations"] = [data.nominationId];
+    }
 
-    // Try creating with just Email first
+    const fields: any = { ...initialFields };
     let body = {
-        records: [{ fields: { "Email": data.email.trim().toLowerCase() } }]
+        records: [{ fields: initialFields }]
     };
 
     let res = await fetch(url, {
@@ -439,63 +479,10 @@ export async function addContactToAirtable(data: {
     });
 
     if (res.ok) {
-        // If Email-only creation worked, try updating with other fields
-        const createdData = await res.json();
-        const createdRecordId = createdData.records[0].id;
-        
-        const updateFields: any = {};
-        if (data.name && data.name.trim()) {
-            updateFields["Name"] = data.name.trim();
-        }
-        if (data.organization && data.organization.trim()) {
-            updateFields["Company Name"] = data.organization.trim();
-        }
-        if (data.jobTitle && data.jobTitle.trim()) {
-            updateFields["Job Title"] = data.jobTitle.trim();
-        }
-        // Link nomination if provided
-        if (data.nominationId) {
-            updateFields["Nominations"] = [data.nominationId];
-        }
-        
-        if (Object.keys(updateFields).length > 0) {
-            const updateUrl = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`;
-            const updateRes = await fetch(updateUrl, {
-                method: 'PATCH',
-                headers: HEADERS,
-                body: JSON.stringify({
-                    records: [{
-                        id: createdRecordId,
-                        fields: updateFields
-                    }]
-                })
-            });
-            
-            if (!updateRes.ok) {
-                const updateErr = await updateRes.json();
-                console.error("Airtable Update Contact Fields Error:", JSON.stringify(updateErr, null, 2));
-                console.error("Fields being updated:", JSON.stringify(updateFields, null, 2));
-                // Don't throw - at least the contact was created with Email
-            }
-        }
-        
+        // Contact created successfully with all fields in initial create
         return true;
     } else {
-        // If Email-only creation failed, try with all fields
-        if (data.name && data.name.trim()) {
-            fields["Name"] = data.name.trim();
-        }
-        if (data.organization && data.organization.trim()) {
-            fields["Company Name"] = data.organization.trim();
-        }
-        if (data.jobTitle && data.jobTitle.trim()) {
-            fields["Job Title"] = data.jobTitle.trim();
-        }
-        // Link nomination if provided
-        if (data.nominationId) {
-            fields["Nominations"] = [data.nominationId];
-        }
-
+        // Retry with same data (fields already populated from initialFields)
         body = {
             records: [{ fields }]
         };

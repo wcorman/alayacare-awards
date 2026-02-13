@@ -14,10 +14,12 @@ export async function POST(request: NextRequest) {
             imageUrl,
             jobTitle,
             organization,
-            nominatorName,
+            nominatorFirstName,
+            nominatorLastName,
             nominatorOrganization,
             nominatorJobTitle,
-            isHomeCare
+            isHomeCare,
+            language
         } = body;
 
         if (!nomineeFirstName || !nomineeLastName || !nomineeEmail || !description || !category) {
@@ -30,7 +32,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ ok: false, reason: "duplicate_nominee" });
         }
 
-        // Submit to Airtable
+        // Submit to Airtable (language from i18n: "English" or "French")
         const nominationId = await submitNomination({
             nominatorEmail: nominatorEmail || nomineeEmail, // If self-nomination, use nominee email
             nomineeFirstName,
@@ -41,20 +43,23 @@ export async function POST(request: NextRequest) {
             imageUrl,
             jobTitle: jobTitle || '',
             organization: organization || '',
-            nominatorName: nominatorName || '',
+            nominatorName: [nominatorFirstName, nominatorLastName].filter(Boolean).join(' ').trim() || '',
             nominatorOrganization: nominatorOrganization || '',
-            nominatorJobTitle: nominatorJobTitle || ''
+            nominatorJobTitle: nominatorJobTitle || '',
+            language: language || 'English'
         });
 
         // Add nominator to Contacts table if they checked the home care industry option
-        if (isHomeCare && nominatorEmail && (nominatorName || nominatorOrganization || nominatorJobTitle)) {
+        if (isHomeCare && nominatorEmail && (nominatorFirstName || nominatorLastName || nominatorOrganization || nominatorJobTitle)) {
             try {
                 await addContactToAirtable({
                     email: nominatorEmail,
-                    name: nominatorName || '',
+                    firstName: nominatorFirstName || '',
+                    lastName: nominatorLastName || '',
                     organization: nominatorOrganization || '',
                     jobTitle: nominatorJobTitle || '',
-                    nominationId: nominationId || undefined
+                    nominationId: nominationId || undefined,
+                    language: language || 'English'
                 });
             } catch (error) {
                 // Log error but don't fail the nomination if contact addition fails

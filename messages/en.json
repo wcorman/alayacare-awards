@@ -72,7 +72,7 @@
       "title": "About the awards",
       "intro1": "The Home-Based Care Momentum Awards, presented by AlayaCare, recognize the individuals driving meaningful impact across home-based care in North America.",
       "intro2": "From frontline caregivers to operational leaders, executives, and innovators, this program celebrates the people behind better outcomes, stronger teams, and smarter systems.",
-      "poweredByPrefix": "Powered by ",
+      "poweredByPrefix": "Presented by ",
       "poweredBy1": "<link>AlayaCare</link> is a global technology platform purpose-built for home and community-based care. We partner with care organizations to improve outcomes and strengthen the caregiver experience.",
       "poweredBy2": "The Momentum Awards are open to individuals employed by eligible home-based care organizations delivering services in home or community settings, including home care, home health, hospice, home infusion, and related services.",
       "poweredBy3": "This is more than recognition. It's a platform to spotlight the people shaping the future of home-based care, and to build momentum that lifts the entire industry."
@@ -209,7 +209,7 @@
   },
   "Footer": {
     "tagline": "Celebrating the momentum behind exceptional home-based care.",
-    "poweredBy": "Powered by",
+    "poweredBy": "Presented by",
     "terms": "Terms & Conditions"
   },
   "NominationForm": {
@@ -262,7 +262,8 @@
         "nominatorEmail": "Your email (required for submission)",
         "nominatorEmailPlaceholder": "So we can contact you if they win",
         "industryCheckbox": "I am currently working in the home-based care sector.",
-        "nominatorName": "Your name",
+        "nominatorFirstName": "Your first name",
+        "nominatorLastName": "Your last name",
         "nominatorOrganization": "Your organization",
         "nominatorJobTitle": "Your job title",
         "termsAgreePrefix": "I agree to the",

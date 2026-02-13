@@ -42,7 +42,7 @@ export default async function Home() {
         <div className="relative z-20 max-w-[970px] mx-auto">
           <div className="mb-6 flex justify-center">
             <Image
-              src="/logo-white.png"
+              src="/momentum-logo-white.svg"
               alt="AlayaCare"
               width={320}
               height={60}
@@ -238,7 +238,7 @@ export default async function Home() {
       <section className="pt-3 pb-[70px] px-6 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto flex justify-center">
           <Image
-            src="/logo-blue.png"
+            src="/momentum-logo-blue.svg"
             alt="AlayaCare"
             width={320}
             height={60}

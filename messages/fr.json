@@ -72,7 +72,7 @@
       "title": "À propos des prix",
       "intro1": "Les Prix Momentum des soins à domicile, présentés par AlayaCare, reconnaissent les personnes qui ont un impact concret sur les soins à domicile en Amérique du Nord.",
       "intro2": "Des soignants de première ligne aux leaders opérationnels, dirigeants et innovateurs, ce programme célèbre les personnes qui améliorent les résultats, renforcent les équipes et optimisent les systèmes.",
-      "poweredByPrefix": "Propulsé par ",
+      "poweredByPrefix": "Presenté par ",
       "poweredBy1": "<link>AlayaCare</link> est une plateforme technologique mondiale conçue pour les soins à domicile et en milieu communautaire. Nous collaborons avec les organisations de soins pour améliorer les résultats et renforcer l'expérience des soignants.",
       "poweredBy2": "Les Prix Momentum sont ouverts aux personnes employées par des organisations de soins à domicile admissibles qui offrent des services à domicile ou en milieu communautaire, notamment les soins à domicile, la santé à domicile, les soins palliatifs, la perfusion à domicile et les services connexes.",
       "poweredBy3": "C'est plus qu'une reconnaissance. C'est une plateforme pour mettre en lumière les personnes qui façonnent l'avenir des soins à domicile et pour créer un élan qui élève toute l'industrie."
@@ -209,7 +209,7 @@
   },
   "Footer": {
     "tagline": "Célébrer l'élan derrière des soins à domicile exceptionnels.",
-    "poweredBy": "Propulsé par",
+    "poweredBy": "Presenté par",
     "terms": "Conditions générales"
   },
   "NominationForm": {
@@ -262,7 +262,8 @@
         "nominatorEmail": "Votre courriel (requis pour la soumission)",
         "nominatorEmailPlaceholder": "Pour que nous puissions vous contacter s'ils gagnent",
         "industryCheckbox": "Je travaille actuellement dans le secteur des soins à domicile.",
-        "nominatorName": "Votre nom",
+        "nominatorFirstName": "Votre prénom",
+        "nominatorLastName": "Votre nom de famille",
         "nominatorOrganization": "Votre organisation",
         "nominatorJobTitle": "Votre titre d'emploi",
         "termsAgreePrefix": "J'accepte les",

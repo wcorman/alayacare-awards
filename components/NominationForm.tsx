@@ -5,7 +5,7 @@ import { FileUploaderRegular } from '@uploadcare/react-uploader/next';
 import '@uploadcare/react-uploader/core.css';
 import { User, Users, ChevronRight, Upload, Check, Briefcase, AlertCircle, Loader2, UserPlus, Heart, Award, Sparkles, FileText, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 
 const THEME = {
@@ -28,6 +28,7 @@ const CATEGORIES = [
 export default function NominationForm() {
     const router = useRouter();
     const t = useTranslations('NominationForm');
+    const locale = useLocale();
     const tHome = useTranslations('Home');
     const [step, setStep] = useState<'type' | 'form' | 'success'>('type');
     const [nominationType, setNominationType] = useState<'self' | 'other'>('other');
@@ -44,7 +45,8 @@ export default function NominationForm() {
         email: '', // Nominator email
         profileImage: null as string | null,
         isHomeCare: false,
-        name: '', // Nominator name
+        nominatorFirstName: '', // Nominator first name
+        nominatorLastName: '', // Nominator last name
         nominatorOrganization: '', // Nominator organization
         nominatorJobTitle: '', // Nominator job title
         organization: '', // Nominee organization
@@ -77,6 +79,8 @@ export default function NominationForm() {
         try {
             const nominatorEmail = nominationType === 'self' ? formData.nomineeEmail : formData.email;
 
+            const language = locale === 'fr' ? 'French' : 'English';
+
             const res = await fetch('/api/nominate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -90,10 +94,12 @@ export default function NominationForm() {
                     imageUrl: formData.profileImage,
                     jobTitle: formData.jobTitle || '',
                     organization: formData.organization || '',
-                    nominatorName: formData.name || '',
+                    nominatorFirstName: formData.nominatorFirstName || '',
+                    nominatorLastName: formData.nominatorLastName || '',
                     nominatorOrganization: formData.nominatorOrganization || '',
                     nominatorJobTitle: formData.nominatorJobTitle || '',
-                    isHomeCare: nominationType === 'other' ? formData.isHomeCare : false
+                    isHomeCare: nominationType === 'other' ? formData.isHomeCare : false,
+                    language
                 }),
             });
 
@@ -382,7 +388,8 @@ export default function NominationForm() {
                                     onChange={e => setFormData({ 
                                         ...formData, 
                                         isHomeCare: e.target.checked,
-                                        name: e.target.checked ? formData.name : '',
+                                        nominatorFirstName: e.target.checked ? formData.nominatorFirstName : '',
+                                        nominatorLastName: e.target.checked ? formData.nominatorLastName : '',
                                         nominatorOrganization: e.target.checked ? formData.nominatorOrganization : '',
                                         nominatorJobTitle: e.target.checked ? formData.nominatorJobTitle : ''
                                     })}
@@ -397,16 +404,29 @@ export default function NominationForm() {
                         {/* Nominator Info Fields (Only for Other Nominations when checkbox is checked) */}
                         {!isSelf && formData.isHomeCare && (
                             <>
-                                <div>
-                                    <label className="block text-sm font-bold mb-2 text-gray-700">{t('form.fields.nominatorName')}</label>
-                                    <input
-                                        required
-                                        type="text"
-                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                        placeholder={t('form.placeholders.name')}
-                                        value={formData.name}
-                                        onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                    />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="block text-sm font-bold mb-2 text-gray-700">{t('form.fields.nominatorFirstName')}</label>
+                                        <input
+                                            required
+                                            type="text"
+                                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
+                                            placeholder={t('form.placeholders.firstName')}
+                                            value={formData.nominatorFirstName}
+                                            onChange={e => setFormData({ ...formData, nominatorFirstName: e.target.value })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-bold mb-2 text-gray-700">{t('form.fields.nominatorLastName')}</label>
+                                        <input
+                                            required
+                                            type="text"
+                                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
+                                            placeholder={t('form.placeholders.lastName')}
+                                            value={formData.nominatorLastName}
+                                            onChange={e => setFormData({ ...formData, nominatorLastName: e.target.value })}
+                                        />
+                                    </div>
                                 </div>
                                 
                                 <div>
@@ -463,7 +483,7 @@ export default function NominationForm() {
                         <button
                             type="submit"
                             className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg"
-                            disabled={isSubmitting || !formData.agreedToTerms || (!formData.nomineeFirstName || !formData.nomineeLastName || !formData.organization || !formData.jobTitle || (!isSelf && formData.isHomeCare && (!formData.name || !formData.nominatorOrganization || !formData.nominatorJobTitle)))}
+                            disabled={isSubmitting || !formData.agreedToTerms || (!formData.nomineeFirstName || !formData.nomineeLastName || !formData.organization || !formData.jobTitle || (!isSelf && formData.isHomeCare && (!formData.nominatorFirstName || !formData.nominatorLastName || !formData.nominatorOrganization || !formData.nominatorJobTitle)))}
                         >
                             {isSubmitting ? (
                                 <>
