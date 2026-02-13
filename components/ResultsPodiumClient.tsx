@@ -69,7 +69,7 @@ function PodiumCard({
   const t = useTranslations("Results");
   const [imageUrl, setImageUrl] = useState(nominee.image);
   const handleImageError = () => {
-    setImageUrl("https://placehold.co/400x400/dadadf/08193e?text=Photo+Missing");
+    setImageUrl("/nominee-placeholder.webp");
   };
 
   const heightClass =
@@ -91,7 +91,7 @@ function PodiumCard({
           style={{ borderColor: categoryColor }}
         >
           <img
-            src={imageUrl || "https://placehold.co/400x400/dadadf/08193e?text=No+Photo"}
+            src={imageUrl || "/nominee-placeholder.webp"}
             alt={nominee.name}
             className="w-20 h-20 object-cover"
             onError={handleImageError}

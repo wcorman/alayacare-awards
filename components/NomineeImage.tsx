@@ -9,10 +9,10 @@ interface NomineeImageProps {
 }
 
 export default function NomineeImage({ src, alt, className = "" }: NomineeImageProps) {
-    const [imageUrl, setImageUrl] = useState(src || "https://placehold.co/1200x600/dadadf/08193e?text=Photo+Missing");
+    const [imageUrl, setImageUrl] = useState(src || "/nominee-placeholder.webp");
 
     const handleError = () => {
-        setImageUrl("https://placehold.co/1200x600/dadadf/08193e?text=Photo+Missing");
+        setImageUrl("/nominee-placeholder.webp");
     };
 
     return (

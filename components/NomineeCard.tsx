@@ -62,7 +62,7 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
         
         // Fallback to placeholder
         target.onerror = null;
-        target.src = "https://placehold.co/400x400/dadadf/08193e?text=Photo+Missing";
+        target.src = "/nominee-placeholder.webp";
     };
 
     return (
@@ -70,7 +70,7 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
             <Link href={`/nominees/${nominee.id}`} className="flex-1 flex flex-col cursor-pointer">
                 <div className="relative aspect-square overflow-hidden bg-gray-200">
                     <img
-                        src={imageUrl || "https://placehold.co/400x400/dadadf/08193e?text=No+Photo"}
+                        src={imageUrl || "/nominee-placeholder.webp"}
                         alt={nominee.name}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         onError={handleImageError}
