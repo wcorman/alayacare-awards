@@ -222,7 +222,7 @@ export default async function Home() {
               className="inline-block object-contain mb-[6px]"
             />
           </h3>
-          <p className="text-gray-700 leading-relaxed mb-4">
+          <p className="text-gray-700 text-lg leading-relaxed mb-4">
             {t.rich('aboutAwards.poweredBy1', {
               link: (chunks) => (
                 <a
@@ -236,10 +236,10 @@ export default async function Home() {
               ),
             })}
           </p>
-          <p className="text-gray-700 leading-relaxed mb-4">
+          <p className="text-gray-700 text-lg leading-relaxed mb-4">
             {t('aboutAwards.poweredBy2')}
           </p>
-          <p className="text-gray-700 leading-relaxed">
+          <p className="text-gray-700 text-lg leading-relaxed">
             {t('aboutAwards.poweredBy3')}
           </p>
         </div>
