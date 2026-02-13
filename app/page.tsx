@@ -41,7 +41,7 @@ export default async function Home() {
         >
           <source src="/video/hero.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-br from-[#15265d] to-[#112e90] opacity-60 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#15265d] to-[#112e90] opacity-45 z-10"></div>
         <div className="relative z-20 max-w-[970px] mx-auto">
           <div className="mb-6 flex justify-center">
             <Image
