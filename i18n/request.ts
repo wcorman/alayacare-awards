@@ -14,7 +14,14 @@ export default getRequestConfig(async () => {
   const headerStore = await headers();
   const cookieLocale = cookieStore.get("NEXT_LOCALE")?.value;
   const headerLocale = headerStore.get("accept-language")?.split(",")[0];
-  const locale = normalizeLocale(cookieLocale ?? headerLocale);
+
+  // Auto French for Quebec visitors (no cookie = first visit or no explicit choice)
+  const country = headerStore.get("x-vercel-ip-country") ?? "";
+  const region = headerStore.get("x-vercel-ip-country-region") ?? "";
+  const isQuebec = country === "CA" && region === "QC";
+  const quebecLocale = !cookieLocale && isQuebec ? "fr" : undefined;
+
+  const locale = normalizeLocale(cookieLocale ?? quebecLocale ?? headerLocale);
 
   return {
     locale,
