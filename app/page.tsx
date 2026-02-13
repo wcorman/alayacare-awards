@@ -2,7 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, getLocale } from 'next-intl/server';
 import { UserPlus, Heart, Trophy, Megaphone, Calendar, Users, Gavel, Award } from 'lucide-react';
 
 // Force dynamic rendering so we always get the latest nominees
@@ -17,6 +17,9 @@ const CATEGORIES = [
 
 export default async function Home() {
   const t = await getTranslations('Home');
+  const locale = await getLocale();
+  const heroLogo = locale === 'fr' ? '/momentum-logo-white-fr.svg' : '/momentum-logo-white.svg';
+  const footerLogo = locale === 'fr' ? '/momentum-logo-blue-fr.svg' : '/momentum-logo-blue.svg';
   const missionItems = t.raw('mission.items') as string[];
   const missionIcons = [Trophy, Heart, UserPlus, Megaphone];
   const timelineItems = t.raw('timeline.items') as Array<{ title: string; date: string; description: string }>;
@@ -38,11 +41,11 @@ export default async function Home() {
         >
           <source src="/video/hero.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-br from-[#15265d] to-[#113cca] opacity-60 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#15265d] to-[#112e90] opacity-60 z-10"></div>
         <div className="relative z-20 max-w-[970px] mx-auto">
           <div className="mb-6 flex justify-center">
             <Image
-              src="/momentum-logo-white.svg"
+              src={heroLogo}
               alt="AlayaCare"
               width={320}
               height={60}
@@ -238,7 +241,7 @@ export default async function Home() {
       <section className="pt-3 pb-[70px] px-6 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto flex justify-center">
           <Image
-            src="/momentum-logo-blue.svg"
+            src={footerLogo}
             alt="AlayaCare"
             width={320}
             height={60}
