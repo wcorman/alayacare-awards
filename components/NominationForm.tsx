@@ -562,7 +562,7 @@ export default function NominationForm() {
                                 <button
                                     type="button"
                                     onClick={() => setShowTermsConfirm(false)}
-                                    className="px-5 py-2.5 rounded-xl font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors"
+                                    className="px-5 py-2.5 rounded-lg font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors"
                                 >
                                     {t('form.fields.termsModalStay')}
                                 </button>
@@ -572,7 +572,7 @@ export default function NominationForm() {
                                         setShowTermsConfirm(false);
                                         router.push('/terms');
                                     }}
-                                    className="px-5 py-2.5 rounded-xl font-semibold text-white bg-[#1D5EED] hover:bg-[#113CCA] transition-colors"
+                                    className="px-5 py-2.5 rounded-lg font-semibold text-white bg-[#1D5EED] hover:bg-[#113CCA] transition-colors"
                                 >
                                     {t('form.fields.termsModalContinue')}
                                 </button>
