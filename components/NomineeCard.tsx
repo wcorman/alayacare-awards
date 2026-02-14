@@ -107,7 +107,7 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
                     className="flex items-center gap-1.5 text-gray-500 font-medium hover:text-[#08193E] transition-colors"
                 >
                     <Award size={16} className="text-[#08193E]" />
-                    <span className="text-xs">{nominee.votes} {t('votes')}</span>
+                    <span className="text-xs">{nominee.votes} {nominee.votes === 1 ? t('voteSingular') : t('votes')}</span>
                 </Link>
 
                 <button
@@ -119,7 +119,7 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
                     disabled={hasVoted}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${hasVoted
                             ? 'bg-green-100 text-green-700 cursor-default'
-                            : 'bg-gray-100 text-gray-600 hover:bg-[#1D5EED] hover:text-white'
+                            : 'bg-gray-100 text-gray-600 hover:bg-[#1D5EED] hover:text-white cursor-pointer'
                         }`}
                 >
                     {hasVoted ? (

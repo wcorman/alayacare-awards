@@ -27,7 +27,8 @@ export default function VoteModal({
     const t = useTranslations('VoteModal');
     const [email, setEmail] = useState('');
     const [isHomeCare, setIsHomeCare] = useState(false);
-    const [name, setName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [organization, setOrganization] = useState('');
     const [jobTitle, setJobTitle] = useState('');
 
@@ -53,7 +54,8 @@ export default function VoteModal({
                         onClick={() => {
                             setEmail('');
                             setIsHomeCare(false);
-                            setName('');
+                            setFirstName('');
+                            setLastName('');
                             setOrganization('');
                             setJobTitle('');
                             onClose();
@@ -74,7 +76,8 @@ export default function VoteModal({
             onClick={() => {
                 setEmail('');
                 setIsHomeCare(false);
-                setName('');
+                setFirstName('');
+                setLastName('');
                 setOrganization('');
                 setJobTitle('');
                 onClose();
@@ -88,7 +91,8 @@ export default function VoteModal({
                     onClick={() => {
                         setEmail('');
                         setIsHomeCare(false);
-                        setName('');
+                        setFirstName('');
+                        setLastName('');
                         setOrganization('');
                         setJobTitle('');
                         onClose();
@@ -111,7 +115,7 @@ export default function VoteModal({
                     </div>
                 )}
 
-                <form onSubmit={(e) => { e.preventDefault(); onSubmit(email, isHomeCare, name, organization, jobTitle); }}>
+                <form onSubmit={(e) => { e.preventDefault(); onSubmit(email, isHomeCare, [firstName.trim(), lastName.trim()].filter(Boolean).join(' ') || undefined, organization, jobTitle); }}>
                     <div className="mb-6">
                         <label className="block text-sm font-bold mb-2 text-gray-700">{t('fields.email')}</label>
                         <input
@@ -135,7 +139,8 @@ export default function VoteModal({
                                 onChange={(e) => {
                                     setIsHomeCare(e.target.checked);
                                     if (!e.target.checked) {
-                                        setName('');
+                                        setFirstName('');
+                                        setLastName('');
                                         setOrganization('');
                                         setJobTitle('');
                                     }
@@ -151,16 +156,29 @@ export default function VoteModal({
                     {/* Name and Organization Fields */}
                     {isHomeCare && (
                         <>
-                            <div className="mb-6">
-                                <label className="block text-sm font-bold mb-2 text-gray-700">{t('fields.name')}</label>
-                                <input
-                                    required
-                                    type="text"
-                                    className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
-                                    placeholder={t('fields.namePlaceholder')}
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
+                            <div className="mb-6 grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">{t('fields.firstName')}</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
+                                        placeholder={t('fields.firstNamePlaceholder')}
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-bold mb-2 text-gray-700">{t('fields.lastName')}</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1D5EED] focus:border-transparent transition-all text-gray-900"
+                                        placeholder={t('fields.lastNamePlaceholder')}
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                    />
+                                </div>
                             </div>
                             <div className="mb-6">
                                 <label className="block text-sm font-bold mb-2 text-gray-700">{t('fields.organization')}</label>
@@ -195,7 +213,7 @@ export default function VoteModal({
                         <button
                             type="submit"
                             className="flex-1 px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                            disabled={isChecking || (isHomeCare && (!name || !organization || !jobTitle))}
+                            disabled={isChecking || (isHomeCare && (!firstName.trim() || !lastName.trim() || !organization || !jobTitle))}
                         >
                             {isChecking ? (
                                 <>
@@ -210,7 +228,8 @@ export default function VoteModal({
                             onClick={() => {
                                 setEmail('');
                                 setIsHomeCare(false);
-                                setName('');
+                                setFirstName('');
+                                setLastName('');
                                 setOrganization('');
                                 setJobTitle('');
                                 onClose();

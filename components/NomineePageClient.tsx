@@ -74,7 +74,7 @@ export default function NomineePageClient({ nominee }: NomineePageClientProps) {
             <div className="pt-8 border-t border-gray-200">
                 <button
                     onClick={handleInitiateVote}
-                    className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-3 px-8 py-4 rounded-lg font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer"
                 >
                     <ThumbsUp size={20} />
                     {t('voteFor', { name: nominee.firstName || nominee.name.split(' ')[0] || nominee.name })}

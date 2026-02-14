@@ -331,8 +331,10 @@
       "email": "Votre adresse courriel",
       "emailPlaceholder": "p. ex. nom@entreprise.com",
       "industryCheckbox": "Je travaille actuellement dans le secteur des soins à domicile.",
-      "name": "Nom",
-      "namePlaceholder": "p. ex. Jean Dupont",
+      "firstName": "Prénom",
+      "firstNamePlaceholder": "p. ex. Jean",
+      "lastName": "Nom de famille",
+      "lastNamePlaceholder": "p. ex. Dupont",
       "organization": "Organisation",
       "organizationPlaceholder": "p. ex. Soins à domicile ABC",
       "jobTitle": "Titre d'emploi",
@@ -343,7 +345,8 @@
     "viewNominee": "Voir la candidature",
     "vote": "Voter",
     "voted": "Voté",
-    "votes": "Votes"
+    "voteSingular": "vote",
+    "votes": "votes"
   },
   "NomineePage": {
     "voteFor": "Voter pour {name}"
@@ -387,7 +390,7 @@
     "close": "Fermer",
     "thankYou": "Merci!",
     "voteConfirmed": "Votre vote a été confirmé pour",
-    "voteForOthers": "Proposer quelqu'un d'autre"
+    "castAnotherVote": "Voter à nouveau"
   },
   "Terms": {
     "hero": {

@@ -331,8 +331,10 @@
       "email": "Your email address",
       "emailPlaceholder": "e.g. name@company.com",
       "industryCheckbox": "I am currently working in the home-based care sector.",
-      "name": "Name",
-      "namePlaceholder": "e.g. Jane Doe",
+      "firstName": "First name",
+      "firstNamePlaceholder": "e.g. Jane",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "e.g. Doe",
       "organization": "Organization",
       "organizationPlaceholder": "e.g. ABC Home Care",
       "jobTitle": "Job title",
@@ -343,7 +345,8 @@
     "viewNominee": "View Nominee",
     "vote": "Vote",
     "voted": "Voted",
-    "votes": "Votes"
+    "voteSingular": "vote",
+    "votes": "votes"
   },
   "NomineePage": {
     "voteFor": "Vote for {name}"
@@ -387,7 +390,7 @@
     "close": "Close",
     "thankYou": "Thank you!",
     "voteConfirmed": "Your vote has been confirmed for",
-    "voteForOthers": "Nominate Someone Else"
+    "castAnotherVote": "Cast Another Vote"
   },
   "Terms": {
     "hero": {
