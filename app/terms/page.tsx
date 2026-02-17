@@ -14,7 +14,7 @@ export default async function TermsPage() {
     sectionKey,
     paragraphs,
   }: {
-    sectionKey: 'eligibility' | 'nominations' | 'selection' | 'useOfContent' | 'publicity' | 'privacy' | 'disqualification' | 'changes' | 'governingLaw';
+    sectionKey: 'participation' | 'eligibility' | 'nominations' | 'selection' | 'useOfContent' | 'publicity' | 'privacy' | 'disqualification' | 'changes' | 'releaseAndLimitation' | 'governingLaw';
     paragraphs: ('p1' | 'p2' | 'p3' | 'p4')[];
   }) => (
     <div className="mb-10">
@@ -48,14 +48,16 @@ export default async function TermsPage() {
       {/* Content */}
       <section className="py-16 px-6 lg:px-12 bg-white">
         <div className="max-w-4xl mx-auto">
+          <Section sectionKey="participation" paragraphs={['p1']} />
           <Section sectionKey="eligibility" paragraphs={['p1', 'p2']} />
-          <Section sectionKey="nominations" paragraphs={['p1', 'p2']} />
+          <Section sectionKey="nominations" paragraphs={['p1', 'p2', 'p3']} />
           <Section sectionKey="selection" paragraphs={['p1', 'p2', 'p3', 'p4']} />
           <Section sectionKey="useOfContent" paragraphs={['p1']} />
           <Section sectionKey="publicity" paragraphs={['p1', 'p2']} />
-          <Section sectionKey="privacy" paragraphs={['p1', 'p2', 'p3', 'p4']} />
+          <Section sectionKey="privacy" paragraphs={['p1', 'p2', 'p3']} />
           <Section sectionKey="disqualification" paragraphs={['p1']} />
-          <Section sectionKey="changes" paragraphs={['p1']} />
+          <Section sectionKey="changes" paragraphs={['p1', 'p2']} />
+          <Section sectionKey="releaseAndLimitation" paragraphs={['p1']} />
           <Section sectionKey="governingLaw" paragraphs={['p1']} />
         </div>
       </section>

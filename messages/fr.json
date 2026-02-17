@@ -79,9 +79,6 @@
       "poweredBy3": "C'est plus qu'une reconnaissance. C'est une plateforme pour mettre en lumière les personnes qui façonnent l'avenir des soins à domicile et pour créer un élan qui élève toute l'industrie."
     }
   },
-  "NomineeCard": {
-    "viewNominee": "Voir la candidature"
-  },
   "Eligibility": {
     "hero": {
       "title": "Détails d'admissibilité",
@@ -397,15 +394,20 @@
       "title": "Conditions générales",
       "subtitle": "Conditions générales"
     },
+    "participation": {
+      "title": "Participation et acceptation des Conditions",
+      "p1": "En soumettant une candidature (un \"Proposant\"), en acceptant une candidature (un \"Candidat\"), en votant (un \"Votant\"), ou en participant autrement aux Prix Momentum des soins à domicile (les \"Prix\"), chaque personne ou organisation (chacune un \"Participant\" et collectivement les \"Participants\") reconnaît et accepte d'être liée par les Conditions, telles qu'elles peuvent être modifiées de temps à autre par AlayaCare."
+    },
     "eligibility": {
       "title": "Admissibilité",
-      "p1": "Les Prix Momentum des soins à domicile sont ouverts aux personnes et aux organisations qui exercent leurs activités dans le secteur des soins à domicile au Canada et aux États-Unis. Cela comprend notamment les services de santé à domicile, de soins à domicile, de perfusion à domicile, de soins palliatifs, de soins communautaires et les services connexes.",
-      "p2": "Les candidats doivent travailler activement dans ce secteur au moment de leur mise en candidature."
+      "p1": "Les Prix sont ouverts aux personnes et aux organisations qui exercent leurs activités dans le secteur des soins à domicile au Canada et aux États-Unis. Cela comprend notamment les services de santé à domicile, de soins à domicile, de soins palliatifs, de soins communautaires et les services connexes. Les candidats doivent travailler activement dans ce secteur au moment de leur mise en candidature.",
+      "p2": "La participation est nulle là où elle est interdite par la loi."
     },
     "nominations": {
       "title": "Mises en candidature",
-      "p1": "Les mises en candidature peuvent être soumises par des pairs, des collègues, des organisations ou par auto-candidature, sauf indication contraire. Toutes les informations soumises doivent être exactes et complètes au mieux des connaissances de la personne qui propose la candidature.",
-      "p2": "AlayaCare se réserve le droit de vérifier les renseignements fournis dans le cadre des mises en candidature et de demander des informations supplémentaires au besoin."
+      "p1": "Les mises en candidature peuvent être soumises par des pairs, des collègues, des organisations ou par auto-candidature, sauf indication contraire. Toutes les informations soumises doivent être exactes et complètes au mieux des connaissances du Proposant.",
+      "p2": "AlayaCare se réserve le droit de vérifier les renseignements fournis dans le cadre des mises en candidature et de demander des informations supplémentaires au besoin. AlayaCare peut, à sa discrétion, limiter le nombre de candidatures soumises par ou concernant tout candidat, ou refuser de considérer les candidatures qui sont dupliquées, incomplètes ou qui ne correspondent pas à l'intention des Prix.",
+      "p3": "Une candidature ne crée aucun droit acquis, attente ou droit à recevoir un prix."
     },
     "selection": {
       "title": "Processus de sélection",
@@ -420,8 +422,8 @@
     },
     "publicity": {
       "title": "Publicité",
-      "p1": "Les lauréats acceptent de participer à des activités promotionnelles raisonnables liées aux prix. Cela peut inclure des entrevues, des portraits écrits, des mentions sur les réseaux sociaux ou une participation à des événements.",
-      "p2": "Si un candidat ne souhaite pas être reconnu publiquement, il doit en informer AlayaCare avant la sélection finale."
+      "p1": "Les candidats acceptent de participer à des activités promotionnelles raisonnables liées aux prix. Cela peut inclure des entrevues, des portraits écrits, des mentions sur les réseaux sociaux ou une participation à des événements.",
+      "p2": "Si un Candidat ne souhaite pas être reconnu publiquement, il doit en informer AlayaCare avant la sélection finale. Dans de tels cas, AlayaCare peut, à sa discrétion, retirer la candidature ou ajuster la façon dont le Candidat est référencé dans les documents publics."
     },
     "privacy": {
       "title": "Protection des renseignements personnels et communications marketing",
@@ -432,15 +434,19 @@
     },
     "disqualification": {
       "title": "Disqualification",
-      "p1": "AlayaCare se réserve le droit de disqualifier toute candidature ou tout participant si les renseignements fournis sont faux, trompeurs, incomplets ou soumis en contravention des présentes conditions générales."
+      "p1": "AlayaCare se réserve le droit de disqualifier toute candidature ou tout participant si les renseignements fournis sont faux, trompeurs, incomplets ou soumis en contravention des présentes Conditions."
     },
     "changes": {
       "title": "Modifications et annulation",
       "p1": "AlayaCare se réserve le droit de modifier en tout temps les catégories de prix, les critères, les échéanciers ou les présentes conditions générales. AlayaCare peut suspendre ou annuler les prix si les circonstances l’exigent, sans engager sa responsabilité."
     },
+    "releaseAndLimitation": {
+      "title": "Décharge et limitation de responsabilité",
+      "p1": "Dans la mesure maximale permise par la loi applicable, les Participants dégagent AlayaCare et ses affiliés, employés, agents et représentants de toute réclamation, dommage, perte ou dépense découlant de ou liée à la participation aux Prix, l'utilisation des Renseignements de candidature conformément aux présentes Conditions, ou toute décision prise en relation avec les Prix. AlayaCare ne sera pas responsable de tout dommage indirect, accessoire, consécutif, spécial, exemplaire ou punitif, ou de toute perte de profits ou de revenus, qu'il découle d'un contrat, d'un délit ou autrement."
+    },
     "governingLaw": {
       "title": "Droit applicable",
-      "p1": "Les présentes conditions générales sont régies par les lois de la juridiction dans laquelle AlayaCare exerce ses activités, sans égard aux principes en matière de conflits de lois."
+      "p1": "Les présentes Conditions sont régies par et interprétées conformément aux lois de la province de l'Ontario et aux lois fédérales du Canada applicables aux Participants situés au Canada, et aux lois de l'État de New York pour tous les autres Participants, dans chaque cas sans égard aux principes en matière de conflits de lois."
     }
   }
 }
