@@ -193,7 +193,7 @@ export default async function EligibilityPage() {
       </section>
 
       {/* Category Eligibility */}
-      <section className="py-16 px-6 lg:px-12 bg-gray-50">
+      <section id="categories" className="pt-[99px] pb-16 px-6 lg:px-12 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4 text-[#08193e]">{t('categoryLevel.title')}</h2>
