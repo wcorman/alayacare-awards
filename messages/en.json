@@ -389,6 +389,11 @@
     "voteConfirmed": "Your vote has been confirmed for",
     "castAnotherVote": "Cast Another Vote"
   },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "backToHome": "Back to Home"
+  },
   "Terms": {
     "hero": {
       "title": "Terms and conditions",
