@@ -132,7 +132,7 @@ export default function NominationForm() {
         return (
             <div className="py-8 px-6 lg:px-12 bg-gray-50 min-h-screen flex flex-col items-center">
                 <div className="max-w-4xl w-full text-center">
-                    <button onClick={() => router.push('/')} className="flex items-center gap-2 text-gray-500 hover:text-[#1D5EED] mb-6 font-medium mx-auto md:mx-0">
+                    <button onClick={() => router.push('/')} className="flex items-center gap-2 text-gray-500 hover:text-[#1D5EED] mb-6 font-medium mr-auto">
                         <ChevronRight className="rotate-180" size={20} /> {t('backToHome')}
                     </button>
 
