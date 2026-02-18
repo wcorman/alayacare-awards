@@ -81,9 +81,6 @@ export default function NominationAcceptanceShare() {
         </button>
       </div>
 
-      <p className="mt-4 text-sm text-gray-600">
-        Instagram does not currently support pre-filled web shares, so the button opens Instagram and copies the post text for quick paste.
-      </p>
     </div>
   );
 }
