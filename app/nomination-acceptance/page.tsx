@@ -15,7 +15,7 @@ export default function NominationAcceptancePage() {
   return (
     <main className="min-h-screen bg-[#fcfcfc] text-slate-800">
       <section
-        className="relative text-white py-16 px-6 lg:px-12 overflow-hidden"
+        className="relative text-white py-[calc(4rem+2px)] px-[calc(1.5rem+2px)] lg:px-[calc(3rem+2px)] overflow-hidden"
         style={{ background: "linear-gradient(135deg, #08193e 0%, #113cca 100%)" }}
       >
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-bl-full transform translate-x-1/2 -translate-y-1/2"></div>
