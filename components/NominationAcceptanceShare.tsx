@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { Copy, Facebook, Instagram, Linkedin } from "lucide-react";
 
 const AWARDS_URL = "https://awards.alayacare.com/";
+const FALLBACK_NOMINATION_IMAGE_URL =
+  "https://2702101.fs1.hubspotusercontent-na1.net/hubfs/2702101/Ive%20been%20nominated%20for%20the%20Momentum%20Awards!.png";
 const SOCIAL_COPY = `I’m excited to be nominated for the 2026 Home-Based Care Momentum Awards presented by AlayaCare, recognizing leaders moving our industry forward! 🎉 Public voting starts May 1 — stay tuned to cast your vote!
 Learn more about the awards: ${AWARDS_URL}
 #MomentumAwards2026`;
@@ -18,6 +20,8 @@ export default function NominationAcceptanceShare({
   nomineeName = null,
 }: NominationAcceptanceShareProps) {
   const [copied, setCopied] = useState(false);
+  const [isCopyButtonHovered, setIsCopyButtonHovered] = useState(false);
+  const imageUrlToUse = customImageUrl || FALLBACK_NOMINATION_IMAGE_URL;
 
   const shareLinks = useMemo(() => {
     const encodedMessage = encodeURIComponent(SOCIAL_COPY);
@@ -44,28 +48,30 @@ export default function NominationAcceptanceShare({
     <div className="rounded-xl border border-blue-100 bg-blue-50 p-6">
       <h3 className="text-xl font-bold text-[#08193e] mb-3">Share the good news on social media</h3>
 
-      {customImageUrl && (
-        <>
-          <div className="max-w-lg overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
-            <img
-              src={customImageUrl}
-              alt={`${nomineeName || "Nominee"} nomination image`}
-              className="w-full h-auto object-contain"
-            />
-          </div>
-          <a
-            href={customImageUrl}
-            download
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center rounded-md bg-[#1D5EED] px-4 py-2 text-white font-semibold hover:bg-[#113CCA] transition-colors"
-          >
-            Download image
-          </a>
-        </>
-      )}
+      <>
+        <div className="max-w-lg overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
+          <img
+            src={imageUrlToUse}
+            alt={`${nomineeName || "Nominee"} nomination image`}
+            className="w-full h-auto object-contain"
+          />
+        </div>
+        <a
+          href={imageUrlToUse}
+          download
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center rounded-md bg-[#1D5EED] px-4 py-2 text-white font-semibold hover:bg-[#113CCA] transition-colors"
+        >
+          Download image
+        </a>
+      </>
 
-      <blockquote className="mt-4 rounded-lg border border-blue-100 bg-white p-4 text-gray-700 leading-relaxed whitespace-pre-line">
+      <blockquote
+        className={`mt-4 rounded-lg border bg-white p-4 text-gray-700 leading-relaxed whitespace-pre-line transition-colors ${
+          isCopyButtonHovered ? "border-[#1D5EED]" : "border-blue-100"
+        }`}
+      >
         &ldquo;{SOCIAL_COPY}&rdquo;
       </blockquote>
 
@@ -104,6 +110,8 @@ export default function NominationAcceptanceShare({
         <button
           type="button"
           onClick={copySocialText}
+          onMouseEnter={() => setIsCopyButtonHovered(true)}
+          onMouseLeave={() => setIsCopyButtonHovered(false)}
           className="inline-flex items-center gap-2 rounded-md border border-[#08193e] px-4 py-2 font-semibold text-[#08193e] hover:bg-white transition-colors"
         >
           <Copy size={18} />
