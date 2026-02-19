@@ -8,7 +8,15 @@ const SOCIAL_COPY = `I’m excited to be nominated for the 2026 Home-Based Care 
 Learn more about the awards: ${AWARDS_URL}
 #MomentumAwards2026`;
 
-export default function NominationAcceptanceShare() {
+interface NominationAcceptanceShareProps {
+  customImageUrl?: string | null;
+  nomineeName?: string | null;
+}
+
+export default function NominationAcceptanceShare({
+  customImageUrl = null,
+  nomineeName = null,
+}: NominationAcceptanceShareProps) {
   const [copied, setCopied] = useState(false);
 
   const shareLinks = useMemo(() => {
@@ -35,8 +43,30 @@ export default function NominationAcceptanceShare() {
   return (
     <div className="rounded-xl border border-blue-100 bg-blue-50 p-6">
       <h3 className="text-xl font-bold text-[#08193e] mb-3">Share the good news on social media</h3>
-      <blockquote className="rounded-lg border border-blue-100 bg-white p-4 text-gray-700 leading-relaxed whitespace-pre-line">
-        "{SOCIAL_COPY}"
+
+      {customImageUrl && (
+        <>
+          <div className="max-w-lg overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
+            <img
+              src={customImageUrl}
+              alt={`${nomineeName || "Nominee"} nomination image`}
+              className="w-full h-auto object-contain"
+            />
+          </div>
+          <a
+            href={customImageUrl}
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center rounded-md bg-[#1D5EED] px-4 py-2 text-white font-semibold hover:bg-[#113CCA] transition-colors"
+          >
+            Download image
+          </a>
+        </>
+      )}
+
+      <blockquote className="mt-4 rounded-lg border border-blue-100 bg-white p-4 text-gray-700 leading-relaxed whitespace-pre-line">
+        &ldquo;{SOCIAL_COPY}&rdquo;
       </blockquote>
 
       <div className="mt-5 flex flex-wrap gap-3">

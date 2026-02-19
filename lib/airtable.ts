@@ -101,6 +101,44 @@ export async function fetchNomineeById(id: string): Promise<Nominee | null> {
     };
 }
 
+export interface NominationAcceptanceData {
+    id: string;
+    nomineeName: string;
+    customNominationImage: string | null;
+}
+
+export async function fetchNominationAcceptanceDataById(id: string): Promise<NominationAcceptanceData | null> {
+    const TABLE_NAME = "Nominations";
+    const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}/${encodeURIComponent(id)}`;
+
+    const res = await fetch(url, { headers: HEADERS, cache: 'no-store' });
+
+    if (!res.ok) {
+        if (res.status === 404) {
+            return null;
+        }
+        throw new Error(`Failed to fetch nomination acceptance data: ${res.statusText}`);
+    }
+
+    const record = await res.json();
+    const firstName = record.fields["First Name"] || null;
+    const lastName = record.fields["Last Name"] || null;
+    const nomineeName = firstName && lastName
+        ? `${firstName} ${lastName}`.trim()
+        : record.fields["Name"] || "Nominee";
+
+    const rawCustomImage = record.fields["custom-nomination-image"];
+    const customNominationImage = typeof rawCustomImage === "string"
+        ? rawCustomImage
+        : rawCustomImage?.[0]?.url || null;
+
+    return {
+        id: record.id,
+        nomineeName,
+        customNominationImage,
+    };
+}
+
 export async function findVotingRecord(email: string) {
     const TABLE_NAME = "Voting Record";
     const filterFormula = encodeURIComponent(`{Voter Email}='${email}'`);

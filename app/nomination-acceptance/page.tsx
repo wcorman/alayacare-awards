@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import NominationAcceptanceShare from "@/components/NominationAcceptanceShare";
+import { fetchNominationAcceptanceDataById } from "@/lib/airtable";
 
 export const metadata: Metadata = {
   title: "Nomination Acceptance | Home-Based Care Momentum Awards",
@@ -11,7 +12,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function NominationAcceptancePage() {
+export const dynamic = "force-dynamic";
+
+interface NominationAcceptancePageProps {
+  searchParams?: Promise<{ id?: string | string[] }>;
+}
+
+export default async function NominationAcceptancePage({ searchParams }: NominationAcceptancePageProps) {
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const idParam = resolvedSearchParams?.id;
+  const recordId = Array.isArray(idParam) ? idParam[0] : idParam;
+
+  const nominationData = recordId
+    ? await fetchNominationAcceptanceDataById(recordId)
+    : null;
+
+  const customImageUrl = nominationData?.customNominationImage || null;
+
   return (
     <main className="min-h-screen bg-[#fcfcfc] text-slate-800">
       <section
@@ -50,7 +67,10 @@ export default function NominationAcceptancePage() {
             </ul>
           </div>
 
-          <NominationAcceptanceShare />
+          <NominationAcceptanceShare
+            customImageUrl={customImageUrl}
+            nomineeName={nominationData?.nomineeName || null}
+          />
 
           <div className="rounded-xl border border-gray-200 p-6">
             <h3 className="text-xl font-bold text-[#08193e] mb-2">Questions?</h3>
