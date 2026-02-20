@@ -10,13 +10,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "The Home-Based Care Momentum Awards",
     description: "Recognize the outstanding individuals who are elevating home-based care every day.",
-    images: ["/momentum-awards-social-2026.png"],
+    images: ["/momentum-awards-og.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Home-Based Care Momentum Awards",
     description: "Recognize the outstanding individuals who are elevating home-based care every day.",
-    images: ["/momentum-awards-social-2026.png"],
+    images: ["/momentum-awards-og.png"],
   },
 };
 
