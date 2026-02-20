@@ -68,11 +68,23 @@ export default function NominationAcceptanceShare({
       </>
 
       <blockquote
-        className={`mt-4 rounded-lg border bg-white p-4 text-gray-700 leading-relaxed whitespace-pre-line transition-colors ${
+        className={`relative mt-4 rounded-lg border bg-white px-8 py-6 text-gray-700 leading-relaxed whitespace-pre-line transition-colors ${
           isCopyButtonHovered ? "border-[#1D5EED]" : "border-blue-100"
         }`}
       >
-        &ldquo;{SOCIAL_COPY}&rdquo;
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute left-3 top-1 select-none text-5xl leading-none text-blue-200/70"
+        >
+          &ldquo;
+        </span>
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute right-3 top-1 select-none text-5xl leading-none text-blue-200/70"
+        >
+          &rdquo;
+        </span>
+        {SOCIAL_COPY}
       </blockquote>
 
       <div className="mt-5 flex flex-wrap gap-3">
