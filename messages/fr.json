@@ -205,6 +205,31 @@
       "cta": "Prêt à proposer une candidature?"
     }
   },
+  "NominationAcceptance": {
+    "page": {
+      "heroTitle": "Merci d’avoir accepté votre candidature!",
+      "nextStepsTitle": "Pour en savoir plus sur les Prix Momentum des soins à domicile et les prochaines étapes, vous pouvez :",
+      "nextStepsEligibilityPrefix": "Consulter l’aperçu du programme et les critères",
+      "nextStepsEligibilityLink": "sur la page d’admissibilité",
+      "nextStepsTimelinePrefix": "Voir les dates clés et les étapes importantes",
+      "nextStepsTimelineLink": "dans la chronologie de la page d’accueil",
+      "questionsTitle": "Des questions?",
+      "questionsPrefix": "Vous avez des questions au sujet des Prix Momentum? Écrivez à",
+      "questionsSuffix": "et un membre du comité des prix se fera un plaisir de vous aider."
+    },
+    "share": {
+      "title": "Partagez la bonne nouvelle sur les réseaux sociaux",
+      "downloadImage": "Télécharger l’image",
+      "shareOnLinkedIn": "Partager sur LinkedIn",
+      "shareOnFacebook": "Partager sur Facebook",
+      "openInstagram": "Ouvrir Instagram",
+      "copyPostText": "Copier le texte de publication",
+      "copied": "Copié!",
+      "fallbackName": "Candidat",
+      "imageAlt": "Image de candidature de {name}",
+      "socialCopy": "Je suis ravie d’être en nomination pour les Prix Momentum des soins à domicile 2026, présentés par AlayaCare, qui reconnaissent les leaders qui font progresser notre industrie! 🎉 Le vote du public débute le 1er mai — restez à l’affût pour voter!\nEn savoir plus sur les prix : https://awards.alayacare.com/\n#MomentumAwards2026"
+    }
+  },
   "Footer": {
     "tagline": "Célébrer l'élan derrière des soins à domicile exceptionnels.",
     "poweredBy": "Presenté par",

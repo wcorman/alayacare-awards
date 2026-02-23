@@ -2,13 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { Copy, Facebook, Instagram, Linkedin } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const AWARDS_URL = "https://awards.alayacare.com/";
 const FALLBACK_NOMINATION_IMAGE_URL =
   "https://2702101.fs1.hubspotusercontent-na1.net/hubfs/2702101/Ive%20been%20nominated%20for%20the%20Momentum%20Awards!.png";
-const SOCIAL_COPY = `I’m excited to be nominated for the 2026 Home-Based Care Momentum Awards presented by AlayaCare, recognizing leaders moving our industry forward! 🎉 Public voting starts May 1 — stay tuned to cast your vote!
-Learn more about the awards: ${AWARDS_URL}
-#MomentumAwards2026`;
 
 interface NominationAcceptanceShareProps {
   customImageUrl?: string | null;
@@ -19,12 +17,14 @@ export default function NominationAcceptanceShare({
   customImageUrl = null,
   nomineeName = null,
 }: NominationAcceptanceShareProps) {
+  const t = useTranslations("NominationAcceptance.share");
   const [copied, setCopied] = useState(false);
   const [isCopyButtonHovered, setIsCopyButtonHovered] = useState(false);
   const imageUrlToUse = customImageUrl || FALLBACK_NOMINATION_IMAGE_URL;
+  const socialCopy = t("socialCopy");
 
   const shareLinks = useMemo(() => {
-    const encodedMessage = encodeURIComponent(SOCIAL_COPY);
+    const encodedMessage = encodeURIComponent(socialCopy);
     const encodedUrl = encodeURIComponent(AWARDS_URL);
 
     return {
@@ -32,11 +32,11 @@ export default function NominationAcceptanceShare({
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedMessage}`,
       instagram: "https://www.instagram.com/",
     };
-  }, []);
+  }, [socialCopy]);
 
   const copySocialText = async () => {
     try {
-      await navigator.clipboard.writeText(SOCIAL_COPY);
+      await navigator.clipboard.writeText(socialCopy);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -46,13 +46,13 @@ export default function NominationAcceptanceShare({
 
   return (
     <div className="rounded-xl border border-blue-100 bg-blue-50 p-6">
-      <h3 className="text-xl font-bold text-[#08193e] mb-3">Share the good news on social media</h3>
+      <h3 className="text-xl font-bold text-[#08193e] mb-3">{t("title")}</h3>
 
       <>
         <div className="max-w-lg overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
           <img
             src={imageUrlToUse}
-            alt={`${nomineeName || "Nominee"} nomination image`}
+            alt={t("imageAlt", { name: nomineeName || t("fallbackName") })}
             className="w-full h-auto object-contain"
           />
         </div>
@@ -63,7 +63,7 @@ export default function NominationAcceptanceShare({
           rel="noopener noreferrer"
           className="mt-3 inline-flex items-center rounded-md bg-[#1D5EED] px-4 py-2 text-white font-semibold hover:bg-[#113CCA] transition-colors"
         >
-          Download image
+          {t("downloadImage")}
         </a>
       </>
 
@@ -84,7 +84,7 @@ export default function NominationAcceptanceShare({
         >
           &rdquo;
         </span>
-        {SOCIAL_COPY}
+        {socialCopy}
       </blockquote>
 
       <div className="mt-5 flex flex-wrap gap-3">
@@ -95,7 +95,7 @@ export default function NominationAcceptanceShare({
           className="inline-flex items-center gap-2 rounded-md bg-[#0a66c2] px-4 py-2 text-white font-semibold hover:opacity-90 transition-opacity"
         >
           <Linkedin size={18} />
-          Share on LinkedIn
+          {t("shareOnLinkedIn")}
         </a>
 
         <a
@@ -105,7 +105,7 @@ export default function NominationAcceptanceShare({
           className="inline-flex items-center gap-2 rounded-md bg-[#1877f2] px-4 py-2 text-white font-semibold hover:opacity-90 transition-opacity"
         >
           <Facebook size={18} />
-          Share on Facebook
+          {t("shareOnFacebook")}
         </a>
 
         <a
@@ -116,7 +116,7 @@ export default function NominationAcceptanceShare({
           className="inline-flex items-center gap-2 rounded-md bg-[#d62976] px-4 py-2 text-white font-semibold hover:opacity-90 transition-opacity"
         >
           <Instagram size={18} />
-          Open Instagram
+          {t("openInstagram")}
         </a>
 
         <button
@@ -127,7 +127,7 @@ export default function NominationAcceptanceShare({
           className="inline-flex items-center gap-2 rounded-md border border-[#08193e] px-4 py-2 font-semibold text-[#08193e] hover:bg-white transition-colors"
         >
           <Copy size={18} />
-          {copied ? "Copied!" : "Copy post text"}
+          {copied ? t("copied") : t("copyPostText")}
         </button>
       </div>
 

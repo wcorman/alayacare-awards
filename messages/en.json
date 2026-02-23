@@ -205,6 +205,31 @@
       "cta": "Ready to Nominate?"
     }
   },
+  "NominationAcceptance": {
+    "page": {
+      "heroTitle": "Thank you for accepting your nomination!",
+      "nextStepsTitle": "To learn more about The Home-Based Care Momentum Awards and what happens next, you can:",
+      "nextStepsEligibilityPrefix": "Review the award overview and criteria",
+      "nextStepsEligibilityLink": "on the eligibility page",
+      "nextStepsTimelinePrefix": "See the key dates and milestones",
+      "nextStepsTimelineLink": "on the homepage timeline",
+      "questionsTitle": "Questions?",
+      "questionsPrefix": "Have questions about the Momentum Awards? Please email",
+      "questionsSuffix": "and a member of the awards committee will be happy to help."
+    },
+    "share": {
+      "title": "Share the good news on social media",
+      "downloadImage": "Download image",
+      "shareOnLinkedIn": "Share on LinkedIn",
+      "shareOnFacebook": "Share on Facebook",
+      "openInstagram": "Open Instagram",
+      "copyPostText": "Copy post text",
+      "copied": "Copied!",
+      "fallbackName": "Nominee",
+      "imageAlt": "{name} nomination image",
+      "socialCopy": "I’m excited to be nominated for the 2026 Home-Based Care Momentum Awards presented by AlayaCare, recognizing leaders moving our industry forward! 🎉 Public voting starts May 1 — stay tuned to cast your vote!\nLearn more about the awards: https://awards.alayacare.com/\n#MomentumAwards2026"
+    }
+  },
   "Footer": {
     "tagline": "Celebrating the momentum behind exceptional home-based care.",
     "poweredBy": "Presented by",
