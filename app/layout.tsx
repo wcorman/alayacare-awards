@@ -39,7 +39,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={inter.className}>
+      <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-S4N9M8JZMB"
           strategy="afterInteractive"
@@ -52,6 +52,8 @@ export default async function RootLayout({
             gtag('config', 'G-S4N9M8JZMB');
           `}
         </Script>
+      </head>
+      <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div className="min-h-screen flex flex-col">
             <Navbar />
