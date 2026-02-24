@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
-import { Search, X, Heart, Award, Briefcase, Sparkles, Grid3x3 } from 'lucide-react';
+import { Search, X, Heart, Award, Briefcase, Sparkles, Grid3x3, Vote, UserPlus } from 'lucide-react';
+import Link from 'next/link';
 import NomineeCard from './NomineeCard';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
@@ -17,14 +18,16 @@ const CATEGORY_CONFIG: Record<string, { icon: React.ComponentType<{ size?: numbe
 
 interface VotePageClientProps {
     nominees: Nominee[];
+    isVotingOpen: boolean;
 }
 
-export default function VotePageClient({ nominees }: VotePageClientProps) {
+export default function VotePageClient({ nominees, isVotingOpen }: VotePageClientProps) {
     const t = useTranslations('VotePage');
     const tHome = useTranslations('Home');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [votedNomineeIds, setVotedNomineeIds] = useState<string[]>([]);
+    const [adminAccessInput, setAdminAccessInput] = useState('');
 
     // Vote Modal State
     const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
@@ -124,6 +127,49 @@ export default function VotePageClient({ nominees }: VotePageClientProps) {
             (nominee.category && nominee.category.toLowerCase().includes(lowerSearch))
         );
     });
+
+    const hasAdminAccess = adminAccessInput.trim().toLowerCase() === 'marketingsquad';
+    const showVotingGrid = isVotingOpen || hasAdminAccess;
+
+    if (!showVotingGrid) {
+        return (
+            <div className="max-w-3xl mx-auto px-6 lg:px-12 py-20 min-h-[60vh] flex flex-col">
+                <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-10 text-center">
+                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#1D5EED]/10 text-[#1D5EED]">
+                        <Vote size={22} />
+                    </div>
+                    <h2 className="text-3xl font-bold text-[#08193e]">Voting opens May 1st</h2>
+                    <p className="text-gray-600 mt-3">
+                        Nominate someone in the meantime and come back once voting is live.
+                    </p>
+                    <Link
+                        href="/nominate"
+                        className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#1D5EED] text-white font-semibold hover:bg-[#113cca] transition-colors"
+                    >
+                        <UserPlus size={18} />
+                        Nominate a Changemaker
+                    </Link>
+                </div>
+
+                <div className="mt-auto pt-8">
+                    <div className="max-w-xs mx-auto">
+                        <input
+                            type="text"
+                            value={adminAccessInput}
+                            onChange={(e) => setAdminAccessInput(e.target.value)}
+                            placeholder="admin access"
+                            className="w-full text-xs px-3 py-2 rounded-md border border-gray-200 text-gray-500 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300"
+                            aria-label="Admin access"
+                            autoComplete="off"
+                            spellCheck={false}
+                            data-lpignore="true"
+                            data-1p-ignore="true"
+                        />
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">

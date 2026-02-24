@@ -7,10 +7,11 @@ export const dynamic = 'force-dynamic';
 
 export default async function VotePage() {
     const nominees = await fetchNominations();
+    const isVotingOpen = false;
 
     return (
         <main className="min-h-screen bg-[#fcfcfc] text-slate-800">
-            <VotePageClient nominees={nominees} />
+            <VotePageClient nominees={nominees} isVotingOpen={isVotingOpen} />
         </main>
     );
 }
