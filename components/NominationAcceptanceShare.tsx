@@ -2,11 +2,13 @@
 
 import { useMemo, useState } from "react";
 import { Copy, Facebook, Instagram, Linkedin } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const AWARDS_URL = "https://awards.alayacare.com/";
 const FALLBACK_NOMINATION_IMAGE_URL =
   "https://2702101.fs1.hubspotusercontent-na1.net/hubfs/2702101/Ive%20been%20nominated%20for%20the%20Momentum%20Awards!.png";
+const FALLBACK_NOMINATION_IMAGE_URL_FR =
+  "https://2702101.fs1.hubspotusercontent-na1.net/hubfs/2702101/Momentum-nomination-acceptance-fr.png";
 
 interface NominationAcceptanceShareProps {
   customImageUrl?: string | null;
@@ -18,9 +20,12 @@ export default function NominationAcceptanceShare({
   nomineeName = null,
 }: NominationAcceptanceShareProps) {
   const t = useTranslations("NominationAcceptance.share");
+  const locale = useLocale();
   const [copied, setCopied] = useState(false);
   const [isCopyButtonHovered, setIsCopyButtonHovered] = useState(false);
-  const imageUrlToUse = customImageUrl || FALLBACK_NOMINATION_IMAGE_URL;
+  const fallbackImageUrl =
+    locale === "fr" ? FALLBACK_NOMINATION_IMAGE_URL_FR : FALLBACK_NOMINATION_IMAGE_URL;
+  const imageUrlToUse = customImageUrl || fallbackImageUrl;
   const socialCopy = t("socialCopy");
 
   const shareLinks = useMemo(() => {
