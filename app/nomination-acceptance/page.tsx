@@ -19,6 +19,7 @@ interface NominationAcceptancePageProps {
   searchParams?: Promise<{ id?: string | string[] }>;
 }
 
+
 export default async function NominationAcceptancePage({ searchParams }: NominationAcceptancePageProps) {
   const t = await getTranslations("NominationAcceptance.page");
   const resolvedSearchParams = searchParams ? await searchParams : undefined;
