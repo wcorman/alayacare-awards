@@ -26,9 +26,15 @@ export default async function NominationAcceptancePage({ searchParams }: Nominat
   const idParam = resolvedSearchParams?.id;
   const recordId = Array.isArray(idParam) ? idParam[0] : idParam;
 
-  const nominationData = recordId
-    ? await fetchNominationAcceptanceDataById(recordId)
-    : null;
+  let nominationData = null;
+  if (recordId) {
+    try {
+      nominationData = await fetchNominationAcceptanceDataById(recordId);
+    } catch (err) {
+      console.error("[nomination-acceptance] Failed to fetch nomination data:", err);
+      throw err;
+    }
+  }
 
   const customImageUrl = nominationData?.customNominationImage || null;
 

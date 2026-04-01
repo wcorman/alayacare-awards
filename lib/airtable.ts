@@ -117,17 +117,25 @@ export async function fetchNominationAcceptanceDataById(id: string): Promise<Nom
         if (res.status === 404) {
             return null;
         }
-        throw new Error(`Failed to fetch nomination acceptance data: ${res.statusText}`);
+        let errDetail = res.statusText;
+        try {
+            const errBody = await res.json();
+            errDetail = errBody?.error?.message || JSON.stringify(errBody) || errDetail;
+        } catch {
+            // ignore
+        }
+        throw new Error(`Failed to fetch nomination acceptance data (${res.status}): ${errDetail}`);
     }
 
     const record = await res.json();
-    const firstName = record.fields["First Name"] || null;
-    const lastName = record.fields["Last Name"] || null;
+    const fields = record?.fields ?? {};
+    const firstName = fields["First Name"] || null;
+    const lastName = fields["Last Name"] || null;
     const nomineeName = firstName && lastName
         ? `${firstName} ${lastName}`.trim()
-        : record.fields["Name"] || "Nominee";
+        : fields["Name"] || "Nominee";
 
-    const rawCustomImage = record.fields["custom-nomination-image"];
+    const rawCustomImage = fields["custom-nomination-image"];
     const customNominationImage = typeof rawCustomImage === "string"
         ? rawCustomImage
         : rawCustomImage?.[0]?.url || null;
