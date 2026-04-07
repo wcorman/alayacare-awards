@@ -381,6 +381,57 @@
     "viewAllNominees": "View All Nominees",
     "nominateSomeone": "Nominate Someone"
   },
+  "ProfilePage": {
+    "eyebrow": "Nominee Account",
+    "title": "Profile Information",
+    "description": "Update your public professional details so your nomination is accurately represented throughout the Home-Based Care Momentum Awards review process.",
+    "backToHome": "Back to Home",
+    "empty": {
+      "missingIdTitle": "Check your email for your direct profile link",
+      "missingIdDescription": "Your nominee profile is accessed from a personalized link sent by the awards team. Open that email and use the direct link to view and update your profile.",
+      "skeletonDescription": "Once you open your personalized profile link, your nominee details and editable profile fields will appear here.",
+      "invalidIdTitle": "We couldn't find that nominee profile",
+      "invalidIdDescription": "Double-check that the profile link is complete and that the nomination record still exists.",
+      "backHome": "Return Home"
+    },
+    "photoCard": {
+      "title": "Profile Photo",
+      "pendingSave": "Updated when you click Save Changes",
+      "uploadButton": "Upload New Photo",
+      "removeButton": "Remove Photo",
+      "help": "Recommended: Square JPG or PNG, at least 400 x 400 px.",
+      "uploadUnavailable": "Photo uploads are currently unavailable because Uploadcare is not configured."
+    },
+    "form": {
+      "readOnlyEyebrow": "Nominee Details",
+      "readOnlyDescription": "These fields are pulled directly from your nomination record and can only be changed by the awards team.",
+      "readOnlyTooltip": "Please reach out to the Awards team if you need to update your {field}.",
+      "editableEyebrow": "Public Profile Links",
+      "emptyValue": "Not provided",
+      "fields": {
+        "fullName": "Full Name",
+        "nominationId": "Nomination ID",
+        "jobTitle": "Job Title",
+        "companyName": "Company Name",
+        "category": "Category",
+        "linkedInProfile": "LinkedIn Profile URL",
+        "companyWebsite": "Company Website URL"
+      },
+      "placeholders": {
+        "linkedInProfile": "https://linkedin.com/in/username",
+        "companyWebsite": "https://company.com"
+      }
+    },
+    "actions": {
+      "discard": "Discard",
+      "save": "Save Changes",
+      "saving": "Saving..."
+    },
+    "messages": {
+      "saveSuccess": "Your profile updates have been saved.",
+      "saveError": "We couldn't save your changes. Please try again."
+    }
+  },
   "Navbar": {
     "logo": {
       "title": "The Home-Based Care",

@@ -9,10 +9,11 @@ interface NomineeImageProps {
 }
 
 export default function NomineeImage({ src, alt, className = "" }: NomineeImageProps) {
-    const [imageUrl, setImageUrl] = useState(src || "/nominee-placeholder.webp");
+    const [hasError, setHasError] = useState(false);
+    const imageUrl = hasError ? "/nominee-placeholder.webp" : (src || "/nominee-placeholder.webp");
 
     const handleError = () => {
-        setImageUrl("/nominee-placeholder.webp");
+        setHasError(true);
     };
 
     return (

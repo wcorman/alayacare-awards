@@ -381,6 +381,57 @@
     "viewAllNominees": "Voir tous les candidats",
     "nominateSomeone": "Proposer quelqu'un"
   },
+  "ProfilePage": {
+    "eyebrow": "Compte du candidat",
+    "title": "Informations du profil",
+    "description": "Mettez à jour vos renseignements professionnels publics afin que votre candidature soit représentée avec exactitude tout au long du processus d’évaluation des Prix Momentum des soins à domicile.",
+    "backToHome": "Retour à l'accueil",
+    "empty": {
+      "missingIdTitle": "Vérifiez votre courriel pour votre lien de profil direct",
+      "missingIdDescription": "Votre profil de candidat est accessible à partir d’un lien personnalisé envoyé par l’équipe des prix. Ouvrez ce courriel et utilisez le lien direct pour consulter et mettre à jour votre profil.",
+      "skeletonDescription": "Lorsque vous ouvrirez votre lien de profil personnalisé, les détails de votre candidature et les champs modifiables apparaîtront ici.",
+      "invalidIdTitle": "Nous n’avons pas trouvé ce profil de candidat",
+      "invalidIdDescription": "Vérifiez que le lien de profil est complet et que l’enregistrement de candidature existe toujours.",
+      "backHome": "Retour à l'accueil"
+    },
+    "photoCard": {
+      "title": "Photo de profil",
+      "pendingSave": "La photo est mise à jour lorsque vous cliquez sur Enregistrer les modifications",
+      "uploadButton": "Téléverser une nouvelle photo",
+      "removeButton": "Supprimer la photo",
+      "help": "Recommandé : JPG ou PNG carré, d’au moins 400 x 400 px.",
+      "uploadUnavailable": "Le téléversement de photos est indisponible pour le moment, car Uploadcare n’est pas configuré."
+    },
+    "form": {
+      "readOnlyEyebrow": "Détails du candidat",
+      "readOnlyDescription": "Ces champs proviennent directement de votre candidature et ne peuvent être modifiés que par l’équipe des prix.",
+      "readOnlyTooltip": "Veuillez communiquer avec l’équipe des prix si vous devez mettre à jour votre champ {field}.",
+      "editableEyebrow": "Liens de profil public",
+      "emptyValue": "Non fourni",
+      "fields": {
+        "fullName": "Nom complet",
+        "nominationId": "ID de candidature",
+        "jobTitle": "Titre d'emploi",
+        "companyName": "Nom de l'entreprise",
+        "category": "Catégorie",
+        "linkedInProfile": "URL du profil LinkedIn",
+        "companyWebsite": "URL du site Web de l'entreprise"
+      },
+      "placeholders": {
+        "linkedInProfile": "https://linkedin.com/in/username",
+        "companyWebsite": "https://company.com"
+      }
+    },
+    "actions": {
+      "discard": "Annuler",
+      "save": "Enregistrer les modifications",
+      "saving": "Enregistrement..."
+    },
+    "messages": {
+      "saveSuccess": "Les mises à jour de votre profil ont été enregistrées.",
+      "saveError": "Nous n’avons pas pu enregistrer vos modifications. Veuillez réessayer."
+    }
+  },
   "Navbar": {
     "logo": {
       "title": "Les soins à domicile",

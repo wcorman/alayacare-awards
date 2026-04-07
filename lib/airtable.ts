@@ -10,6 +10,38 @@ const HEADERS = {
     "Content-Type": "application/json",
 };
 
+function getNomineeName(fields: Record<string, unknown>) {
+    const firstName = fields["First Name"] || null;
+    const lastName = fields["Last Name"] || null;
+
+    if (firstName && lastName) {
+        return `${firstName} ${lastName}`.trim();
+    }
+
+    return fields["Name"] || "Unknown Name";
+}
+
+function getAttachmentUrl(value: unknown): string | null {
+    if (typeof value === "string") {
+        return value;
+    }
+
+    if (Array.isArray(value) && value.length > 0) {
+        const firstAttachment = value[0];
+
+        if (
+            typeof firstAttachment === "object" &&
+            firstAttachment !== null &&
+            "url" in firstAttachment &&
+            typeof firstAttachment.url === "string"
+        ) {
+            return firstAttachment.url;
+        }
+    }
+
+    return null;
+}
+
 export interface Nominee {
     id: string;
     name: string;
@@ -42,9 +74,7 @@ export async function fetchNominations(): Promise<Nominee[]> {
     return data.records.map((record: any) => {
         const firstName = record.fields["First Name"] || null;
         const lastName = record.fields["Last Name"] || null;
-        const name = firstName && lastName
-            ? `${firstName} ${lastName}`.trim()
-            : record.fields["Name"] || "Unknown Name";
+        const name = getNomineeName(record.fields);
         return {
             id: record.id,
             name,
@@ -52,7 +82,7 @@ export async function fetchNominations(): Promise<Nominee[]> {
             lastName: lastName || undefined,
             category: record.fields["Category"] || "Uncategorized",
             votes: record.fields["Votes"] || 0,
-            image: record.fields["Profile Photo"]?.[0]?.url || null,
+            image: getAttachmentUrl(record.fields["Profile Photo"]),
             description: record.fields["Nomination Reason"] || "No description provided.",
             organization: record.fields["Company Name"] || null,
             jobTitle: record.fields["Job Title"] || null,
@@ -83,9 +113,7 @@ export async function fetchNomineeById(id: string): Promise<Nominee | null> {
 
     const firstName = record.fields["First Name"] || null;
     const lastName = record.fields["Last Name"] || null;
-    const name = firstName && lastName
-        ? `${firstName} ${lastName}`.trim()
-        : record.fields["Name"] || "Unknown Name";
+    const name = getNomineeName(record.fields);
 
     return {
         id: record.id,
@@ -94,7 +122,7 @@ export async function fetchNomineeById(id: string): Promise<Nominee | null> {
         lastName: lastName || undefined,
         category: record.fields["Category"] || "Uncategorized",
         votes: record.fields["Votes"] || 0,
-        image: record.fields["Profile Photo"]?.[0]?.url || null,
+        image: getAttachmentUrl(record.fields["Profile Photo"]),
         description: record.fields["Nomination Reason"] || "No description provided.",
         organization: record.fields["Company Name"] || null,
         jobTitle: record.fields["Job Title"] || null,
@@ -105,6 +133,17 @@ export interface NominationAcceptanceData {
     id: string;
     nomineeName: string;
     customNominationImage: string | null;
+}
+
+export interface NomineeProfileEditorData {
+    id: string;
+    nomineeName: string;
+    category: string;
+    companyName: string;
+    jobTitle: string;
+    linkedInProfile: string;
+    companyWebsite: string;
+    profilePhoto: string | null;
 }
 
 export async function fetchNominationAcceptanceDataById(id: string): Promise<NominationAcceptanceData | null> {
@@ -129,21 +168,108 @@ export async function fetchNominationAcceptanceDataById(id: string): Promise<Nom
 
     const record = await res.json();
     const fields = record?.fields ?? {};
-    const firstName = fields["First Name"] || null;
-    const lastName = fields["Last Name"] || null;
-    const nomineeName = firstName && lastName
-        ? `${firstName} ${lastName}`.trim()
-        : fields["Name"] || "Nominee";
+    const nomineeName = getNomineeName(fields);
 
     const rawCustomImage = fields["custom-nomination-image"];
-    const customNominationImage = typeof rawCustomImage === "string"
-        ? rawCustomImage
-        : rawCustomImage?.[0]?.url || null;
+    const customNominationImage = getAttachmentUrl(rawCustomImage);
 
     return {
         id: record.id,
         nomineeName,
         customNominationImage,
+    };
+}
+
+export async function fetchNomineeProfileEditorDataById(id: string): Promise<NomineeProfileEditorData | null> {
+    const TABLE_NAME = "Nominations";
+    const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}/${encodeURIComponent(id)}`;
+
+    const res = await fetch(url, { headers: HEADERS, cache: "no-store" });
+
+    if (!res.ok) {
+        if (res.status === 404) {
+            return null;
+        }
+        throw new Error(`Failed to fetch nominee profile editor data: ${res.statusText}`);
+    }
+
+    const record = await res.json();
+    const fields = record?.fields ?? {};
+
+    return {
+        id: record.id,
+        nomineeName: getNomineeName(fields),
+        category: fields["Category"] || "Uncategorized",
+        companyName: fields["Company Name"] || "",
+        jobTitle: fields["Job Title"] || "",
+        linkedInProfile: fields["LinkedIn Profile"] || "",
+        companyWebsite: fields["Company Website"] || "",
+        profilePhoto: getAttachmentUrl(fields["Profile Photo"]),
+    };
+}
+
+export async function updateNomineeProfileEditorData(
+    id: string,
+    updates: {
+        linkedInProfile: string;
+        companyWebsite: string;
+        profilePhotoUrl: string | null;
+    }
+): Promise<NomineeProfileEditorData> {
+    const TABLE_NAME = "Nominations";
+    const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`;
+
+    const profilePhotoUrl = updates.profilePhotoUrl?.trim() || null;
+    const fields = {
+        "LinkedIn Profile": updates.linkedInProfile.trim(),
+        "Company Website": updates.companyWebsite.trim(),
+        "Profile Photo": profilePhotoUrl
+            ? [{
+                url: profilePhotoUrl,
+                filename: `${id}_profile-photo.${profilePhotoUrl.includes(".png") ? "png" : "jpg"}`
+            }]
+            : [],
+    };
+
+    const res = await fetch(url, {
+        method: "PATCH",
+        headers: HEADERS,
+        body: JSON.stringify({
+            records: [{ id, fields }]
+        })
+    });
+
+    if (!res.ok) {
+        let errDetail = res.statusText;
+
+        try {
+            const errBody = await res.json();
+            errDetail = errBody?.error?.message || JSON.stringify(errBody) || errDetail;
+        } catch {
+            // ignore JSON parsing failures and use status text
+        }
+
+        throw new Error(`Failed to update nominee profile editor data (${res.status}): ${errDetail}`);
+    }
+
+    const result = await res.json();
+    const updatedRecord = result?.records?.[0];
+
+    if (!updatedRecord) {
+        throw new Error("Airtable did not return the updated nominee record");
+    }
+
+    const updatedFields = updatedRecord.fields ?? {};
+
+    return {
+        id: updatedRecord.id,
+        nomineeName: getNomineeName(updatedFields),
+        category: updatedFields["Category"] || "Uncategorized",
+        companyName: updatedFields["Company Name"] || "",
+        jobTitle: updatedFields["Job Title"] || "",
+        linkedInProfile: updatedFields["LinkedIn Profile"] || "",
+        companyWebsite: updatedFields["Company Website"] || "",
+        profilePhoto: getAttachmentUrl(updatedFields["Profile Photo"]),
     };
 }
 
