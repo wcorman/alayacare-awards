@@ -85,7 +85,9 @@ function MissingIdSkeleton({ t }: { t: Awaited<ReturnType<typeof getTranslations
     return (
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
             <section className="lg:col-span-4 rounded-[28px] bg-white p-8 shadow-[0_20px_50px_rgba(8,25,62,0.08)]">
-                <h2 className="mb-6 text-base font-semibold text-[#08193e]">{t("photoCard.title")}</h2>
+                <div className="mb-8 text-center text-sm font-semibold uppercase tracking-[0.24em] text-[#1D5EED]">
+                    {t("photoCard.title")}
+                </div>
 
                 <div className="flex flex-col items-center text-center">
                     <div className="mb-5 h-44 w-44 animate-pulse rounded-full border-4 border-[#dfe8ff] bg-[#edf2ff]" />
