@@ -10,15 +10,23 @@ const HEADERS = {
     "Content-Type": "application/json",
 };
 
-function getNomineeName(fields: Record<string, unknown>) {
-    const firstName = fields["First Name"] || null;
-    const lastName = fields["Last Name"] || null;
+function getNomineeName(fields: Record<string, unknown>): string {
+    const firstName = fields["First Name"];
+    const lastName = fields["Last Name"];
 
-    if (firstName && lastName) {
-        return `${firstName} ${lastName}`.trim();
+    if (typeof firstName === "string" && typeof lastName === "string") {
+        const combined = `${firstName} ${lastName}`.trim();
+        if (combined) {
+            return combined;
+        }
     }
 
-    return fields["Name"] || "Unknown Name";
+    const nameField = fields["Name"];
+    if (typeof nameField === "string" && nameField.trim()) {
+        return nameField.trim();
+    }
+
+    return "Unknown Name";
 }
 
 function getAttachmentUrl(value: unknown): string | null {
