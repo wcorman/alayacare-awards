@@ -384,7 +384,7 @@
   "ProfilePage": {
     "eyebrow": "Compte du candidat",
     "title": "Informations du profil",
-    "description": "Mettez à jour vos renseignements professionnels publics afin que votre candidature soit représentée avec exactitude tout au long du processus d’évaluation des Prix Momentum des soins à domicile.",
+    "description": "Mettez à jour vos renseignements professionnels publics afin que votre candidature soit représentée avec exactitude tout au long des Prix Momentum des soins à domicile.",
     "backToHome": "Retour à l'accueil",
     "empty": {
       "missingIdTitle": "Vérifiez votre courriel pour votre lien de profil direct",
@@ -404,12 +404,11 @@
     },
     "form": {
       "readOnlyEyebrow": "Détails du candidat",
-      "readOnlyDescription": "Ces champs proviennent directement de votre candidature et ne peuvent être modifiés que par l’équipe des prix.",
       "readOnlyTooltip": "Veuillez communiquer avec l’équipe des prix si vous devez mettre à jour votre champ {field}.",
       "editableEyebrow": "Liens de profil public",
       "emptyValue": "Non fourni",
       "fields": {
-        "fullName": "Nom complet",
+        "fullName": "Nom",
         "nominationId": "ID de candidature",
         "jobTitle": "Titre d'emploi",
         "companyName": "Nom de l'entreprise",

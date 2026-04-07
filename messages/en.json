@@ -384,7 +384,7 @@
   "ProfilePage": {
     "eyebrow": "Nominee Account",
     "title": "Profile Information",
-    "description": "Update your public professional details so your nomination is accurately represented throughout the Home-Based Care Momentum Awards review process.",
+    "description": "Update your public professional details so your nomination is accurately represented throughout the Home-Based Care Momentum Awards.",
     "backToHome": "Back to Home",
     "empty": {
       "missingIdTitle": "Check your email for your direct profile link",
@@ -404,12 +404,11 @@
     },
     "form": {
       "readOnlyEyebrow": "Nominee Details",
-      "readOnlyDescription": "These fields are pulled directly from your nomination record and can only be changed by the awards team.",
       "readOnlyTooltip": "Please reach out to the Awards team if you need to update your {field}.",
       "editableEyebrow": "Public Profile Links",
       "emptyValue": "Not provided",
       "fields": {
-        "fullName": "Full Name",
+        "fullName": "Name",
         "nominationId": "Nomination ID",
         "jobTitle": "Job Title",
         "companyName": "Company Name",

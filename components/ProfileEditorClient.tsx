@@ -228,13 +228,8 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
                 </section>
 
                 <section className="lg:col-span-8 rounded-[28px] bg-white p-8 md:p-10 shadow-[0_20px_50px_rgba(8,25,62,0.08)]">
-                    <div className="mb-8">
-                        <div className="mb-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#1D5EED]">
-                            {t("form.readOnlyEyebrow")}
-                        </div>
-                        <p className="max-w-2xl text-sm leading-relaxed text-[#52607d]">
-                            {t("form.readOnlyDescription")}
-                        </p>
+                    <div className="mb-8 text-sm font-semibold uppercase tracking-[0.24em] text-[#1D5EED]">
+                        {t("form.readOnlyEyebrow")}
                     </div>
 
                 {(errorMessage || successMessage) && (
