@@ -397,7 +397,7 @@
     "photoCard": {
       "title": "Photo de profil",
       "pendingSave": "La photo est mise à jour lorsque vous cliquez sur Enregistrer les modifications",
-      "uploadButton": "Téléverser une nouvelle photo",
+      "uploadButton": "Téléverser une photo",
       "removeButton": "Supprimer la photo",
       "help": "Recommandé : JPG ou PNG carré, d’au moins 400 x 400 px.",
       "uploadUnavailable": "Le téléversement de photos est indisponible pour le moment, car Uploadcare n’est pas configuré."

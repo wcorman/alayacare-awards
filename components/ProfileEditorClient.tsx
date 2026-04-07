@@ -12,7 +12,7 @@ import {
     Trash2,
     TriangleAlert,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import NomineeImage from "@/components/NomineeImage";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -58,6 +58,7 @@ function getReadOnlyTooltip(t: ReturnType<typeof useTranslations>, fieldLabel: s
 
 export default function ProfileEditorClient({ profile }: ProfileEditorClientProps) {
     const t = useTranslations("ProfilePage");
+    const locale = useLocale();
     const initialState = useMemo<EditableProfileState>(() => ({
         linkedInProfile: profile.linkedInProfile || "",
         companyWebsite: profile.companyWebsite || "",
@@ -176,6 +177,12 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
                                 sourceList="local, camera, facebook"
                                 classNameUploader="uc-light"
                                 pubkey={uploadcarePublicKey}
+                                localeDefinitionOverride={{
+                                    [locale]: {
+                                        "upload-files": t("photoCard.uploadButton"),
+                                        "upload-file": t("photoCard.uploadButton"),
+                                    },
+                                }}
                                 onChange={(info) => {
                                     if (info.allEntries.length > 0 && info.allEntries[0].status === "success") {
                                         setFormState((prev) => ({

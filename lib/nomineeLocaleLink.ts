@@ -7,13 +7,11 @@ export function pathWithNomineeLang(
     return `${pathWithQuery}${joiner}lang=${lang}`;
 }
 
-/** `/nominees/[id]` with optional `?lang=` from Airtable "English or French". */
-export function nomineeDetailPath(nominee: {
-    id: string;
-    languagePreference: "en" | "fr" | null;
-}): string {
-    if (!nominee.languagePreference) {
-        return `/nominees/${nominee.id}`;
-    }
-    return pathWithNomineeLang(`/nominees/${nominee.id}`, nominee.languagePreference);
+/**
+ * Nominee detail links intentionally do not force `?lang=`. Automatic locale
+ * alignment happens server-side only for visitors without an explicit locale
+ * cookie, so manual language switches are respected.
+ */
+export function nomineeDetailPath(nominee: { id: string }): string {
+    return `/nominees/${nominee.id}`;
 }

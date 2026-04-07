@@ -397,7 +397,7 @@
     "photoCard": {
       "title": "Profile Photo",
       "pendingSave": "Updated when you click Save Changes",
-      "uploadButton": "Upload New Photo",
+      "uploadButton": "Upload photo",
       "removeButton": "Remove Photo",
       "help": "Recommended: Square JPG or PNG, at least 400 x 400 px.",
       "uploadUnavailable": "Photo uploads are currently unavailable because Uploadcare is not configured."
