@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Award, Heart, Briefcase, Sparkles } from 'lucide-react';
 import { fetchNomineeById } from '@/lib/airtable';
+import { redirectIfNomineeLocaleMismatch } from '@/lib/redirectNomineeLocale';
 import NomineeImage from '@/components/NomineeImage';
 import NomineePageClient from '@/components/NomineePageClient';
 import { getTranslations } from 'next-intl/server';
@@ -28,6 +29,8 @@ export default async function NomineePage({ params }: NomineePageProps) {
     if (!nominee) {
         notFound();
     }
+
+    await redirectIfNomineeLocaleMismatch(nominee.languagePreference, `/nominees/${id}`);
 
     const t = await getTranslations('NomineeProfile');
     const tHome = await getTranslations('Home');

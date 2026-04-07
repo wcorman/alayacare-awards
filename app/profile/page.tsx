@@ -5,6 +5,7 @@ import { ArrowLeft, CircleAlert, Mail } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import ProfileEditorClient from "@/components/ProfileEditorClient";
 import { fetchNomineeProfileEditorDataById } from "@/lib/airtable";
+import { redirectIfNomineeLocaleMismatch } from "@/lib/redirectNomineeLocale";
 
 export const metadata: Metadata = {
     title: "Nominee Profile | Home-Based Care Momentum Awards",
@@ -171,6 +172,13 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
     const profile = recordId
         ? await fetchNomineeProfileEditorDataById(recordId)
         : null;
+
+    if (profile && recordId) {
+        await redirectIfNomineeLocaleMismatch(
+            profile.languagePreference,
+            `/profile?id=${encodeURIComponent(recordId)}`
+        );
+    }
 
     const localizedProfile = profile
         ? {

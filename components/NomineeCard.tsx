@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { ThumbsUp, Check, Award } from 'lucide-react';
 import { Nominee } from '@/lib/airtable';
+import { nomineeDetailPath } from '@/lib/nomineeLocaleLink';
 import { useTranslations } from 'next-intl';
 
 interface NomineeCardProps {
@@ -65,9 +66,11 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
         target.src = "/nominee-placeholder.webp";
     };
 
+    const detailHref = nomineeDetailPath(nominee);
+
     return (
         <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full group">
-            <Link href={`/nominees/${nominee.id}`} className="flex-1 flex flex-col cursor-pointer">
+            <Link href={detailHref} className="flex-1 flex flex-col cursor-pointer">
                 <div className="relative aspect-square overflow-hidden bg-gray-200">
                     <img
                         src={imageUrl || "/nominee-placeholder.webp"}
@@ -103,7 +106,7 @@ export default function NomineeCard({ nominee, hasVoted, onVote }: NomineeCardPr
 
             <div className="p-3 flex items-center justify-between border-t border-gray-100">
                 <Link 
-                    href={`/nominees/${nominee.id}`}
+                    href={detailHref}
                     className="flex items-center gap-1.5 text-gray-500 font-medium hover:text-[#08193E] transition-colors"
                 >
                     <Award size={16} className="text-[#08193E]" />

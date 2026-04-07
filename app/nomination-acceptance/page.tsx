@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import NominationAcceptanceShare from "@/components/NominationAcceptanceShare";
 import { fetchNominationAcceptanceDataById } from "@/lib/airtable";
+import { redirectIfNomineeLocaleMismatch } from "@/lib/redirectNomineeLocale";
 
 export const metadata: Metadata = {
   title: "Nomination Acceptance | Home-Based Care Momentum Awards",
@@ -34,6 +35,13 @@ export default async function NominationAcceptancePage({ searchParams }: Nominat
       console.error("[nomination-acceptance] Failed to fetch nomination data:", err);
       throw err;
     }
+  }
+
+  if (nominationData && recordId) {
+    await redirectIfNomineeLocaleMismatch(
+      nominationData.languagePreference,
+      `/nomination-acceptance?id=${encodeURIComponent(recordId)}`
+    );
   }
 
   const customImageUrl = nominationData?.customNominationImage || null;

@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { Award, Heart, Briefcase, Sparkles, Medal, Trophy } from "lucide-react";
 import { Nominee } from "@/lib/airtable";
+import { nomineeDetailPath } from "@/lib/nomineeLocaleLink";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
@@ -74,6 +75,7 @@ function PodiumCard({
 
   const heightClass =
     rank === 1 ? "h-[220px]" : rank === 2 ? "h-[180px]" : "h-[140px]";
+  const detailHref = nomineeDetailPath(nominee);
 
   return (
     <div
@@ -86,7 +88,7 @@ function PodiumCard({
       {/* Avatar + badge */}
       <div className="relative">
         <Link
-          href={`/nominees/${nominee.id}`}
+          href={detailHref}
           className="block rounded-full overflow-hidden border-4 shadow-xl ring-2 ring-white/50 transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2"
           style={{ borderColor: categoryColor }}
         >
@@ -104,7 +106,7 @@ function PodiumCard({
 
       {/* Name */}
       <Link
-        href={`/nominees/${nominee.id}`}
+        href={detailHref}
         className="text-center font-bold text-[#08193e] hover:text-[#1D5EED] transition-colors line-clamp-2 max-w-[140px]"
       >
         {nominee.name}

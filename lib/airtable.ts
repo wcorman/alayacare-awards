@@ -10,6 +10,18 @@ const HEADERS = {
     "Content-Type": "application/json",
 };
 
+const NOMINATION_LANGUAGE_FIELD = "English or French";
+
+/** Maps Airtable single select to next-intl locale; null if unset or unknown. */
+export function getNominationLanguagePreference(
+    fields: Record<string, unknown>
+): "en" | "fr" | null {
+    const raw = fields[NOMINATION_LANGUAGE_FIELD];
+    if (raw === "French") return "fr";
+    if (raw === "English") return "en";
+    return null;
+}
+
 function getNomineeName(fields: Record<string, unknown>): string {
     const firstName = fields["First Name"];
     const lastName = fields["Last Name"];
@@ -61,6 +73,8 @@ export interface Nominee {
     description: string;
     organization: string | null;
     jobTitle: string | null;
+    /** From Airtable "English or French"; drives automatic locale on nominee pages. */
+    languagePreference: "en" | "fr" | null;
 }
 
 export async function fetchNominations(): Promise<Nominee[]> {
@@ -94,6 +108,7 @@ export async function fetchNominations(): Promise<Nominee[]> {
             description: record.fields["Nomination Reason"] || "No description provided.",
             organization: record.fields["Company Name"] || null,
             jobTitle: record.fields["Job Title"] || null,
+            languagePreference: getNominationLanguagePreference(record.fields),
         };
     });
 }
@@ -134,6 +149,7 @@ export async function fetchNomineeById(id: string): Promise<Nominee | null> {
         description: record.fields["Nomination Reason"] || "No description provided.",
         organization: record.fields["Company Name"] || null,
         jobTitle: record.fields["Job Title"] || null,
+        languagePreference: getNominationLanguagePreference(record.fields),
     };
 }
 
@@ -141,6 +157,7 @@ export interface NominationAcceptanceData {
     id: string;
     nomineeName: string;
     customNominationImage: string | null;
+    languagePreference: "en" | "fr" | null;
 }
 
 export interface NomineeProfileEditorData {
@@ -152,6 +169,7 @@ export interface NomineeProfileEditorData {
     linkedInProfile: string;
     companyWebsite: string;
     profilePhoto: string | null;
+    languagePreference: "en" | "fr" | null;
 }
 
 export async function fetchNominationAcceptanceDataById(id: string): Promise<NominationAcceptanceData | null> {
@@ -185,6 +203,7 @@ export async function fetchNominationAcceptanceDataById(id: string): Promise<Nom
         id: record.id,
         nomineeName,
         customNominationImage,
+        languagePreference: getNominationLanguagePreference(fields),
     };
 }
 
@@ -213,6 +232,7 @@ export async function fetchNomineeProfileEditorDataById(id: string): Promise<Nom
         linkedInProfile: fields["LinkedIn Profile"] || "",
         companyWebsite: fields["Company Website"] || "",
         profilePhoto: getAttachmentUrl(fields["Profile Photo"]),
+        languagePreference: getNominationLanguagePreference(fields),
     };
 }
 
@@ -278,6 +298,7 @@ export async function updateNomineeProfileEditorData(
         linkedInProfile: updatedFields["LinkedIn Profile"] || "",
         companyWebsite: updatedFields["Company Website"] || "",
         profilePhoto: getAttachmentUrl(updatedFields["Profile Photo"]),
+        languagePreference: getNominationLanguagePreference(updatedFields),
     };
 }
 
