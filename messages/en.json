@@ -409,7 +409,6 @@
       "emptyValue": "Not provided",
       "fields": {
         "fullName": "Name",
-        "nominationId": "Nomination ID",
         "jobTitle": "Job Title",
         "companyName": "Company Name",
         "category": "Category",

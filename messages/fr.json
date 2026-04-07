@@ -409,7 +409,6 @@
       "emptyValue": "Non fourni",
       "fields": {
         "fullName": "Nom",
-        "nominationId": "ID de candidature",
         "jobTitle": "Titre d'emploi",
         "companyName": "Nom de l'entreprise",
         "category": "Catégorie",

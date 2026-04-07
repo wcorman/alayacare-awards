@@ -75,10 +75,9 @@ function EmptyState({
 function MissingIdSkeleton({ t }: { t: Awaited<ReturnType<typeof getTranslations>> }) {
     const fieldLabels = [
         t("form.fields.fullName"),
-        t("form.fields.nominationId"),
+        t("form.fields.category"),
         t("form.fields.jobTitle"),
         t("form.fields.companyName"),
-        t("form.fields.category"),
         t("form.fields.linkedInProfile"),
         t("form.fields.companyWebsite"),
     ];
@@ -128,11 +127,6 @@ function MissingIdSkeleton({ t }: { t: Awaited<ReturnType<typeof getTranslations
                                 <div className="h-12 animate-pulse rounded-xl bg-[#eef3ff]" />
                             </div>
                         ))}
-
-                        <div className="flex flex-col gap-2 md:col-span-2">
-                            <label className="text-sm font-medium text-[#52607d]">{fieldLabels[4]}</label>
-                            <div className="h-12 animate-pulse rounded-xl bg-[#eef3ff]" />
-                        </div>
                     </div>
 
                     <div className="h-px bg-[#d7def2]" />
@@ -143,7 +137,7 @@ function MissingIdSkeleton({ t }: { t: Awaited<ReturnType<typeof getTranslations
                         </div>
 
                         <div className="grid grid-cols-1 gap-y-6">
-                            {fieldLabels.slice(5).map((label) => (
+                            {fieldLabels.slice(4).map((label) => (
                                 <div key={label} className="flex flex-col gap-2">
                                     <label className="text-sm font-medium text-[#52607d]">{label}</label>
                                     <div className="h-12 animate-pulse rounded-xl bg-[#f3f6ff]" />

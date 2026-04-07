@@ -5,7 +5,6 @@ import { FileUploaderRegular } from "@uploadcare/react-uploader/next";
 import "@uploadcare/react-uploader/core.css";
 import {
     CheckCircle2,
-    CircleHelp,
     Globe,
     Link2,
     LoaderCircle,
@@ -128,29 +127,22 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
 
         return (
             <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2">
-                    <label className="text-sm font-medium text-[#52607d]">{label}</label>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <button
-                                type="button"
-                                aria-label={tooltip}
-                                className="inline-flex h-5 w-5 items-center justify-center rounded-full text-[#7b88a8] transition hover:bg-[#eef3ff] hover:text-[#1D5EED] focus:outline-none focus:ring-2 focus:ring-[#1D5EED]/20"
-                            >
-                                <CircleHelp size={14} />
-                            </button>
-                        </TooltipTrigger>
-                        <TooltipContent side="top">
-                            {tooltip}
-                        </TooltipContent>
-                    </Tooltip>
-                </div>
-                <input
-                    type="text"
-                    value={value}
-                    disabled
-                    className={`${readOnlyInputClasses} ${extraClassName}`}
-                />
+                <label className="text-sm font-medium text-[#52607d]">{label}</label>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <div tabIndex={0} className="rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1D5EED]/20">
+                            <input
+                                type="text"
+                                value={value}
+                                disabled
+                                className={`${readOnlyInputClasses} ${extraClassName}`}
+                            />
+                        </div>
+                    </TooltipTrigger>
+                    <TooltipContent side="top">
+                        {tooltip}
+                    </TooltipContent>
+                </Tooltip>
             </div>
         );
     }
@@ -248,13 +240,9 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
                     <form onSubmit={handleSave} className="space-y-8">
                         <div className="grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2">
                             {renderReadOnlyField(t("form.fields.fullName"), profile.nomineeName)}
-                            {renderReadOnlyField(t("form.fields.nominationId"), profile.id, "font-mono")}
+                            {renderReadOnlyField(t("form.fields.category"), profile.category)}
                             {renderReadOnlyField(t("form.fields.jobTitle"), profile.jobTitle || t("form.emptyValue"))}
                             {renderReadOnlyField(t("form.fields.companyName"), profile.companyName || t("form.emptyValue"))}
-
-                            <div className="md:col-span-2">
-                                {renderReadOnlyField(t("form.fields.category"), profile.category)}
-                            </div>
                         </div>
 
                         <div className="h-px bg-[#d7def2]" />
