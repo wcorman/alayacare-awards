@@ -7,6 +7,7 @@ import {
     CheckCircle2,
     Globe,
     Link2,
+    LockKeyhole,
     LoaderCircle,
     Mail,
     RotateCcw,
@@ -44,6 +45,9 @@ const readOnlyInputClasses =
 
 const iconInputClasses =
     "absolute left-4 top-1/2 -translate-y-1/2 text-[#08193e]/30";
+
+const readOnlyLockIconClasses =
+    "absolute right-4 top-1/2 -translate-y-1/2 text-[#08193e]/10";
 
 function normalizeState(state: EditableProfileState) {
     return {
@@ -137,12 +141,15 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <div tabIndex={0} className="rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1D5EED]/20">
-                            <input
-                                type="text"
-                                value={value}
-                                disabled
-                                className={`${readOnlyInputClasses} ${extraClassName}`}
-                            />
+                            <div className="relative">
+                                <LockKeyhole size={18} className={readOnlyLockIconClasses} />
+                                <input
+                                    type="text"
+                                    value={value}
+                                    disabled
+                                    className={`${readOnlyInputClasses} pr-11 ${extraClassName}`}
+                                />
+                            </div>
                         </div>
                     </TooltipTrigger>
                     <TooltipContent side="top">
