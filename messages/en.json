@@ -404,7 +404,7 @@
     },
     "form": {
       "readOnlyEyebrow": "Nominee Details",
-      "readOnlyTooltip": "Please reach out to the Awards team if you need to update your {field}.",
+      "readOnlyTooltip": "Please reach out to the Awards team at awards@alayacare.com if you need to update your {field}.",
       "editableEyebrow": "Public Profile Links",
       "emptyValue": "Not provided",
       "fields": {

@@ -404,7 +404,7 @@
     },
     "form": {
       "readOnlyEyebrow": "Détails du candidat",
-      "readOnlyTooltip": "Veuillez communiquer avec l’équipe des prix si vous devez mettre à jour votre champ {field}.",
+      "readOnlyTooltip": "Veuillez communiquer avec l’équipe des prix à awards@alayacare.com si vous devez mettre à jour votre champ {field}.",
       "editableEyebrow": "Liens de profil public",
       "emptyValue": "Non fourni",
       "fields": {
