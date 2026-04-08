@@ -423,7 +423,8 @@
     "actions": {
       "discard": "Annuler",
       "save": "Enregistrer les modifications",
-      "saving": "Enregistrement..."
+      "saving": "Enregistrement...",
+      "emailTooltip": "Envoyez un message à l’équipe des prix pour mettre à jour les informations de votre profil."
     },
     "messages": {
       "saveSuccess": "Les mises à jour de votre profil ont été enregistrées.",

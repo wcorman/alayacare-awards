@@ -8,6 +8,7 @@ import {
     Globe,
     Link2,
     LoaderCircle,
+    Mail,
     RotateCcw,
     Trash2,
     TriangleAlert,
@@ -73,6 +74,11 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
 
     const hasChanges = JSON.stringify(normalizeState(formState)) !== JSON.stringify(normalizeState(savedState));
     const uploadcarePublicKey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
+    const profileUpdateMailtoHref = useMemo(() => {
+        const subject = `Profile update request for ${profile.nomineeName}`;
+        const params = new URLSearchParams({ subject });
+        return `mailto:awards@alayacare.com?${params.toString()}`;
+    }, [profile.nomineeName]);
 
     async function handleSave(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -301,6 +307,20 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
                         </div>
 
                         <div className="flex flex-col-reverse gap-3 border-t border-[#d7def2] pt-6 sm:flex-row sm:items-center sm:justify-end">
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <a
+                                        href={profileUpdateMailtoHref}
+                                        className="inline-flex items-center justify-center rounded-full px-4 py-3 text-[#1D5EED] transition hover:bg-[#eef3ff] sm:mr-auto"
+                                        aria-label={t("actions.emailTooltip")}
+                                    >
+                                        <Mail size={18} />
+                                    </a>
+                                </TooltipTrigger>
+                                <TooltipContent side="top">
+                                    {t("actions.emailTooltip")}
+                                </TooltipContent>
+                            </Tooltip>
                             <button
                                 type="button"
                                 onClick={handleDiscard}

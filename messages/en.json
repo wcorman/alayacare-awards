@@ -423,7 +423,8 @@
     "actions": {
       "discard": "Discard",
       "save": "Save Changes",
-      "saving": "Saving..."
+      "saving": "Saving...",
+      "emailTooltip": "Send the Awards team a message to update your profile information."
     },
     "messages": {
       "saveSuccess": "Your profile updates have been saved.",
