@@ -76,8 +76,7 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
     const uploadcarePublicKey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
     const profileUpdateMailtoHref = useMemo(() => {
         const subject = `Profile update request for ${profile.nomineeName}`;
-        const params = new URLSearchParams({ subject });
-        return `mailto:awards@alayacare.com?${params.toString()}`;
+        return `mailto:awards@alayacare.com?subject=${encodeURIComponent(subject)}`;
     }, [profile.nomineeName]);
 
     async function handleSave(event: React.FormEvent<HTMLFormElement>) {
