@@ -195,7 +195,7 @@ export default function NominationForm() {
                         {t('success.message')}
                     </p>
                     <div className="space-y-3">
-                        <button onClick={() => window.location.href = '/nominate'} className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA]">
+                        <button onClick={() => window.location.href = '/vote'} className="w-full px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA]">
                             {t('success.voteForOthers')}
                         </button>
                         <button onClick={() => router.push('/')} className="w-full px-6 py-3 rounded-md font-semibold bg-white text-[#08193e] border border-gray-300 hover:bg-gray-50">

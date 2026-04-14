@@ -4,7 +4,7 @@
       "badge": "Prix Momentum des soins à domicile 2026",
       "title": "Célébrons les <people>personnes</people> qui propulsent des soins à domicile exceptionnels",
       "subtitle": "Les Prix Momentum des soins à domicile reconnaissent des personnes exceptionnelles partout en Amérique du Nord qui font progresser les soins à domicile chaque jour — de la première ligne aux opérations, et du siège social aux innovateurs visionnaires.",
-      "cta": "Proposer un Agent de Changement"
+      "cta": "Voter maintenant"
     },
     "categories": {
       "title": "Catégories de prix",
@@ -43,7 +43,7 @@
       "managers": "Gestionnaires"
     },
     "timeline": {
-      "nominateCta": "Proposer maintenant",
+      "nominateCta": "Voter maintenant",
       "eyebrow": "Dates clés et étapes",
       "title": "Restez informé des grands moments des Prix Momentum des soins à domicile",
       "items": [
@@ -202,7 +202,7 @@
       "text": "Veuillez envoyer un courriel à",
       "email": "awards@alayacare.com",
       "textAfter": "et un membre du comité des prix sera heureux de vous aider.",
-      "cta": "Prêt à proposer une candidature?"
+      "cta": "Voter maintenant"
     }
   },
   "NominationAcceptance": {
@@ -311,7 +311,7 @@
       "homeCareTitle": "Candidature soumise!",
       "otherTitle": "Merci pour votre candidature!",
       "message": "Nous examinerons votre soumission sous peu.",
-      "voteForOthers": "Proposer quelqu'un d'autre",
+      "voteForOthers": "Voir la page de vote",
       "returnHome": "Retour à l'accueil"
     },
     "errors": {
@@ -332,6 +332,10 @@
     "noResults": {
       "title": "Aucun candidat correspondant trouvé.",
       "subtitle": "Essayez un nom ou un terme de recherche différent."
+    },
+    "prelaunch": {
+      "title": "Le vote ouvre le 1er mai",
+      "description": "Les mises en candidature sont maintenant closes. Le vote du public ouvrira officiellement le 1er mai 2026."
     },
     "errors": {
       "alreadyVoted": "Vous avez déjà voté pour ce candidat.",
@@ -379,7 +383,14 @@
     "category": "Catégorie",
     "nominationStory": "Histoire de la candidature",
     "viewAllNominees": "Voir tous les candidats",
-    "nominateSomeone": "Proposer quelqu'un"
+    "nominateSomeone": "Voter maintenant"
+  },
+  "NominationClosedPage": {
+    "eyebrow": "Candidatures closes",
+    "title": "La période de mise en candidature est terminée",
+    "description": "Merci d’avoir aidé à mettre en lumière les agents de changement des soins à domicile. Le vote du public ouvre officiellement le 1er mai 2026.",
+    "primaryCta": "Aller au vote",
+    "secondaryCta": "Retour à l'accueil"
   },
   "ProfilePage": {
     "eyebrow": "Compte du candidat",
@@ -439,8 +450,8 @@
     "home": "Accueil",
     "eligibility": "Admissibilité",
     "results": "Résultats",
-    "nominate": "Proposer",
-    "voteNow": "Proposer maintenant",
+    "nominate": "Voter",
+    "voteNow": "Voter maintenant",
     "languageSwitcher": {
       "french": "Français",
       "english": "English",

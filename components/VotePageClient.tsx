@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
-import { Search, X, Heart, Award, Briefcase, Sparkles, Grid3x3, Vote, UserPlus } from 'lucide-react';
-import Link from 'next/link';
+import { Search, X, Heart, Award, Briefcase, Sparkles, Grid3x3, Vote } from 'lucide-react';
 import NomineeCard from './NomineeCard';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
@@ -138,17 +137,10 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
                     <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#1D5EED]/10 text-[#1D5EED]">
                         <Vote size={22} />
                     </div>
-                    <h2 className="text-3xl font-bold text-[#08193e]">Voting opens May 1st</h2>
+                    <h2 className="text-3xl font-bold text-[#08193e]">{t('prelaunch.title')}</h2>
                     <p className="text-gray-600 mt-3">
-                        Nominate someone in the meantime and come back once voting is live.
+                        {t('prelaunch.description')}
                     </p>
-                    <Link
-                        href="/nominate"
-                        className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#1D5EED] text-white font-semibold hover:bg-[#113cca] transition-colors"
-                    >
-                        <UserPlus size={18} />
-                        Nominate a Changemaker
-                    </Link>
                 </div>
 
                 <div className="mt-auto pt-8">

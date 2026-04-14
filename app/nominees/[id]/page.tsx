@@ -172,7 +172,7 @@ export default async function NomineePage({ params }: NomineePageProps) {
                             {t('viewAllNominees')}
                         </Link>
                         <Link
-                            href="/nominate"
+                            href="/vote"
                             className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED] transition-all duration-200 text-center"
                         >
                             {t('nominateSomeone')}

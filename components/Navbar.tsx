@@ -45,7 +45,7 @@ export default function Navbar() {
                         {t('eligibility')}
                     </Link>
                     <Link
-                        href="/nominate"
+                        href="/vote"
                         className="py-2 px-4 text-sm font-semibold rounded-md bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-colors"
                     >
                         {t('voteNow')}
@@ -86,7 +86,7 @@ export default function Navbar() {
                         {t('eligibility')}
                     </Link>
                     <Link
-                        href="/nominate"
+                        href="/vote"
                         onClick={() => setMobileMenuOpen(false)}
                         className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e] bg-[#1D5EED] text-white hover:bg-[#113CCA]"
                     >

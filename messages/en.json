@@ -4,7 +4,7 @@
       "badge": "2026 Home-Based Care Momentum Awards",
       "title": "Celebrating the <people>people</people> powering exceptional home-based care",
       "subtitle": "The Home-Based Care Momentum Awards recognize outstanding individuals across North America who are elevating home-based care every day — from the front lines to the back office, and the C-suite to visionary innovators.",
-      "cta": "Nominate a Changemaker"
+      "cta": "Vote Now"
     },
     "categories": {
       "title": "Award categories",
@@ -43,7 +43,7 @@
       "managers": "Managers"
     },
     "timeline": {
-      "nominateCta": "Nominate Now",
+      "nominateCta": "Vote Now",
       "eyebrow": "Key dates and milestones",
       "title": "Stay on top of the major moments for The Home-Based Care Momentum Awards",
       "items": [
@@ -202,7 +202,7 @@
       "text": "Please email",
       "email": "awards@alayacare.com",
       "textAfter": "and a member of the awards committee will be happy to help.",
-      "cta": "Ready to Nominate?"
+      "cta": "Vote Now"
     }
   },
   "NominationAcceptance": {
@@ -311,7 +311,7 @@
       "homeCareTitle": "Nomination submitted!",
       "otherTitle": "Thank you for your nomination!",
       "message": "We'll review your submission shortly.",
-      "voteForOthers": "Nominate Others",
+      "voteForOthers": "View Voting Page",
       "returnHome": "Return Home"
     },
     "errors": {
@@ -332,6 +332,10 @@
     "noResults": {
       "title": "No matching nominees found.",
       "subtitle": "Try a different name or search term."
+    },
+    "prelaunch": {
+      "title": "Voting opens May 1",
+      "description": "Nominations are now closed. Public voting will officially open on May 1, 2026."
     },
     "errors": {
       "alreadyVoted": "You've already voted for this nominee.",
@@ -379,7 +383,14 @@
     "category": "Category",
     "nominationStory": "Nomination Story",
     "viewAllNominees": "View All Nominees",
-    "nominateSomeone": "Nominate Someone"
+    "nominateSomeone": "Vote Now"
+  },
+  "NominationClosedPage": {
+    "eyebrow": "Nominations closed",
+    "title": "The nomination period has ended",
+    "description": "Thank you for helping spotlight changemakers across home-based care. Public voting officially opens on May 1, 2026.",
+    "primaryCta": "Go to Voting",
+    "secondaryCta": "Back to Home"
   },
   "ProfilePage": {
     "eyebrow": "Nominee Account",
@@ -439,8 +450,8 @@
     "home": "Home",
     "eligibility": "Eligibility",
     "results": "Results",
-    "nominate": "Nominate",
-    "voteNow": "Nominate Now",
+    "nominate": "Vote",
+    "voteNow": "Vote Now",
     "languageSwitcher": {
       "french": "Français",
       "english": "English",

@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations, getLocale } from 'next-intl/server';
-import { UserPlus, Heart, Trophy, Megaphone, Calendar, Users, Gavel, Award } from 'lucide-react';
+import { UserPlus, Heart, Trophy, Megaphone, Calendar, Users, Gavel, Award, Vote } from 'lucide-react';
 
 // Force dynamic rendering so we always get the latest nominees
 export const dynamic = 'force-dynamic';
@@ -63,10 +63,10 @@ export default async function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/nominate"
+              href="/vote"
               className="px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-all duration-200 shadow-sm flex items-center justify-center gap-2"
             >
-              <UserPlus size={20} /> {t('hero.cta')}
+              <Vote size={20} /> {t('hero.cta')}
             </Link>
           </div>
         </div>
@@ -186,10 +186,10 @@ export default async function Home() {
                       <p className="text-gray-600 mt-3 leading-relaxed">{item.description}</p>
                       {index === 0 && (
                         <Link
-                          href="/nominate"
+                          href="/vote"
                           className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-all duration-200 shadow-sm text-sm"
                         >
-                          <UserPlus size={16} /> {t('timeline.nominateCta')}
+                          <Vote size={16} /> {t('timeline.nominateCta')}
                         </Link>
                       )}
                     </div>

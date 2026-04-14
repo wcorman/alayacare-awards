@@ -257,7 +257,7 @@ export default async function EligibilityPage() {
               {' '}{t('contact.textAfter')}
             </p>
             <Link
-              href="/nominate"
+              href="/vote"
               className="inline-block px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-all duration-200 shadow-sm"
             >
               {t('contact.cta')}
