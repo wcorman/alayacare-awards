@@ -226,6 +226,11 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
                                     sourceList="local, camera, facebook"
                                     classNameUploader="uc-light"
                                     pubkey={uploadcarePublicKey}
+                                    imgOnly
+                                    useCloudImageEditor
+                                    cloudImageEditorAutoOpen
+                                    cloudImageEditorTabs="crop"
+                                    cropPreset="1:1"
                                     localeDefinitionOverride={{
                                         [locale]: {
                                             "upload-files": t("photoCard.uploadButton"),
