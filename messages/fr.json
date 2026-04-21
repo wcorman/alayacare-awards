@@ -413,6 +413,14 @@
       "help": "Recommandé : JPG ou PNG carré, d’au moins 400 x 400 px.",
       "uploadUnavailable": "Le téléversement de photos est indisponible pour le moment, car Uploadcare n’est pas configuré."
     },
+    "socialCard": {
+      "title": "Partage social",
+      "description": "Téléchargez votre image de campagne prête a partager pour la publier sur les reseaux sociaux.",
+      "downloadButton": "Telecharger l'image",
+      "imageAlt": "Image de partage social pour {name}",
+      "openLightbox": "Ouvrir l'image de partage social en grand format",
+      "closeLightbox": "Fermer l'image de partage social"
+    },
     "form": {
       "readOnlyEyebrow": "Détails du candidat",
       "readOnlyTooltip": "Veuillez communiquer avec l’équipe des prix à awards@alayacare.com si vous devez mettre à jour votre champ {field}.",

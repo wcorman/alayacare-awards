@@ -413,6 +413,14 @@
       "help": "Recommended: Square JPG or PNG, at least 400 x 400 px.",
       "uploadUnavailable": "Photo uploads are currently unavailable because Uploadcare is not configured."
     },
+    "socialCard": {
+      "title": "Social Sharing",
+      "description": "Download your ready-to-share campaign image to post on social channels.",
+      "downloadButton": "Download image",
+      "imageAlt": "Social sharing image for {name}",
+      "openLightbox": "Open social sharing image in a larger view",
+      "closeLightbox": "Close social sharing image"
+    },
     "form": {
       "readOnlyEyebrow": "Nominee Details",
       "readOnlyTooltip": "Please reach out to the Awards team at awards@alayacare.com if you need to update your {field}.",

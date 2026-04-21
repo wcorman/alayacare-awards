@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FileUploaderRegular } from "@uploadcare/react-uploader/next";
 import "@uploadcare/react-uploader/core.css";
 import {
     CheckCircle2,
+    Download,
     Globe,
     Link2,
     LockKeyhole,
@@ -13,6 +14,7 @@ import {
     RotateCcw,
     Trash2,
     TriangleAlert,
+    X,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import NomineeImage from "@/components/NomineeImage";
@@ -28,6 +30,7 @@ interface ProfileEditorClientProps {
         linkedInProfile: string;
         companyWebsite: string;
         profilePhoto: string | null;
+        customVoteImage: string | null;
     };
 }
 
@@ -75,6 +78,7 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
     const [isSaving, setIsSaving] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const [isSocialLightboxOpen, setIsSocialLightboxOpen] = useState(false);
 
     const hasChanges = JSON.stringify(normalizeState(formState)) !== JSON.stringify(normalizeState(savedState));
     const uploadcarePublicKey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY || "";
@@ -82,6 +86,38 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
         const subject = `Profile update request for ${profile.nomineeName}`;
         return `mailto:awards@alayacare.com?subject=${encodeURIComponent(subject)}`;
     }, [profile.nomineeName]);
+    const socialShareFilename = useMemo(() => {
+        const normalizedName = profile.nomineeName
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "") || "nominee";
+
+        const extension = profile.customVoteImage?.match(/\.([a-zA-Z0-9]+)(?:[?#].*)?$/)?.[1] || "png";
+
+        return `${normalizedName}-social-share.${extension}`;
+    }, [profile.customVoteImage, profile.nomineeName]);
+
+    useEffect(() => {
+        if (!isSocialLightboxOpen) {
+            return;
+        }
+
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        function handleKeyDown(event: KeyboardEvent) {
+            if (event.key === "Escape") {
+                setIsSocialLightboxOpen(false);
+            }
+        }
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [isSocialLightboxOpen]);
 
     async function handleSave(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -179,64 +215,104 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
                         <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#1D5EED]/15 opacity-0 transition group-hover:opacity-100" />
                     </div>
 
-                    <div className="mb-4 inline-flex items-center justify-center rounded-full bg-[#eef3ff] px-3 py-1 text-xs font-medium text-[#1D5EED]">
+                    <div className="inline-flex items-center justify-center rounded-full bg-[#eef3ff] px-3 py-1 text-xs font-medium text-[#1D5EED]">
                         {t("photoCard.pendingSave")}
                     </div>
 
-                    {uploadcarePublicKey ? (
-                        <div className="w-full">
-                            <FileUploaderRegular
-                                sourceList="local, camera, facebook"
-                                classNameUploader="uc-light"
-                                pubkey={uploadcarePublicKey}
-                                localeDefinitionOverride={{
-                                    [locale]: {
-                                        "upload-files": t("photoCard.uploadButton"),
-                                        "upload-file": t("photoCard.uploadButton"),
-                                    },
-                                }}
-                                onChange={(info) => {
-                                    if (info.allEntries.length > 0 && info.allEntries[0].status === "success") {
-                                        setFormState((prev) => ({
-                                            ...prev,
-                                            profilePhoto: info.allEntries[0].cdnUrl,
-                                        }));
+                    <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+                        {uploadcarePublicKey ? (
+                            <div>
+                                <FileUploaderRegular
+                                    sourceList="local, camera, facebook"
+                                    classNameUploader="uc-light"
+                                    pubkey={uploadcarePublicKey}
+                                    localeDefinitionOverride={{
+                                        [locale]: {
+                                            "upload-files": t("photoCard.uploadButton"),
+                                            "upload-file": t("photoCard.uploadButton"),
+                                        },
+                                    }}
+                                    onChange={(info) => {
+                                        if (info.allEntries.length > 0 && info.allEntries[0].status === "success") {
+                                            setFormState((prev) => ({
+                                                ...prev,
+                                                profilePhoto: info.allEntries[0].cdnUrl,
+                                            }));
+                                            setErrorMessage(null);
+                                            setSuccessMessage(null);
+                                        } else if (info.allEntries.length === 0) {
+                                            setFormState((prev) => ({
+                                                ...prev,
+                                                profilePhoto: null,
+                                            }));
+                                        }
+                                    }}
+                                />
+                            </div>
+                        ) : (
+                            <p className="rounded-2xl bg-[#fff5ef] px-4 py-3 text-sm text-[#9a4e15]">
+                                {t("photoCard.uploadUnavailable")}
+                            </p>
+                        )}
+
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setFormState((prev) => ({ ...prev, profilePhoto: null }));
                                         setErrorMessage(null);
                                         setSuccessMessage(null);
-                                    } else if (info.allEntries.length === 0) {
-                                        setFormState((prev) => ({
-                                            ...prev,
-                                            profilePhoto: null,
-                                        }));
-                                    }
-                                }}
-                            />
-                        </div>
-                    ) : (
-                        <p className="rounded-2xl bg-[#fff5ef] px-4 py-3 text-sm text-[#9a4e15]">
-                            {t("photoCard.uploadUnavailable")}
-                        </p>
-                    )}
-
-                    <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
-                        <button
-                            type="button"
-                            onClick={() => {
-                                setFormState((prev) => ({ ...prev, profilePhoto: null }));
-                                setErrorMessage(null);
-                                setSuccessMessage(null);
-                            }}
-                            disabled={!formState.profilePhoto}
-                            className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[#08193e] transition hover:bg-[#f4f6fb] disabled:cursor-not-allowed disabled:opacity-50"
-                        >
-                            <Trash2 size={16} />
-                            {t("photoCard.removeButton")}
-                        </button>
+                                    }}
+                                    disabled={!formState.profilePhoto}
+                                    aria-label={t("photoCard.removeButton")}
+                                    className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[#08193e] transition hover:bg-[#f4f6fb] disabled:cursor-not-allowed disabled:opacity-50"
+                                >
+                                    <Trash2 size={16} />
+                                </button>
+                            </TooltipTrigger>
+                            <TooltipContent side="top">
+                                {t("photoCard.removeButton")}
+                            </TooltipContent>
+                        </Tooltip>
                     </div>
 
                     <p className="mt-4 max-w-xs text-xs leading-relaxed text-[#52607d]">
                         {t("photoCard.help")}
                     </p>
+
+                    {profile.customVoteImage ? (
+                        <div className="mt-8 w-full rounded-[24px] border border-[#dfe8ff] bg-[#f8faff] p-5 text-left">
+                            <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1D5EED]">
+                                {t("socialCard.title")}
+                            </div>
+                            <p className="mt-2 text-sm leading-relaxed text-[#52607d]">
+                                {t("socialCard.description")}
+                            </p>
+                            <button
+                                type="button"
+                                onClick={() => setIsSocialLightboxOpen(true)}
+                                className="mt-4 block w-full cursor-pointer overflow-hidden rounded-[18px] border border-[#dfe8ff] bg-white text-left shadow-[0_10px_25px_rgba(8,25,62,0.06)] transition hover:shadow-[0_14px_32px_rgba(8,25,62,0.1)] focus:outline-none focus:ring-4 focus:ring-[#1D5EED]/15"
+                                aria-label={t("socialCard.openLightbox")}
+                            >
+                                <img
+                                    src={profile.customVoteImage}
+                                    alt={t("socialCard.imageAlt", { name: profile.nomineeName })}
+                                    className="h-auto w-full object-contain"
+                                />
+                            </button>
+                            <a
+                                href={profile.customVoteImage}
+                                download={socialShareFilename}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#1D5EED] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#113cca]"
+                            >
+                                <Download size={16} />
+                                {t("socialCard.downloadButton")}
+                            </a>
+                        </div>
+                    ) : null}
                 </div>
                 </section>
 
@@ -349,6 +425,48 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
                     </form>
                 </section>
             </div>
+            {profile.customVoteImage && isSocialLightboxOpen ? (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-[#08193e]/85 p-4 sm:p-8"
+                    onClick={() => setIsSocialLightboxOpen(false)}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label={t("socialCard.title")}
+                >
+                    <div
+                        className="relative max-h-[90vh] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white p-4 shadow-[0_30px_80px_rgba(8,25,62,0.35)] sm:p-6"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <button
+                            type="button"
+                            onClick={() => setIsSocialLightboxOpen(false)}
+                            className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#08193e] transition hover:bg-[#eef3ff] focus:outline-none focus:ring-4 focus:ring-[#1D5EED]/15"
+                            aria-label={t("socialCard.closeLightbox")}
+                        >
+                            <X size={18} />
+                        </button>
+                        <div className="overflow-auto rounded-[20px] border border-[#dfe8ff] bg-[#f8faff] p-2 sm:p-4">
+                            <img
+                                src={profile.customVoteImage}
+                                alt={t("socialCard.imageAlt", { name: profile.nomineeName })}
+                                className="mx-auto max-h-[70vh] h-auto w-full object-contain"
+                            />
+                        </div>
+                        <div className="mt-4 flex justify-center">
+                            <a
+                                href={profile.customVoteImage}
+                                download={socialShareFilename}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 rounded-full bg-[#1D5EED] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#113cca]"
+                            >
+                                <Download size={16} />
+                                {t("socialCard.downloadButton")}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
         </TooltipProvider>
     );
 }

@@ -169,6 +169,7 @@ export interface NomineeProfileEditorData {
     linkedInProfile: string;
     companyWebsite: string;
     profilePhoto: string | null;
+    customVoteImage: string | null;
     languagePreference: "en" | "fr" | null;
 }
 
@@ -232,6 +233,7 @@ export async function fetchNomineeProfileEditorDataById(id: string): Promise<Nom
         linkedInProfile: fields["LinkedIn Profile"] || "",
         companyWebsite: fields["Company Website"] || "",
         profilePhoto: getAttachmentUrl(fields["Profile Photo"]),
+        customVoteImage: getAttachmentUrl(fields["custom-vote-image"]),
         languagePreference: getNominationLanguagePreference(fields),
     };
 }
@@ -298,6 +300,7 @@ export async function updateNomineeProfileEditorData(
         linkedInProfile: updatedFields["LinkedIn Profile"] || "",
         companyWebsite: updatedFields["Company Website"] || "",
         profilePhoto: getAttachmentUrl(updatedFields["Profile Photo"]),
+        customVoteImage: getAttachmentUrl(updatedFields["custom-vote-image"]),
         languagePreference: getNominationLanguagePreference(updatedFields),
     };
 }
