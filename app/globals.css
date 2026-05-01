@@ -39,3 +39,59 @@ body {
 .animate-gentle-pulse {
   animation: gentle-pulse 2s ease-in-out infinite;
 }
+
+@keyframes spotlight-drift-primary {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  35% {
+    transform: translate3d(-2rem, 1.5rem, 0) scale(1.08);
+  }
+  70% {
+    transform: translate3d(1.5rem, 2.5rem, 0) scale(0.96);
+  }
+}
+
+@keyframes spotlight-drift-secondary {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  40% {
+    transform: translate3d(2.25rem, -1.5rem, 0) scale(1.06);
+  }
+  75% {
+    transform: translate3d(-1rem, -2.25rem, 0) scale(0.98);
+  }
+}
+
+@keyframes spotlight-drift-center {
+  0%, 100% {
+    transform: translate3d(0, -50%, 0) scale(1);
+  }
+  45% {
+    transform: translate3d(2rem, calc(-50% - 1rem), 0) scale(1.12);
+  }
+  80% {
+    transform: translate3d(-1.25rem, calc(-50% + 1.5rem), 0) scale(0.95);
+  }
+}
+
+.animate-spotlight-primary {
+  animation: spotlight-drift-primary 18s ease-in-out infinite;
+}
+
+.animate-spotlight-secondary {
+  animation: spotlight-drift-secondary 22s ease-in-out infinite;
+}
+
+.animate-spotlight-center {
+  animation: spotlight-drift-center 20s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spotlight-primary,
+  .animate-spotlight-secondary,
+  .animate-spotlight-center {
+    animation: none;
+  }
+}

@@ -323,6 +323,16 @@
   "VotePage": {
     "title": "Vote for excellence",
     "subtitle": "Recognize outstanding individuals transforming home-based care by casting your vote.",
+    "hero": {
+      "eyebrow": "Public voting is open",
+      "title": "Help celebrate the people moving home-based care forward.",
+      "description": "Explore this year's nominees, read their stories, and cast your vote for the changemakers making a difference across home-based care.",
+      "instruction": "One vote per nominee. Check your email after voting to confirm your submission.",
+      "deadlineLabel": "Voting closes",
+      "deadlineValue": "June 1, 2026",
+      "nomineeStat": "nominees to celebrate",
+      "categoryStat": "award categories"
+    },
     "searchPlaceholder": "Search nominees...",
     "filterByCategory": "Filter by category:",
     "allCategories": "All categories",

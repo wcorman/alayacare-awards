@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
-import { Search, X, Heart, Award, Briefcase, Sparkles, Grid3x3, Vote } from 'lucide-react';
+import { Search, X, Heart, Award, Briefcase, Sparkles, Grid3x3, Vote, Calendar, Users } from 'lucide-react';
 import NomineeCard from './NomineeCard';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
@@ -165,14 +165,56 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
 
     return (
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
-            {/* Header & Search */}
-            <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-6">
-                <div>
-                    <h2 className="text-3xl font-bold text-[#08193e]">{t('title')}</h2>
-                    <p className="text-gray-600 mt-2">{t('subtitle')}</p>
-                </div>
+            <section className="relative overflow-hidden rounded-3xl bg-[#08193e] text-white mb-10 shadow-lg">
+                <div className="animate-spotlight-primary absolute -top-44 -right-36 h-[32rem] w-[32rem] rounded-full bg-[#1D5EED]/30 blur-3xl" />
+                <div className="animate-spotlight-secondary absolute -bottom-48 -left-32 h-[34rem] w-[34rem] rounded-full bg-[#f37021]/22 blur-3xl" />
+                <div className="animate-spotlight-center absolute left-1/3 top-1/2 h-72 w-72 rounded-full bg-[#5FEAE6]/10 blur-3xl" />
+                <div className="relative z-10 grid gap-8 p-8 md:p-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
+                    <div>
+                        <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-white/90 ring-1 ring-white/15">
+                            <Vote size={14} />
+                            {t('hero.eyebrow')}
+                        </span>
+                        <h1 className="mt-5 max-w-[42rem] text-[1.75rem] font-bold leading-tight md:text-[2.5rem]">
+                            {t('hero.title')}
+                        </h1>
+                        <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
+                            {t('hero.description')}
+                        </p>
+                        <p className="mt-5 inline-flex rounded-2xl bg-white/10 px-4 py-3 text-sm font-medium text-white/90 ring-1 ring-white/15">
+                            {t('hero.instruction')}
+                        </p>
+                    </div>
 
-                <div className="relative w-full md:w-72">
+                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                        <div className="rounded-2xl bg-white p-4 text-[#08193e] shadow-sm">
+                            <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#1D5EED]/10 text-[#1D5EED]">
+                                <Calendar size={20} />
+                            </div>
+                            <p className="text-xs font-bold uppercase tracking-wider text-gray-500">{t('hero.deadlineLabel')}</p>
+                            <p className="mt-1 text-lg font-bold">{t('hero.deadlineValue')}</p>
+                        </div>
+                        <div className="rounded-2xl bg-white/10 p-4 ring-1 ring-white/15">
+                            <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white">
+                                <Users size={20} />
+                            </div>
+                            <p className="text-3xl font-bold">{nominees.length}</p>
+                            <p className="mt-1 text-sm text-white/75">{t('hero.nomineeStat')}</p>
+                        </div>
+                        <div className="rounded-2xl bg-white/10 p-4 ring-1 ring-white/15">
+                            <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white">
+                                <Grid3x3 size={20} />
+                            </div>
+                            <p className="text-3xl font-bold">{categories.length}</p>
+                            <p className="mt-1 text-sm text-white/75">{t('hero.categoryStat')}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Search */}
+            <div className="mb-8">
+                <div className="relative w-full md:max-w-md">
                     <input
                         type="text"
                         placeholder={t('searchPlaceholder')}

@@ -323,6 +323,16 @@
   "VotePage": {
     "title": "Voter pour l'excellence",
     "subtitle": "Reconnaissez des personnes exceptionnelles qui transforment les soins à domicile en votant.",
+    "hero": {
+      "eyebrow": "Le vote du public est ouvert",
+      "title": "Aidez-nous à célébrer les personnes qui font avancer les soins à domicile.",
+      "description": "Découvrez les candidats de cette année, lisez leurs histoires et votez pour les agents de changement qui font une différence dans les soins à domicile.",
+      "instruction": "Un vote par candidat. Consultez votre courriel après avoir voté pour confirmer votre soumission.",
+      "deadlineLabel": "Fin du vote",
+      "deadlineValue": "1er juin 2026",
+      "nomineeStat": "candidats à célébrer",
+      "categoryStat": "catégories de prix"
+    },
     "searchPlaceholder": "Rechercher des candidats...",
     "filterByCategory": "Filtrer par catégorie :",
     "allCategories": "Toutes les catégories",
