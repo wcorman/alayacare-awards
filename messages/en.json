@@ -330,8 +330,8 @@
       "instruction": "One vote per nominee. Check your email after voting to confirm your submission.",
       "deadlineLabel": "Voting closes",
       "deadlineValue": "June 1, 2026",
-      "nomineeStat": "nominees to celebrate",
-      "categoryStat": "award categories"
+      "nomineeStat": "Nominees to celebrate",
+      "categoryStat": "Award categories"
     },
     "searchPlaceholder": "Search nominees...",
     "filterByCategory": "Filter by category:",

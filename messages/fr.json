@@ -330,8 +330,8 @@
       "instruction": "Un vote par candidat. Consultez votre courriel après avoir voté pour confirmer votre soumission.",
       "deadlineLabel": "Fin du vote",
       "deadlineValue": "1er juin 2026",
-      "nomineeStat": "candidats à célébrer",
-      "categoryStat": "catégories de prix"
+      "nomineeStat": "Candidats à célébrer",
+      "categoryStat": "Catégories de prix"
     },
     "searchPlaceholder": "Rechercher des candidats...",
     "filterByCategory": "Filtrer par catégorie :",
