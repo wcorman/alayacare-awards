@@ -10,6 +10,8 @@ const HEADERS = {
     "Content-Type": "application/json",
 };
 
+export const NOMINATIONS_REVALIDATE_SECONDS = 60;
+
 const NOMINATION_LANGUAGE_FIELD = "English or French";
 
 /** Maps Airtable single select to next-intl locale; null if unset or unknown. */
@@ -84,8 +86,10 @@ export async function fetchNominations(): Promise<Nominee[]> {
 
     const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}?${sortQuery}&filterByFormula=${filterFormula}`;
 
-    // Remove cache to always get fresh image URLs (Airtable URLs expire)
-    const res = await fetch(url, { headers: HEADERS, cache: 'no-store' });
+    const res = await fetch(url, {
+        headers: HEADERS,
+        next: { revalidate: NOMINATIONS_REVALIDATE_SECONDS },
+    });
 
     if (!res.ok) {
         throw new Error(`Failed to fetch nominees: ${res.statusText}`);

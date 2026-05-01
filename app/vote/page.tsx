@@ -2,8 +2,8 @@ import React from 'react';
 import { fetchNominations } from '@/lib/airtable';
 import VotePageClient from '@/components/VotePageClient';
 
-// Force dynamic rendering so we always get the latest nominees
-export const dynamic = 'force-dynamic';
+// Keep nominee data fresh without making every page view wait on Airtable.
+export const revalidate = 60;
 
 export default async function VotePage() {
     const nominees = await fetchNominations();
