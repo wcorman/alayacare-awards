@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
-import { Search, X, Heart, Award, Briefcase, Sparkles, Grid3x3, Vote, Calendar, Users } from 'lucide-react';
+import { Search, X, Heart, Award, Briefcase, Sparkles, Vote, Calendar, Users, Tag } from 'lucide-react';
 import NomineeCard from './NomineeCard';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
@@ -203,7 +203,7 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
                         </div>
                         <div className="rounded-2xl bg-white/10 p-4 ring-1 ring-white/15">
                             <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white">
-                                <Grid3x3 size={20} />
+                                <Tag size={20} />
                             </div>
                             <p className="text-3xl font-bold">{categories.length}</p>
                             <p className="mt-1 text-sm text-white/75">{t('hero.categoryStat')}</p>
@@ -239,7 +239,7 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
                                     : 'bg-white text-gray-700 border border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED]'
                             }`}
                         >
-                            <Grid3x3 size={16} />
+                            <Tag size={16} />
                             {t('allCategories')}
                         </button>
                         {categories.map((category) => {
