@@ -331,7 +331,8 @@
       "deadlineLabel": "Fin du vote",
       "deadlineValue": "1er juin 2026",
       "nomineeStat": "Candidats à célébrer",
-      "categoryStat": "Catégories de prix"
+      "categoryStat": "Catégories de prix",
+      "totalVotesStat": "Votes au total"
     },
     "searchPlaceholder": "Rechercher des candidats...",
     "filterByCategory": "Filtrer par catégorie :",

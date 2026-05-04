@@ -331,7 +331,8 @@
       "deadlineLabel": "Voting closes",
       "deadlineValue": "June 1, 2026",
       "nomineeStat": "Nominees to celebrate",
-      "categoryStat": "Award categories"
+      "categoryStat": "Award categories",
+      "totalVotesStat": "Total votes cast"
     },
     "searchPlaceholder": "Search nominees...",
     "filterByCategory": "Filter by category:",

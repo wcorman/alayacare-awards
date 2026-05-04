@@ -5,7 +5,7 @@ import { Search, X, Heart, Award, Briefcase, Sparkles, Vote, Calendar, Users, Ta
 import NomineeCard from './NomineeCard';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 // Category definitions matching the ones used in NominationForm and Home page
 const CATEGORY_CONFIG: Record<string, { icon: React.ComponentType<{ size?: number; className?: string }>; color: string }> = {
@@ -23,6 +23,7 @@ interface VotePageClientProps {
 export default function VotePageClient({ nominees, isVotingOpen }: VotePageClientProps) {
     const t = useTranslations('VotePage');
     const tHome = useTranslations('Home');
+    const locale = useLocale();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [votedNomineeIds, setVotedNomineeIds] = useState<string[]>([]);
@@ -110,6 +111,11 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
         return uniqueCategories.sort();
     }, [nominees]);
 
+    const totalVoteCount = useMemo(
+        () => nominees.reduce((sum, n) => sum + (n.votes ?? 0), 0),
+        [nominees]
+    );
+
     // Filter Nominees
     const filteredNominees = nominees.filter(nominee => {
         // Category filter
@@ -186,27 +192,44 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
                         </p>
                     </div>
 
-                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                        <div className="rounded-2xl bg-white p-4 text-[#08193e] shadow-sm">
-                            <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#1D5EED]/10 text-[#1D5EED]">
-                                <Calendar size={20} />
+                    <div className="grid gap-2.5 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-1">
+                        <div className="flex items-center justify-between gap-3 rounded-2xl bg-white px-3 py-2.5 text-[#08193e] shadow-sm">
+                            <div className="min-w-0">
+                                <p className="text-xs font-bold uppercase tracking-wider text-gray-500">{t('hero.deadlineLabel')}</p>
+                                <p className="mt-0.5 text-base font-bold leading-tight md:text-lg">{t('hero.deadlineValue')}</p>
                             </div>
-                            <p className="text-xs font-bold uppercase tracking-wider text-gray-500">{t('hero.deadlineLabel')}</p>
-                            <p className="mt-1 text-lg font-bold">{t('hero.deadlineValue')}</p>
+                            <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1D5EED]/10 text-[#1D5EED]">
+                                <Calendar size={18} />
+                            </div>
                         </div>
-                        <div className="rounded-2xl bg-white/10 p-4 ring-1 ring-white/15">
-                            <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white">
-                                <Users size={20} />
+                        <div className="flex items-center justify-between gap-3 rounded-2xl bg-white/10 px-3 py-2.5 ring-1 ring-white/15">
+                            <div className="min-w-0">
+                                <p className="text-2xl font-bold tabular-nums leading-none md:text-3xl">{nominees.length}</p>
+                                <p className="mt-1 text-xs leading-snug text-white/75 md:text-sm">{t('hero.nomineeStat')}</p>
                             </div>
-                            <p className="text-3xl font-bold">{nominees.length}</p>
-                            <p className="mt-1 text-sm text-white/75">{t('hero.nomineeStat')}</p>
+                            <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white">
+                                <Users size={18} />
+                            </div>
                         </div>
-                        <div className="rounded-2xl bg-white/10 p-4 ring-1 ring-white/15">
-                            <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white">
-                                <Tag size={20} />
+                        <div className="flex items-center justify-between gap-3 rounded-2xl bg-white/10 px-3 py-2.5 ring-1 ring-white/15">
+                            <div className="min-w-0">
+                                <p className="text-2xl font-bold tabular-nums leading-none md:text-3xl">{categories.length}</p>
+                                <p className="mt-1 text-xs leading-snug text-white/75 md:text-sm">{t('hero.categoryStat')}</p>
                             </div>
-                            <p className="text-3xl font-bold">{categories.length}</p>
-                            <p className="mt-1 text-sm text-white/75">{t('hero.categoryStat')}</p>
+                            <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white">
+                                <Tag size={18} />
+                            </div>
+                        </div>
+                        <div className="flex items-center justify-between gap-3 rounded-2xl bg-white/10 px-3 py-2.5 ring-1 ring-white/15">
+                            <div className="min-w-0">
+                                <p className="text-2xl font-bold tabular-nums leading-none md:text-3xl">
+                                    {totalVoteCount.toLocaleString(locale)}
+                                </p>
+                                <p className="mt-1 text-xs leading-snug text-white/75 md:text-sm">{t('hero.totalVotesStat')}</p>
+                            </div>
+                            <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white">
+                                <Vote size={18} />
+                            </div>
                         </div>
                     </div>
                 </div>
