@@ -335,6 +335,8 @@
       "totalVotesStat": "Total votes cast"
     },
     "searchPlaceholder": "Search nominees...",
+    "filterByOrganization": "Filter by organization",
+    "allOrganizations": "All organizations",
     "filterByCategory": "Filter by category:",
     "allCategories": "All categories",
     "showingResults": "Showing {count} {nominee} in",

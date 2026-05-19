@@ -335,6 +335,8 @@
       "totalVotesStat": "Votes au total"
     },
     "searchPlaceholder": "Rechercher des candidats...",
+    "filterByOrganization": "Filtrer par organisation",
+    "allOrganizations": "Toutes les organisations",
     "filterByCategory": "Filtrer par catégorie :",
     "allCategories": "Toutes les catégories",
     "showingResults": "Affichage de {count} {nominee} dans",

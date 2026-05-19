@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
-import { Search, X, Heart, Award, Briefcase, Sparkles, Vote, Calendar, Users, Tag } from 'lucide-react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { Search, X, Heart, Award, Briefcase, Sparkles, Vote, Calendar, Users, Tag, ChevronDown, Check } from 'lucide-react';
 import NomineeCard from './NomineeCard';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
@@ -26,6 +26,9 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
     const locale = useLocale();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [selectedOrganization, setSelectedOrganization] = useState<string | null>(null);
+    const [isOrganizationMenuOpen, setIsOrganizationMenuOpen] = useState(false);
+    const organizationMenuRef = useRef<HTMLDivElement>(null);
     const [votedNomineeIds, setVotedNomineeIds] = useState<string[]>([]);
     const [adminAccessInput, setAdminAccessInput] = useState('');
 
@@ -35,6 +38,33 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
     const [isCheckingVote, setIsCheckingVote] = useState(false);
     const [voteError, setVoteError] = useState<string | null>(null);
     const [voteCompleted, setVoteCompleted] = useState(false);
+
+    useEffect(() => {
+        if (!isOrganizationMenuOpen) return;
+
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                organizationMenuRef.current &&
+                !organizationMenuRef.current.contains(event.target as Node)
+            ) {
+                setIsOrganizationMenuOpen(false);
+            }
+        };
+
+        const handleEscape = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setIsOrganizationMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('keydown', handleEscape);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', handleEscape);
+        };
+    }, [isOrganizationMenuOpen]);
 
     const checkStatus = async (email: string) => {
         try {
@@ -111,6 +141,18 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
         return uniqueCategories.sort();
     }, [nominees]);
 
+    const organizations = useMemo(() => {
+        const uniqueOrganizations = Array.from(
+            new Set(
+                nominees
+                    .map((nominee) => nominee.organization?.trim())
+                    .filter((organization): organization is string => Boolean(organization))
+            )
+        );
+
+        return uniqueOrganizations.sort((a, b) => a.localeCompare(b, locale));
+    }, [locale, nominees]);
+
     const totalVoteCount = useMemo(
         () => nominees.reduce((sum, n) => sum + (n.votes ?? 0), 0),
         [nominees]
@@ -123,18 +165,25 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
             return false;
         }
 
+        // Organization filter
+        if (selectedOrganization && nominee.organization !== selectedOrganization) {
+            return false;
+        }
+
         // Search filter
         if (!searchTerm) return true;
         const lowerSearch = searchTerm.toLowerCase();
         return (
             (nominee.name && nominee.name.toLowerCase().includes(lowerSearch)) ||
             (nominee.description && nominee.description.toLowerCase().includes(lowerSearch)) ||
-            (nominee.category && nominee.category.toLowerCase().includes(lowerSearch))
+            (nominee.category && nominee.category.toLowerCase().includes(lowerSearch)) ||
+            (nominee.organization && nominee.organization.toLowerCase().includes(lowerSearch))
         );
     });
 
     const hasAdminAccess = adminAccessInput.trim().toLowerCase() === 'marketingsquad';
     const showVotingGrid = isVotingOpen || hasAdminAccess;
+    const hasActiveFilters = Boolean(selectedCategory || selectedOrganization);
 
     if (!showVotingGrid) {
         return (
@@ -237,15 +286,100 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
 
             {/* Search */}
             <div className="mb-8">
-                <div className="relative w-full md:max-w-md">
-                    <input
-                        type="text"
-                        placeholder={t('searchPlaceholder')}
-                        className="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-[#1D5EED] w-full"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
+                <div className="flex flex-col gap-3 md:flex-row">
+                    <div className="relative w-full md:max-w-md">
+                        <input
+                            type="text"
+                            placeholder={t('searchPlaceholder')}
+                            className="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-[#1D5EED] w-full"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
+                    </div>
+
+                    {organizations.length > 0 && (
+                        <div ref={organizationMenuRef} className="relative w-full md:w-80">
+                            <button
+                                type="button"
+                                className="flex w-full items-center justify-between gap-3 rounded-full border border-gray-300 bg-white py-2 pl-4 pr-4 text-left text-gray-700 transition-colors hover:border-[#1D5EED]/60 focus:outline-none focus:border-[#1D5EED]"
+                                onClick={() => setIsOrganizationMenuOpen((open) => !open)}
+                                aria-haspopup="listbox"
+                                aria-expanded={isOrganizationMenuOpen}
+                                aria-label={t('filterByOrganization')}
+                            >
+                                <span className="truncate">
+                                    {selectedOrganization ?? t('allOrganizations')}
+                                </span>
+                                <ChevronDown
+                                    className={`shrink-0 text-gray-500 transition-transform ${isOrganizationMenuOpen ? 'rotate-180' : ''}`}
+                                    size={18}
+                                    aria-hidden
+                                />
+                            </button>
+
+                            {isOrganizationMenuOpen && (
+                                <ul
+                                    role="listbox"
+                                    aria-label={t('filterByOrganization')}
+                                    className="absolute z-20 mt-2 max-h-64 w-full overflow-y-auto rounded-2xl border border-gray-200 bg-white py-1 shadow-lg ring-1 ring-black/5"
+                                >
+                                    <li role="presentation">
+                                        <button
+                                            type="button"
+                                            role="option"
+                                            aria-selected={selectedOrganization === null}
+                                            onClick={() => {
+                                                setSelectedOrganization(null);
+                                                setIsOrganizationMenuOpen(false);
+                                            }}
+                                            className={`flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm transition-colors ${
+                                                selectedOrganization === null
+                                                    ? 'bg-[#1D5EED]/10 font-medium text-[#1D5EED]'
+                                                    : 'text-gray-700 hover:bg-gray-50'
+                                            }`}
+                                        >
+                                            {selectedOrganization === null && (
+                                                <Check size={16} className="shrink-0" aria-hidden />
+                                            )}
+                                            <span className={selectedOrganization === null ? '' : 'pl-6'}>
+                                                {t('allOrganizations')}
+                                            </span>
+                                        </button>
+                                    </li>
+                                    {organizations.map((organization) => (
+                                        <li key={organization} role="presentation">
+                                            <button
+                                                type="button"
+                                                role="option"
+                                                aria-selected={selectedOrganization === organization}
+                                                onClick={() => {
+                                                    setSelectedOrganization(organization);
+                                                    setIsOrganizationMenuOpen(false);
+                                                }}
+                                                className={`flex w-full items-center gap-2 px-4 py-2.5 text-left text-sm transition-colors ${
+                                                    selectedOrganization === organization
+                                                        ? 'bg-[#1D5EED]/10 font-medium text-[#1D5EED]'
+                                                        : 'text-gray-700 hover:bg-gray-50'
+                                                }`}
+                                            >
+                                                {selectedOrganization === organization && (
+                                                    <Check size={16} className="shrink-0" aria-hidden />
+                                                )}
+                                                <span
+                                                    className={
+                                                        selectedOrganization === organization ? 'truncate' : 'truncate pl-6'
+                                                    }
+                                                >
+                                                    {organization}
+                                                </span>
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -294,9 +428,18 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
                             );
                         })}
                     </div>
+                </div>
+            )}
+
+            {hasActiveFilters && (
+                <div className="mb-8 flex flex-wrap items-center gap-2 text-sm text-gray-600">
+                    <span>{t('showingResults', {
+                        count: filteredNominees.length,
+                        nominee: filteredNominees.length === 1 ? t('nominee') : t('nominees')
+                    })}</span>
                     {selectedCategory && (() => {
                         const categoryInfo = CATEGORY_CONFIG[selectedCategory] || { color: '#6b7280' };
-                        // Convert hex to rgba with 15% opacity
+                        // Convert hex to rgba with 15% opacity.
                         const hexToRgba = (hex: string, alpha: number) => {
                             const r = parseInt(hex.slice(1, 3), 16);
                             const g = parseInt(hex.slice(3, 5), 16);
@@ -309,23 +452,22 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
                                                    selectedCategory === "Impact and Innovation" ? tHome('categories.impact.name') :
                                                    selectedCategory;
                         return (
-                            <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
-                                <span>{t('showingResults', { 
-                                    count: filteredNominees.length, 
-                                    nominee: filteredNominees.length === 1 ? t('nominee') : t('nominees')
-                                })}</span>
-                                <span 
-                                    className="px-3 py-1 rounded-full font-semibold"
-                                    style={{ 
-                                        backgroundColor: hexToRgba(categoryInfo.color, 0.15),
-                                        color: categoryInfo.color
-                                    }}
-                                >
-                                    {translatedCategory}
-                                </span>
-                            </div>
+                            <span
+                                className="rounded-full px-3 py-1 font-semibold"
+                                style={{
+                                    backgroundColor: hexToRgba(categoryInfo.color, 0.15),
+                                    color: categoryInfo.color
+                                }}
+                            >
+                                {translatedCategory}
+                            </span>
                         );
                     })()}
+                    {selectedOrganization && (
+                        <span className="rounded-full bg-[#1D5EED]/10 px-3 py-1 font-semibold text-[#1D5EED]">
+                            {selectedOrganization}
+                        </span>
+                    )}
                 </div>
             )}
 
