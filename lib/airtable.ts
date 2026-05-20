@@ -351,6 +351,23 @@ export async function createConfirmationRecord(email: string, nomineeId: string,
     return true;
 }
 
+export async function findConfirmationByEmailAndNominee(email: string, nomineeId: string) {
+    const TABLE_NAME = "Email Confirmations";
+    const filterFormula = encodeURIComponent(`LOWER({Voter Email})=LOWER('${email}')`);
+    const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}?filterByFormula=${filterFormula}`;
+
+    const res = await fetch(url, { headers: HEADERS, cache: 'no-store' });
+    if (!res.ok) throw new Error("Failed to find confirmation record by email and nominee");
+
+    const data = await res.json();
+    return (
+        data.records.find((record: { fields?: Record<string, unknown> }) => {
+            const votedForIds = record.fields?.["Voted For"];
+            return Array.isArray(votedForIds) && votedForIds.includes(nomineeId);
+        }) || null
+    );
+}
+
 export async function findConfirmationByToken(token: string) {
     const TABLE_NAME = "Email Confirmations";
     const filterFormula = encodeURIComponent(`{Confirmation Token}='${token}'`);
@@ -366,6 +383,10 @@ export async function findConfirmationByToken(token: string) {
 export async function confirmVoteInAirtable(confirmationRecord: any) {
     const TABLE_NAME_CONFIRM = "Email Confirmations";
     const TABLE_NAME_VOTING = "Voting Record";
+
+    if (confirmationRecord.fields["Vote Confirmed"]) {
+        return false;
+    }
 
     const { "Voter Email": email, "Voted For": votedForIds } = confirmationRecord.fields;
     const nomineeId = votedForIds ? votedForIds[0] : null;
@@ -418,6 +439,8 @@ export async function confirmVoteInAirtable(confirmationRecord: any) {
             })
         });
     }
+
+    return true;
 }
 
 export async function checkIfNomineeExists(email: string): Promise<boolean> {

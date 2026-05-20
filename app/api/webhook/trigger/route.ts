@@ -26,6 +26,10 @@ export async function GET(request: NextRequest) {
             return NextResponse.redirect(`${baseUrl}/?error=missing_data`);
         }
 
+        if (confirmationRecord.fields["Vote Confirmed"]) {
+            return NextResponse.redirect(`${baseUrl}/?vote=confirmed`);
+        }
+
         // 3. Fetch nominee data
         const nominees = await fetchNominations();
         const nominee = nominees.find(n => n.id === nomineeId);
@@ -35,7 +39,11 @@ export async function GET(request: NextRequest) {
         }
 
         // 4. Confirm the vote (updates Vote Confirmed = true and Confirmed At timestamp)
-        await confirmVoteInAirtable(confirmationRecord);
+        const voteWasConfirmed = await confirmVoteInAirtable(confirmationRecord);
+
+        if (!voteWasConfirmed) {
+            return NextResponse.redirect(`${baseUrl}/?vote=confirmed`);
+        }
 
         // 5. Send webhook
         await sendVoteRequestWebhook(email, {

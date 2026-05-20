@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { findVotingRecord, createConfirmationRecord, addContactToAirtable } from '@/lib/airtable';
+import {
+    findVotingRecord,
+    createConfirmationRecord,
+    addContactToAirtable,
+    findConfirmationByEmailAndNominee
+} from '@/lib/airtable';
 
 
 export async function POST(request: NextRequest) {
@@ -20,6 +25,12 @@ export async function POST(request: NextRequest) {
             if (votedNominees.includes(nomineeId)) {
                 return NextResponse.json({ ok: false, reason: "already_voted" });
             }
+        }
+
+        // Prevent duplicate pending or already-confirmed email confirmations
+        const existingConfirmation = await findConfirmationByEmailAndNominee(email, nomineeId);
+        if (existingConfirmation) {
+            return NextResponse.json({ ok: false, reason: "already_voted" });
         }
 
         // 2. Generate Token & Create Confirmation Record
