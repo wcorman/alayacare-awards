@@ -2,7 +2,7 @@
 
 import React, { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, Check, ClipboardList, Loader2, RotateCcw, Save, Search, Users } from "lucide-react";
+import { AlertTriangle, ArrowLeft, ArrowRight, Check, ClipboardList, Loader2, RotateCcw, Save, Search, ThumbsUp, Users, X } from "lucide-react";
 import type { Nominee } from "@/lib/airtable";
 import NomineeImage from "@/components/NomineeImage";
 
@@ -102,6 +102,7 @@ export default function JudgingPanelClient({ nominees }: JudgingPanelClientProps
     const [saveState, setSaveState] = useState<SaveState>("idle");
     const [saveError, setSaveError] = useState<string | null>(null);
     const [showSummary, setShowSummary] = useState(false);
+    const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
 
     const nomineesById = useMemo(() => new Map(nominees.map((nominee) => [nominee.id, nominee])), [nominees]);
 
@@ -136,6 +137,7 @@ export default function JudgingPanelClient({ nominees }: JudgingPanelClientProps
     const progressPercent = Math.round((selectedCount / totalSelectionSlots) * 1000) / 10;
     const isDirty = selectionSignature(selections) !== selectionSignature(savedSelections);
     const selectedInActiveCategory = selections[activeCategory].length;
+    const hasSelections = selectedCount > 0;
 
     useEffect(() => {
         const signedInClassName = "judging-panel-signed-in";
@@ -241,9 +243,23 @@ export default function JudgingPanelClient({ nominees }: JudgingPanelClientProps
     };
 
     const handleReset = () => {
+        const hasSelections = CATEGORIES.some((category) => selections[category].length > 0);
+
+        if (!hasSelections) {
+            setSelections(createEmptySelections());
+            setSaveState("idle");
+            setSaveError(null);
+            return;
+        }
+
+        setIsResetDialogOpen(true);
+    };
+
+    const confirmReset = () => {
         setSelections(createEmptySelections());
         setSaveState("idle");
         setSaveError(null);
+        setIsResetDialogOpen(false);
     };
 
     const moveActiveNominee = useCallback((direction: "previous" | "next") => {
@@ -304,6 +320,24 @@ export default function JudgingPanelClient({ nominees }: JudgingPanelClientProps
             window.removeEventListener("keydown", handleKeyDown);
         };
     }, [judgeEmail, moveActiveNominee, showSummary]);
+
+    useEffect(() => {
+        if (!isResetDialogOpen) {
+            return;
+        }
+
+        const handleEscape = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setIsResetDialogOpen(false);
+            }
+        };
+
+        window.addEventListener("keydown", handleEscape);
+
+        return () => {
+            window.removeEventListener("keydown", handleEscape);
+        };
+    }, [isResetDialogOpen]);
 
     if (!judgeEmail) {
         return (
@@ -422,7 +456,8 @@ export default function JudgingPanelClient({ nominees }: JudgingPanelClientProps
                         <button
                             type="button"
                             onClick={handleReset}
-                            className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[.06] px-3 py-2 text-xs font-semibold text-white/80 transition hover:bg-white/[.1]"
+                            disabled={!hasSelections}
+                            className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[.06] px-3 py-2 text-xs font-semibold text-white/80 transition hover:bg-white/[.1] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/[.06]"
                         >
                             <RotateCcw size={15} />
                             Reset
@@ -559,7 +594,10 @@ export default function JudgingPanelClient({ nominees }: JudgingPanelClientProps
                                                 </span>
                                             </div>
                                             <p className="mt-2 text-xs font-semibold text-white/45">
-                                                {nominee.votes ? `${nominee.votes} public votes` : "No public votes"}
+                                                <span className="inline-flex items-center gap-1.5">
+                                                    <ThumbsUp size={12} className="text-white/35" />
+                                                    {nominee.votes ? `${nominee.votes} public votes` : "No public votes"}
+                                                </span>
                                             </p>
                                         </button>
                                     );
@@ -583,6 +621,57 @@ export default function JudgingPanelClient({ nominees }: JudgingPanelClientProps
                     </div>
                 )}
             </div>
+
+            {isResetDialogOpen && (
+                <div
+                    className="fixed inset-0 z-[120] flex items-center justify-center bg-black/65 p-4"
+                    onClick={() => setIsResetDialogOpen(false)}
+                >
+                    <div
+                        className="relative w-full max-w-md rounded-3xl border border-white/10 bg-[#0e2350] p-6 text-white shadow-2xl"
+                        onClick={(event) => event.stopPropagation()}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="reset-dialog-title"
+                    >
+                        <button
+                            type="button"
+                            onClick={() => setIsResetDialogOpen(false)}
+                            className="absolute right-4 top-4 text-white/45 transition hover:text-white"
+                            aria-label="Close reset confirmation"
+                        >
+                            <X size={20} />
+                        </button>
+
+                        <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f37021]/15 text-[#f37021]">
+                            <AlertTriangle size={28} />
+                        </div>
+                        <h3 id="reset-dialog-title" className="text-2xl font-bold text-white">
+                            Reset selections?
+                        </h3>
+                        <p className="mt-3 text-sm leading-6 text-white/65">
+                            This will clear all of your nominee selections across every category. You can keep your current picks or reset and start over.
+                        </p>
+
+                        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-end">
+                            <button
+                                type="button"
+                                onClick={() => setIsResetDialogOpen(false)}
+                                className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/[.04] px-4 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/[.08]"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="button"
+                                onClick={confirmReset}
+                                className="inline-flex items-center justify-center rounded-xl bg-[#f37021] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#ff8a3d]"
+                            >
+                                Reset selections
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
@@ -676,7 +765,8 @@ function NomineeDetailPanel({
                             >
                                 {category}
                             </span>
-                            <span className="rounded-full border border-white/10 bg-white/[.05] px-3 py-1 text-xs font-semibold text-white/55">
+                            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[.05] px-3 py-1 text-xs font-semibold text-white/55">
+                                <ThumbsUp size={12} className="text-white/35" />
                                 {activeNominee.votes ? `${activeNominee.votes} public votes` : "No public votes"}
                             </span>
                         </div>
@@ -775,7 +865,8 @@ function SummaryPanel({
                                                     {nominee.jobTitle || "Nominee"} · {nominee.organization || "Organization not listed"}
                                                 </p>
                                             </div>
-                                            <span className="text-xs font-semibold text-white/45">
+                                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-white/45">
+                                                <ThumbsUp size={12} className="text-white/35" />
                                                 {nominee.votes ? `${nominee.votes} votes` : "No votes"}
                                             </span>
                                             <button
