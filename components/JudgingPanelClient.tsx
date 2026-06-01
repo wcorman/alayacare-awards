@@ -322,7 +322,7 @@ export default function JudgingPanelClient({ nominees }: JudgingPanelClientProps
                             Judging Panel
                         </h1>
                         <p className="mt-4 text-sm leading-6 text-white/70 md:text-base">
-                            Sign in with your judge email to load your current nominee selections and continue reviewing nominations.
+                            Sign in with your email to review and select nominations.
                         </p>
 
                         <form onSubmit={handleSignIn} className="mt-8 space-y-4">
