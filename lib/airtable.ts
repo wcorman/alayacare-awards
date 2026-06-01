@@ -79,6 +79,69 @@ export interface Nominee {
     languagePreference: "en" | "fr" | null;
 }
 
+export const JUDGING_CATEGORY_SELECTION_FIELDS = {
+    "Frontline Care": "Frontline Care Selection",
+    "Operational Excellence": "Operational Excellence Selection",
+    "Executive Leadership": "Executive Leadership Selection",
+    "Impact and Innovation": "Impact and Innovation Selection",
+} as const;
+
+export type JudgingCategory = keyof typeof JUDGING_CATEGORY_SELECTION_FIELDS;
+
+export interface JudgeSelectionRecord {
+    id: string | null;
+    email: string;
+    selections: Record<JudgingCategory, string[]>;
+}
+
+interface AirtableRecord {
+    id: string;
+    fields: Record<string, unknown>;
+}
+
+const JUDGING_PANEL_TABLE_NAME = "Judging Panel";
+const JUDGING_PANEL_EMAIL_FIELD = process.env.AIRTABLE_JUDGING_PANEL_EMAIL_FIELD || "Email";
+
+function escapeAirtableFormulaString(value: string): string {
+    return value.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+}
+
+function emptyJudgeSelections(): Record<JudgingCategory, string[]> {
+    return Object.keys(JUDGING_CATEGORY_SELECTION_FIELDS).reduce(
+        (acc, category) => {
+            acc[category as JudgingCategory] = [];
+            return acc;
+        },
+        {} as Record<JudgingCategory, string[]>
+    );
+}
+
+function getStringField(fields: Record<string, unknown>, fieldName: string): string | null {
+    const value = fields[fieldName];
+    return typeof value === "string" && value.trim() ? value : null;
+}
+
+function mapNominationRecord(record: AirtableRecord): Nominee {
+    const firstName = getStringField(record.fields, "First Name");
+    const lastName = getStringField(record.fields, "Last Name");
+    const name = getNomineeName(record.fields);
+    const votes = record.fields["Votes"];
+
+    return {
+        id: record.id,
+        name,
+        firstName: firstName || undefined,
+        lastName: lastName || undefined,
+        category: getStringField(record.fields, "Category") || "Uncategorized",
+        votes: typeof votes === "number" ? votes : 0,
+        image: getAttachmentUrl(record.fields["Profile Photo"]),
+        description: getStringField(record.fields, "Nomination Reason") || "No description provided.",
+        organization: getStringField(record.fields, "Company Name"),
+        jobTitle: getStringField(record.fields, "Job Title"),
+        languagePreference: getNominationLanguagePreference(record.fields),
+    };
+}
+
 export async function fetchNominations(): Promise<Nominee[]> {
     const TABLE_NAME = "Nominations";
     const sortQuery = "sort[0][field]=Votes&sort[0][direction]=desc";
@@ -97,24 +160,127 @@ export async function fetchNominations(): Promise<Nominee[]> {
 
     const data = await res.json();
 
-    return data.records.map((record: any) => {
-        const firstName = record.fields["First Name"] || null;
-        const lastName = record.fields["Last Name"] || null;
-        const name = getNomineeName(record.fields);
-        return {
-            id: record.id,
-            name,
-            firstName: firstName || undefined,
-            lastName: lastName || undefined,
-            category: record.fields["Category"] || "Uncategorized",
-            votes: record.fields["Votes"] || 0,
-            image: getAttachmentUrl(record.fields["Profile Photo"]),
-            description: record.fields["Nomination Reason"] || "No description provided.",
-            organization: record.fields["Company Name"] || null,
-            jobTitle: record.fields["Job Title"] || null,
-            languagePreference: getNominationLanguagePreference(record.fields),
-        };
+    return data.records.map(mapNominationRecord);
+}
+
+export async function fetchJudgingNominations(): Promise<Nominee[]> {
+    const TABLE_NAME = "Nominations";
+    const sortQuery = "sort[0][field]=Votes&sort[0][direction]=desc";
+    const records: AirtableRecord[] = [];
+    let offset: string | undefined;
+
+    do {
+        const offsetQuery = offset ? `&offset=${encodeURIComponent(offset)}` : "";
+        const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}?${sortQuery}${offsetQuery}`;
+
+        const res = await fetch(url, {
+            headers: HEADERS,
+            next: { revalidate: NOMINATIONS_REVALIDATE_SECONDS },
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to fetch judging nominees: ${res.statusText}`);
+        }
+
+        const data = await res.json() as { records?: AirtableRecord[]; offset?: string };
+        records.push(...(data.records || []));
+        offset = data.offset;
+    } while (offset);
+
+    return records.map(mapNominationRecord);
+}
+
+export async function findJudgeSelectionRecord(email: string): Promise<JudgeSelectionRecord | null> {
+    const normalizedEmail = email.trim().toLowerCase();
+    const filterFormula = encodeURIComponent(
+        `LOWER({${JUDGING_PANEL_EMAIL_FIELD}})=LOWER('${escapeAirtableFormulaString(normalizedEmail)}')`
+    );
+    const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(JUDGING_PANEL_TABLE_NAME)}?filterByFormula=${filterFormula}`;
+
+    const res = await fetch(url, { headers: HEADERS, cache: "no-store" });
+
+    if (!res.ok) {
+        throw new Error(`Failed to find judge selection record: ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    const record = data.records?.[0];
+
+    if (!record) {
+        return null;
+    }
+
+    const selections = emptyJudgeSelections();
+
+    Object.entries(JUDGING_CATEGORY_SELECTION_FIELDS).forEach(([category, fieldName]) => {
+        const rawSelection = record.fields?.[fieldName];
+        selections[category as JudgingCategory] = Array.isArray(rawSelection)
+            ? rawSelection.filter((id): id is string => typeof id === "string")
+            : [];
     });
+
+    return {
+        id: record.id,
+        email: normalizedEmail,
+        selections,
+    };
+}
+
+export async function saveJudgeSelectionRecord(
+    email: string,
+    selections: Record<JudgingCategory, string[]>
+): Promise<JudgeSelectionRecord> {
+    const normalizedEmail = email.trim().toLowerCase();
+    const existingRecord = await findJudgeSelectionRecord(normalizedEmail);
+
+    if (!existingRecord?.id) {
+        throw new Error("This email is not registered for the judging panel.");
+    }
+
+    const fields: Record<string, string | string[]> = {
+        [JUDGING_PANEL_EMAIL_FIELD]: normalizedEmail,
+    };
+
+    Object.entries(JUDGING_CATEGORY_SELECTION_FIELDS).forEach(([category, fieldName]) => {
+        fields[fieldName] = selections[category as JudgingCategory] || [];
+    });
+
+    const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(JUDGING_PANEL_TABLE_NAME)}`;
+    const res = await fetch(url, {
+        method: "PATCH",
+        headers: HEADERS,
+        body: JSON.stringify({
+            records: [
+                { id: existingRecord.id, fields },
+            ],
+        }),
+    });
+
+    if (!res.ok) {
+        let errDetail = res.statusText;
+
+        try {
+            const errBody = await res.json();
+            errDetail = errBody?.error?.message || JSON.stringify(errBody) || errDetail;
+        } catch {
+            // Use status text if Airtable did not return JSON.
+        }
+
+        throw new Error(`Failed to save judge selections (${res.status}): ${errDetail}`);
+    }
+
+    const result = await res.json();
+    const savedRecord = result?.records?.[0];
+
+    if (!savedRecord) {
+        throw new Error("Airtable did not return the saved judge selection record");
+    }
+
+    return {
+        id: savedRecord.id,
+        email: normalizedEmail,
+        selections,
+    };
 }
 
 export async function fetchNomineeById(id: string): Promise<Nominee | null> {

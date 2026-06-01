@@ -57,7 +57,7 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div className="min-h-screen flex flex-col">
             <Navbar />
-            <main className="flex-grow">{children}</main>
+            <main className="flex-grow min-h-0">{children}</main>
             <Footer />
           </div>
           <Suspense fallback={null}>

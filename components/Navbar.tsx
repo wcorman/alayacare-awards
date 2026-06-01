@@ -22,7 +22,7 @@ export default function Navbar() {
     };
 
     return (
-        <header className="bg-white shadow-sm sticky top-0 z-50">
+        <header data-awards-navbar="true" className="bg-white shadow-sm sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                 <Link href="/" className="flex items-center cursor-pointer">
                     <div className="flex flex-col">
