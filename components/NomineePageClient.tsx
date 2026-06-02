@@ -14,10 +14,32 @@ interface NomineePageClientProps {
 export default function NomineePageClient({ nominee }: NomineePageClientProps) {
     const t = useTranslations('NomineePage');
     const tVotePage = useTranslations('VotePage');
+    const isVotingOpen = false;
     const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
     const [isCheckingVote, setIsCheckingVote] = useState(false);
     const [voteError, setVoteError] = useState<string | null>(null);
     const [voteCompleted, setVoteCompleted] = useState(false);
+
+    if (!isVotingOpen) {
+        return (
+            <div className="pt-8 border-t border-gray-200">
+                <div className="rounded-2xl bg-[#08193e] px-6 py-7 text-white shadow-sm">
+                    <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white/85 ring-1 ring-white/15">
+                        {tVotePage('prelaunch.badge')}
+                    </span>
+                    <h2 className="mt-4 text-2xl font-bold leading-tight">
+                        {tVotePage('prelaunch.title')}
+                    </h2>
+                    <p className="mt-3 text-base leading-relaxed text-white/85">
+                        {tVotePage('prelaunch.description')}
+                    </p>
+                    <p className="mt-4 text-sm leading-relaxed text-white/75 md:text-base">
+                        {tVotePage('prelaunch.body')}
+                    </p>
+                </div>
+            </div>
+        );
+    }
 
     const handleInitiateVote = () => {
         setVoteError(null);

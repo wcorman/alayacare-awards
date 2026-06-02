@@ -7,7 +7,7 @@ export const revalidate = 60;
 
 export default async function VotePage() {
     const nominees = await fetchNominations();
-    const isVotingOpen = true;
+    const isVotingOpen = false;
 
     return (
         <main className="min-h-screen bg-[#fcfcfc] text-slate-800">

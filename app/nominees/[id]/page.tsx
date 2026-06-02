@@ -56,7 +56,7 @@ export default async function NomineePage({ params }: NomineePageProps) {
 
                 <div className="relative z-10 max-w-7xl mx-auto">
                     <Link
-                        href="/vote"
+                        href="/"
                         className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-8 transition-colors group"
                     >
                         <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
@@ -166,7 +166,7 @@ export default async function NomineePage({ params }: NomineePageProps) {
                     {/* Related Actions */}
                     <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
-                            href="/vote"
+                            href="/"
                             className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED] transition-all duration-200 text-center"
                         >
                             {t('viewAllNominees')}

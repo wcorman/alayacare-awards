@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Search, X, Heart, Award, Briefcase, Sparkles, Vote, Calendar, Users, Tag, ChevronDown, Check } from 'lucide-react';
+import { Search, X, Heart, Award, Briefcase, Sparkles, Vote, Calendar, Users, Tag, ChevronDown, Check, Gavel } from 'lucide-react';
 import NomineeCard from './NomineeCard';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
@@ -30,8 +30,6 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
     const [isOrganizationMenuOpen, setIsOrganizationMenuOpen] = useState(false);
     const organizationMenuRef = useRef<HTMLDivElement>(null);
     const [votedNomineeIds, setVotedNomineeIds] = useState<string[]>([]);
-    const [adminAccessInput, setAdminAccessInput] = useState('');
-
     // Vote Modal State
     const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
     const [selectedNomineeId, setSelectedNomineeId] = useState<string | null>(null);
@@ -181,37 +179,29 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
         );
     });
 
-    const hasAdminAccess = adminAccessInput.trim().toLowerCase() === 'marketingsquad';
-    const showVotingGrid = isVotingOpen || hasAdminAccess;
+    const showVotingGrid = isVotingOpen;
     const hasActiveFilters = Boolean(selectedCategory || selectedOrganization);
 
     if (!showVotingGrid) {
         return (
-            <div className="max-w-3xl mx-auto px-6 lg:px-12 py-20 min-h-[60vh] flex flex-col">
-                <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-10 text-center">
-                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#1D5EED]/10 text-[#1D5EED]">
-                        <Vote size={22} />
-                    </div>
-                    <h2 className="text-3xl font-bold text-[#08193e]">{t('prelaunch.title')}</h2>
-                    <p className="text-gray-600 mt-3">
-                        {t('prelaunch.description')}
-                    </p>
-                </div>
-
-                <div className="mt-auto pt-8">
-                    <div className="max-w-xs mx-auto">
-                        <input
-                            type="text"
-                            value={adminAccessInput}
-                            onChange={(e) => setAdminAccessInput(e.target.value)}
-                            placeholder="admin access"
-                            className="w-full text-xs px-3 py-2 rounded-md border border-gray-200 text-gray-500 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:border-gray-300"
-                            aria-label="Admin access"
-                            autoComplete="off"
-                            spellCheck={false}
-                            data-lpignore="true"
-                            data-1p-ignore="true"
-                        />
+            <div className="mx-auto flex min-h-[60vh] max-w-4xl px-6 py-20 lg:px-12">
+                <div className="relative w-full overflow-hidden rounded-3xl bg-[#08193e] p-10 text-center text-white shadow-lg md:p-14">
+                    <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#1D5EED]/25 blur-3xl" />
+                    <div className="absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-[#f37021]/20 blur-3xl" />
+                    <div className="relative z-10">
+                        <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/90 ring-1 ring-white/15">
+                            <Gavel size={14} />
+                            {t('prelaunch.badge')}
+                        </span>
+                        <h1 className="mx-auto mt-6 max-w-3xl text-3xl font-bold leading-tight md:text-5xl">
+                            {t('prelaunch.title')}
+                        </h1>
+                        <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
+                            {t('prelaunch.description')}
+                        </p>
+                        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg">
+                            {t('prelaunch.body')}
+                        </p>
                     </div>
                 </div>
             </div>

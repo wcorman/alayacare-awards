@@ -43,7 +43,7 @@
       "managers": "Managers"
     },
     "timeline": {
-      "nominateCta": "Vote Now",
+      "nominateCta": "Awards Status",
       "eyebrow": "Key dates and milestones",
       "title": "Stay on top of the major moments for The Home-Based Care Momentum Awards",
       "items": [
@@ -202,7 +202,7 @@
       "text": "Please email",
       "email": "awards@alayacare.com",
       "textAfter": "and a member of the awards committee will be happy to help.",
-      "cta": "Vote Now"
+      "cta": "Awards Status"
     }
   },
   "NominationAcceptance": {
@@ -347,8 +347,10 @@
       "subtitle": "Try a different name or search term."
     },
     "prelaunch": {
-      "title": "Voting opens May 1",
-      "description": "Nominations are now closed. Public voting will officially open on May 1, 2026."
+      "badge": "JUDGING IS UNDERWAY",
+      "title": "The votes are in. Winners announced July 20th.",
+      "description": "3,850 votes cast and 97 nominees celebrated. Thank you to everyone who showed up for home-based care.",
+      "body": "Our judging panel is now reviewing nominees across all four categories. Winners will be announced soon."
     },
     "errors": {
       "alreadyVoted": "You've already voted for this nominee.",
@@ -391,18 +393,18 @@
     "voteFor": "Vote for {name}"
   },
   "NomineeProfile": {
-    "backToAllNominees": "Back to All Nominees",
+    "backToAllNominees": "Back to Home",
     "votes": "Votes",
     "category": "Category",
     "nominationStory": "Nomination Story",
-    "viewAllNominees": "View All Nominees",
-    "nominateSomeone": "Vote Now"
+    "viewAllNominees": "Back to Home",
+    "nominateSomeone": "Awards Status"
   },
   "NominationClosedPage": {
     "eyebrow": "Nominations closed",
     "title": "The nomination period has ended",
-    "description": "Thank you for helping spotlight changemakers across home-based care. Public voting officially opens on May 1, 2026.",
-    "primaryCta": "Go to Voting",
+    "description": "Thank you for helping spotlight changemakers across home-based care. Public voting has now closed and judging is underway.",
+    "primaryCta": "Awards Status",
     "secondaryCta": "Back to Home"
   },
   "ProfilePage": {

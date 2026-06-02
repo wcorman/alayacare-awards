@@ -43,7 +43,7 @@
       "managers": "Gestionnaires"
     },
     "timeline": {
-      "nominateCta": "Voter maintenant",
+      "nominateCta": "Statut des prix",
       "eyebrow": "Dates clés et étapes",
       "title": "Restez informé des grands moments des Prix Momentum des soins à domicile",
       "items": [
@@ -202,7 +202,7 @@
       "text": "Veuillez envoyer un courriel à",
       "email": "awards@alayacare.com",
       "textAfter": "et un membre du comité des prix sera heureux de vous aider.",
-      "cta": "Voter maintenant"
+      "cta": "Statut des prix"
     }
   },
   "NominationAcceptance": {
@@ -347,8 +347,10 @@
       "subtitle": "Essayez un nom ou un terme de recherche différent."
     },
     "prelaunch": {
-      "title": "Le vote ouvre le 1er mai",
-      "description": "Les mises en candidature sont maintenant closes. Le vote du public ouvrira officiellement le 1er mai 2026."
+      "badge": "L'ÉVALUATION EST EN COURS",
+      "title": "Les votes sont comptabilisés. Les lauréats seront annoncés le 20 juillet.",
+      "description": "3 850 votes comptabilisés et 97 candidats célébrés. Merci à toutes les personnes qui se sont mobilisées pour les soins à domicile.",
+      "body": "Notre jury évalue maintenant les candidats dans les quatre catégories. Les lauréats seront annoncés sous peu."
     },
     "errors": {
       "alreadyVoted": "Vous avez déjà voté pour ce candidat.",
@@ -391,18 +393,18 @@
     "voteFor": "Voter pour {name}"
   },
   "NomineeProfile": {
-    "backToAllNominees": "Retour à tous les candidats",
+    "backToAllNominees": "Retour à l'accueil",
     "votes": "Votes",
     "category": "Catégorie",
     "nominationStory": "Histoire de la candidature",
-    "viewAllNominees": "Voir tous les candidats",
-    "nominateSomeone": "Voter maintenant"
+    "viewAllNominees": "Retour à l'accueil",
+    "nominateSomeone": "Statut des prix"
   },
   "NominationClosedPage": {
     "eyebrow": "Candidatures closes",
     "title": "La période de mise en candidature est terminée",
-    "description": "Merci d’avoir aidé à mettre en lumière les agents de changement des soins à domicile. Le vote du public ouvre officiellement le 1er mai 2026.",
-    "primaryCta": "Aller au vote",
+    "description": "Merci d'avoir aidé à mettre en lumière les agents de changement des soins à domicile. Le vote du public est maintenant terminé et l'évaluation est en cours.",
+    "primaryCta": "Statut des prix",
     "secondaryCta": "Retour à l'accueil"
   },
   "ProfilePage": {

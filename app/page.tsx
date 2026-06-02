@@ -167,7 +167,7 @@ export default async function Home() {
             <div className="space-y-10">
               {timelineItems.map((item, index) => (
                 <div key={`${item.title}-${index}`} className="relative">
-                  <span className={`absolute left-4 top-6 h-4 w-4 -translate-x-1/2 rounded-full bg-[#1D5EED] ring-4 ring-white shadow-md sm:left-1/2 ${index === 1 ? 'animate-gentle-pulse' : ''}`}></span>
+                  <span className={`absolute left-4 top-6 h-4 w-4 -translate-x-1/2 rounded-full bg-[#1D5EED] ring-4 ring-white shadow-md sm:left-1/2 ${index === 2 ? 'animate-gentle-pulse' : ''}`}></span>
                   <div
                     className={`pl-12 sm:pl-0 sm:w-1/2 ${
                       index % 2 === 0 ? 'sm:pr-12' : 'sm:pl-12 sm:ml-auto'
@@ -184,14 +184,6 @@ export default async function Home() {
                       </div>
                       <h3 className="text-xl font-bold text-[#08193e] mt-2">{item.title}</h3>
                       <p className="text-gray-600 mt-3 leading-relaxed">{item.description}</p>
-                      {index === 1 && (
-                        <Link
-                          href="/vote"
-                          className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-all duration-200 shadow-sm text-sm"
-                        >
-                          <Vote size={16} /> {t('timeline.nominateCta')}
-                        </Link>
-                      )}
                     </div>
                   </div>
                 </div>
