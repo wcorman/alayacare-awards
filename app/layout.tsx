@@ -27,6 +27,7 @@ import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ConfirmPopup from "@/components/ConfirmPopup";
+import MetaPixel from "@/components/MetaPixel";
 import VoteConfirmationPopup from "@/components/VoteConfirmationPopup";
 
 export default async function RootLayout({
@@ -54,6 +55,7 @@ export default async function RootLayout({
         </Script>
       </head>
       <body className={inter.className}>
+        <MetaPixel />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div className="min-h-screen flex flex-col">
             <Navbar />
