@@ -13,6 +13,7 @@ const HEADERS = {
 export const NOMINATIONS_REVALIDATE_SECONDS = 60;
 
 const NOMINATION_LANGUAGE_FIELD = "English or French";
+const ENGLISH_REASON_FIELD = "English Reason";
 
 /** Maps Airtable single select to next-intl locale; null if unset or unknown. */
 export function getNominationLanguagePreference(
@@ -121,7 +122,19 @@ function getStringField(fields: Record<string, unknown>, fieldName: string): str
     return typeof value === "string" && value.trim() ? value : null;
 }
 
-function mapNominationRecord(record: AirtableRecord): Nominee {
+/** For judges (English-only): French nominations show the translated English Reason when available. */
+function getJudgingNominationDescription(fields: Record<string, unknown>): string {
+    if (getNominationLanguagePreference(fields) === "fr") {
+        const englishReason = getStringField(fields, ENGLISH_REASON_FIELD);
+        if (englishReason) {
+            return englishReason;
+        }
+    }
+
+    return getStringField(fields, "Nomination Reason") || "No description provided.";
+}
+
+function mapNominationRecord(record: AirtableRecord, options?: { forJudgingPanel?: boolean }): Nominee {
     const firstName = getStringField(record.fields, "First Name");
     const lastName = getStringField(record.fields, "Last Name");
     const name = getNomineeName(record.fields);
@@ -135,7 +148,9 @@ function mapNominationRecord(record: AirtableRecord): Nominee {
         category: getStringField(record.fields, "Category") || "Uncategorized",
         votes: typeof votes === "number" ? votes : 0,
         image: getAttachmentUrl(record.fields["Profile Photo"]),
-        description: getStringField(record.fields, "Nomination Reason") || "No description provided.",
+        description: options?.forJudgingPanel
+            ? getJudgingNominationDescription(record.fields)
+            : getStringField(record.fields, "Nomination Reason") || "No description provided.",
         organization: getStringField(record.fields, "Company Name"),
         jobTitle: getStringField(record.fields, "Job Title"),
         languagePreference: getNominationLanguagePreference(record.fields),
@@ -187,7 +202,7 @@ export async function fetchJudgingNominations(): Promise<Nominee[]> {
         offset = data.offset;
     } while (offset);
 
-    return records.map(mapNominationRecord);
+    return records.map((record) => mapNominationRecord(record, { forJudgingPanel: true }));
 }
 
 export async function findJudgeSelectionRecord(email: string): Promise<JudgeSelectionRecord | null> {
