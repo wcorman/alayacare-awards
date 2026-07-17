@@ -394,9 +394,11 @@
   },
   "NomineeProfile": {
     "backToAllNominees": "Back to Home",
+    "backToWinners": "Back to Winners",
     "votes": "Votes",
     "category": "Category",
     "nominationStory": "Nomination Story",
+    "winnerBanner": "Winner of the {category} Award",
     "viewAllNominees": "Back to Home",
     "nominateSomeone": "Awards Status"
   },
@@ -436,6 +438,16 @@
       "openLightbox": "Open social sharing image in a larger view",
       "closeLightbox": "Close social sharing image"
     },
+    "winnerShare": {
+      "title": "Share your win",
+      "description": "Download the press release template and share your recognition on LinkedIn.",
+      "downloadPressRelease": "Download press release",
+      "shareOnLinkedIn": "Share on LinkedIn",
+      "copyCaption": "Copy caption",
+      "copied": "Copied!",
+      "companyFallback": "my organization",
+      "linkedinCaption": "Honored to be named a 2026 Home-Based Care Momentum Award winner in {category}. 🏆\n[1–2 sentences about what this recognition means to you personally, or what drives your work in home-based care.]\n\nHome-based care is an industry built on people who show up for their clients, their teams, and their communities. I'm proud to work alongside so many of them every day at {company}.\n\nThank you to @AlayaCare and to everyone who voted and nominated. This one means a lot.\n#MomentumAwards2026 #HomeCare #HomeBasedCare #{categoryHashtag}"
+    },
     "form": {
       "readOnlyEyebrow": "Nominee Details",
       "readOnlyTooltip": "Please reach out to the Awards team at awards@alayacare.com if you need to update your {field}.",
@@ -474,7 +486,9 @@
     "eligibility": "Eligibility",
     "results": "Results",
     "nominate": "Vote",
+    "nominateNow": "Nominate Now",
     "voteNow": "Vote Now",
+    "seeWinners": "View Winners",
     "languageSwitcher": {
       "french": "Français",
       "english": "English",
@@ -483,12 +497,12 @@
     }
   },
   "Results": {
-    "title": "Award results",
-    "subtitle": "Top 3 nominees by category based on community votes. Final winners are determined by the judging panel.",
-    "noWinners": "No nominees yet",
-    "noWinnersSubtitle": "Nominations and voting will determine the top changemakers in this category.",
-    "noResults": "No results yet",
-    "noResultsSubtitle": "Once nominations and voting are complete, winners will appear here.",
+    "title": "Award winners",
+    "subtitle": "Recognized nominees in each category, selected by the judging panel.",
+    "noWinners": "No winners yet",
+    "noWinnersSubtitle": "Winners for this category will appear here once they are announced.",
+    "noResults": "No winners yet",
+    "noResultsSubtitle": "Once winners are announced, they will appear here.",
     "vote": "vote",
     "votes": "votes"
   },

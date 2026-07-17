@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import NomineeImage from "@/components/NomineeImage";
+import WinnerShareActions from "@/components/WinnerShareActions";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface ProfileEditorClientProps {
@@ -25,12 +26,14 @@ interface ProfileEditorClientProps {
         id: string;
         nomineeName: string;
         category: string;
+        categoryKey: string;
         companyName: string;
         jobTitle: string;
         linkedInProfile: string;
         companyWebsite: string;
         profilePhoto: string | null;
         customVoteImage: string | null;
+        isWinner: boolean;
     };
 }
 
@@ -198,6 +201,15 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
 
     return (
         <TooltipProvider>
+            <div className="space-y-8">
+                {profile.isWinner ? (
+                    <WinnerShareActions
+                        categoryName={profile.category}
+                        categoryKey={profile.categoryKey}
+                        companyName={profile.companyName}
+                    />
+                ) : null}
+
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
                 <section className="lg:col-span-4 rounded-[28px] bg-white p-8 md:p-10 shadow-[0_20px_50px_rgba(8,25,62,0.08)]">
                     <div className="mb-8 text-center text-sm font-semibold uppercase tracking-[0.24em] text-[#1D5EED]">
@@ -429,6 +441,7 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
                         </div>
                     </form>
                 </section>
+            </div>
             </div>
             {profile.customVoteImage && isSocialLightboxOpen ? (
                 <div

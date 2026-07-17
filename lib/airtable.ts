@@ -78,6 +78,8 @@ export interface Nominee {
     jobTitle: string | null;
     /** From Airtable "English or French"; drives automatic locale on nominee pages. */
     languagePreference: "en" | "fr" | null;
+    /** From Airtable "Winner?" checkbox. */
+    isWinner: boolean;
 }
 
 export const JUDGING_CATEGORY_SELECTION_FIELDS = {
@@ -154,6 +156,7 @@ function mapNominationRecord(record: AirtableRecord, options?: { forJudgingPanel
         organization: getStringField(record.fields, "Company Name"),
         jobTitle: getStringField(record.fields, "Job Title"),
         languagePreference: getNominationLanguagePreference(record.fields),
+        isWinner: record.fields["Winner?"] === true,
     };
 }
 
@@ -176,6 +179,35 @@ export async function fetchNominations(): Promise<Nominee[]> {
     const data = await res.json();
 
     return data.records.map(mapNominationRecord);
+}
+
+/** Nominees with the Airtable "Winner?" checkbox enabled. */
+export async function fetchWinners(): Promise<Nominee[]> {
+    const TABLE_NAME = "Nominations";
+    const sortQuery = "sort[0][field]=Name&sort[0][direction]=asc";
+    const filterFormula = encodeURIComponent("{Winner?}");
+    const records: AirtableRecord[] = [];
+    let offset: string | undefined;
+
+    do {
+        const offsetQuery = offset ? `&offset=${encodeURIComponent(offset)}` : "";
+        const url = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}?${sortQuery}&filterByFormula=${filterFormula}${offsetQuery}`;
+
+        const res = await fetch(url, {
+            headers: HEADERS,
+            next: { revalidate: NOMINATIONS_REVALIDATE_SECONDS },
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to fetch winners: ${res.statusText}`);
+        }
+
+        const data = await res.json() as { records?: AirtableRecord[]; offset?: string };
+        records.push(...(data.records || []));
+        offset = data.offset;
+    } while (offset);
+
+    return records.map((record) => mapNominationRecord(record));
 }
 
 export async function fetchJudgingNominations(): Promise<Nominee[]> {
@@ -335,6 +367,7 @@ export async function fetchNomineeById(id: string): Promise<Nominee | null> {
         organization: record.fields["Company Name"] || null,
         jobTitle: record.fields["Job Title"] || null,
         languagePreference: getNominationLanguagePreference(record.fields),
+        isWinner: record.fields["Winner?"] === true,
     };
 }
 
@@ -356,6 +389,8 @@ export interface NomineeProfileEditorData {
     profilePhoto: string | null;
     customVoteImage: string | null;
     languagePreference: "en" | "fr" | null;
+    /** From Airtable "Winner?" checkbox. */
+    isWinner: boolean;
 }
 
 export async function fetchNominationAcceptanceDataById(id: string): Promise<NominationAcceptanceData | null> {
@@ -420,6 +455,7 @@ export async function fetchNomineeProfileEditorDataById(id: string): Promise<Nom
         profilePhoto: getAttachmentUrl(fields["Profile Photo"]),
         customVoteImage: getAttachmentUrl(fields["custom-vote-image"]),
         languagePreference: getNominationLanguagePreference(fields),
+        isWinner: fields["Winner?"] === true,
     };
 }
 
@@ -487,6 +523,7 @@ export async function updateNomineeProfileEditorData(
         profilePhoto: getAttachmentUrl(updatedFields["Profile Photo"]),
         customVoteImage: getAttachmentUrl(updatedFields["custom-vote-image"]),
         languagePreference: getNominationLanguagePreference(updatedFields),
+        isWinner: updatedFields["Winner?"] === true,
     };
 }
 

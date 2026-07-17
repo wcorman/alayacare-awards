@@ -179,6 +179,7 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
     const localizedProfile = profile
         ? {
             ...profile,
+            categoryKey: profile.category,
             category: translateCategory(profile.category, tHome),
         }
         : null;

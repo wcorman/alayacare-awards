@@ -394,9 +394,11 @@
   },
   "NomineeProfile": {
     "backToAllNominees": "Retour à l'accueil",
+    "backToWinners": "Retour aux lauréats",
     "votes": "Votes",
     "category": "Catégorie",
     "nominationStory": "Histoire de la candidature",
+    "winnerBanner": "Lauréat(e) du prix {category}",
     "viewAllNominees": "Retour à l'accueil",
     "nominateSomeone": "Statut des prix"
   },
@@ -436,6 +438,16 @@
       "openLightbox": "Ouvrir l'image de partage social en grand format",
       "closeLightbox": "Fermer l'image de partage social"
     },
+    "winnerShare": {
+      "title": "Partagez votre distinction",
+      "description": "Téléchargez le modèle de communiqué de presse et partagez votre reconnaissance sur LinkedIn.",
+      "downloadPressRelease": "Télécharger le communiqué de presse",
+      "shareOnLinkedIn": "Partager sur LinkedIn",
+      "copyCaption": "Copier la légende",
+      "copied": "Copié!",
+      "companyFallback": "mon organisation",
+      "linkedinCaption": "Honoré(e) d'être nommé(e) lauréat(e) des Prix Momentum des soins à domicile 2026 dans la catégorie {category}. 🏆\n[1 à 2 phrases sur ce que cette reconnaissance signifie pour vous personnellement, ou ce qui motive votre travail en soins à domicile.]\n\nLes soins à domicile sont une industrie bâtie par des personnes qui sont présentes pour leurs clients, leurs équipes et leurs communautés. Je suis fier(ère) de travailler chaque jour à leurs côtés chez {company}.\n\nMerci à @AlayaCare et à toutes les personnes qui ont voté et nominé. Cela compte beaucoup pour moi.\n#MomentumAwards2026 #HomeCare #HomeBasedCare #{categoryHashtag}"
+    },
     "form": {
       "readOnlyEyebrow": "Détails du candidat",
       "readOnlyTooltip": "Veuillez communiquer avec l’équipe des prix à awards@alayacare.com si vous devez mettre à jour votre champ {field}.",
@@ -474,7 +486,9 @@
     "eligibility": "Admissibilité",
     "results": "Résultats",
     "nominate": "Voter",
+    "nominateNow": "Nominer maintenant",
     "voteNow": "Voter maintenant",
+    "seeWinners": "Voir les lauréats",
     "languageSwitcher": {
       "french": "Français",
       "english": "English",
@@ -483,12 +497,12 @@
     }
   },
   "Results": {
-    "title": "Résultats des prix",
-    "subtitle": "Top 3 des candidats par catégorie selon les votes de la communauté. Les lauréats finaux sont déterminés par le jury.",
-    "noWinners": "Aucun candidat pour le moment",
-    "noWinnersSubtitle": "Les candidatures et le vote détermineront les meilleurs agents de changement dans cette catégorie.",
-    "noResults": "Aucun résultat pour le moment",
-    "noResultsSubtitle": "Une fois les candidatures et le vote terminés, les lauréats apparaîtront ici.",
+    "title": "Lauréats",
+    "subtitle": "Candidats reconnus dans chaque catégorie, sélectionnés par le jury.",
+    "noWinners": "Aucun lauréat pour le moment",
+    "noWinnersSubtitle": "Les lauréats de cette catégorie apparaîtront ici une fois annoncés.",
+    "noResults": "Aucun lauréat pour le moment",
+    "noResultsSubtitle": "Une fois les lauréats annoncés, ils apparaîtront ici.",
     "vote": "vote",
     "votes": "votes"
   },
