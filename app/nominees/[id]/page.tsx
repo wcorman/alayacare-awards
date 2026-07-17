@@ -1,8 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, Award, Heart, Briefcase, Sparkles } from 'lucide-react';
+import { ArrowLeft, Award, Heart, Briefcase, Sparkles, Trophy } from 'lucide-react';
 import { fetchNomineeById } from '@/lib/airtable';
+import { isAwardsPhaseEqual } from '@/lib/awardsPhase';
 import { redirectIfNomineeLocaleMismatch } from '@/lib/redirectNomineeLocale';
 import NomineeImage from '@/components/NomineeImage';
 import NomineePageClient from '@/components/NomineePageClient';
@@ -34,6 +35,8 @@ export default async function NomineePage({ params }: NomineePageProps) {
 
     const t = await getTranslations('NomineeProfile');
     const tHome = await getTranslations('Home');
+    const isResultsPhase = isAwardsPhaseEqual('results_phase');
+    const showWinnerBanner = isResultsPhase && nominee.isWinner;
     const categoryInfo = CATEGORY_CONFIG[nominee.category] || { icon: Award, color: '#6b7280' };
     const IconComponent = categoryInfo.icon;
 
@@ -43,6 +46,9 @@ export default async function NomineePage({ params }: NomineePageProps) {
                                nominee.category === "Executive Leadership" ? tHome('categories.executive.name') :
                                nominee.category === "Impact and Innovation" ? tHome('categories.impact.name') :
                                nominee.category;
+
+    const backHref = isResultsPhase ? '/winners' : '/';
+    const backLabel = isResultsPhase ? t('backToWinners') : t('backToAllNominees');
 
     return (
         <main className="min-h-screen bg-[#fcfcfc] text-slate-800">
@@ -56,11 +62,11 @@ export default async function NomineePage({ params }: NomineePageProps) {
 
                 <div className="relative z-10 max-w-7xl mx-auto">
                     <Link
-                        href="/"
+                        href={backHref}
                         className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-8 transition-colors group"
                     >
                         <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-                        <span className="font-medium">{t('backToAllNominees')}</span>
+                        <span className="font-medium">{backLabel}</span>
                     </Link>
 
                     <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
@@ -109,13 +115,15 @@ export default async function NomineePage({ params }: NomineePageProps) {
 
                                     {/* Stats Cards (Desktop: under photo) */}
                                     <div className="hidden md:grid grid-cols-1 gap-4">
-                                        <div className="p-6 rounded-xl bg-gradient-to-br from-[#08193e] to-[#113cca] text-white">
-                                            <div className="flex items-center gap-3 mb-2">
-                                                <Award size={24} />
-                                                <span className="text-sm font-semibold uppercase tracking-wide opacity-80">{t('votes')}</span>
+                                        {!isResultsPhase && (
+                                            <div className="p-6 rounded-xl bg-gradient-to-br from-[#08193e] to-[#113cca] text-white">
+                                                <div className="flex items-center gap-3 mb-2">
+                                                    <Award size={24} />
+                                                    <span className="text-sm font-semibold uppercase tracking-wide opacity-80">{t('votes')}</span>
+                                                </div>
+                                                <p className="text-3xl font-bold">{nominee.votes}</p>
                                             </div>
-                                            <p className="text-3xl font-bold">{nominee.votes}</p>
-                                        </div>
+                                        )}
                                         <div className="p-6 rounded-xl bg-gradient-to-br from-[#1D5EED] to-[#113CCA] text-white">
                                             <div className="flex items-center gap-3 mb-2">
                                                 <IconComponent size={24} />
@@ -128,6 +136,18 @@ export default async function NomineePage({ params }: NomineePageProps) {
 
                                 {/* Right Column: Nomination Story */}
                                 <div className="flex-1">
+                                    {showWinnerBanner && (
+                                        <div
+                                            className="mb-6 flex items-center gap-3 rounded-xl px-4 py-3 text-white shadow-sm"
+                                            style={{ backgroundColor: categoryInfo.color }}
+                                        >
+                                            <Trophy size={22} className="shrink-0" strokeWidth={2.25} />
+                                            <p className="text-sm md:text-base font-bold tracking-wide">
+                                                {t('winnerBanner', { category: translatedCategory })}
+                                            </p>
+                                        </div>
+                                    )}
+
                                     <div className="mb-8">
                                         <h2 className="text-2xl font-bold text-[#08193e] mb-4 flex items-center gap-3">
                                             <div className="w-1 h-8 rounded-full" style={{ backgroundColor: categoryInfo.color }}></div>
@@ -140,13 +160,15 @@ export default async function NomineePage({ params }: NomineePageProps) {
 
                                     {/* Stats Cards (Mobile: under story) */}
                                     <div className="grid grid-cols-1 md:hidden gap-4 mb-8">
-                                        <div className="p-6 rounded-xl bg-gradient-to-br from-[#08193e] to-[#113cca] text-white">
-                                            <div className="flex items-center gap-3 mb-2">
-                                                <Award size={24} />
-                                                <span className="text-sm font-semibold uppercase tracking-wide opacity-80">{t('votes')}</span>
+                                        {!isResultsPhase && (
+                                            <div className="p-6 rounded-xl bg-gradient-to-br from-[#08193e] to-[#113cca] text-white">
+                                                <div className="flex items-center gap-3 mb-2">
+                                                    <Award size={24} />
+                                                    <span className="text-sm font-semibold uppercase tracking-wide opacity-80">{t('votes')}</span>
+                                                </div>
+                                                <p className="text-3xl font-bold">{nominee.votes}</p>
                                             </div>
-                                            <p className="text-3xl font-bold">{nominee.votes}</p>
-                                        </div>
+                                        )}
                                         <div className="p-6 rounded-xl bg-gradient-to-br from-[#1D5EED] to-[#113CCA] text-white">
                                             <div className="flex items-center gap-3 mb-2">
                                                 <IconComponent size={24} />
@@ -166,21 +188,22 @@ export default async function NomineePage({ params }: NomineePageProps) {
                     {/* Related Actions */}
                     <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
-                            href="/"
+                            href={backHref}
                             className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED] transition-all duration-200 text-center"
                         >
-                            {t('viewAllNominees')}
+                            {isResultsPhase ? t('backToWinners') : t('viewAllNominees')}
                         </Link>
-                        <Link
-                            href="/vote"
-                            className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED] transition-all duration-200 text-center"
-                        >
-                            {t('nominateSomeone')}
-                        </Link>
+                        {!isResultsPhase && (
+                            <Link
+                                href="/vote"
+                                className="px-6 py-3 rounded-lg font-medium text-[#08193e] bg-white border-2 border-gray-300 hover:border-[#1D5EED] hover:text-[#1D5EED] transition-all duration-200 text-center"
+                            >
+                                {t('nominateSomeone')}
+                            </Link>
+                        )}
                     </div>
                 </div>
             </section>
         </main>
     );
 }
-

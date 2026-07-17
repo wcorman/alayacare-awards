@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { ThumbsUp } from 'lucide-react';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
+import { isAwardsPhaseEqual } from '@/lib/awardsPhase';
 import { useTranslations } from 'next-intl';
 
 interface NomineePageClientProps {
@@ -15,12 +15,17 @@ export default function NomineePageClient({ nominee }: NomineePageClientProps) {
     const t = useTranslations('NomineePage');
     const tVotePage = useTranslations('VotePage');
     const isVotingOpen = false;
+    const isJudgingPhase = isAwardsPhaseEqual('judging_phase');
     const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
     const [isCheckingVote, setIsCheckingVote] = useState(false);
     const [voteError, setVoteError] = useState<string | null>(null);
     const [voteCompleted, setVoteCompleted] = useState(false);
 
     if (!isVotingOpen) {
+        if (!isJudgingPhase) {
+            return null;
+        }
+
         return (
             <div className="pt-8 border-t border-gray-200">
                 <div className="rounded-2xl bg-[#08193e] px-6 py-7 text-white shadow-sm">

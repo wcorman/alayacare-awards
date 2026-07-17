@@ -5,7 +5,9 @@ import { Search, X, Heart, Award, Briefcase, Sparkles, Vote, Calendar, Users, Ta
 import NomineeCard from './NomineeCard';
 import VoteModal from './VoteModal';
 import { Nominee } from '@/lib/airtable';
+import { getPrimaryNavCta, isAwardsPhaseEqual } from '@/lib/awardsPhase';
 import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 // Category definitions matching the ones used in NominationForm and Home page
 const CATEGORY_CONFIG: Record<string, { icon: React.ComponentType<{ size?: number; className?: string }>; color: string }> = {
@@ -180,9 +182,25 @@ export default function VotePageClient({ nominees, isVotingOpen }: VotePageClien
     });
 
     const showVotingGrid = isVotingOpen;
+    const isJudgingPhase = isAwardsPhaseEqual('judging_phase');
     const hasActiveFilters = Boolean(selectedCategory || selectedOrganization);
+    const tNav = useTranslations('Navbar');
+    const primaryCta = getPrimaryNavCta();
 
     if (!showVotingGrid) {
+        if (!isJudgingPhase) {
+            return (
+                <div className="mx-auto flex min-h-[40vh] max-w-4xl items-center justify-center px-6 py-20 lg:px-12">
+                    <Link
+                        href={primaryCta.href}
+                        className="py-3 px-6 text-sm font-semibold rounded-md bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-colors"
+                    >
+                        {tNav(primaryCta.labelKey)}
+                    </Link>
+                </div>
+            );
+        }
+
         return (
             <div className="mx-auto flex min-h-[60vh] max-w-4xl px-6 py-20 lg:px-12">
                 <div className="relative w-full overflow-hidden rounded-3xl bg-[#08193e] p-10 text-center text-white shadow-lg md:p-14">

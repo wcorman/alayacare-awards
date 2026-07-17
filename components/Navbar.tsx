@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { Menu, X, Globe } from 'lucide-react';
+import { getPrimaryNavCta } from '@/lib/awardsPhase';
 
 export default function Navbar() {
     const t = useTranslations('Navbar');
@@ -13,6 +14,7 @@ export default function Navbar() {
     const router = useRouter();
     const locale = useLocale();
     const nextLocale = locale === 'fr' ? 'en' : 'fr';
+    const primaryCta = getPrimaryNavCta();
 
     const isActive = (path: string) => pathname === path;
 
@@ -45,10 +47,10 @@ export default function Navbar() {
                         {t('eligibility')}
                     </Link>
                     <Link
-                        href="/vote"
+                        href={primaryCta.href}
                         className="py-2 px-4 text-sm font-semibold rounded-md bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-colors"
                     >
-                        {t('voteNow')}
+                        {t(primaryCta.labelKey)}
                     </Link>
                     <button
                         type="button"
@@ -86,11 +88,11 @@ export default function Navbar() {
                         {t('eligibility')}
                     </Link>
                     <Link
-                        href="/vote"
+                        href={primaryCta.href}
                         onClick={() => setMobileMenuOpen(false)}
                         className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e] bg-[#1D5EED] text-white hover:bg-[#113CCA]"
                     >
-                        {t('voteNow')}
+                        {t(primaryCta.labelKey)}
                     </Link>
                     <button
                         type="button"
