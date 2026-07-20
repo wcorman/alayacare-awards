@@ -439,8 +439,10 @@
     },
     "winnerShare": {
       "title": "Partagez votre distinction",
-      "description": "Téléchargez le modèle de communiqué de presse et partagez votre reconnaissance sur LinkedIn.",
-      "downloadPressRelease": "Télécharger le communiqué de presse",
+      "description": "Partagez votre reconnaissance sur LinkedIn et téléchargez un modèle de communiqué de presse ci-dessous.",
+      "pressReleaseHeading": "Communiqué de presse",
+      "downloadPressReleaseEn": "Anglais",
+      "downloadPressReleaseFr": "Français",
       "shareOnLinkedIn": "Partager sur LinkedIn",
       "copyCaption": "Copier la légende suggérée",
       "copied": "Copié!",

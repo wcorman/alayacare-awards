@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { Copy, Download, Linkedin, Trophy } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-const PRESS_RELEASE_URL =
+const PRESS_RELEASE_URL_EN =
   "https://alayacare.com/wp-content/uploads/2026/07/Celebrating-INSERT-YOUR-NAME-2026-Home-Based-Care-Momentum.docx";
+const PRESS_RELEASE_URL_FR =
+  "https://alayacare.com/wp-content/uploads/2026/07/FR-press-release-template.docx";
 
 const CATEGORY_HASHTAGS: Record<string, string> = {
   "Frontline Care": "FrontlineCare",
@@ -84,17 +86,6 @@ export default function WinnerShareActions({
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <a
-          href={PRESS_RELEASE_URL}
-          download
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1D5EED] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#113cca]"
-        >
-          <Download size={16} />
-          {t("downloadPressRelease")}
-        </a>
-
-        <a
           href={linkedInHref}
           target="_blank"
           rel="noopener noreferrer"
@@ -162,6 +153,34 @@ export default function WinnerShareActions({
           <p className="mt-3 text-xs leading-relaxed text-[#52607d]/80">
             {t("captionFootnote")}
           </p>
+        </div>
+      </div>
+
+      <div className="mt-8 border-t border-[#dfe8ff] pt-8">
+        <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1D5EED]">
+          {t("pressReleaseHeading")}
+        </div>
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a
+            href={PRESS_RELEASE_URL_EN}
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1D5EED] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#113cca]"
+          >
+            <Download size={16} />
+            {t("downloadPressReleaseEn")}
+          </a>
+          <a
+            href={PRESS_RELEASE_URL_FR}
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1D5EED] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#113cca]"
+          >
+            <Download size={16} />
+            {t("downloadPressReleaseFr")}
+          </a>
         </div>
       </div>
     </section>

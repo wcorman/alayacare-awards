@@ -439,8 +439,10 @@
     },
     "winnerShare": {
       "title": "Share your win",
-      "description": "Download the press release template and share your recognition on LinkedIn.",
-      "downloadPressRelease": "Download press release",
+      "description": "Share your recognition on LinkedIn, and download a press release template below.",
+      "pressReleaseHeading": "Press release",
+      "downloadPressReleaseEn": "English",
+      "downloadPressReleaseFr": "French",
       "shareOnLinkedIn": "Share on LinkedIn",
       "copyCaption": "Copy suggested caption",
       "copied": "Copied!",
