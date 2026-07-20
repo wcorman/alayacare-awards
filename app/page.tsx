@@ -3,7 +3,8 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations, getLocale } from 'next-intl/server';
-import { UserPlus, Heart, Trophy, Megaphone, Calendar, Users, Gavel, Award, Vote } from 'lucide-react';
+import { UserPlus, Heart, Trophy, Megaphone, Calendar, Users, Gavel, Award } from 'lucide-react';
+import { getAwardsPhase, type AwardsPhase } from '@/lib/awardsPhase';
 
 // Force dynamic rendering so we always get the latest nominees
 export const dynamic = 'force-dynamic';
@@ -15,6 +16,13 @@ const CATEGORIES = [
   { id: 'impact', nameKey: 'categories.impact.name', descriptionKey: 'categories.impact.description', iconPath: '/Impact-and-innovation.png', color: '#08193e' },
 ];
 
+const TIMELINE_ACTIVE_INDEX: Record<AwardsPhase, number> = {
+  nomination_phase: 0,
+  voting_phase: 1,
+  judging_phase: 2,
+  results_phase: 3,
+};
+
 export default async function Home() {
   const t = await getTranslations('Home');
   const locale = await getLocale();
@@ -24,6 +32,7 @@ export default async function Home() {
   const missionIcons = [Trophy, Heart, UserPlus, Megaphone];
   const timelineItems = t.raw('timeline.items') as Array<{ title: string; date: string; description: string }>;
   const timelineIcons = [Calendar, Users, Gavel, Award];
+  const activeTimelineIndex = TIMELINE_ACTIVE_INDEX[getAwardsPhase()];
 
   return (
     <main className="min-h-screen bg-[#fcfcfc] text-slate-800">
@@ -63,10 +72,10 @@ export default async function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/vote"
+              href="/winners"
               className="px-6 py-3 rounded-md font-semibold bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-all duration-200 shadow-sm flex items-center justify-center gap-2"
             >
-              <Vote size={20} /> {t('hero.cta')}
+              <Award size={20} /> {t('hero.cta')}
             </Link>
           </div>
         </div>
@@ -167,7 +176,7 @@ export default async function Home() {
             <div className="space-y-10">
               {timelineItems.map((item, index) => (
                 <div key={`${item.title}-${index}`} className="relative">
-                  <span className={`absolute left-4 top-6 h-4 w-4 -translate-x-1/2 rounded-full bg-[#1D5EED] ring-4 ring-white shadow-md sm:left-1/2 ${index === 2 ? 'animate-gentle-pulse' : ''}`}></span>
+                  <span className={`absolute left-4 top-6 h-4 w-4 -translate-x-1/2 rounded-full bg-[#1D5EED] ring-4 ring-white shadow-md sm:left-1/2 ${index === activeTimelineIndex ? 'animate-gentle-pulse' : ''}`}></span>
                   <div
                     className={`pl-12 sm:pl-0 sm:w-1/2 ${
                       index % 2 === 0 ? 'sm:pr-12' : 'sm:pl-12 sm:ml-auto'
