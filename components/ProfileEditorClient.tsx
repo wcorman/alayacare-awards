@@ -207,6 +207,10 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
                         categoryName={profile.category}
                         categoryKey={profile.categoryKey}
                         companyName={profile.companyName}
+                        customVoteImage={profile.customVoteImage}
+                        nomineeName={profile.nomineeName}
+                        socialShareFilename={socialShareFilename}
+                        onOpenLightbox={() => setIsSocialLightboxOpen(true)}
                     />
                 ) : null}
 
@@ -298,14 +302,11 @@ export default function ProfileEditorClient({ profile }: ProfileEditorClientProp
                         {t("photoCard.help")}
                     </p>
 
-                    {profile.customVoteImage ? (
+                    {!profile.isWinner && profile.customVoteImage ? (
                         <div className="mt-8 w-full rounded-[24px] border border-[#dfe8ff] bg-[#f8faff] p-5 text-left">
-                            <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1D5EED]">
+                            <div className="text-sm font-semibold leading-snug text-[#1D5EED]">
                                 {t("socialCard.title")}
                             </div>
-                            <p className="mt-2 text-sm leading-relaxed text-[#52607d]">
-                                {t("socialCard.description")}
-                            </p>
                             <button
                                 type="button"
                                 onClick={() => setIsSocialLightboxOpen(true)}

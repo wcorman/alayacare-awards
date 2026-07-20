@@ -431,8 +431,7 @@
       "uploadUnavailable": "Photo uploads are currently unavailable because Uploadcare is not configured."
     },
     "socialCard": {
-      "title": "Social Sharing",
-      "description": "Download your ready-to-share campaign image to post on social channels.",
+      "title": "Download your ready-to-share image",
       "downloadButton": "Download image",
       "imageAlt": "Social sharing image for {name}",
       "openLightbox": "Open social sharing image in a larger view",
@@ -443,7 +442,7 @@
       "description": "Download the press release template and share your recognition on LinkedIn.",
       "downloadPressRelease": "Download press release",
       "shareOnLinkedIn": "Share on LinkedIn",
-      "copyCaption": "Copy caption",
+      "copyCaption": "Copy suggested caption",
       "copied": "Copied!",
       "companyFallback": "my organization",
       "linkedinCaption": "Honored to be named a 2026 Home-Based Care Momentum Award winner in {category}. 🏆\n[1–2 sentences about what this recognition means to you personally, or what drives your work in home-based care.]\n\nHome-based care is an industry built on people who show up for their clients, their teams, and their communities. I'm proud to work alongside so many of them every day at {company}.\n\nThank you to @AlayaCare and to everyone who voted and nominated. This one means a lot.\n#MomentumAwards2026 #HomeCare #HomeBasedCare #{categoryHashtag}"

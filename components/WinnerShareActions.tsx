@@ -19,14 +19,23 @@ interface WinnerShareActionsProps {
   /** English Airtable category value, used for hashtag mapping. */
   categoryKey: string;
   companyName: string | null;
+  customVoteImage?: string | null;
+  nomineeName?: string;
+  socialShareFilename?: string;
+  onOpenLightbox?: () => void;
 }
 
 export default function WinnerShareActions({
   categoryName,
   categoryKey,
   companyName,
+  customVoteImage = null,
+  nomineeName = "",
+  socialShareFilename,
+  onOpenLightbox,
 }: WinnerShareActionsProps) {
   const t = useTranslations("ProfilePage.winnerShare");
+  const tSocial = useTranslations("ProfilePage.socialCard");
   const [copied, setCopied] = useState(false);
   const [isCopyHovered, setIsCopyHovered] = useState(false);
 
@@ -54,6 +63,8 @@ export default function WinnerShareActions({
       setCopied(false);
     }
   };
+
+  const hasSocialImage = Boolean(customVoteImage);
 
   return (
     <section className="rounded-[28px] bg-white p-8 md:p-10 shadow-[0_20px_50px_rgba(8,25,62,0.08)]">
@@ -105,13 +116,51 @@ export default function WinnerShareActions({
         </button>
       </div>
 
-      <blockquote
-        className={`mt-6 rounded-[20px] border bg-[#f8faff] px-5 py-5 text-sm leading-relaxed text-[#52607d] whitespace-pre-line transition-colors md:text-base ${
-          isCopyHovered ? "border-[#1D5EED]" : "border-[#dfe8ff]"
+      <div
+        className={`mt-8 grid grid-cols-1 gap-6 ${
+          hasSocialImage ? "lg:grid-cols-2 lg:gap-8" : ""
         }`}
       >
-        {socialCopy}
-      </blockquote>
+        {hasSocialImage && customVoteImage ? (
+          <div className="flex flex-col rounded-[20px] border border-[#dfe8ff] bg-[#f8faff] p-5">
+            <div className="text-sm font-semibold leading-snug text-[#1D5EED]">
+              {tSocial("title")}
+            </div>
+            <button
+              type="button"
+              onClick={onOpenLightbox}
+              className="mt-4 block w-full flex-1 cursor-pointer overflow-hidden rounded-[18px] border border-[#dfe8ff] bg-white text-left shadow-[0_10px_25px_rgba(8,25,62,0.06)] transition hover:shadow-[0_14px_32px_rgba(8,25,62,0.1)] focus:outline-none focus:ring-4 focus:ring-[#1D5EED]/15"
+              aria-label={tSocial("openLightbox")}
+            >
+              <img
+                src={customVoteImage}
+                alt={tSocial("imageAlt", { name: nomineeName })}
+                className="h-auto w-full object-contain"
+              />
+            </button>
+            <a
+              href={customVoteImage}
+              download={socialShareFilename}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center justify-center gap-2 self-start rounded-full bg-[#1D5EED] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#113cca]"
+            >
+              <Download size={16} />
+              {tSocial("downloadButton")}
+            </a>
+          </div>
+        ) : null}
+
+        <div className="flex min-h-0 flex-col">
+          <blockquote
+            className={`flex-1 rounded-[20px] border bg-[#f8faff] px-5 py-5 text-sm leading-relaxed text-[#52607d] whitespace-pre-line transition-colors md:text-base ${
+              isCopyHovered ? "border-[#1D5EED]" : "border-[#dfe8ff]"
+            }`}
+          >
+            {socialCopy}
+          </blockquote>
+        </div>
+      </div>
     </section>
   );
 }
