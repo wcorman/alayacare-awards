@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, Award } from 'lucide-react';
 import { getPrimaryNavCta } from '@/lib/awardsPhase';
 
 export default function Navbar() {
@@ -15,6 +15,7 @@ export default function Navbar() {
     const locale = useLocale();
     const nextLocale = locale === 'fr' ? 'en' : 'fr';
     const primaryCta = getPrimaryNavCta();
+    const showWinnersIcon = primaryCta.labelKey === 'seeWinners';
 
     const isActive = (path: string) => pathname === path;
 
@@ -48,8 +49,9 @@ export default function Navbar() {
                     </Link>
                     <Link
                         href={primaryCta.href}
-                        className="py-2 px-4 text-sm font-semibold rounded-md bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-colors"
+                        className="inline-flex items-center gap-2 py-2 px-4 text-sm font-semibold rounded-md bg-[#1D5EED] text-white hover:bg-[#113CCA] transition-colors"
                     >
+                        {showWinnersIcon ? <Award size={16} strokeWidth={2.2} /> : null}
                         {t(primaryCta.labelKey)}
                     </Link>
                     <button
@@ -90,8 +92,9 @@ export default function Navbar() {
                     <Link
                         href={primaryCta.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e] bg-[#1D5EED] text-white hover:bg-[#113CCA]"
+                        className="p-4 text-left font-medium border-b hover:bg-gray-50 text-[#08193e] bg-[#1D5EED] text-white hover:bg-[#113CCA] inline-flex items-center gap-2"
                     >
+                        {showWinnersIcon ? <Award size={16} strokeWidth={2.2} /> : null}
                         {t(primaryCta.labelKey)}
                     </Link>
                     <button
