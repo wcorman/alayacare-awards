@@ -445,7 +445,8 @@
       "copyCaption": "Copier la légende suggérée",
       "copied": "Copié!",
       "companyFallback": "mon organisation",
-      "linkedinCaption": "Honoré(e) d'être nommé(e) lauréat(e) des Prix Momentum des soins à domicile 2026 dans la catégorie {category}. 🏆\n[1 à 2 phrases sur ce que cette reconnaissance signifie pour vous personnellement, ou ce qui motive votre travail en soins à domicile.]\n\nLes soins à domicile sont une industrie bâtie par des personnes qui sont présentes pour leurs clients, leurs équipes et leurs communautés. Je suis fier(ère) de travailler chaque jour à leurs côtés chez {company}.\n\nMerci à @AlayaCare et à toutes les personnes qui ont voté et nominé. Cela compte beaucoup pour moi.\n#MomentumAwards2026 #HomeCare #HomeBasedCare #{categoryHashtag}"
+      "captionFootnote": "*Nous vous encourageons à développer ce que cette reconnaissance signifie pour vous personnellement, ou ce qui motive votre travail en soins à domicile.",
+      "linkedinCaption": "Honoré(e) d'être nommé(e) lauréat(e) des Prix Momentum des soins à domicile 2026 dans la catégorie {category}. 🏆\n\nLes soins à domicile sont une industrie bâtie par des personnes qui sont présentes pour leurs clients, leurs équipes et leurs communautés. Je suis fier(ère) de travailler chaque jour à leurs côtés chez {company}.\n\nMerci à @AlayaCare et à toutes les personnes qui ont voté et nominé. Cela compte beaucoup pour moi.\n#MomentumAwards2026 #HomeCare #HomeBasedCare #{categoryHashtag}"
     },
     "form": {
       "readOnlyEyebrow": "Détails du candidat",

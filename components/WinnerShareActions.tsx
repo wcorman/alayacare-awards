@@ -159,6 +159,9 @@ export default function WinnerShareActions({
           >
             {socialCopy}
           </blockquote>
+          <p className="mt-3 text-xs leading-relaxed text-[#52607d]/80">
+            {t("captionFootnote")}
+          </p>
         </div>
       </div>
     </section>

@@ -445,7 +445,8 @@
       "copyCaption": "Copy suggested caption",
       "copied": "Copied!",
       "companyFallback": "my organization",
-      "linkedinCaption": "Honored to be named a 2026 Home-Based Care Momentum Award winner in {category}. 🏆\n[1–2 sentences about what this recognition means to you personally, or what drives your work in home-based care.]\n\nHome-based care is an industry built on people who show up for their clients, their teams, and their communities. I'm proud to work alongside so many of them every day at {company}.\n\nThank you to @AlayaCare and to everyone who voted and nominated. This one means a lot.\n#MomentumAwards2026 #HomeCare #HomeBasedCare #{categoryHashtag}"
+      "captionFootnote": "*We encourage you to expand on what this recognition means to you personally, or what drives your work in home-based care.",
+      "linkedinCaption": "Honored to be named a 2026 Home-Based Care Momentum Award winner in {category}. 🏆\n\nHome-based care is an industry built on people who show up for their clients, their teams, and their communities. I'm proud to work alongside so many of them every day at {company}.\n\nThank you to @AlayaCare and to everyone who voted and nominated. This one means a lot.\n#MomentumAwards2026 #HomeCare #HomeBasedCare #{categoryHashtag}"
     },
     "form": {
       "readOnlyEyebrow": "Nominee Details",
